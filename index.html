@@ -918,6 +918,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       // Une adresse non invitée reçoit la même réponse qu'une adresse invitée : la page ne dit pas qui a un accès.
       if (statut === 429 || err.code === "over_email_send_rate_limit" || err.code === "over_request_rate_limit") return { ok: false, texte: "Un lien vient déjà de partir. Patientez une minute avant d'en redemander un." };
       if (statut === 0) return { ok: false, texte: "Connexion impossible pour le moment. Vérifiez votre réseau, puis réessayez." };
+      // Une adresse absente de l'équipe est refusée par la base au moment de créer son compte : même réponse neutre.
+      if (statut >= 500 && /saving new user/i.test(String(err.message || ""))) return { ok: true };
       if (statut >= 500) return { ok: false, texte: "L'envoi du mail a échoué. Réessayez dans un instant ; si cela continue, prévenez la personne qui anime l'espace." };
       return { ok: true };
     }, function () {
@@ -957,7 +959,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     carte([
       el("h1", { text: "Votre espace projet" }),
       el("p", { class: "connexion-texte", text: "Saisissez votre adresse professionnelle : vous recevrez un lien de connexion et un code, sans mot de passe à retenir." }),
-      message("Si " + email + " a accès à un espace projet, un lien vient d'y être envoyé. Il est valable 15 minutes.", "succes"),
+      message("Si " + email + " a accès à un espace projet, un lien vient d'y être envoyé. Il est valable une heure.", "succes"),
       form,
       el("p", { class: "connexion-petit", id: "connexion-aide" }, [
         "Rien reçu après une minute ? Regardez dans les courriers indésirables, ou ",
