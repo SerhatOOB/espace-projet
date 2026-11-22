@@ -1,0 +1,15 @@
+# Chaque jour, un appel à la base évite que Supabase mette en pause le projet gratuit,
+# vacances comprises. L'adresse et la clé publique sont celles inscrites dans la page.
+name: Réveil de la base
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+jobs:
+  reveil:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Appel à la base
+        run: >
+          curl --fail --silent --show-error -X POST "https://rgsewrjkazqnizpyjzzm.supabase.co/rest/v1/rpc/ping"
+          -H "apikey: sb_publishable_f6Icf4lPGIT0U7HqKSiVLg_ULWQHyl2" -H "Content-Type: application/json" -d '{}'
