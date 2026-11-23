@@ -1005,8 +1005,12 @@ a.connexion-bouton{display:block;text-align:center;text-decoration:none}
 :root[data-theme="dark"] .bouton.fort{background:var(--papier-lusko);color:var(--suie)}
 .bouton svg,.bouton-clair svg{flex:none}
 .feuille.large{width:min(720px,100%)}
-.trois{display:grid;grid-template-columns:1fr;gap:0 12px}
-@media (min-width:620px){.trois{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.feuille-partie{margin:26px 0 2px;padding-top:18px;border-top:1.5px solid var(--encre)}
+.feuille-partie h3{font-family:var(--titre);font-weight:600;font-size:24px;line-height:1;text-transform:uppercase;letter-spacing:.01em}
+.feuille-partie .champ-aide{margin-top:6px}
+.trois,.quatre{display:grid;grid-template-columns:1fr;gap:0 12px}
+@media (min-width:620px){.trois{grid-template-columns:repeat(3,minmax(0,1fr))}.quatre{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:900px){.quatre{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .lien-carte{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;padding:2px 0;white-space:nowrap}
 .lien-carte:hover span{text-decoration:underline;text-decoration-color:var(--rose);text-decoration-thickness:3px;text-underline-offset:4px}
 .lien-carte svg{transition:transform .2s var(--ease)}
@@ -1026,7 +1030,8 @@ a.connexion-bouton{display:block;text-align:center;text-decoration:none}
 .etiq.etape-signe{background:var(--vert-teinte);color:var(--vert-texte)}
 .etiq.etape-perdu{background:none;box-shadow:inset 0 0 0 1px var(--filet-2);color:var(--discret)}
 .etiq.rouge{background:var(--rouge-teinte);color:var(--rouge-texte)}
-.etiq.scenario{background:var(--suie);color:var(--papier-lusko)}
+.etiq.fp{background:var(--vert);color:var(--suie)}
+.etiq.scenario{background:var(--suie);color:var(--papier-lusko);max-width:100%;white-space:normal}
 :root[data-theme="dark"] .etiq.scenario{background:var(--papier-lusko);color:var(--suie)}
 .statut{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;line-height:1.3}
 .statut svg{flex:none}
@@ -1269,6 +1274,7 @@ button.trou:hover{background:var(--bleu-teinte)}
 .case-lib.discret{font-size:13.5px;font-weight:600;color:var(--attenue)}
 .tuiles{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr);gap:16px}
 .tuiles.quatre{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tuiles.six{grid-template-columns:repeat(3,minmax(0,1fr))}
 .tuile{display:flex;flex-direction:column;gap:9px;padding:18px 20px;background:var(--papier);border:1px solid var(--filet);min-width:0}
 .tuile.hero{--f1:6px;--f2:12px;margin:0 12px 12px 0;border-color:var(--filet-2);box-shadow:var(--f1) var(--f1) 0 var(--bleu),var(--f2) var(--f2) 0 var(--vert)}
 .tuile-lib{font-family:var(--titre);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--discret)}
@@ -1326,6 +1332,41 @@ button.trou:hover{background:var(--bleu-teinte)}
 .vl-marge{display:flex;flex-direction:column;align-items:flex-end;gap:1px;font-variant-numeric:tabular-nums}
 .vl-marge strong{font-size:16px}
 .vl-marge span{font-size:12px;color:var(--rouge-texte)}
+
+/* ---------- Payplan 2027 ---------- */
+
+/* Un critère : atteint (vert, coche), manqué (rouge, alerte) ou encore ouvert (horloge) */
+.critere{display:inline-flex;align-items:center;gap:5px;min-height:24px;max-width:100%;padding:2px 10px 2px 8px;border-radius:12px;font-size:12.5px;font-weight:700;line-height:1.25;white-space:nowrap}
+.pp-carte .critere{white-space:normal;padding-top:3px;padding-bottom:3px}
+.critere svg{flex:none}
+.critere.bon{background:var(--vert-teinte);color:var(--vert-texte)}
+.critere.mauvais{background:var(--rouge-teinte);color:var(--rouge-texte)}
+.critere.ouvert{background:var(--pierre);color:var(--attenue)}
+.bm-payplan{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:8px 8px;padding-top:14px;border-top:1px solid var(--filet)}
+.bm-payplan .bm-lib{margin-right:6px}
+.section-payplan .note-discrete{margin-top:-8px}
+.payplan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pp-carte{display:flex;flex-direction:column;gap:9px;padding:16px 18px;background:var(--papier);border:1px solid var(--filet);min-width:0}
+.pp-carte.large{grid-column:span 2}
+.pp-carte.alerte{box-shadow:inset 4px 0 0 var(--rouge)}
+.pp-carte .critere{align-self:flex-start}
+.pp-valeur{font-size:14px;color:var(--attenue);line-height:1.1}
+.pp-valeur strong{font-family:var(--titre);font-weight:600;font-size:36px;line-height:.92;color:var(--encre)}
+.pp-carte.large .pp-valeur strong{font-size:44px}
+/* La marge du mois sur ses repères : démarrage du variable, accélération, objectif */
+.paliers{position:relative;height:12px;margin:8px 0 22px;background:var(--pierre)}
+.paliers-rempli{position:absolute;left:0;top:0;bottom:0;background:var(--rose)}
+.paliers-repere{position:absolute;top:-4px;bottom:-4px;width:2px;margin-left:-1px;background:var(--encre)}
+.paliers-repere.objectif{width:3px;margin-left:-1.5px}
+.paliers-val{position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);font-size:11.5px;font-weight:700;color:var(--attenue);white-space:nowrap;font-variant-numeric:tabular-nums}
+.paliers-repere.objectif .paliers-val{color:var(--encre)}
+.pp-mois{display:flex;flex-wrap:wrap;gap:8px 18px}
+.pp-mois-case{display:flex;flex-direction:column;gap:5px}
+.pp-mois-nom{font-size:13px;font-weight:700}
+.pp-mois-case.courant .pp-mois-nom{text-decoration:underline;text-decoration-color:var(--rose);text-decoration-thickness:3px;text-underline-offset:4px}
+.pp-reglages-pied{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:6px}
+.table-payplan .critere{font-size:12px}
+.table-payplan td.num{text-align:right}
 
 /* ---------- Scripts ---------- */
 
@@ -1391,7 +1432,9 @@ body.vue-mur{
   .jour-grille{grid-template-columns:minmax(0,1fr)}
   .jour-colonne.cote{position:static}
   .closings{grid-template-columns:minmax(0,1fr)}
-  .tuiles.quatre{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tuiles.quatre,.tuiles.six{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .payplan{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pp-carte.large.constance{grid-column:auto}
 }
 @media screen and (max-width:999px){
   .appel-grille{grid-template-columns:minmax(0,1fr);gap:16px}
@@ -1430,7 +1473,8 @@ body.vue-mur{
   .obj-cat{grid-column:1 / -1}
   .obj-corps{padding:0 16px 16px 18px}
   .reformulation{padding:20px 18px;margin-right:14px}
-  .tuiles,.tuiles.quatre{grid-template-columns:minmax(0,1fr)}
+  .tuiles,.tuiles.quatre,.tuiles.six,.payplan{grid-template-columns:minmax(0,1fr)}
+  .pp-carte.large{grid-column:auto}
   .tuile.hero .tuile-valeur strong{font-size:50px}
   .ent-ligne{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"lib val" "barre barre";gap:4px 12px}
   .ent-lib{grid-area:lib}.ent-barre{grid-area:barre}.ent-val{grid-area:val;flex-direction:row;align-items:baseline;gap:8px}
@@ -2038,6 +2082,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   };
   var VUES = ["journee", "appel", "prospects", "resultats", "scripts", "mur"];
   var DEFAUTS = { objectif_marge: 11000, objectifs: {}, tase_min: 50, annulation_max: 20, cible_accompagnement: 25, societe: "OOB", macrozones: [], offres: [], levier_macrozone: "" };
+  // Le payplan 2027 : ses seuils vivent dans les réglages de l'équipe, dans la base. La page est publique : aucun seuil ici.
+  var PAYPLAN = { debut: "", objectif: 0, declenchement: 0, acceleration: 0, boosters: 0, constance: 0, rdv_fp: 0, actes_mrl: 0, tase: 0, reprise: 0, visible: false };
 
   var etat = {
     vue: vueDepuisAdresse(),
@@ -2094,7 +2140,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function entier(n) { n = Math.round(num(n)); return (FMT_ENTIER ? FMT_ENTIER.format(n) : String(n)).replace(/[\u202f\u00a0\s]/g, NB); }
   function euros(n) { return entier(n) + NB + "€"; }
   // Un taux entre 0 et 1, en pour cent à une décimale au plus ; « pas encore » quand il n'y a rien à diviser.
-  function pourcent(x) { if (x === null || !isFinite(x)) return "pas encore"; var v = Math.round(x * 1000) / 10; return (FMT_DECIMAL ? FMT_DECIMAL.format(v) : String(v)) + NB + "%"; }
+  function pourcent(x) { if (x === Infinity) return "plus de 100" + NB + "%"; if (x === null || !isFinite(x)) return "pas encore"; var v = Math.round(x * 1000) / 10; return (FMT_DECIMAL ? FMT_DECIMAL.format(v) : String(v)) + NB + "%"; }
   function taux(a, b) { return b > 0 ? a / b : null; }
   function montantSaisi(s) { var n = Number(String(s || "").replace(/\s| | /g, "").replace(",", ".").replace(/€$/, "")); return isFinite(n) ? n : NaN; }
 
@@ -2348,6 +2394,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return el("span", { class: "statut " + (bon === null ? "neutre" : (bon ? "bon" : "mauvais")) }, [trait(bon === false ? ICONES.alerte : ICONES.coche, 14), texte]);
   }
   function etiquette(texte, genre) { return el("span", { class: "etiq" + (genre ? " " + genre : ""), text: texte }); }
+  // Un critère du payplan : atteint, manqué, ou encore ouvert (null). Le signe et les mots disent l'état, pas la couleur seule.
+  function critere(etatCritere, texte) {
+    var genre = etatCritere === true ? "bon" : (etatCritere === false ? "mauvais" : "ouvert");
+    return el("span", { class: "critere " + genre }, [trait(etatCritere === true ? ICONES.coche : (etatCritere === false ? ICONES.alerte : ICONES.horloge), 13), texte]);
+  }
 
   /* ---------- Le message du bas ---------- */
 
@@ -2463,10 +2514,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         return el("div", { class: "lecture-ligne" }, [el("dt", { text: l[0] }), el("dd", { text: l[1] })]);
       })));
     }
-    (opts.champs || []).forEach(function (c) { corps.push(c.groupe ? el("div", { class: "deux" }, c.groupe.map(champ)) : champ(c)); });
+    (opts.champs || []).forEach(function (c) {
+      // { intertitre, aide } : un titre de partie dans un long formulaire
+      if (c.intertitre) corps.push(el("div", { class: "feuille-partie" }, [el("h3", { text: c.intertitre }), c.aide ? el("p", { class: "champ-aide", text: c.aide }) : null]));
+      else corps.push(c.groupe ? el("div", { class: "deux" }, c.groupe.map(champ)) : champ(c));
+    });
     if (opts.apres) corps.push(opts.apres);
     var tousChamps = [];
-    (opts.champs || []).forEach(function (c) { if (c.groupe) tousChamps = tousChamps.concat(c.groupe); else tousChamps.push(c); });
+    (opts.champs || []).forEach(function (c) { if (c.intertitre) return; if (c.groupe) tousChamps = tousChamps.concat(c.groupe); else tousChamps.push(c); });
     var boutons = [];
     if (opts.enregistrer) boutons.push(el("button", { type: "submit", class: "bouton", "data-cle": "enregistrer", text: opts.libelleEnregistrer || "Enregistrer" }));
     (opts.boutons || []).forEach(function (b) { boutons.push(b); });
@@ -2619,12 +2674,30 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!o.objectifs || typeof o.objectifs !== "object" || Array.isArray(o.objectifs)) o.objectifs = {};
     o.macrozones = tableau(o.macrozones);
     o.offres = tableau(o.offres);
+    var pp = r.payplan && typeof r.payplan === "object" ? r.payplan : {};
+    o.payplan = {};
+    Object.keys(PAYPLAN).forEach(function (k) {
+      var v = pp[k];
+      if (k === "debut") o.payplan.debut = /^\d{4}-\d{2}$/.test(String(v || "")) ? v : PAYPLAN.debut;
+      else if (k === "visible") o.payplan.visible = v === true;
+      else o.payplan[k] = v !== undefined && v !== null && v !== "" && isFinite(Number(v)) ? Math.max(0, Number(v)) : PAYPLAN[k];
+    });
+    // Les proportions de la grille, pour recalculer les seuils depuis un autre objectif
+    var rg = pp.regles && typeof pp.regles === "object" ? pp.regles : null;
+    o.payplan.regles = rg && ["declenchement", "acceleration", "boosters", "constance", "arrondi"].every(function (k) { return isFinite(Number(rg[k])) && Number(rg[k]) > 0; })
+      ? { declenchement: Number(rg.declenchement), acceleration: Number(rg.acceleration), boosters: Number(rg.boosters), constance: Number(rg.constance), arrondi: Number(rg.arrondi) } : null;
     return o;
   }
-  // L'objectif de marge d'un conseiller : le sien s'il est réglé (0 : pas d'objectif), sinon celui de l'équipe.
-  function objectifDe(email) {
+  // Le payplan 2027 existe une fois réglé ; il se montre à l'administrateur, et aux conseillers et au mur quand il le décide.
+  function payplanRegle() { var p = reglages().payplan; return !!p.debut && p.objectif > 0; }
+  function payplanVisible() { return payplanRegle() && (estAdmin || reglages().payplan.visible); }
+  function payplanEnVigueur(m) { return !!m && payplanRegle() && m >= reglages().payplan.debut; }
+  // L'objectif de marge d'un conseiller pour un mois : le sien s'il est réglé (0 : pas d'objectif),
+  // sinon celui du payplan 2027 à partir de son premier mois, et avant celui de l'équipe.
+  function objectifDe(email, m) {
     var r = reglages(), v = r.objectifs[String(email || "").toLowerCase()];
     if (v !== undefined && v !== null && v !== "" && isFinite(Number(v))) return Math.max(0, Number(v));
+    if (payplanEnVigueur(m)) return r.payplan.objectif;
     return Math.max(0, num(r.objectif_marge));
   }
   function docs(c) { var d = etat.donnees[c] || {}; return Object.keys(d).map(function (id) { return Object.assign({ id: id }, d[id]); }); }
@@ -2637,19 +2710,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function objections() { return docs("objections").sort(parOrdre); }
 
   // L'équipe : les conseillers invités, et toute personne dont les chiffres apparaissent (l'administrateur qui saisit, un ancien membre).
-  function equipe(lignes) {
+  function equipe(lignes, mois) {
     var l = [], vus = {};
     etat.membres.forEach(function (m) {
       if (m.role !== "edition") return;
       var cle = m.user_id || m.email;
       vus[cle] = true;
-      l.push({ cle: cle, uid: m.user_id || "", email: m.email, nom: txt(m.nom) || m.email, objectif: objectifDe(m.email) });
+      l.push({ cle: cle, uid: m.user_id || "", email: m.email, nom: txt(m.nom) || m.email, objectif: objectifDe(m.email, mois) });
     });
     (lignes || []).forEach(function (r) {
       if (!r.conseiller || vus[r.conseiller]) return;
       vus[r.conseiller] = true;
       var m = etat.membres.filter(function (x) { return x.user_id === r.conseiller; })[0];
-      l.push({ cle: r.conseiller, uid: r.conseiller, email: m ? m.email : "", nom: m ? (txt(m.nom) || m.email) : (r.conseiller === compte.id ? (compte.nom || "Vous") : "Ancien membre"), objectif: m && m.role === "edition" ? objectifDe(m.email) : 0 });
+      l.push({ cle: r.conseiller, uid: r.conseiller, email: m ? m.email : "", nom: m ? (txt(m.nom) || m.email) : (r.conseiller === compte.id ? (compte.nom || "Vous") : "Ancien membre"), objectif: m && m.role === "edition" ? objectifDe(m.email, mois) : 0 });
     });
     return l.sort(function (a, b) { return a.nom.localeCompare(b.nom, "fr"); });
   }
@@ -2661,7 +2734,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   /* ---------- Les totaux et ce qu'ils disent ---------- */
 
-  var CHAMPS_ACT = ["appels", "decroches", "argumentes", "r1p", "r1_tenus", "r1_signes", "r2", "ap_proposes", "rdv_tenus", "ventes", "marge", "actes", "engageants", "actes_annules", "marge_annulee", "full_prospect", "marge_fp_nette", "accompagnement"];
+  // Chaque total compte le jour de son événement : la vente à sa signature, l'annulation le jour où elle arrive.
+  var CHAMPS_ACT = ["appels", "decroches", "argumentes", "r1p", "r1_tenus", "r1_signes", "r2", "ap_proposes", "rdv_tenus", "rdv_fp", "ventes", "marge", "actes", "engageants", "actes_mrl", "full_prospect", "accompagnement", "annulations", "actes_annules", "marge_annulee", "marge_fp_nette"];
   function somme(lignes, filtre) {
     var t = {};
     CHAMPS_ACT.forEach(function (k) { t[k] = 0; });
@@ -2669,10 +2743,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     t.marge_nette = t.marge - t.marge_annulee;
     return t;
   }
-  // Le TASE et le taux d'annulation se calculent sur le nombre global d'actes, jamais en moyenne de taux individuels.
+  // Le TASE se calcule sur le nombre global d'actes, jamais en moyenne de taux individuels.
+  // Le taux d'annulation, comme dans les bilans d'OOB : la marge annulée dans le mois sur la marge signée du mois
+  // (il passe 100 % quand les annulations du mois dépassent ce qui a été signé).
+  function tauxAnnulation(t) { return t.marge > 0 ? t.marge_annulee / t.marge : (t.marge_annulee > 0 ? Infinity : null); }
   function lecture(t, objectif) {
     var r = reglages(), seuilTase = num(r.tase_min) / 100, plafond = num(r.annulation_max) / 100;
-    var tase = taux(t.engageants, t.actes), annul = taux(t.actes_annules, t.actes);
+    var tase = taux(t.engageants, t.actes), annul = tauxAnnulation(t);
     return {
       t: t, objectif: objectif, part: objectif > 0 ? t.marge_nette / objectif : null,
       tase: tase, seuilTase: seuilTase, taseOk: tase === null ? null : tase >= seuilTase - 1e-9,
@@ -2696,6 +2773,55 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     };
   }
   function activiteDu(m) { return etat.activite[m] || null; }
+
+  /* ---------- Le payplan 2027 : les critères du mois et du trimestre ---------- */
+
+  function trimestreDe(m) { var a = m.slice(0, 4), q = Math.floor((Number(m.slice(5, 7)) - 1) / 3); return [1, 2, 3].map(function (k) { var x = q * 3 + k; return a + "-" + (x < 10 ? "0" : "") + x; }); }
+  // t : totaux du mois ; parMois : { "2027-01": marge signée, ... } pour la constance du trimestre ; objectif : celui de la personne.
+  function lecturePayplan(t, m, parMois, objectif) {
+    var p = reglages().payplan, o = objectif === undefined ? p.objectif : objectif;
+    // Les seuils suivent l'objectif de la personne quand il diffère de celui de l'équipe (montée en charge...).
+    var k = p.objectif > 0 && o > 0 ? o / p.objectif : 1;
+    var s = { declenchement: p.declenchement * k, acceleration: p.acceleration * k, objectif: o, boosters: p.boosters * k, constance: p.constance * k };
+    var marge = t.marge, debloque = marge >= s.boosters - 1e-9;
+    var palier = marge >= s.objectif - 1e-9 ? (marge > s.objectif + 1e-9 ? "au-dela" : "objectif") : (marge >= s.acceleration ? "acceleration" : (marge >= s.declenchement ? "variable" : "sous"));
+    var tase = taux(t.engageants, t.actes), reprise = tauxAnnulation(t);
+    // Un compteur qui ne fait que monter (marge, RDV, actes) n'est raté qu'une fois le mois fini : avant, il est en cours.
+    var fini = m < moisDe(aujourdhui());
+    function cumul(ok) { return ok ? true : (fini ? false : null); }
+    var mois = trimestreDe(m), aout = m.slice(0, 4) + "-08", enVigueur = payplanEnVigueur(m);
+    var constance = mois.map(function (x) {
+      // parMois : un nombre ; null pour un mois passé sans aucune activité de l'équipe dans le copilote ; absent s'il n'est pas encore lu.
+      var v = parMois[x], connu = typeof v === "number", avant = enVigueur && x < p.debut, exempte = x === aout || avant;
+      return { mois: x, marge: connu ? v : null, sansDonnees: v === null && !exempte, exempte: exempte, avant: avant, aout: x === aout,
+        passe: x < m, courant: x === m, futur: x > m, termine: x < m || (x === m && fini),
+        ok: exempte ? true : (connu ? v >= s.constance - 1e-9 : null) };
+    });
+    var perdue = constance.some(function (c) { return c.ok === false && c.termine; });
+    var etatConstance = perdue ? "perdue" : (constance.every(function (c) { return c.ok === true; }) ? "acquise" : (constance.some(function (c) { return c.sansDonnees; }) ? "incomplete" : "en-cours"));
+    return {
+      p: p, s: s, marge: marge, palier: palier, debloque: debloque, k: k, fini: fini, deblocage: cumul(debloque),
+      fp: { n: t.rdv_fp, cible: p.rdv_fp, ok: t.rdv_fp >= p.rdv_fp, etat: cumul(t.rdv_fp >= p.rdv_fp) },
+      mrl: { n: t.actes_mrl, cible: p.actes_mrl, ok: t.actes_mrl >= p.actes_mrl, etat: cumul(t.actes_mrl >= p.actes_mrl) },
+      tase: { v: tase, cible: p.tase / 100, ok: tase !== null && tase >= p.tase / 100 - 1e-9, manque: Math.max(0, Math.ceil(p.tase / 100 * t.actes - 1e-9) - t.engageants) },
+      reprise: { v: reprise, plafond: p.reprise / 100, ok: reprise === null || reprise < p.reprise / 100 - 1e-9 },
+      constance: constance, etatConstance: etatConstance, constancePerdue: perdue,
+      ap: t.accompagnement
+    };
+  }
+  // La marge signée de chaque mois du trimestre, pour une personne (uid) ou pour l'équipe (uid vide).
+  // Le payplan se lit sur toute la marge : la case « Sans les RDV de la TMK » ne s'y applique pas.
+  // Un mois passé où personne n'a rien saisi dans le copilote donne null (pas de données) plutôt qu'un zéro trompeur.
+  function margesDuTrimestre(m, uid) {
+    var o = {}, mc = moisDe(aujourdhui());
+    trimestreDe(m).forEach(function (x) {
+      if (x > mc) return;
+      var l = activiteDu(x);
+      if (!l) { assurerMois(x); return; }
+      o[x] = l.length || x === mc ? somme(l, function (r) { return !uid || r.conseiller === uid; }).marge : null;
+    });
+    return o;
+  }
   function filtreOrigine(r) { return !etat.sansTmk || r.source !== "tmk"; }
 
   /* ---------- Les fiches ---------- */
@@ -2859,7 +2985,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function bandeauMois() {
     var mc = moisDe(aujourdhui()), lignes = activiteDu(mc);
     var mien = function (r) { return r.conseiller === compte.id; };
-    var obj = objectifDe(compte.email);
+    var obj = objectifDe(compte.email, mc);
     var bouton = el("button", { type: "button", class: "lien-carte", "data-cle": "voir-resultats", onclick: function () { etat.mois = mc; etat.portee = "moi"; changerVue("resultats"); } }, [el("span", { text: "Mes résultats" }), trait(ICONES.fleche, 14)]);
     if (!lignes) return el("section", { class: "bandeau-mois attente", "aria-label": "Mon mois" }, [el("p", { class: "chiffre-sous", text: "Chargement des chiffres du mois" }), bouton]);
     var L = lecture(somme(lignes, mien), obj), R = rythme(mc, L.t.marge_nette, obj);
@@ -2877,10 +3003,24 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       ]),
       el("div", { class: "bm-taux" }, [
         el("p", { class: "bm-lib", text: "Annulations" }),
-        el("p", { class: "bm-valeur" }, [el("strong", { text: L.t.actes ? pourcent(L.annulation) : "Pas de vente" })]),
-        L.t.actes ? statut(L.annulationOk, L.annulationOk ? "Sous les " + pourcent(L.plafond) : "Au-dessus des " + pourcent(L.plafond)) : null
+        el("p", { class: "bm-valeur" }, [el("strong", { text: L.annulation === null ? "Pas de vente" : pourcent(L.annulation) })]),
+        L.annulation === null ? null : statut(L.annulationOk, L.annulationOk ? "Sous les " + pourcent(L.plafond) : "Au-dessus des " + pourcent(L.plafond))
       ]),
-      bouton
+      bouton,
+      payplanVisible() && payplanEnVigueur(mc) ? payplanCompact(L.t, mc, obj) : null
+    ]);
+  }
+  // Les critères du payplan du mois, en une ligne : de quoi savoir où l'on en est sans ouvrir les résultats.
+  function payplanCompact(t, m, obj) {
+    var Pp = lecturePayplan(t, m, margesDuTrimestre(m, compte.id), obj);
+    var constance = { perdue: [false, "Constance perdue ce trimestre"], acquise: [true, "Constance acquise ce trimestre"], incomplete: [null, "Constance : un mois sans données"], "en-cours": [null, "Constance : " + euros(Pp.s.constance) + " chaque mois"] }[Pp.etatConstance];
+    return el("div", { class: "bm-payplan", "data-cle": "payplan-compact" }, [
+      el("p", { class: "bm-lib", text: "Payplan" }),
+      critere(Pp.deblocage, Pp.debloque ? "Boosters débloqués" : "Boosters dès " + euros(Pp.s.boosters)),
+      critere(Pp.fp.etat, "Full Prospect " + Pp.fp.n + "/" + Pp.fp.cible),
+      critere(Pp.mrl.etat, "Mon Réseau Local " + Pp.mrl.n + "/" + Pp.mrl.cible),
+      critere(Pp.tase.v === null ? null : Pp.tase.ok, "TASE " + (Pp.tase.v === null ? "sans vente" : pourcent(Pp.tase.v))),
+      critere(constance[0], constance[1])
     ]);
   }
 
@@ -3014,6 +3154,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         { cle: "societe", lib: "Société", type: "texte" },
         { groupe: [{ cle: "contact", lib: "Contact", type: "texte" }, { cle: "telephone", lib: "Téléphone", type: "tel" }] },
         { groupe: [{ cle: "date", lib: r1p ? "Date du R1" : "Date du rappel", type: "date", valeur: estOuvre(demain) ? demain : decaler(demain, enDate(demain).getUTCDay() === 6 ? 2 : 1), requis: true }, { cle: "heure", lib: "Heure", type: "heure", valeur: "10:00", requis: true }] },
+        { cle: "full_prospect", lib: "Full Prospect : rien n'est facturé chez Orange sur ce SIREN", type: "case" },
         { cle: "note", lib: "Note", type: "long", lignes: 2 }
       ],
       libelleEnregistrer: "Enregistrer",
@@ -3021,10 +3162,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         if (!txt(v.societe) && !txt(v.contact) && !txt(v.telephone)) return Promise.reject({ texte: "Indiquez au moins la société, le contact ou le téléphone." });
         var t = instantParis(v.date, Math.max(0, heureMin(v.heure)));
         if (heureMin(v.heure) < 0 || !jourIso(v.date)) return Promise.reject({ texte: "La date ou l'heure n'est pas valable." });
-        var fiche = { societe: v.societe, contact: v.contact, telephone: v.telephone, note: v.note, etape: r1p ? "r1p" : "rappel", rappel_le: new Date(t).toISOString(), source: "prospection", scenario: scenarioPar(etat.scenarioSession) ? etat.scenarioSession : "" };
+        var fiche = { societe: v.societe, contact: v.contact, telephone: v.telephone, note: v.note, etape: r1p ? "r1p" : "rappel", rappel_le: new Date(t).toISOString(), source: "prospection", full_prospect: !!v.full_prospect, scenario: scenarioPar(etat.scenarioSession) ? etat.scenarioSession : "" };
         return inserer("vad_prospects", fiche).then(function (p) {
           poserProspect(p);
-          return inserer("vad_appels", { nature: "prospection", source: "prospection", decroche: true, argumente: r1p ? true : argumente, issue: issue, prospect: p.id, scenario: fiche.scenario }).then(function (ligne) {
+          return inserer("vad_appels", { nature: "prospection", source: "prospection", decroche: true, argumente: r1p ? true : argumente, issue: issue, prospect: p.id, scenario: fiche.scenario, full_prospect: fiche.full_prospect }).then(function (ligne) {
             etat.appelsJour.unshift(ligne);
             etat.saisie = { pas: "decroche" };
             rendre();
@@ -3066,7 +3207,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   var BROUILLON = "vad-appel";
   function natureDe(etape) { return etape === "r1p" ? "r1" : (etape === "r2" ? "r2" : "prospection"); }
-  function ficheVide() { return { societe: "", contact: "", telephone: "", email: "", ville: "", siret: "", code_insee: "", activite: "", effectif: "", source: "prospection", note: "" }; }
+  function ficheVide() { return { societe: "", contact: "", telephone: "", email: "", ville: "", siret: "", code_insee: "", activite: "", effectif: "", source: "prospection", full_prospect: false, note: "" }; }
   function copieFiche(p) {
     var f = ficheVide();
     if (p) Object.keys(f).forEach(function (k) { f[k] = p[k] === null || p[k] === undefined ? f[k] : p[k]; });
@@ -3104,7 +3245,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       prospectId: p ? p.id : null, fiche: copieFiche(p), etapeInitiale: p ? p.etape : "a_appeler", nature: natureDe(p ? p.etape : ""),
       scenario: sc, pas: "accroche", vus: ["accroche"], debut: Date.now(), conseiller: compte.id,
       decouverte: decouverteDe(p), axe: axeUn ? cleAxe(axeUn) : "", objections: [], ouvertes: [], apPropose: false, temperature: "",
-      issue: "", vente: { marge: "", actes: "", engageants: "", fp: false, ap: false, offres: [], note: "" },
+      issue: "", vente: { marge: "", actes: "", engageants: "", mrl: "", fp: !!(p && p.full_prospect), ap: false, offres: [], note: "" },
       rdv: { date: "", heure: "" }, motif: "", note: "", argForce: null, valide: false, ids: { prospect: null, appel: null, vente: null },
       categorie: "", cherche: ""
     };
@@ -3259,7 +3400,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           details.join(" · "),
           tel ? el("a", { class: "ab-tel", href: "tel:" + tel.replace(/[^\d+]/g, ""), "data-cle": "tel", text: tel }) : null
         ]),
-        el("p", { class: "etiqs" }, [sc ? etiquette(sc.nom, "scenario") : null, f.source !== "prospection" ? etiquette(libelle(SOURCES, f.source)) : null, estMacrozone(f) ? etiquette("Macrozone Rouge", "rouge") : null, txt(f.effectif) ? etiquette(f.effectif) : null])
+        el("p", { class: "etiqs" }, [sc ? etiquette("Scénario : " + sc.nom, "scenario") : null, f.full_prospect ? etiquette("Full Prospect", "fp") : null, f.source !== "prospection" ? etiquette(libelle(SOURCES, f.source)) : null, estMacrozone(f) ? etiquette("Macrozone Rouge", "rouge") : null, txt(f.effectif) ? etiquette(f.effectif) : null])
       ]),
       el("div", { class: "ab-actions" }, [
         el("p", { class: "chrono", "aria-label": "Durée de l'appel" }, [trait(ICONES.horloge, 14), el("span", { class: "chrono-temps", text: duree(a) })]),
@@ -3560,10 +3701,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (a.issue === "Vente signée") {
       var v = a.vente;
       details.push(el("div", { class: "vente-form" }, [
-        el("div", { class: "trois" }, [
+        el("div", { class: "quatre" }, [
           zone("vente-marge", "Marge attendue (€)", liaison(saisie("text", v.marge, "vente-marge", { inputmode: "decimal" }), ["vente", "marge"])),
           zone("vente-actes", "Actes", liaison(saisie("text", v.actes, "vente-actes", { inputmode: "numeric" }), ["vente", "actes"])),
-          zone("vente-engageants", "Dont avec service engageant", liaison(saisie("text", v.engageants, "vente-engageants", { inputmode: "numeric" }), ["vente", "engageants"]))
+          zone("vente-engageants", "Dont service engageant", liaison(saisie("text", v.engageants, "vente-engageants", { inputmode: "numeric" }), ["vente", "engageants"])),
+          zone("vente-mrl", "Dont Mon Réseau Local", liaison(saisie("text", v.mrl || "", "vente-mrl", { inputmode: "numeric" }), ["vente", "mrl"]), "Pare-feu, wifi privé ou public.")
         ]),
         el("label", { class: "case-lib" }, [liaison(el("input", { type: "checkbox", "data-cle": "vente-fp", checked: !!v.fp }), ["vente", "fp"]), el("span", { text: "Full Prospect : rien n'est facturé chez Orange sur ce SIREN" })]),
         el("label", { class: "case-lib" }, [liaison(el("input", { type: "checkbox", "data-cle": "vente-ap", checked: !!v.ap }), ["vente", "ap"]), el("span", { text: "Accompagnement Pro signé" })]),
@@ -3625,6 +3767,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function champsFiche(f) {
     var o = {};
     ["societe", "contact", "telephone", "email", "ville", "activite", "effectif", "source", "note"].forEach(function (k) { o[k] = txt(f[k]); });
+    o.full_prospect = !!f.full_prospect;
     o.siret = /^\d{9}(\d{5})?$/.test(String(f.siret || "").replace(/\s+/g, "")) ? String(f.siret).replace(/\s+/g, "") : null;
     o.code_insee = /^[0-9][0-9AB][0-9]{3}$/.test(txt(f.code_insee)) ? txt(f.code_insee) : null;
     if (SOURCES.map(function (s) { return s[0]; }).indexOf(o.source) < 0) o.source = "prospection";
@@ -3647,7 +3790,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (!isFinite(marge) || marge < 0) return stopper("Indiquez la marge attendue de la vente, en euros.");
       if (!Number.isInteger(actes) || actes < 1) return stopper("Indiquez le nombre d'actes de la vente.");
       if (!Number.isInteger(eng) || eng < 0 || eng > actes) return stopper("Les actes avec service engageant vont de 0 au nombre d'actes.");
-      vente = { marge: Math.round(marge * 100) / 100, actes: actes, actes_engageants: eng, full_prospect: !!a.vente.fp, accompagnement_pro: !!a.vente.ap, offres: tableau(a.vente.offres).slice(0, 20), note: txt(a.vente.note) };
+      var mrl = Number(txt(a.vente.mrl) || "0");
+      if (!Number.isInteger(mrl) || mrl < 0 || mrl > actes) return stopper("Les actes Mon Réseau Local vont de 0 au nombre d'actes.");
+      vente = { marge: Math.round(marge * 100) / 100, actes: actes, actes_engageants: eng, actes_mrl: mrl, full_prospect: !!a.vente.fp, accompagnement_pro: !!a.vente.ap, offres: tableau(a.vente.offres).slice(0, 20), note: txt(a.vente.note) };
     }
     var suite = suiteDeLAppel(a, a.issue, quandMs);
     var besoinFiche = suite && suite.etape !== "perdu";
@@ -3660,6 +3805,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var avant = a.prospectId ? prospectPar(a.prospectId) : null;
     var champs = Object.assign(champsFiche(a.fiche), { decouverte: Object.assign({}, a.decouverte, { maj: aujourdhui() }), scenario: a.scenario || "" });
     if (suite) Object.assign(champs, suite);
+    // Une vente Full Prospect dit aussi que l'entreprise l'est.
+    if (vente && vente.full_prospect) champs.full_prospect = true;
     if (note && !a.prospectId) champs.note = [txt(a.fiche.note), note].filter(Boolean).join("\n").slice(0, 4000);
     else if (note && avant) champs.note = [txt(avant.note), aujourdhui().split("-").reverse().join("/") + " : " + note].filter(Boolean).join("\n").slice(-4000);
     etat.envoi = true;
@@ -3675,7 +3822,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     etapeFiche.then(function () {
       if (a.ids.appel) return null;
       var objs = a.objections.slice(0, 30), etapes = PARCOURS.map(function (x) { return x[0]; }).filter(function (x) { return a.vus.indexOf(x) >= 0; });
-      return inserer("vad_appels", { prospect: prospectId || null, nature: a.nature, source: source, decroche: true, argumente: arg, issue: a.issue, scenario: a.scenario || "", etapes: etapes, objections: objs, ap_propose: !!a.apPropose, note: note.slice(0, 2000) })
+      return inserer("vad_appels", { prospect: prospectId || null, nature: a.nature, source: source, full_prospect: !!champs.full_prospect, decroche: true, argumente: arg, issue: a.issue, scenario: a.scenario || "", etapes: etapes, objections: objs, ap_propose: !!a.apPropose, note: note.slice(0, 2000) })
         .then(function (l) { a.ids.appel = l.id; etat.appelsJour.unshift(l); sauverBrouillon(); });
     }).then(function () {
       if (!vente || a.ids.vente) return null;
@@ -3694,7 +3841,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           if (cree && ids.prospect) return supprimerLigne("vad_prospects", ids.prospect).then(function () { oterProspect(ids.prospect); });
           if (avant) {
             var retour = {};
-            ["etape", "rappel_le", "decouverte", "scenario", "note", "societe", "contact", "telephone", "email", "ville", "siret", "code_insee", "activite", "effectif", "source"].forEach(function (k) { retour[k] = avant[k] === undefined ? null : avant[k]; });
+            ["etape", "rappel_le", "decouverte", "scenario", "note", "societe", "contact", "telephone", "email", "ville", "siret", "code_insee", "activite", "effectif", "source", "full_prospect"].forEach(function (k) { retour[k] = avant[k] === undefined ? null : avant[k]; });
+            retour.full_prospect = !!retour.full_prospect;
             ["note", "societe", "contact", "telephone", "email", "ville", "activite", "effectif"].forEach(function (k) { if (retour[k] === null) retour[k] = ""; });
             if (!retour.source) retour.source = "prospection";
             if (!retour.decouverte) retour.decouverte = {};
@@ -3729,7 +3877,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         var nouveau = jourIso(v.date) && heureMin(v.heure) >= 0 ? new Date(instantParis(v.date, heureMin(v.heure))).toISOString() : null;
         if ((v.date || v.heure) && !nouveau) return Promise.reject({ texte: "Indiquez la date et l'heure du nouveau créneau, ou laissez-les vides." });
         var source = champsFiche(a.fiche).source;
-        return inserer("vad_appels", { prospect: a.prospectId || null, nature: a.nature, source: source, decroche: false, argumente: false, issue: v.raison, scenario: a.scenario || "" }).then(function (l) {
+        return inserer("vad_appels", { prospect: a.prospectId || null, nature: a.nature, source: source, full_prospect: !!a.fiche.full_prospect, decroche: false, argumente: false, issue: v.raison, scenario: a.scenario || "" }).then(function (l) {
           etat.appelsJour.unshift(l);
           var maj = nouveau && p ? majLigne("vad_prospects", p.id, { rappel_le: nouveau }).then(poserProspect) : Promise.resolve();
           var ancien = p ? p.rappel_le : null;
@@ -3761,9 +3909,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   /* ---------- Fiches ---------- */
 
-  var FILTRES = [["actifs", "Actives"], ["rappel", "À rappeler"], ["r1p", "R1 prévus"], ["r2", "R2 prévus"], ["a_appeler", "À appeler"], ["sans_date", "Sans date"], ["signe", "Signées"], ["perdu", "Perdues"], ["toutes", "Toutes"]];
+  var FILTRES = [["actifs", "Actives"], ["rappel", "À rappeler"], ["r1p", "R1 prévus"], ["r2", "R2 prévus"], ["a_appeler", "À appeler"], ["sans_date", "Sans date"], ["fp", "Full Prospect"], ["signe", "Signées"], ["perdu", "Perdues"], ["toutes", "Toutes"]];
   function filtrer(p, f) {
     if (f === "toutes") return true;
+    if (f === "fp") return !!p.full_prospect;
     if (f === "actifs") return ACTIVES.indexOf(p.etape) >= 0;
     if (f === "sans_date") return ["rappel", "r1p", "r2"].indexOf(p.etape) >= 0 && !isFinite(msDe(p.rappel_le));
     return p.etape === f;
@@ -3783,7 +3932,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     cherche.addEventListener("input", function () { etat.recherche = cherche.value; rendre(); });
     var filtres = el("div", { class: "filtres-cat", role: "group", "aria-label": "Étapes" }, FILTRES.map(function (f) {
       var n = base.filter(function (p) { return filtrer(p, f[0]); }).length, on = etat.filtre === f[0];
-      if (!n && !on && ["sans_date", "r2"].indexOf(f[0]) >= 0) return null;
+      if (!n && !on && ["sans_date", "r2", "fp"].indexOf(f[0]) >= 0) return null;
       return el("button", { type: "button", class: "seg-btn" + (on ? " actif" : ""), "aria-pressed": on ? "true" : "false", "data-cle": "filtre-" + f[0], onclick: function () { etat.filtre = f[0]; rendre(); } }, [f[1], el("span", { class: "seg-n", text: String(n) })]);
     }));
     var choixConseiller = null;
@@ -3809,7 +3958,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         el("strong", { text: nomFiche(p) }),
         el("span", { text: [txt(p.contact), txt(p.ville), mien ? "" : nomDe(p.conseiller)].filter(Boolean).join(" · ") })
       ]),
-      el("span", { class: "fl-etape" }, [etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape), p.source !== "prospection" ? etiquette(libelle(SOURCES, p.source)) : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null]),
+      el("span", { class: "fl-etape" }, [etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape), p.full_prospect ? etiquette("Full Prospect", "fp") : null, p.source !== "prospection" ? etiquette(libelle(SOURCES, p.source)) : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null]),
       el("span", { class: "fl-quand" + (retard ? " retard" : ""), text: isFinite(t) && ACTIVES.indexOf(p.etape) >= 0 ? (retard ? "En retard : " : "") + minuscule(quand(t)) : "" }),
       mien && ["signe", "perdu"].indexOf(p.etape) < 0 ? el("button", { type: "button", class: "bouton-clair", "data-cle": "appeler-" + p.id, onclick: function () { nouvelAppel(p); } }, [trait(ICONES.appel, 13), "Appeler"]) : el("span")
     ]);
@@ -3898,7 +4047,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       { groupe: [{ cle: "email", lib: "Mail", type: "email", valeur: f.email }, { cle: "ville", lib: "Ville", type: "texte", valeur: f.ville }] },
       { groupe: [{ cle: "siret", lib: "SIRET", type: "texte", valeur: f.siret, exemple: "14 chiffres" }, { cle: "effectif", lib: "Effectif", type: "texte", valeur: f.effectif }] },
       { cle: "activite", lib: "Activité", type: "texte", valeur: f.activite },
-      { cle: "source", lib: "Origine", type: "selection", options: SOURCES, valeur: f.source || "prospection" }
+      { cle: "source", lib: "Origine", type: "selection", options: SOURCES, valeur: f.source || "prospection" },
+      { cle: "full_prospect", lib: "Full Prospect : rien n'est facturé chez Orange sur ce SIREN", type: "case", valeur: !!f.full_prospect }
     ];
     if (opts.suivi) {
       champs.push({ cle: "etape", lib: "Étape", type: "selection", options: ETAPES, valeur: f.etape || "a_appeler" });
@@ -3959,6 +4109,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             var r = {};
             Object.keys(c).forEach(function (k) { r[k] = avant[k] === undefined ? null : avant[k]; });
             ["societe", "contact", "telephone", "email", "ville", "activite", "effectif", "note"].forEach(function (k) { if (r[k] === null) r[k] = ""; });
+            r.full_prospect = !!r.full_prospect;
             return majLigne("vad_prospects", p.id, r).then(function (x) { poserProspect(x); rendre(); });
           });
         });
@@ -3997,7 +4148,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!l) return null;
     return l.filter(filtreOrigine).filter(function (r) { return portee === "equipe" || r.conseiller === compte.id; });
   }
-  function objectifEquipe(lignes) { return equipe(lignes).reduce(function (s, c) { return s + c.objectif; }, 0); }
+  function objectifEquipe(lignes, m) { return equipe(lignes, m).reduce(function (s, c) { return s + c.objectif; }, 0); }
 
   function vueResultats() {
     var m = etat.mois, mc = moisDe(aujourdhui()), portee = porteeEffective();
@@ -4015,9 +4166,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var tete = teteDePage(null, "Résultats", null, [choixMois, choixPortee, tmk]);
     var lignes = lignesDe(m, portee);
     if (!lignes) return [tete, el("p", { class: "chargement", role: "status" }, [el("span", { class: "rond", "aria-hidden": "true" }), "Chargement des chiffres"])];
-    var objectif = portee === "equipe" ? objectifEquipe(activiteDu(m)) : objectifDe(compte.email);
+    var objectif = portee === "equipe" ? objectifEquipe(activiteDu(m), m) : objectifDe(compte.email, m);
     var t = somme(lignes), L = lecture(t, objectif), R = rythme(m, t.marge_nette, objectif);
-    var blocs = [tete, tuilesObjectifs(L, R, m, portee), tuilesSecondaires(L), entonnoir(L), courbeMarge(m, lignes, objectif)];
+    var blocs = [tete, tuilesObjectifs(L, R, m, portee), payplanVisible() ? blocPayplan(m, portee, objectif) : null, tuilesSecondaires(L), entonnoir(L), courbeMarge(m, lignes, objectif)];
     if (portee === "equipe") blocs.push(tableEquipe(m));
     if (portee === "moi" && peutSaisir) blocs.push(mesVentes(m));
     return blocs;
@@ -4038,7 +4189,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("p", { class: "tuile-lib", text: "Marge nette" + (portee === "equipe" ? " de l'équipe" : "") }),
           el("p", { class: "tuile-valeur" }, [el("strong", { text: euros(t.marge_nette) }), L.objectif > 0 ? el("span", { text: " sur " + euros(L.objectif) }) : null]),
           L.objectif > 0 ? jauge(L.part) : null
-        ].concat(sous, [t.marge_annulee ? el("p", { class: "tuile-sous", text: euros(t.marge) + " signés, " + euros(t.marge_annulee) + " annulés" }) : null])),
+        ].concat(sous, [t.marge_annulee ? el("p", { class: "tuile-sous", text: euros(t.marge) + " signés, " + euros(t.marge_annulee) + " annulés dans le mois" }) : null])),
         el("div", { class: "tuile", "data-cle": "tuile-tase" }, [
           el("p", { class: "tuile-lib", text: "TASE" }),
           el("p", { class: "tuile-valeur" }, [el("strong", { text: t.actes ? pourcent(L.tase) : "Pas de vente" })]),
@@ -4048,10 +4199,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         ]),
         el("div", { class: "tuile", "data-cle": "tuile-annulation" }, [
           el("p", { class: "tuile-lib", text: "Annulations" }),
-          el("p", { class: "tuile-valeur" }, [el("strong", { text: t.actes ? pourcent(L.annulation) : "Pas de vente" })]),
-          t.actes ? jauge(L.annulation, L.plafond, "plafond") : null,
-          t.actes ? statut(L.annulationOk, L.annulationOk ? "Sous le plafond de " + pourcent(L.plafond) : "Au-dessus du plafond de " + pourcent(L.plafond)) : null,
-          el("p", { class: "tuile-sous", text: pluriel(t.actes_annules, "acte annulé", "actes annulés") + " sur les ventes signées en " + MOIS_LONGS[Number(m.slice(5, 7)) - 1] })
+          el("p", { class: "tuile-valeur" }, [el("strong", { text: L.annulation === null ? "Pas de vente" : pourcent(L.annulation) })]),
+          L.annulation === null ? null : jauge(Math.min(1, L.annulation), L.plafond, "plafond"),
+          L.annulation === null ? null : statut(L.annulationOk, L.annulationOk ? "Sous le plafond de " + pourcent(L.plafond) : "Au-dessus du plafond de " + pourcent(L.plafond)),
+          el("p", { class: "tuile-sous", text: euros(t.marge_annulee) + " annulés en " + MOIS_LONGS[Number(m.slice(5, 7)) - 1] + " (" + pluriel(t.annulations, "vente", "ventes") + "), pour " + euros(t.marge) + " signés" })
         ])
       ])
     ], "section-tuiles");
@@ -4064,11 +4215,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     return section("detail", [
       titreSection("detail", "Le mois en détail"),
-      el("div", { class: "tuiles quatre" }, [
+      el("div", { class: "tuiles six" }, [
         petite("ventes", "Ventes", entier(t.ventes), t.ventes ? "Panier moyen " + euros(L.panier) : null),
         petite("fp", "Full Prospect", entier(t.full_prospect), t.full_prospect ? euros(t.marge_fp_nette) + " de marge nette" : "Aucune vente Full Prospect"),
         petite("ap", "Accompagnement Pro", t.ventes ? pourcent(L.apSigne) : "Pas de vente", (t.ventes ? pluriel(t.accompagnement, "vente", "ventes") + " sur " + t.ventes + (cible ? ", cible " + pourcent(cible) : "") : "") + (t.rdv_tenus ? " · proposé dans " + pourcent(L.apPropose) + " des R1 et R2 tenus" : "")),
-        petite("r1p", "R1P pris", entier(t.r1p), t.r1p && t.appels ? "1 pour " + entier(t.appels / t.r1p) + " appels de prospection" : null)
+        petite("r1p", "R1P pris", entier(t.r1p), t.r1p && t.appels ? "1 pour " + entier(t.appels / t.r1p) + " appels de prospection" : null),
+        petite("rdv-fp", "RDV Full Prospect", entier(t.rdv_fp), "R1 tenus avec une entreprise sans facturation chez Orange"),
+        petite("mrl", "Mon Réseau Local", entier(t.actes_mrl), pluriel(t.actes_mrl, "acte", "actes") + " : pare-feu, wifi privé ou public")
       ])
     ]);
   }
@@ -4186,12 +4339,115 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var l = document.documentElement.clientWidth || window.innerWidth || 1000;
     return Math.round(Math.max(280, Math.min(1124, l - (l < 760 ? 32 : 56))));
   }
+  /* ---------- Payplan 2027 : où l'on en est, critère par critère ---------- */
+
+  var PALIERS = {
+    sous: function (s, mg) { return "Le variable démarre à " + euros(s.declenchement) + " : encore " + euros(s.declenchement - mg) + "."; },
+    variable: function (s, mg) { return "Variable en route. L'accélération commence à " + euros(s.acceleration) + " : encore " + euros(s.acceleration - mg) + "."; },
+    acceleration: function (s, mg) { return "Tranche d'accélération : encore " + euros(s.objectif - mg) + " pour l'objectif de " + euros(s.objectif) + "."; },
+    objectif: function (s) { return "Objectif de " + euros(s.objectif) + " atteint : prime d'objectif."; },
+    "au-dela": function (s, mg) { return "Objectif atteint, et " + euros(mg - s.objectif) + " au-delà, sans plafond."; }
+  };
+  function barrePaliers(Pp) {
+    var s = Pp.s, max = Math.max(s.objectif * 1.15, Pp.marge, 1);
+    var pc = function (v) { return (Math.max(0, Math.min(1, v / max)) * 100).toFixed(2) + "%"; };
+    return el("div", { class: "paliers", "aria-hidden": "true" }, [
+      el("span", { class: "paliers-rempli", css: { width: pc(Pp.marge) } }),
+      [["declenchement", s.declenchement], ["acceleration", s.acceleration], ["objectif", s.objectif]].map(function (x) {
+        return el("span", { class: "paliers-repere " + x[0], css: { left: pc(x[1]) } }, [el("span", { class: "paliers-val", text: entier(x[1]) })]);
+      })
+    ]);
+  }
+  function blocPayplan(m, portee, objectif) {
+    var r = reglages(), p = r.payplan, enVigueur = payplanEnVigueur(m);
+    var notes = [];
+    if (!enVigueur) notes.push("Le payplan 2027 s'applique à partir de " + libelleMois(p.debut) + ". D'ici là, ce bloc lit le mois comme s'il était en place, avec des seuils proportionnels à l'objectif " + (portee === "equipe" ? "de chacun." : "du mois (" + euros(objectif) + ")."));
+    if (etat.sansTmk) notes.push("Le payplan se lit sur toute la marge, RDV de la TMK compris : la case « Sans les RDV de la TMK » ne s'applique pas à ce bloc.");
+    if (estAdmin && !p.visible) notes.push("Les conseillers ne voient pas encore ce bloc. Pour le leur montrer : « Objectifs et réglages ».");
+    var tete = [titreSection("payplan", "Payplan 2027", estAdmin ? lienModifier("modifier-payplan", ouvrirReglages, "Régler") : null)].concat(notes.map(function (n) { return el("p", { class: "note-discrete", text: n }); }));
+    if (portee === "equipe") return section("payplan", tete.concat([tablePayplan(m)]), "section-payplan");
+    var t = somme(activiteDu(m) || [], function (x) { return x.conseiller === compte.id; });
+    var Pp = lecturePayplan(t, m, margesDuTrimestre(m, compte.id), objectif);
+    return section("payplan", tete.concat([el("div", { class: "payplan" }, cartesPayplan(Pp, m))]), "section-payplan");
+  }
+  function cartesPayplan(Pp, m) {
+    var s = Pp.s, moisLong = MOIS_LONGS[Number(m.slice(5, 7)) - 1];
+    function carte(cle, titre, enfants, genre) { return el("div", { class: "pp-carte" + (genre ? " " + genre : ""), "data-cle": "pp-" + cle }, [el("p", { class: "tuile-lib", text: titre })].concat(enfants)); }
+    function booster(cle, titre, valeur, cible, etatCritere, detail) {
+      return carte(cle, titre, [el("p", { class: "pp-valeur" }, [el("strong", { text: valeur }), el("span", { text: " / " + cible })]), critere(etatCritere, etatCritere ? "Atteint" : (etatCritere === false ? "Pas atteint en " + moisLong : detail))]);
+    }
+    var phraseConstance = {
+      perdue: "Perdue pour ce trimestre : un mois est passé sous " + euros(s.constance) + ".",
+      acquise: "Acquise pour ce trimestre : chaque mois au-dessus de " + euros(s.constance) + ".",
+      incomplete: "Pas mesurable ici pour ce trimestre : le copilote n'a pas de données pour un des mois.",
+      "en-cours": "Chaque mois au-dessus de " + euros(s.constance) + " (août exempté)."
+    }[Pp.etatConstance];
+    return [
+      carte("marge", "Marge signée en " + moisLong, [
+        el("p", { class: "pp-valeur" }, [el("strong", { text: euros(Pp.marge) }), el("span", { text: " pour un objectif de " + euros(s.objectif) })]),
+        barrePaliers(Pp),
+        el("p", { class: "tuile-sous fort", text: PALIERS[Pp.palier](s, Pp.marge) }),
+        el("p", { class: "tuile-sous", text: "Repères : le variable démarre à " + euros(s.declenchement) + ", accélère à " + euros(s.acceleration) + ", et l'objectif ouvre la prime." })
+      ], "large"),
+      carte("deblocage", "Boosters et Accompagnement Pro", [
+        el("p", { class: "pp-valeur" }, [el("strong", { text: Pp.debloque ? "Débloqués" : (Pp.fini ? "Pas débloqués" : "Pas encore") })]),
+        critere(Pp.deblocage, Pp.debloque ? "La marge du mois dépasse " + euros(s.boosters) : (Pp.fini ? "Il fallait " + euros(s.boosters) + " de marge" : "Dès " + euros(s.boosters) + " de marge : encore " + euros(s.boosters - Pp.marge))),
+        el("p", { class: "tuile-sous", text: pluriel(Pp.ap, "contrat d'Accompagnement Pro signé", "contrats d'Accompagnement Pro signés") + " ce mois-ci" })
+      ]),
+      booster("fp", "Booster Full Prospect", entier(Pp.fp.n), Pp.fp.cible + " RDV", Pp.fp.etat, "Encore " + pluriel(Pp.fp.cible - Pp.fp.n, "RDV", "RDV") + " avec une entreprise Full Prospect"),
+      booster("mrl", "Booster Mon Réseau Local", entier(Pp.mrl.n), Pp.mrl.cible + " actes", Pp.mrl.etat, "Encore " + pluriel(Pp.mrl.cible - Pp.mrl.n, "acte", "actes") + " : pare-feu, wifi privé ou public"),
+      carte("tase", "Booster TASE", [
+        el("p", { class: "pp-valeur" }, [el("strong", { text: Pp.tase.v === null ? "Sans vente" : pourcent(Pp.tase.v) }), el("span", { text: " / " + pourcent(Pp.tase.cible) })]),
+        critere(Pp.tase.v === null ? null : Pp.tase.ok, Pp.tase.ok ? "Atteint" : (Pp.tase.v === null ? "Pas encore de vente" : "Il manque " + pluriel(Pp.tase.manque, "acte engageant", "actes engageants")))
+      ]),
+      carte("reprise", "Garde-fou reprise", [
+        el("p", { class: "pp-valeur" }, [el("strong", { text: Pp.reprise.v === null ? "Aucune" : pourcent(Pp.reprise.v) }), el("span", { text: " / " + pourcent(Pp.reprise.plafond) })]),
+        critere(Pp.reprise.ok, Pp.reprise.ok ? "Sous le plafond" : "Au-dessus : malus sur la marge du mois"),
+        el("p", { class: "tuile-sous", text: "Marge annulée dans le mois, rapportée à la marge signée." })
+      ], Pp.reprise.ok ? "" : "alerte"),
+      carte("constance", "Prime de constance du trimestre", [
+        el("ol", { class: "pp-mois" }, Pp.constance.map(function (c) {
+          var lib = majuscule(MOIS_LONGS[Number(c.mois.slice(5, 7)) - 1]);
+          var etatTxt = c.avant ? "avant le payplan" : (c.exempte ? "exempté" : (c.futur ? "à venir" : (c.sansDonnees ? "pas de données" : (c.marge === null ? "chargement" : euros(c.marge)))));
+          var ok = c.exempte ? true : (c.marge === null ? null : (c.ok ? true : (c.termine ? false : null)));
+          return el("li", { class: "pp-mois-case" + (c.courant ? " courant" : "") }, [el("span", { class: "pp-mois-nom", text: lib }), critere(ok, etatTxt)]);
+        })),
+        el("p", { class: "tuile-sous", text: phraseConstance })
+      ], "large constance")
+    ];
+  }
+  // Pour l'équipe : chaque conseiller, chaque critère.
+  function tablePayplan(m) {
+    var lignes = activiteDu(m) || [], membres = equipe(lignes, m);
+    if (!membres.length) return el("p", { class: "vide", text: "Aucun conseiller pour l'instant." });
+    var entetes = ["Conseiller", "Marge signée", "Palier", "Boosters", "Full Prospect", "Mon Réseau Local", "TASE", "Reprise", "Constance"];
+    var constance = { perdue: [false, "Perdue"], acquise: [true, "Acquise"], incomplete: [null, "Non mesurable"], "en-cours": [null, "En cours"] };
+    return el("div", { class: "table-defile" }, [el("table", { class: "table-equipe table-payplan" }, [
+      el("thead", {}, [el("tr", {}, entetes.map(function (x, i) { return el("th", { scope: "col", class: i ? "num" : "", text: x }); }))]),
+      el("tbody", {}, membres.map(function (c) {
+        var t = somme(lignes, function (r) { return c.uid && r.conseiller === c.uid; });
+        var Pp = lecturePayplan(t, m, c.uid ? margesDuTrimestre(m, c.uid) : {}, c.objectif || reglages().payplan.objectif);
+        var paliers = { sous: "Sous le déclenchement", variable: "Variable", acceleration: "Accélération", objectif: "Objectif", "au-dela": "Au-delà" };
+        return el("tr", { class: c.uid === compte.id ? "moi" : "" }, [
+          el("th", { scope: "row", text: c.nom }),
+          el("td", { class: "num" }, [el("strong", { text: euros(Pp.marge) })]),
+          el("td", { class: "num", text: paliers[Pp.palier] }),
+          el("td", { class: "num" }, [critere(Pp.deblocage, Pp.debloque ? "Débloqués" : "Dès " + euros(Pp.s.boosters))]),
+          el("td", { class: "num" }, [critere(Pp.fp.etat, Pp.fp.n + "/" + Pp.fp.cible)]),
+          el("td", { class: "num" }, [critere(Pp.mrl.etat, Pp.mrl.n + "/" + Pp.mrl.cible)]),
+          el("td", { class: "num" }, [critere(Pp.tase.v === null ? null : Pp.tase.ok, Pp.tase.v === null ? "Sans vente" : pourcent(Pp.tase.v))]),
+          el("td", { class: "num" }, [critere(Pp.reprise.ok ? (Pp.reprise.v === null ? null : true) : false, Pp.reprise.v === null ? "Aucune" : pourcent(Pp.reprise.v))]),
+          el("td", { class: "num" }, [critere(constance[Pp.etatConstance][0], constance[Pp.etatConstance][1])])
+        ]);
+      }))
+    ])]);
+  }
   function svgEl(nom, attrs) { var n = document.createElementNS(NS, nom); Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); }); return n; }
   function pasRond(v) { if (!(v > 0)) return 1000; var p = Math.pow(10, Math.floor(Math.log10(v))), r = v / p; return (r <= 1 ? 1 : r <= 2 ? 2 : r <= 2.5 ? 2.5 : r <= 5 ? 5 : 10) * p; }
 
   // L'équipe, conseiller par conseiller : marge face à l'objectif de chacun, TASE et annulations sur ses propres actes.
   function tableEquipe(m) {
-    var toutes = (activiteDu(m) || []).filter(filtreOrigine), membres = equipe(activiteDu(m) || []);
+    var toutes = (activiteDu(m) || []).filter(filtreOrigine), membres = equipe(activiteDu(m) || [], m);
     if (!membres.length) return section("equipe", [titreSection("equipe", "L'équipe"), el("p", { class: "vide", text: "Aucun conseiller n'a encore accès au copilote. Ajoutez-les depuis « Gérer les accès »." })]);
     var r = reglages();
     var rangs = membres.map(function (c) {
@@ -4210,7 +4466,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             el("td", { class: "num" }, [el("strong", { text: euros(t.marge_nette) })]),
             el("td", { class: "num" }, x.c.objectif > 0 ? [jauge(x.L.part), " ", pourcent(x.L.part)] : ["Sans objectif"]),
             cellTaux(x.L.tase, x.L.taseOk, !t.actes),
-            cellTaux(x.L.annulation, x.L.annulationOk, !t.actes),
+            cellTaux(x.L.annulation, x.L.annulationOk, x.L.annulation === null),
             el("td", { class: "num", text: entier(t.appels) }),
             el("td", { class: "num", text: t.appels ? pourcent(x.L.decroche) : "" }),
             el("td", { class: "num", text: t.decroches ? pourcent(x.L.argumente) : "" }),
@@ -4234,7 +4490,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     else corps = el("ol", { class: "ventes" }, l.map(function (v) {
       return el("li", { class: "vente-ligne" + (v.annulee_le ? " annulee" : "") }, [
         el("span", { class: "vl-date", text: majuscule(jourCourt(v.signee_le)) }),
-        el("button", { type: "button", class: "vl-qui", "data-cle": "vente-" + v.id, onclick: function () { ouvrirVente(v); } }, [el("strong", { text: txt(v.societe) || "Vente" }), el("span", { text: [pluriel(v.actes, "acte", "actes"), v.actes_engageants + " engageant" + (v.actes_engageants > 1 ? "s" : ""), v.full_prospect ? "Full Prospect" : "", v.accompagnement_pro ? "Accompagnement Pro" : "", v.source === "tmk" ? "RDV de la TMK" : ""].filter(Boolean).join(" · ") })]),
+        el("button", { type: "button", class: "vl-qui", "data-cle": "vente-" + v.id, onclick: function () { ouvrirVente(v); } }, [el("strong", { text: txt(v.societe) || "Vente" }), el("span", { text: [pluriel(v.actes, "acte", "actes"), v.actes_engageants + " engageant" + (v.actes_engageants > 1 ? "s" : ""), v.actes_mrl ? v.actes_mrl + " Mon Réseau Local" : "", v.full_prospect ? "Full Prospect" : "", v.accompagnement_pro ? "Accompagnement Pro" : "", v.source === "tmk" ? "RDV de la TMK" : ""].filter(Boolean).join(" · ") })]),
         el("span", { class: "vl-marge" }, [el("strong", { text: euros(num(v.marge) - num(v.marge_annulee)) }), v.annulee_le ? el("span", { text: "dont " + euros(v.marge_annulee) + " annulés" }) : null])
       ]);
     }));
@@ -4247,7 +4503,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       { groupe: [{ cle: "signee_le", lib: "Signée le", type: "date", valeur: v.signee_le, requis: true }, { cle: "source", lib: "Origine", type: "selection", options: SOURCES, valeur: v.source }] },
       { cle: "societe", lib: "Société", type: "texte", valeur: v.societe },
       { groupe: [{ cle: "marge", lib: "Marge attendue (€)", type: "nombre", valeur: v.marge === "" ? "" : String(v.marge).replace(".", ","), requis: true }, { cle: "actes", lib: "Actes", type: "nombre", valeur: v.actes, requis: true }] },
-      { cle: "actes_engageants", lib: "Dont avec service engageant", type: "nombre", valeur: v.actes_engageants },
+      { groupe: [{ cle: "actes_engageants", lib: "Dont service engageant", type: "nombre", valeur: v.actes_engageants }, { cle: "actes_mrl", lib: "Dont Mon Réseau Local", type: "nombre", valeur: v.actes_mrl || "", aide: "Pare-feu, wifi privé ou public." }] },
       { cle: "full_prospect", lib: "Full Prospect : rien n'est facturé chez Orange sur ce SIREN", type: "case", valeur: v.full_prospect },
       { cle: "accompagnement_pro", lib: "Accompagnement Pro signé", type: "case", valeur: v.accompagnement_pro },
       r.offres.length ? { cle: "offres", lib: "Offres", type: "puces", options: r.offres.map(function (o) { return [o, o]; }), valeur: v.offres } : null,
@@ -4267,7 +4523,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         if (!isFinite(marge) || marge < 0) return Promise.reject({ texte: "La marge s'écrit en euros, par exemple 1 250." });
         if (!Number.isInteger(actes) || actes < 1) return Promise.reject({ texte: "Indiquez le nombre d'actes (au moins 1)." });
         if (!Number.isInteger(eng) || eng < 0 || eng > actes) return Promise.reject({ texte: "Les actes engageants vont de 0 au nombre d'actes." });
-        var c = { signee_le: x.signee_le, source: x.source, societe: x.societe, marge: Math.round(marge * 100) / 100, actes: actes, actes_engageants: eng, full_prospect: x.full_prospect, accompagnement_pro: x.accompagnement_pro, offres: tableau(x.offres), note: x.note };
+        var mrl = Number(x.actes_mrl || 0);
+        if (!Number.isInteger(mrl) || mrl < 0 || mrl > actes) return Promise.reject({ texte: "Les actes Mon Réseau Local vont de 0 au nombre d'actes." });
+        var c = { signee_le: x.signee_le, source: x.source, societe: x.societe, marge: Math.round(marge * 100) / 100, actes: actes, actes_engageants: eng, actes_mrl: mrl, full_prospect: x.full_prospect, accompagnement_pro: x.accompagnement_pro, offres: tableau(x.offres), note: x.note };
         if (!neuve) {
           if (x.annulee) {
             var aa = Number(x.actes_annules || 0), ma = montantSaisi(x.marge_annulee || "0");
@@ -4481,8 +4739,33 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       { cle: "macrozones", lib: "Macrozones Rouge : codes INSEE des communes", type: "long", lignes: 3, valeur: r.macrozones.join(" "), aide: "Séparés par des espaces, des virgules ou des retours à la ligne. Une fiche dans l'une de ces communes porte la mention Macrozone Rouge." },
       { cle: "levier_macrozone", lib: "Le levier à rappeler en macrozone Rouge", type: "long", lignes: 2, valeur: r.levier_macrozone }
     ]);
+    var pp = r.payplan, regle = payplanRegle();
+    // Payplan pas encore réglé : des champs vides plutôt que des zéros
+    var vpp = function (k) { return regle ? pp[k] : ""; };
+    var champsPayplan = [
+      { intertitre: "Payplan 2027", aide: "Les seuils du payplan 2027 pour la VAD. Un objectif personnel réglé plus haut s'applique aussi en 2027 : les seuils suivent alors en proportion." },
+      { groupe: [{ cle: "pp_debut", lib: "En vigueur à partir de (AAAA-MM)", type: "texte", valeur: vpp("debut") }, { cle: "pp_objectif", lib: "Objectif de marge (€ par mois)", type: "nombre", valeur: vpp("objectif") }] },
+      { groupe: [{ cle: "pp_declenchement", lib: "Le variable démarre à (€)", type: "nombre", valeur: vpp("declenchement") }, { cle: "pp_acceleration", lib: "Tranche d'accélération à partir de (€)", type: "nombre", valeur: vpp("acceleration") }] },
+      { groupe: [{ cle: "pp_boosters", lib: "Boosters et Accompagnement Pro dès (€)", type: "nombre", valeur: vpp("boosters") }, { cle: "pp_constance", lib: "Constance : chaque mois au moins (€)", type: "nombre", valeur: vpp("constance") }] },
+      { groupe: [{ cle: "pp_rdv_fp", lib: "Booster Full Prospect : RDV par mois", type: "nombre", valeur: vpp("rdv_fp") }, { cle: "pp_actes_mrl", lib: "Booster Mon Réseau Local : actes par mois", type: "nombre", valeur: vpp("actes_mrl") }] },
+      { groupe: [{ cle: "pp_tase", lib: "Booster TASE à partir de (%)", type: "nombre", valeur: vpp("tase") }, { cle: "pp_reprise", lib: "Garde-fou reprise à (%)", type: "nombre", valeur: vpp("reprise") }] },
+      { cle: "pp_visible", lib: "Montrer le payplan 2027 aux conseillers et sur le mur", type: "case", valeur: pp.visible, aide: "Tant que la case est décochée, vous seul voyez le bloc « Payplan 2027 »." }
+    ];
+    champs = champs.concat(champsPayplan);
+    // Recalculer les seuils à partir de l'objectif, dans les proportions de la grille gardées avec les réglages (pas dans la page, qui est publique).
+    var rg = pp.regles;
+    var recalcul = rg ? el("button", { type: "button", class: "bouton-clair", "data-cle": "pp-recalculer", text: "Recalculer les seuils depuis l'objectif", onclick: function () {
+      var f = feuille && feuille.form, o = f ? montantSaisi(f.elements.pp_objectif.value) : NaN;
+      if (!f || !(o > 0)) return;
+      var rd = function (x) { return String(Math.round(x / rg.arrondi) * rg.arrondi); };
+      f.elements.pp_declenchement.value = rd(o * rg.declenchement);
+      f.elements.pp_acceleration.value = rd(o * rg.acceleration);
+      f.elements.pp_boosters.value = rd(o * rg.boosters);
+      f.elements.pp_constance.value = rd(o * rg.constance);
+    } }) : null;
     ouvrirFeuille({
       titre: "Objectifs et réglages", champs: champs, large: true,
+      apres: rg ? el("div", { class: "pp-reglages-pied" }, [recalcul, el("p", { class: "champ-aide", text: "Le bouton recalcule le démarrage, l'accélération, les boosters et la constance à partir de l'objectif, dans les proportions de la grille." })]) : null,
       enregistrer: function (v) {
         function nombre(x, lib, max) { var n = montantSaisi(x); if (!isFinite(n) || n < 0 || n > max) throw { texte: "« " + lib + " » n'est pas un nombre valable." }; return n; }
         var o = {};
@@ -4503,6 +4786,25 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         if (faux.length) return Promise.reject({ texte: "Ces codes INSEE ne sont pas valables : " + faux.slice(0, 5).join(", ") + (faux.length > 5 ? "..." : "") + "." });
         o.macrozones = codes.filter(function (c, i) { return codes.indexOf(c) === i; });
         o.levier_macrozone = txt(v.levier_macrozone);
+        // Payplan laissé vide : on n'y touche pas
+        if (!txt(v.pp_debut) && !txt(v.pp_objectif) && !regle) {
+          if ((etat.donnees.reglages || {}).equipe) return modifierDoc("reglages", "equipe", o, "Réglages enregistrés.");
+          return db.doc("reglages/equipe").set(o).then(function () { annoncer("Réglages enregistrés."); });
+        }
+        var pp2 = {};
+        try {
+          if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(txt(v.pp_debut))) throw { texte: "Le mois de début du payplan s'écrit AAAA-MM, par exemple 2027-01." };
+          pp2.debut = txt(v.pp_debut);
+          [["objectif", "Objectif du payplan", 10000000], ["declenchement", "Démarrage du variable", 10000000], ["acceleration", "Tranche d'accélération", 10000000], ["boosters", "Seuil des boosters", 10000000],
+            ["constance", "Seuil de constance", 10000000], ["rdv_fp", "RDV Full Prospect", 1000], ["actes_mrl", "Actes Mon Réseau Local", 1000], ["tase", "Booster TASE", 100], ["reprise", "Garde-fou reprise", 100]].forEach(function (x) {
+            pp2[x[0]] = nombre(v["pp_" + x[0]], x[1], x[2]);
+          });
+          if (!(pp2.declenchement <= pp2.acceleration && pp2.acceleration <= pp2.objectif)) throw { texte: "Les seuils du payplan vont dans l'ordre : démarrage, puis accélération, puis objectif." };
+          if (pp2.boosters > pp2.objectif) throw { texte: "Le seuil des boosters ne dépasse pas l'objectif." };
+        } catch (e) { return Promise.reject(e); }
+        pp2.visible = !!v.pp_visible;
+        if (pp.regles) pp2.regles = pp.regles;
+        o.payplan = pp2;
         if ((etat.donnees.reglages || {}).equipe) return modifierDoc("reglages", "equipe", o, "Réglages enregistrés.");
         return db.doc("reglages/equipe").set(o).then(function () { annoncer("Réglages enregistrés."); });
       }
@@ -4523,7 +4825,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       sortir
     ]);
     if (!lignes) return [tete, el("p", { class: "chargement", role: "status" }, [el("span", { class: "rond", "aria-hidden": "true" }), "Chargement des chiffres de l'équipe"])];
-    var membres = equipe(lignes);
+    var membres = equipe(lignes, mc), avecPayplan = payplanVisible() && payplanEnVigueur(mc);
     var objectif = membres.reduce(function (s, c) { return s + c.objectif; }, 0);
     var L = lecture(somme(lignes), objectif), R = rythme(mc, L.t.marge_nette, objectif);
     var jour = somme(lignes, function (r) { return String(r.jour).slice(0, 10) === auj; });
@@ -4540,7 +4842,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       ]),
       el("section", { class: "mur-tuiles", "aria-label": "Le mois" }, [
         grand("TASE", L.t.actes ? pourcent(L.tase) : "Pas de vente", L.t.actes ? (L.taseOk ? "Au-dessus de " + pourcent(L.seuilTase) : "Sous les " + pourcent(L.seuilTase)) : null, L.t.actes ? L.taseOk : undefined),
-        grand("Annulations", L.t.actes ? pourcent(L.annulation) : "Pas de vente", L.t.actes ? (L.annulationOk ? "Sous le plafond de " + pourcent(L.plafond) : "Au-dessus de " + pourcent(L.plafond)) : null, L.t.actes ? L.annulationOk : undefined),
+        grand("Annulations", L.annulation === null ? "Pas de vente" : pourcent(L.annulation), L.annulation === null ? null : (L.annulationOk ? "Sous le plafond de " + pourcent(L.plafond) : "Au-dessus de " + pourcent(L.plafond)), L.annulation === null ? undefined : L.annulationOk),
         grand("R1P pris", entier(L.t.r1p), L.t.appels ? entier(L.t.appels) + " appels de prospection" : null),
         grand("Ventes", entier(L.t.ventes), L.t.full_prospect ? pluriel(L.t.full_prospect, "Full Prospect", "Full Prospect") : null)
       ]),
@@ -4551,7 +4853,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("h2", { class: "mur-nom", text: prenomDe(c.nom) || c.nom }),
           el("p", { class: "mur-marge" }, [el("strong", { text: euros(t.marge_nette) }), c.objectif > 0 ? el("span", { text: " / " + euros(c.objectif) }) : null]),
           c.objectif > 0 ? jauge(Lc.part) : null,
-          el("p", { class: "mur-ligne" }, ["TASE ", el("strong", { text: t.actes ? pourcent(Lc.tase) : "pas de vente" }), t.actes ? " · Annulations " : "", t.actes ? el("strong", { text: pourcent(Lc.annulation) }) : null]),
+          el("p", { class: "mur-ligne" }, ["TASE ", el("strong", { text: t.actes ? pourcent(Lc.tase) : "pas de vente" }), Lc.annulation !== null ? " · Annulations " : "", Lc.annulation !== null ? el("strong", { text: pourcent(Lc.annulation) }) : null]),
+          avecPayplan ? el("p", { class: "mur-ligne" }, ["Full Prospect ", el("strong", { text: t.rdv_fp + "/" + reglages().payplan.rdv_fp }), " · Mon Réseau Local ", el("strong", { text: t.actes_mrl + "/" + reglages().payplan.actes_mrl })]) : null,
           el("p", { class: "mur-ligne discret" }, ["Aujourd'hui : " + pluriel(tj.appels, "appel", "appels") + ", " + entier(tj.r1p) + " R1P, " + pluriel(tj.ventes, "vente", "ventes")])
         ]);
       })),
