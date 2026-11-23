@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#F5F5F7">
+<meta name="theme-color" content="#FFFDF8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231D1D1F'/%3E%3Crect x='9' y='7' width='14' height='3' rx='1.5' fill='%23EF781B'/%3E%3Cpath d='M11 13v12h10' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>Espace projet : Visite Orange à Rennes</title>
 <style id="style">/* Espace de préparation de la visite d'Orange, à la charte LUSKŌ BU Orange.
@@ -138,7 +138,7 @@ h3{font-size:15px;line-height:1.3;font-weight:700;letter-spacing:-.005em}
 .sommaire-lien:hover{border-color:var(--encre)}
 .page-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
 .page-actions .bouton{padding:10px 18px;font-size:13.5px}
-.section{display:flex;flex-direction:column;gap:16px;min-width:0;scroll-margin-top:90px}
+.section{display:flex;flex-direction:column;gap:16px;min-width:0;scroll-margin-top:134px}
 .titre{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 16px}
 .carte{background:var(--papier);border:1px solid var(--filet);overflow:hidden}
 .vide{padding:18px 22px;color:var(--discret);font-size:14px}
@@ -292,7 +292,7 @@ h3{font-size:15px;line-height:1.3;font-weight:700;letter-spacing:-.005em}
 .moment-nom{font-family:var(--titre);font-weight:600;font-size:28px;line-height:1;letter-spacing:.01em;text-transform:uppercase}
 .moment-heures{font-size:13.5px;font-weight:700;color:var(--attenue);white-space:nowrap}
 .programme > li + li{border-top:1px solid var(--filet)}
-.creneau{scroll-margin-top:100px}
+.creneau{scroll-margin-top:144px}
 .creneau-tete{width:100%;display:grid;grid-template-columns:62px minmax(0,1fr) 64px 14px;align-items:center;gap:4px 16px;padding:11px 20px;transition:background .12s}
 button.creneau-tete:hover{background:var(--survol)}
 .heure{font-family:var(--titre);font-weight:600;font-size:23.5px;line-height:1;letter-spacing:.02em;padding-top:2px}
@@ -673,8 +673,8 @@ textarea.saisie{resize:vertical;min-height:48px}
   .sommaire{flex-wrap:nowrap;overflow-x:auto;align-self:stretch;margin:8px -16px 0;padding:0 16px 2px;scrollbar-width:none}
   .sommaire::-webkit-scrollbar{display:none}
   .sommaire-lien{flex:none}
-  .section{scroll-margin-top:122px}
-  .creneau{scroll-margin-top:130px}
+  .section{scroll-margin-top:126px}
+  .creneau{scroll-margin-top:134px}
   .banniere{--f1:6px;--f2:12px;grid-template-columns:minmax(0,1fr);gap:18px;padding:22px 18px 20px;margin:0 12px 12px 0}
   .banniere h1{font-size:clamp(46px,13.5vw,66px)}
   .banniere-compte{flex-direction:row;align-items:flex-end;justify-content:space-between;text-align:left;gap:16px;padding-top:18px;border-top:1.5px solid rgba(48,48,48,.2)}
@@ -802,6 +802,141 @@ textarea.saisie{resize:vertical;min-height:48px}
   body[data-vue="orange"] .barre,body[data-vue="releve"] .barre{display:none}
   .vue-orange,.vue-releve{padding-top:0}
   .document,.vue-releve .document{width:100%;max-width:none;margin:0;border:0;box-shadow:none;padding:0 0 150px;gap:22px}
+}
+
+/* ======================================================================
+   Une page plus légère : sections repliables, sommaire qui suit la lecture,
+   personnes et sujets sur une ligne, message « Annuler », nouveautés,
+   onglets en bas sur téléphone, bandeau court.
+   ====================================================================== */
+:root{--haut-barre:61px}
+
+/* Le sommaire reste sous l'en-tête et marque la section en cours de lecture */
+.sommaire.collant{position:sticky;top:var(--haut-barre);z-index:15;margin:-34px -28px -38px;padding:10px 28px;background:var(--verre);-webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px);border-bottom:1px solid transparent;transition:border-color .2s}
+.sommaire.collant.colle{border-bottom-color:var(--filet)}
+.sommaire-lien.actif{background:var(--encre);border-color:var(--encre);color:var(--fond)}
+
+/* Sections repliables : fermées, elles tiennent sur une ligne avec leur résumé */
+.repliable h2{min-width:0}
+.repli{display:inline-flex;align-items:center;gap:12px;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;text-align:left;border-radius:4px}
+.repli .chevron{flex:none;width:10px;height:10px}
+.repli:hover .chevron{border-color:var(--encre)}
+.repli-resume{font-size:14px;font-weight:500;color:var(--discret);padding-bottom:2px}
+.section.fermee{gap:0}
+.section.fermee > .titre{padding-bottom:14px;border-bottom:1px solid var(--filet);align-items:center}
+.page > .section.fermee + .section.fermee,.page > .section.fermee + .duo-sections{margin-top:-30px}
+.section-corps{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media (prefers-reduced-motion:no-preference){.section-corps.deplie{animation:deplie .32s var(--ease) both}}
+@keyframes deplie{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* Modifier : un bouton pour la page ; les « Modifier » de section n'apparaissent qu'au survol, sur ordinateur */
+.bouton-edition svg{flex:none}
+.bouton-edition.actif{background:var(--rose);border-color:var(--rose);color:var(--suie)}
+.titre .lien-modifier:not(.actif){opacity:0;transition:opacity .15s}
+.section:hover > .titre .lien-modifier,.section:focus-within > .titre .lien-modifier,.titre .lien-modifier:focus-visible,body.mode-edition .titre .lien-modifier{opacity:1}
+@media (hover:none){body:not(.mode-edition) .titre .lien-modifier:not(.actif){display:none}}
+
+/* Les personnes, une ligne chacune */
+.personnes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--filet);border:1px solid var(--filet)}
+.personnes > .personne:last-child:nth-child(odd){grid-column:1 / -1}
+.personne{min-width:0;background:var(--papier)}
+.personne-btn{width:100%;height:100%;display:flex;align-items:center;gap:14px;padding:12px 16px;text-align:left;transition:background .15s}
+.personne-btn:hover{background:var(--pierre)}
+.personne .mono{width:40px;height:40px;font-size:18px}
+.personnes > li:nth-child(3n+2) .mono{background:var(--rose-teinte)}
+.personnes > li:nth-child(3n) .mono{background:var(--vert-teinte)}
+.personnes > .personne.moi .mono{background:var(--encre);color:var(--fond)}
+.personne.moi{box-shadow:inset 4px 0 0 var(--rose)}
+.personne-noms{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.personne-nom{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:15px;font-weight:700;line-height:1.25}
+.personne-nom .neuf{margin:0}
+.personne-sous{font-size:13.5px;line-height:1.4;color:var(--discret);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.personne-fleche{flex:none;display:grid;place-items:center;color:var(--discret);transition:transform .2s var(--ease)}
+.personne-btn:hover .personne-fleche{transform:translateX(2px);color:var(--encre)}
+.personne-modifier{flex:none;font-size:13px;font-weight:700;color:var(--attenue);text-decoration:underline;text-underline-offset:3px}
+
+/* Sujets et questions : une ligne chacun, dans une seule carte */
+.sujets{gap:0;background:var(--papier);border:1px solid var(--filet)}
+.sujets > li + li{border-top:1px solid var(--filet)}
+.ligne-sujet{position:relative;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 16px;padding:12px 16px 14px;text-align:left;transition:background .15s}
+.ligne-sujet:hover{background:var(--pierre)}
+.ls-corps{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ls-texte{font-size:14px;font-weight:700;line-height:1.38}
+.ls-meta{font-size:13px;line-height:1.35;color:var(--discret)}
+.ls-etat{font-weight:700;color:var(--rose-texte)}
+.question.prete .ls-etat{color:var(--vert-texte)}
+.ls-score{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.ls-points{font-size:13px;color:var(--attenue)}
+.ls-points strong{font-family:var(--titre);font-size:21px;font-weight:600;line-height:1;color:var(--encre)}
+.ls-score .mon-rang{font-size:12px;font-weight:700;padding:3px 8px}
+.ligne-sujet .sujet-barre{position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent}
+.statut-retenu .ligne-sujet,.question.prete .ligne-sujet{box-shadow:inset 4px 0 0 var(--vert)}
+.statut-ecarte .ls-texte{text-decoration:line-through;text-decoration-color:var(--discret);color:var(--discret)}
+
+/* Ce qui a changé depuis la dernière visite */
+.neuf{display:inline-block;flex:none;width:8px;height:8px;margin:0 8px 0 0;border-radius:50%;background:var(--rose);vertical-align:.12em}
+.nouveautes{display:flex;align-items:baseline;gap:10px;font-size:14px;line-height:1.55;color:var(--attenue);text-wrap:pretty}
+.nouveautes > .neuf{margin:0;transform:translateY(-1px)}
+.nv-lien{font-weight:700;color:var(--encre);text-decoration:underline;text-decoration-color:var(--rose);text-decoration-thickness:2px;text-underline-offset:3px}
+.nv-lien:hover{text-decoration-thickness:3px}
+
+/* Le message du bas */
+.annonces{position:fixed;left:0;right:0;bottom:calc(22px + env(safe-area-inset-bottom));z-index:60;display:flex;justify-content:center;padding:0 16px;pointer-events:none}
+.annonce{pointer-events:auto;display:flex;align-items:center;gap:6px 18px;max-width:560px;padding:11px 12px 11px 18px;background:var(--encre);color:var(--fond);font-size:14px;font-weight:500;line-height:1.4;box-shadow:4px 4px 0 var(--rose)}
+.annonce-annuler{flex:none;padding:4px 6px;font-weight:700;color:inherit;text-decoration:underline;text-decoration-color:var(--rose);text-decoration-thickness:2px;text-underline-offset:3px;border-radius:4px}
+.annonce-annuler:hover{text-decoration-thickness:3px}
+.annonce.sort{opacity:0;transform:translateY(8px);transition:opacity .18s,transform .18s}
+@media (prefers-reduced-motion:no-preference){.annonce{animation:annonce-monte .28s var(--ease) both}}
+@keyframes annonce-monte{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Téléphone : onglets en bas, sous le pouce ; bandeau d'accueil sur une bande */
+@media screen and (max-width:759px){
+  :root{--haut-barre:57px}
+  /* L'effet verre de l'en-tête retiendrait la barre d'onglets en haut : sur téléphone, l'en-tête prend un fond plein */
+  .barre{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--fond)}
+  .sommaire.collant{margin:-22px -16px -26px;padding:10px 16px}
+  .barre-int{flex-wrap:nowrap}
+  .onglets{position:fixed;left:0;right:0;bottom:0;z-index:40;order:0;flex:none;margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:0;padding:2px 4px env(safe-area-inset-bottom);background:var(--verre);-webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px);border-top:1px solid var(--filet)}
+  .onglet{flex-direction:column;justify-content:center;gap:3px;min-height:56px;padding:6px 2px 5px;font-size:11.5px;line-height:1.1}
+  .onglet svg{display:block;width:21px;height:21px;opacity:.85}
+  .onglet.actif svg{opacity:1}
+  .onglet::after{left:30%;right:30%;top:-2px;bottom:auto;height:3px}
+  .onglet .long{display:none}
+  .onglet .court{display:inline}
+  .onglet-badge{position:absolute;top:4px;left:calc(50% + 5px);min-width:18px;height:16px;padding:0 5px;font-size:10.5px}
+  body.en-saisie .onglets,body.feuille-ouverte .onglets{display:none}
+  .page{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
+  .annonces{bottom:calc(72px + env(safe-area-inset-bottom))}
+  body.en-saisie .annonces{bottom:12px}
+  .personnes{grid-template-columns:minmax(0,1fr)}
+  .personnes > .personne:last-child:nth-child(odd){grid-column:auto}
+  .personne-btn{padding:11px 14px;gap:12px}
+  .page > .section.fermee + .section.fermee,.page > .section.fermee + .duo-sections{margin-top:-18px}
+  .repli-resume{font-size:13px}
+  .nouveautes{font-size:13.5px}
+
+  .banniere{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"titre compte" "sous sous" "stats stats" "but but" "actions actions";gap:0 14px;align-items:end;padding:20px 18px}
+  .banniere-texte,.banniere-compte{display:contents}
+  .banniere-sur{display:none}
+  .banniere h1{grid-area:titre;font-size:clamp(34px,10vw,44px);margin-top:0;align-self:end}
+  .banniere h1::after{margin-top:10px}
+  .bn-jours{grid-area:compte;align-self:end;align-items:flex-end;text-align:right}
+  .bn-compte{font-size:62px}
+  .bn-compte-lib{font-size:12px}
+  .banniere-sous{grid-area:sous;margin-top:14px;font-size:14px}
+  .bn-stats{grid-area:stats;flex-direction:row;flex-wrap:wrap;gap:4px 18px;margin-top:12px;padding-top:12px;border-top:1.5px solid rgba(48,48,48,.2)}
+  .bn-stat{flex-direction:row;align-items:baseline;justify-content:flex-start;gap:6px}
+  .bn-stat-val{font-size:20px}
+  .bn-stat-lib{margin-top:0;font-size:11.5px}
+  .banniere-but{grid-area:but;margin-top:14px;font-size:14px;line-height:1.5;padding-left:12px}
+  .banniere-actions{grid-area:actions;margin-top:16px;gap:10px 16px}
+}
+
+@media print{
+  .annonces,.nouveautes,.neuf,.personne-fleche,.repli-resume{display:none !important}
+  .personnes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .personne-sous{display:block;-webkit-line-clamp:unset;overflow:visible}
+  .page > .section.fermee + .section.fermee,.page > .section.fermee + .duo-sections{margin-top:0}
 }
 /* Connexion par lien et code, avant l'ouverture de l'espace : une carte sur ses feuillets, les trois bandes dans l'angle */
 body.hors-session #app{display:none}
@@ -1138,7 +1273,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* ---------- La base partagée, sous la forme que la page attend ---------- */
 
   var memoire = {}, ecouteurs = {}, etat = "attente", canal = null, dejaAbonne = false;
-  COLLECTIONS.forEach(function (c) { memoire[c] = {}; ecouteurs[c] = []; });
+  // Pour chaque document : quand et par qui il a changé pour la dernière fois, et son numéro de version.
+  var metas = {};
+  COLLECTIONS.forEach(function (c) { memoire[c] = {}; ecouteurs[c] = []; metas[c] = {}; });
+  function noterMeta(l) { if (metas[l.collection]) metas[l.collection][l.id] = { le: l.maj_le || null, par: l.maj_par || null, v: Number(l.version) || 1 }; }
 
   function instantane(c) {
     var m = memoire[c] || {};
@@ -1155,15 +1293,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function toutCharger() {
     var lignes = [];
     function page(depuis) {
-      return sb.from("documents").select("collection,id,data").eq("espace", ESPACE).order("collection").order("id").range(depuis, depuis + PAGE - 1).then(function (res) {
+      return sb.from("documents").select("collection,id,data,maj_le,maj_par,version").eq("espace", ESPACE).order("collection").order("id").range(depuis, depuis + PAGE - 1).then(function (res) {
         if (res.error) throw res.error;
         lignes = lignes.concat(res.data || []);
         return (res.data || []).length === PAGE ? page(depuis + PAGE) : lignes;
       });
     }
     return page(0).then(function (toutes) {
-      COLLECTIONS.forEach(function (c) { memoire[c] = {}; });
-      toutes.forEach(function (l) { if (memoire[l.collection] && l.data && typeof l.data === "object") memoire[l.collection][l.id] = l.data; });
+      COLLECTIONS.forEach(function (c) { memoire[c] = {}; metas[c] = {}; });
+      toutes.forEach(function (l) { if (memoire[l.collection] && l.data && typeof l.data === "object") { memoire[l.collection][l.id] = l.data; noterMeta(l); } });
       etat = "pret";
       COLLECTIONS.forEach(prevenir);
     });
@@ -1185,11 +1323,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (ancien.espace && ancien.espace !== ESPACE) return;
       if (!memoire[ancien.collection] || !memoire[ancien.collection][ancien.id]) return;
       delete memoire[ancien.collection][ancien.id];
+      if (metas[ancien.collection]) delete metas[ancien.collection][ancien.id];
       prevenir(ancien.collection);
       return;
     }
     if (!neuf || neuf.espace !== ESPACE || !memoire[neuf.collection]) return;
     memoire[neuf.collection][neuf.id] = neuf.data;
+    noterMeta(neuf);
     prevenir(neuf.collection);
   }
   function ecouterChangements() {
@@ -1230,6 +1370,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   var base = {
     doc: refDoc,
+    meta: function (c, id) { var m = metas[c] && metas[c][id]; return m ? { le: m.le, par: m.par, v: m.v } : null; },
     collection: function (c) {
       return {
         path: c,
@@ -1401,7 +1542,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     vue: vueDepuisAdresse(), feuilleDe: feuilleDepuisAdresse(), filtre: lire("pvo-filtre") === "tous" ? "tous" : "moi",
     ouverts: {}, edition: {}, faits: false, ecartes: false, menu: false, impression: false, entree: false, vu: false,
     remontees: null, remonteesErreur: false, remonteesVue: lire("pvo-remontees") === "reponse" ? "reponse" : "question", aSupprimer: "", copie: false,
-    docOrange: lire("pvo-doc") === "carnet" ? "carnet" : "programme", copieDoc: "", brouillonReleve: { quoi: "", qui: "", pour: "", statut: "" }
+    docOrange: lire("pvo-doc") === "carnet" ? "carnet" : "programme", copieDoc: "", brouillonReleve: { quoi: "", qui: "", pour: "", statut: "" },
+    replis: lireReplis(), modeEdition: false, vientDOuvrir: ""
   };
   var db = null, compte = {}, peutModifier = false, estAdmin = false, telechargements = null, feuille = null;
 
@@ -1501,6 +1643,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function changerVue(v, ancre, force) {
     var meme = etat.vue === v;
     if (meme && !ancre && !force) return;
+    if (!meme) { etat.modeEdition = false; etat.edition = {}; }
     etat.vue = v;
     etat.menu = false;
     try { history.replaceState(null, "", "#" + adresseDe(v)); } catch (e) { /* adresse inchangée */ }
@@ -1526,7 +1669,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function appliquerTheme(t) {
     document.documentElement.setAttribute("data-theme", t);
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", t === "dark" ? "#0F0F11" : "#F5F5F7");
+    if (meta) meta.setAttribute("content", t === "dark" ? "#303030" : "#FFFDF8");
   }
   function basculerTheme() { var t = theme() === "dark" ? "light" : "dark"; appliquerTheme(t); ecrire("pvo-theme", t); rendre(); }
 
@@ -1544,17 +1687,172 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (avant) { etat.donnees[c] = Object.assign({}, etat.donnees[c]); etat.donnees[c][id] = Object.assign({}, avant, champs); }
     return { annuler: function () { if (avant) { etat.donnees[c] = Object.assign({}, etat.donnees[c]); etat.donnees[c][id] = avant; } } };
   }
-  function modifier(c, id, champs) {
+  // Chaque écriture faite ici s'annonce en bas de l'écran, avec « Annuler » le temps de se raviser.
+  var NOMS = {
+    actions: ["Tâche", 1], decisions: ["Décision", 1], sujets: ["Sujet", 0], questions: ["Question", 1], sequences: ["Créneau", 0],
+    rdv: ["Rendez-vous", 0], visiteurs: ["Visiteur", 0], intervenants: ["Personne", 1], convictions: ["Message", 0], regles: ["Règle", 1],
+    releve: ["Décision", 1], votes: ["Classement", 0], general: ["Information", 1]
+  };
+  function dit(c, verbe) { var n = NOMS[c] || ["Élément", 0]; return n[0] + " " + verbe + (n[1] ? "e" : "") + "."; }
+  function modifier(c, id, champs, opts) {
+    opts = opts || {};
+    var avant = (etat.donnees[c] || {})[id], precedent = {};
+    Object.keys(champs).forEach(function (k) { precedent[k] = avant && Object.prototype.hasOwnProperty.call(avant, k) ? avant[k] : null; });
     var trace = poser(c, id, champs);
     rendre();
-    return db.doc(c + "/" + id).update(champs).then(null, function (err) { trace.annuler(); throw err; });
+    return db.doc(c + "/" + id).update(champs).then(function () {
+      if (!opts.silence) annoncer(opts.texte || dit(c, "modifié"), function () { return modifier(c, id, precedent, { silence: true }); });
+    }, function (err) { trace.annuler(); throw err; });
   }
-  function creer(c, data) { return db.collection(c).doc().set(data); }
-  function supprimer(c, id) { return db.doc(c + "/" + id).delete(); }
+  function creer(c, data) {
+    var ref = db.collection(c).doc();
+    return ref.set(data).then(function () { annoncer(dit(c, "ajouté"), function () { return db.doc(c + "/" + ref.id).delete(); }); });
+  }
+  // Pour un document dont on choisit l'identifiant : un classement, une personne, les informations de la visite.
+  function poserDoc(c, id, data) {
+    return db.doc(c + "/" + id).set(data).then(function () { annoncer(dit(c, "enregistré"), function () { return db.doc(c + "/" + id).delete(); }); });
+  }
+  function supprimer(c, id) {
+    var avant = (etat.donnees[c] || {})[id];
+    return db.doc(c + "/" + id).delete().then(function () {
+      annoncer(dit(c, "supprimé"), avant ? function () { return db.doc(c + "/" + id).set(JSON.parse(JSON.stringify(avant))); } : null);
+    });
+  }
 
   function cocher(a) {
     var fait = !a.fait;
-    modifier("actions", a.id, { fait: fait }).then(null, function (err) { alerter(messageErreur(err)); });
+    modifier("actions", a.id, { fait: fait }, { texte: fait ? "Tâche cochée." : "Tâche remise à faire." }).then(null, function (err) { alerter(messageErreur(err)); });
+  }
+
+  /* ---------- Le message du bas ---------- */
+
+  var annonce = null, annonces = null;
+  // Remplacé par un autre message, il disparaît aussitôt ; sinon il s'efface en douceur.
+  function fermerAnnonce(aussitot) {
+    if (!annonce) return;
+    var a = annonce;
+    annonce = null;
+    clearTimeout(a.minuteur);
+    function retirer() { if (a.noeud.parentNode) a.noeud.parentNode.removeChild(a.noeud); }
+    if (aussitot) { retirer(); return; }
+    a.noeud.classList.add("sort");
+    setTimeout(retirer, 200);
+  }
+  // Un message à la fois. « Annuler » défait l'action tant qu'il est affiché ; il reste tant qu'on le survole ou qu'il a le focus.
+  function annoncer(texte, defaire) {
+    fermerAnnonce(true);
+    if (!annonces || !annonces.parentNode) { annonces = el("div", { class: "annonces", "aria-live": "polite" }); document.body.appendChild(annonces); }
+    while (annonces.firstChild) annonces.removeChild(annonces.firstChild);
+    var a = { noeud: null, minuteur: null };
+    a.noeud = el("div", { class: "annonce" }, [
+      el("span", { class: "annonce-texte", text: texte }),
+      defaire ? el("button", { type: "button", class: "annonce-annuler", "data-cle": "annuler-action", text: "Annuler", onclick: function () {
+        fermerAnnonce(true);
+        Promise.resolve().then(defaire).then(function () { annoncer("C'est annulé."); }, function (err) { alerter(messageErreur(err)); });
+      } }) : null
+    ]);
+    function partir(ms) { clearTimeout(a.minuteur); a.minuteur = setTimeout(function () { if (annonce === a) fermerAnnonce(); }, ms); }
+    a.noeud.addEventListener("mouseenter", function () { clearTimeout(a.minuteur); });
+    a.noeud.addEventListener("focusin", function () { clearTimeout(a.minuteur); });
+    a.noeud.addEventListener("mouseleave", function () { partir(3000); });
+    a.noeud.addEventListener("focusout", function () { partir(3000); });
+    annonces.appendChild(a.noeud);
+    annonce = a;
+    partir(defaire ? 7000 : 3200);
+  }
+
+  /* ---------- Ce qui a changé depuis la dernière visite ---------- */
+
+  // Une visite se termine après 45 minutes sans passer sur la page. Les points restent toute la visite, même après un rechargement.
+  var PAUSE_VISITE = 45 * 60000, visite = { seuil: null };
+  function noterPassage(debut) {
+    var cle = "pvo-visite-" + (compte.id || ""), maintenant = Date.now(), m = null;
+    try { m = JSON.parse(lire(cle) || "null"); } catch (e) { m = null; }
+    if (!m || typeof m.passage !== "number") m = { seuil: null, passage: maintenant };
+    else if (debut && maintenant - m.passage > PAUSE_VISITE) m.seuil = m.passage;
+    var avant = visite.seuil;
+    if (debut) visite.seuil = typeof m.seuil === "number" ? m.seuil : null;
+    m.passage = maintenant;
+    ecrire(cle, JSON.stringify(m));
+    return visite.seuil !== avant;
+  }
+  // Ce que quelqu'un d'autre a changé depuis la visite précédente (le premier passage ne marque rien).
+  function estNouveau(c, id) {
+    if (!visite.seuil || !db || !db.meta) return false;
+    var m = db.meta(c, id), t = m && m.le ? Date.parse(m.le) : NaN;
+    return t > visite.seuil && m.par !== compte.id;
+  }
+  function estCree(c, id) { var m = db && db.meta ? db.meta(c, id) : null; return !!m && m.v === 1; }
+  function pointNeuf(c, id) {
+    if (!estNouveau(c, id)) return null;
+    var cree = estCree(c, id);
+    return el("span", { class: "neuf", title: (cree ? "Ajouté" : "Modifié") + " depuis votre dernière visite" }, [invisible(cree ? "Nouveau. " : "Modifié depuis votre dernière visite. ")]);
+  }
+  function heureParis(ms) {
+    try {
+      var p = {};
+      new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", hour: "numeric", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(ms)).forEach(function (x) { p[x.type] = x.value; });
+      return minutesFr(Number(p.hour) * 60 + Number(p.minute));
+    } catch (e) { return ""; }
+  }
+  function quandVisite() {
+    var iso = jourParis(new Date(visite.seuil)), auj = aujourdhui(), jour;
+    if (iso === auj) jour = "aujourd'hui";
+    else if (iso === decaler(auj, -1)) jour = "hier";
+    else jour = JOURS_LONGS[enDate(iso).getUTCDay()] + " " + jourEtMois(iso);
+    var h = heureParis(visite.seuil);
+    return jour + (h ? " à " + h : "");
+  }
+  // Ce qui a bougé, en morceaux : texte, page, section ; « tous » et « faits » montrent ce qui serait sinon filtré ou replié.
+  function nouveautes() {
+    if (!visite.seuil) return [];
+    var morceaux = [], moi = compte.intervenant || "";
+    function changes(c) { return liste(c).filter(function (x) { return estNouveau(c, x.id); }); }
+    function horsDeMaListe(xs) { return !!moi && xs.some(function (x) { var q = tableau(x.qui); return q.indexOf(moi) < 0 && q.indexOf("tous") < 0; }); }
+    function tache(texte, xs, faits) { morceaux.push({ texte: texte, vue: "afaire", ancre: "bloc-afaire", tous: horsDeMaListe(xs), faits: !!faits }); }
+    function n(k, un, plusieurs) { return k + " " + (k > 1 ? plusieurs : un); }
+    function deux(c, nom, noms, fem, vue, ancre, verbeCree) {
+      var x = changes(c), a = x.filter(function (y) { return estCree(c, y.id); }).length, m = x.length - a;
+      var vc = verbeCree || "ajouté", e = fem ? "e" : "";
+      if (a) morceaux.push({ texte: n(a, nom + " " + vc + e, noms + " " + vc + e + "s"), vue: vue, ancre: ancre });
+      if (m) morceaux.push({ texte: n(m, nom + " modifié" + e, noms + " modifié" + e + "s"), vue: vue, ancre: ancre });
+    }
+    var t = changes("actions");
+    var tc = t.filter(function (x) { return !estCree("actions", x.id) && x.fait; }), ta = t.filter(function (x) { return estCree("actions", x.id); });
+    var tm = t.filter(function (x) { return tc.indexOf(x) < 0 && ta.indexOf(x) < 0; });
+    if (tc.length) tache(n(tc.length, "tâche cochée", "tâches cochées"), tc, true);
+    if (ta.length) tache(n(ta.length, "tâche ajoutée", "tâches ajoutées"), ta, ta.some(function (x) { return x.fait; }));
+    if (tm.length) tache(n(tm.length, "tâche modifiée", "tâches modifiées"), tm, tm.some(function (x) { return x.fait; }));
+    var d = changes("decisions"), dt = d.filter(function (x) { return !estCree("decisions", x.id) && x.tranchee; }), dm = d.filter(function (x) { return dt.indexOf(x) < 0; });
+    if (dt.length) tache(n(dt.length, "décision tranchée", "décisions tranchées"), dt, true);
+    if (dm.length) tache(n(dm.length, "décision ajoutée ou modifiée", "décisions ajoutées ou modifiées"), dm, dm.some(function (x) { return x.tranchee; }));
+    deux("sujets", "sujet", "sujets", false, "afaire", "bloc-sujets", "proposé");
+    deux("votes", "classement", "classements", false, "afaire", "bloc-sujets", "reçu");
+    deux("questions", "question", "questions", true, "afaire", "bloc-questions");
+    if (changes("sequences").length) morceaux.push({ texte: "le programme modifié", vue: "jour", ancre: "bloc-programme" });
+    deux("rdv", "rendez-vous", "rendez-vous", false, "jour", "bloc-rdv");
+    if (changes("visiteurs").length) morceaux.push({ texte: "la liste des visiteurs mise à jour", vue: "jour", ancre: "bloc-visiteurs" });
+    if (changes("intervenants").length) morceaux.push({ texte: "les rôles mis à jour", vue: "jour", ancre: "bloc-roles" });
+    if (changes("convictions").length || changes("regles").length) morceaux.push({ texte: "les messages et les règles mis à jour", vue: "jour", ancre: "bloc-messages", ouvrir: ["messages", "regles"] });
+    if (changes("general").length) morceaux.push({ texte: "les informations de la visite mises à jour", vue: "jour", ancre: "bloc-notes" });
+    deux("releve", "décision du relevé", "décisions du relevé", true, "releve", "");
+    return morceaux;
+  }
+  function ligneNouveautes() {
+    var m = nouveautes();
+    if (!m.length) return null;
+    var montre = m.slice(0, 5), parties = [];
+    montre.forEach(function (x, i) {
+      if (i) parties.push(i === montre.length - 1 && m.length <= 5 ? " et " : ", ");
+      parties.push(el("button", { type: "button", class: "nv-lien", "data-cle": "nouveaute-" + i, text: x.texte, onclick: function () {
+        if (x.tous) etat.filtre = "tous";
+        if (x.faits) etat.faits = true;
+        (x.ouvrir || [x.ancre]).forEach(ouvrirPour);
+        changerVue(x.vue, x.ancre, true);
+      } }));
+    });
+    if (m.length > 5) parties.push(" et d'autres changements");
+    return el("p", { class: "nouveautes" }, [el("span", { class: "neuf", "aria-hidden": "true" }), el("span", {}, ["Depuis votre dernière visite, " + quandVisite() + " : "].concat(parties, ["."]))]);
   }
 
   /* ---------- En-tête ---------- */
@@ -1572,7 +1870,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     fleche: "M6 3.5 10.5 8 6 12.5",
     remontees: "M2.6 3.7c0-.6.5-1.1 1.1-1.1h8.6c.6 0 1.1.5 1.1 1.1v6c0 .6-.5 1.1-1.1 1.1H7.3l-2.8 2.6v-2.6h-.8c-.6 0-1.1-.5-1.1-1.1zM5.4 5.8h5.2M5.4 7.9h3.4",
     releve: "M4 1.8h5.4l3 3v8.6c0 .5-.4.8-.8.8H4a.8.8 0 0 1-.8-.8V2.6c0-.5.4-.8.8-.8zM9.2 1.8v3.2h3.2M5.6 9.3l1.7 1.7 3.2-3.4",
-    plus: "M8 3v10M3 8h10"
+    plus: "M8 3v10M3 8h10",
+    crayon: "M10.6 2.8l2.6 2.6-7.6 7.6-3.3.7.7-3.3zM9.2 4.2l2.6 2.6"
   };
   function trait(d, taille) {
     var s = document.createElementNS(NS, "svg"), p = document.createElementNS(NS, "path"), t = String(taille || 16);
@@ -1704,17 +2003,40 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   // Par défaut, la page est la même pour tous ; « Modifier » fait apparaître les ajouts et rend les fiches modifiables.
   function bascEdition(id) {
+    if (etat.modeEdition) return null;
     var actif = !!etat.edition[id];
     return el("button", { type: "button", class: "lien-modifier" + (actif ? " actif" : ""), "aria-pressed": actif ? "true" : "false", "data-cle": "editer-" + id, text: actif ? "Terminé" : "Modifier", onclick: function () { etat.edition[id] = !actif; rendre(); } });
   }
-  function enEdition(id) { return !!etat.edition[id] && !etat.impression; }
+  function enEdition(id) { return (etat.modeEdition || !!etat.edition[id]) && !etat.impression; }
   function lienCarte(texte, cle, action) {
     return el("button", { type: "button", class: "ca-lien", "data-cle": cle, onclick: action }, [el("span", { text: texte }), trait(ICONES.fleche, 14)]);
   }
-  function sommaire(liens) {
-    return el("nav", { class: "sommaire", "aria-label": "Dans cette page" }, liens.map(function (l) {
-      return el("a", { class: "sommaire-lien", href: "#" + l[0], "data-cle": "aller-" + l[0], text: l[1], onclick: function (e) { e.preventDefault(); allerA(l[0], true); } });
+  // l : [ancre, libellé, sections à ouvrir]. Collant, le sommaire reste sous l'en-tête et marque la section en cours de lecture.
+  function sommaire(liens, collant) {
+    return el("nav", { class: "sommaire" + (collant ? " collant" : ""), "aria-label": "Dans cette page" }, liens.map(function (l) {
+      return el("a", { class: "sommaire-lien", href: "#" + l[0], "data-cle": "aller-" + l[0], "data-cible": l[0], text: l[1], onclick: function (e) { e.preventDefault(); allerVers(l[0], l[2]); } });
     }));
+  }
+  function allerVers(ancre, aOuvrir) {
+    var ids = (aOuvrir || [ancre.replace(/^bloc-/, "")]).filter(function (id) { return REPLIABLES.indexOf(id) >= 0 && !etat.replis[id]; });
+    if (ids.length) { ids.forEach(function (id) { etat.replis[id] = true; }); memoriserReplis(); rendre(); }
+    allerA(ancre, true);
+  }
+  var suiviPrevu = false, suiviDernier = null;
+  function suivreLecture() {
+    suiviPrevu = false;
+    var nav = app.querySelector(".sommaire.collant");
+    if (!nav) return;
+    var liens = [].slice.call(nav.querySelectorAll(".sommaire-lien")), limite = nav.getBoundingClientRect().bottom + 28, actif = null;
+    liens.forEach(function (a) { var cible = document.getElementById(a.getAttribute("data-cible")); if (cible && cible.getBoundingClientRect().top <= limite) actif = a; });
+    liens.forEach(function (a) { var on = a === actif; a.classList.toggle("actif", on); if (on) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current"); });
+    var haut = parseFloat(window.getComputedStyle(nav).top) || 0;
+    nav.classList.toggle("colle", window.scrollY > 0 && nav.getBoundingClientRect().top <= haut + 0.5);
+    var cle = actif ? actif.getAttribute("data-cible") : "";
+    if (actif && cle !== suiviDernier && nav.scrollWidth > nav.clientWidth && nav.scrollTo) {
+      try { nav.scrollTo({ left: Math.max(0, actif.offsetLeft - 16), behavior: mouvementReduit() ? "auto" : "smooth" }); } catch (e) { /* sans défilement */ }
+    }
+    suiviDernier = cle;
   }
   function jauge(part) {
     return el("span", { class: "jauge", "aria-hidden": "true" }, [el("i", { css: { width: pct(Math.max(0, Math.min(1, part))) } })]);
@@ -1765,7 +2087,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* ---------- Accueil ---------- */
 
   function vueAccueil() {
-    return [banniere(), el("div", { class: "cartes-accueil" }, [carteAttendu(), carteEquipe(), carteJournee(), carteSujets()])];
+    return [banniere(), ligneNouveautes(), el("div", { class: "cartes-accueil" }, [carteAttendu(), carteEquipe(), carteJournee(), carteSujets()])];
   }
 
   function banniere() {
@@ -1950,15 +2272,58 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       el("header", { class: "page-tete" }, [
         el("h1", { text: date ? libelleJour(date) : "La journée" }),
         sous ? el("p", { class: "intro", text: sous + "." }) : null,
-        sommaire([["bloc-programme", "Le programme"], ["bloc-rdv", "Les rendez-vous"], ["bloc-visiteurs", "Qui vient"], ["bloc-roles", "Qui fait quoi"], ["bloc-messages", "Messages et règles"]]),
         el("div", { class: "page-actions" }, [
           el("button", { type: "button", class: "bouton-clair", "data-cle": "pour-orange", onclick: function () { changerVue("orange"); } }, [el("span", { text: "Documents pour Orange" }), trait(ICONES.fleche, 14)]),
-          compte.intervenant ? el("button", { type: "button", class: "bouton-clair", "data-cle": "ma-feuille-jour", onclick: function () { ouvrirRoute(compte.intervenant); } }, [el("span", { text: "Ma feuille de route" }), trait(ICONES.fleche, 14)]) : null
+          compte.intervenant ? el("button", { type: "button", class: "bouton-clair", "data-cle": "ma-feuille-jour", onclick: function () { ouvrirRoute(compte.intervenant); } }, [el("span", { text: "Ma feuille de route" }), trait(ICONES.fleche, 14)]) : null,
+          peutModifier ? boutonModeEdition() : null
         ])
       ]),
+      sommaire([["bloc-programme", "Le programme"], ["bloc-rdv", "Les rendez-vous"], ["bloc-visiteurs", "Qui vient"], ["bloc-roles", "Qui fait quoi"], ["bloc-messages", "Messages et règles", ["messages", "regles", "notes"]]], true),
       blocProgramme(c, b), blocRdv(), blocVisiteurs(), blocRoles(), blocMessages(),
       el("div", { class: "duo-sections" }, [blocRegles(), blocNotes()])
     ];
+  }
+  // Un seul bouton pour toute la page : il ouvre toutes les sections et fait apparaître les ajouts et les fiches à modifier.
+  function boutonModeEdition() {
+    var actif = etat.modeEdition;
+    return el("button", { type: "button", class: "bouton-clair bouton-edition" + (actif ? " actif" : ""), "aria-pressed": actif ? "true" : "false", "data-cle": "mode-edition", onclick: function () { etat.modeEdition = !actif; etat.edition = {}; rendre(); } }, [trait(ICONES.crayon, 14), el("span", { text: actif ? "Terminé" : "Modifier" })]);
+  }
+
+  /* ---------- Sections repliables ---------- */
+
+  // Seul le programme reste toujours ouvert. Chacun retrouve les sections comme il les a laissées ; tout s'ouvre pour imprimer ou modifier.
+  var REPLIABLES = ["rdv", "visiteurs", "roles", "messages", "regles", "notes"];
+  function lireReplis() {
+    try { var o = JSON.parse(lire("pvo-ouvertes") || "{}"); return o && typeof o === "object" && !Array.isArray(o) ? o : {}; } catch (e) { return {}; }
+  }
+  function memoriserReplis() { ecrire("pvo-ouvertes", JSON.stringify(etat.replis)); }
+  function estOuverte(id) { return etat.impression || etat.modeEdition || !!etat.replis[id]; }
+  function basculerSection(id) {
+    etat.replis[id] = !etat.replis[id];
+    if (etat.replis[id]) etat.vientDOuvrir = id;
+    memoriserReplis();
+    rendre();
+  }
+  function ouvrirPour(ancre) {
+    var id = String(ancre || "").replace(/^bloc-/, "");
+    if (REPLIABLES.indexOf(id) >= 0 && !etat.replis[id]) { etat.replis[id] = true; memoriserReplis(); }
+  }
+  // Fermée, une section tient sur une ligne avec son résumé ; son titre l'ouvre et la ferme. contenu() n'est calculé qu'ouverte.
+  function sectionRepliable(id, titre, resume, action, contenu) {
+    var ouverte = estOuverte(id), simple = etat.impression || etat.modeEdition;
+    var tete = simple ? titreSection(id, titre, action) : el("div", { class: "titre bloc-tete repliable" + (ouverte ? " ouverte" : "") }, [
+      el("h2", { id: "titre-" + id }, [
+        el("button", { type: "button", class: "repli", "aria-expanded": ouverte ? "true" : "false", "aria-controls": "corps-" + id, "data-cle": "replier-" + id, onclick: function () { basculerSection(id); } }, [
+          el("span", { text: titre }),
+          el("span", { class: "chevron", "aria-hidden": "true" })
+        ])
+      ]),
+      ouverte ? (action || null) : (resume ? el("span", { class: "repli-resume", text: resume }) : null)
+    ]);
+    return el("section", { class: "section" + (ouverte ? "" : " fermee"), id: "bloc-" + id, "aria-labelledby": "titre-" + id }, [
+      tete,
+      ouverte ? el("div", { class: "section-corps" + (etat.vientDOuvrir === id ? " deplie" : ""), id: "corps-" + id }, contenu()) : null
+    ]);
   }
 
   var MOMENTS = [["Matin", 0, 720], ["Midi", 720, 840], ["Après-midi", 840, 9999]];
@@ -2024,7 +2389,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var contenu = [
       el("span", { class: "heure", text: txt(s.de) }),
       el("span", { class: "creneau-corps" }, [
-        el("span", { class: "creneau-titre" }, [txt(s.titre), genre === "fort" ? " " : null, genre === "fort" ? el("span", { class: "creneau-fort", text: "Temps fort" }) : null]),
+        el("span", { class: "creneau-titre" }, [pointNeuf("sequences", s.id), txt(s.titre), genre === "fort" ? " " : null, genre === "fort" ? el("span", { class: "creneau-fort", text: "Temps fort" }) : null]),
         qui.length ? el("span", { class: "creneau-qui" }, qui.map(function (id) { return el("span", { class: "nom" + (id === compte.intervenant ? " moi" : ""), text: nomDe(id) }); })) : null
       ]),
       el("span", { class: "creneau-duree", text: dureeDe(s) }),
@@ -2062,60 +2427,80 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function basDeFiche(libelle, texte) {
     return txt(texte) ? el("span", { class: "fiche-bas" }, [el("span", { class: "fiche-lib", text: libelle }), el("span", { class: "fiche-texte", text: txt(texte) })]) : null;
   }
-  function blocVisiteurs() {
-    var v = liste("visiteurs").sort(parOrdre);
-    return section("visiteurs", [
-      titreSection("visiteurs", "Qui vient", estAdmin ? bascEdition("visiteurs") : null),
-      v.length ? el("ul", { class: "fiches" }, v.map(function (p) {
-        return ligneRef("visiteurs", p, [identite(p.nom, p.titre), basDeFiche("Ce qui l'intéresse", p.angle)], "fiche");
-      })) : el("p", { class: "vide carte", text: "Les visiteurs ne sont pas encore connus." }),
-      estAdmin && enEdition("visiteurs") ? boutonAjout("Ajouter un visiteur", "ajouter-visiteur", function () { ouvrirRef("visiteurs", null); }) : null
+  // Une ligne par personne ; le détail s'ouvre au toucher. En mode Modifier, la ligne ouvre la fiche à modifier.
+  function lignePersonne(c, item, sous, opts) {
+    var modifiable = estAdmin && enEdition(BLOC_DE[c]), nom = txt(item.nom) || item.id;
+    return el("li", { class: "personne" + (opts.moi ? " moi" : "") }, [
+      el("button", { type: "button", class: "personne-btn", "data-cle": (modifiable ? "ref-" : "personne-") + c + "-" + item.id, onclick: function () { if (modifiable) ouvrirRef(c, item); else opts.ouvrir(); } }, [
+        pastille(nom),
+        el("span", { class: "personne-noms" }, [
+          el("span", { class: "personne-nom" }, [pointNeuf(c, item.id), el("span", { text: nom }), opts.moi ? " " : null, opts.moi ? el("span", { class: "nom moi", text: "Vous" }) : null]),
+          txt(sous) ? el("span", { class: "personne-sous", text: txt(sous) }) : null
+        ]),
+        modifiable ? el("span", { class: "personne-modifier", text: "Modifier" }) : el("span", { class: "personne-fleche", "aria-hidden": "true" }, [trait(ICONES.fleche, 14)])
+      ])
     ]);
   }
+  function blocVisiteurs() {
+    var v = liste("visiteurs").sort(parOrdre);
+    var resume = v.length ? v.length + (v.length > 1 ? " personnes" : " personne") : "À connaître";
+    return sectionRepliable("visiteurs", "Qui vient", resume, estAdmin ? bascEdition("visiteurs") : null, function () {
+      return [
+        v.length ? el("ul", { class: "personnes" }, v.map(function (x) {
+          return lignePersonne("visiteurs", x, x.titre, { ouvrir: function () { ouvrirFeuille({ titre: txt(x.nom) || "Visiteur", lecture: [["Fonction", txt(x.titre)], ["Ce qui l'intéresse", txt(x.angle)]] }); } });
+        })) : el("p", { class: "vide carte", text: "Les visiteurs ne sont pas encore connus." }),
+        estAdmin && enEdition("visiteurs") ? boutonAjout("Ajouter un visiteur", "ajouter-visiteur", function () { ouvrirRef("visiteurs", null); }) : null
+      ];
+    });
+  }
+  function aDesigner(i) { return /à désigner/i.test(txt(i.fonction)) || !txt(i.nom); }
   function blocRoles() {
-    var date = jourIso(infos().date), libelle = date ? libelleJour(date) : "Le jour de la visite";
-    return section("roles", [
-      titreSection("roles", "Qui fait quoi", estAdmin ? bascEdition("roles") : null),
-      el("ul", { class: "fiches" }, intervenants().map(function (i) {
-        var moi = !!compte.intervenant && i.id === compte.intervenant, modifiable = estAdmin && enEdition("roles");
-        return ligneRef("intervenants", i, [
-          identite(i.nom, i.fonction, moi ? el("span", { class: "nom moi", text: "Vous" }) : null),
-          basDeFiche(libelle, i.jour),
-          modifiable || etat.impression ? null : el("button", { type: "button", class: "lien-action fiche-route", "data-cle": "route-fiche-" + i.id, text: moi ? "Ma feuille de route" : "Sa feuille de route", onclick: function () { ouvrirRoute(i.id); } })
-        ], "fiche" + (moi ? " moi" : ""));
-      })),
-      estAdmin && enEdition("roles") ? boutonAjout("Ajouter une personne", "ajouter-intervenant", function () { ouvrirRef("intervenants", null); }) : null
-    ]);
+    var date = jourIso(infos().date), libelle = date ? libelleJour(date) : "Le jour de la visite", tous = intervenants();
+    var vides = tous.filter(aDesigner).length;
+    var resume = tous.length + (tous.length > 1 ? " rôles" : " rôle") + (vides ? ", " + vides + " à désigner" : "");
+    return sectionRepliable("roles", "Qui fait quoi", resume, estAdmin ? bascEdition("roles") : null, function () {
+      return [
+        el("ul", { class: "personnes" }, tous.map(function (i) {
+          var moi = !!compte.intervenant && i.id === compte.intervenant;
+          return lignePersonne("intervenants", i, txt(i.jour) || txt(i.fonction), { moi: moi, ouvrir: function () {
+            ouvrirFeuille({ titre: nomComplet(i), lecture: [["Fonction", txt(i.fonction)], [libelle, txt(i.jour)]],
+              contenu: el("button", { type: "button", class: "bouton-clair", "data-cle": "route-fiche-" + i.id, onclick: function () { fermerFeuille(); ouvrirRoute(i.id); } }, [el("span", { text: moi ? "Ma feuille de route" : "Sa feuille de route" }), trait(ICONES.fleche, 14)]) });
+          } });
+        })),
+        estAdmin && enEdition("roles") ? boutonAjout("Ajouter une personne", "ajouter-intervenant", function () { ouvrirRef("intervenants", null); }) : null
+      ];
+    });
   }
   function blocMessages() {
     var c = liste("convictions").sort(parOrdre);
-    return section("messages", [
-      titreSection("messages", "Ce qu'Orange doit retenir", estAdmin ? bascEdition("messages") : null),
-      el("ul", { class: "fiches trois" }, c.map(function (m) {
-        return ligneRef("convictions", m, [el("span", { class: "carre-fleche", "aria-hidden": "true" }), el("span", { class: "fiche-nom", text: txt(m.titre) }), el("span", { class: "fiche-texte", text: txt(m.texte) })], "fiche message");
-      })),
-      estAdmin && enEdition("messages") ? boutonAjout("Ajouter un message", "ajouter-conviction", function () { ouvrirRef("convictions", null); }) : null
-    ]);
+    return sectionRepliable("messages", "Ce qu'Orange doit retenir", c.length + (c.length > 1 ? " messages" : " message"), estAdmin ? bascEdition("messages") : null, function () {
+      return [
+        el("ul", { class: "fiches trois" }, c.map(function (m) {
+          return ligneRef("convictions", m, [el("span", { class: "carre-fleche", "aria-hidden": "true" }), el("span", { class: "fiche-nom", text: txt(m.titre) }), el("span", { class: "fiche-texte", text: txt(m.texte) })], "fiche message");
+        })),
+        estAdmin && enEdition("messages") ? boutonAjout("Ajouter un message", "ajouter-conviction", function () { ouvrirRef("convictions", null); }) : null
+      ];
+    });
   }
   function blocRegles() {
     var r = liste("regles").sort(parOrdre);
-    return section("regles", [
-      titreSection("regles", "Nos règles", estAdmin ? bascEdition("regles") : null),
-      el("div", { class: "carte" }, [
-        r.length ? el("ul", { class: "regles" }, r.map(function (x) { return ligneRef("regles", x, [el("span", { text: txt(x.texte) })]); })) : el("p", { class: "vide", text: "Aucune règle pour le moment." })
-      ]),
-      estAdmin && enEdition("regles") ? boutonAjout("Ajouter une règle", "ajouter-regle", function () { ouvrirRef("regles", null); }) : null
-    ]);
+    return sectionRepliable("regles", "Nos règles", r.length + (r.length > 1 ? " règles" : " règle"), estAdmin ? bascEdition("regles") : null, function () {
+      return [
+        el("div", { class: "carte" }, [
+          r.length ? el("ul", { class: "regles" }, r.map(function (x) { return ligneRef("regles", x, [el("span", { text: txt(x.texte) })]); })) : el("p", { class: "vide", text: "Aucune règle pour le moment." })
+        ]),
+        estAdmin && enEdition("regles") ? boutonAjout("Ajouter une règle", "ajouter-regle", function () { ouvrirRef("regles", null); }) : null
+      ];
+    });
   }
   function blocNotes() {
     var notes = tableau(infos().notes);
     if (!notes.length && !estAdmin) return null;
-    return section("notes", [
-      titreSection("notes", "À savoir", estAdmin ? lienModifier("modifier-infos", ouvrirInfos) : null),
-      el("div", { class: "carte" }, [
+    return sectionRepliable("notes", "À savoir", notes.length ? notes.length + (notes.length > 1 ? " points" : " point") : "Rien pour le moment", estAdmin ? lienModifier("modifier-infos", ouvrirInfos) : null, function () {
+      return [el("div", { class: "carte" }, [
         notes.length ? el("ul", { class: "notes" }, notes.map(function (n) { return el("li", { text: n }); })) : el("p", { class: "vide", text: "Rien pour le moment." })
-      ])
-    ]);
+      ])];
+    });
   }
 
   /* ---------- Les rendez-vous de l'après-midi ---------- */
@@ -2130,15 +2515,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   function blocRdv() {
     var r = rdvTries(), et = etapesRdv(), fort = creneaux().filter(function (s) { return genreDe(s) === "fort"; })[0];
-    return section("rdv", [
-      titreSection("rdv", "Les rendez-vous de l'après-midi", peutModifier ? boutonAjout("Ajouter un rendez-vous", "ajouter-rdv", function () { ouvrirRdv(null); }) : null),
-      el("p", { class: "section-intro", text: (fort && txt(fort.de) ? "À " + heureFr(fort.de) + ", un" : "Un") + " rendez-vous par groupe, et un en réserve. Pour chacun : le client et son profil, l'IC, le trajet, puis l'accord du client et les deux confirmations." }),
-      r.length ? el("p", { class: "resume" }, et.map(function (e) {
-        var n = r.filter(function (x) { return !!x[e[0]]; }).length;
-        return el("span", {}, [e[1] + " : ", el("strong", { text: n + " sur " + r.length })]);
-      })) : null,
-      r.length ? el("ul", { class: "rdvs" }, r.map(function (x) { return carteRdv(x, et); })) : el("p", { class: "vide carte", text: "Aucun rendez-vous pour l'instant." })
-    ]);
+    var accords = r.filter(function (x) { return !!x.accord; }).length;
+    var resume = r.length ? "Accord du client : " + accords + " sur " + r.length : "Aucun pour l'instant";
+    return sectionRepliable("rdv", "Les rendez-vous de l'après-midi", resume, peutModifier ? bascEdition("rdv") : null, function () {
+      return [
+        el("p", { class: "section-intro", text: (fort && txt(fort.de) ? "À " + heureFr(fort.de) + ", un" : "Un") + " rendez-vous par groupe, et un en réserve. Pour chacun : le client et son profil, l'IC, le trajet, puis l'accord du client et les deux confirmations." }),
+        r.length ? el("p", { class: "resume" }, et.map(function (e) {
+          var n = r.filter(function (x) { return !!x[e[0]]; }).length;
+          return el("span", {}, [e[1] + " : ", el("strong", { text: n + " sur " + r.length })]);
+        })) : null,
+        r.length ? el("ul", { class: "rdvs" }, r.map(function (x) { return carteRdv(x, et); })) : el("p", { class: "vide carte", text: "Aucun rendez-vous pour l'instant." }),
+        peutModifier && enEdition("rdv") ? boutonAjout("Ajouter un rendez-vous", "ajouter-rdv", function () { ouvrirRdv(null); }) : null
+      ];
+    });
   }
   function carteRdv(x, et) {
     var client = txt(x.client);
@@ -2146,7 +2535,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return el("li", { class: "rdv rdv-" + (rangGroupe(x.groupe) < GROUPES_RDV.length ? x.groupe : "aucun") + (x.groupe === "reserve" ? " reserve" : "") }, [
       el("button", { type: "button", class: "carte-rdv", "data-cle": "ouvrir-" + x.id, onclick: function () { ouvrirRdv(x); } }, [
         el("span", { class: "rdv-groupe", text: libelleGroupe(x.groupe) }),
-        el("span", { class: "rdv-client" + (client ? "" : " manque"), text: client || "Client à trouver" }),
+        el("span", { class: "rdv-client" + (client ? "" : " manque") }, [pointNeuf("rdv", x.id), client || "Client à trouver"]),
         el("span", { class: "rdv-infos", text: ligne }),
         txt(x.profil) ? el("span", { class: "rdv-profil", text: txt(x.profil) }) : null,
         el("span", { class: "rdv-etapes" }, et.map(function (e) {
@@ -2227,9 +2616,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("span", {}, [el("strong", { text: String(resteT) }), resteT > 1 ? " tâches à faire" : " tâche à faire"]),
           el("span", {}, [el("strong", { text: String(resteD) }), resteD > 1 ? " décisions à trancher" : " décision à trancher"]),
           retard ? el("span", { class: "en-alerte" }, [el("strong", { text: String(retard) }), " en retard"]) : null
-        ]),
-        sommaire([["bloc-afaire", "Tâches et décisions"], ["bloc-sujets", "Sujets pour Orange"], ["bloc-questions", "Questions qui fâchent"]])
+        ])
       ]),
+      sommaire([["bloc-afaire", "Tâches et décisions"], ["bloc-sujets", "Sujets pour Orange"], ["bloc-questions", "Questions qui fâchent"]], true),
       el("div", { class: "deux-colonnes" }, [section("afaire", corps), el("div", { class: "colonne" }, [blocSujets(), blocQuestions()])])
     ];
   }
@@ -2277,7 +2666,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return el("li", { class: "item " + x.type + (x.fini ? " fini" : "") + (retard ? " en-retard" : "") }, [
       marque,
       el("button", { type: "button", class: "item-corps", "data-cle": "ouvrir-" + x.id, onclick: function () { ouvrirElement(x); } }, [
-        el("span", { class: "item-texte", text: x.texte }),
+        el("span", { class: "item-texte" }, [pointNeuf(x.type === "tache" ? "actions" : "decisions", x.id), x.texte]),
         x.date ? el("span", { class: "item-date", text: (retard ? "En retard, " : "") + dateCourte(x.date) }) : null,
         meta.length ? el("span", { class: "item-meta" }, meta) : null
       ])
@@ -2345,20 +2734,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function ligneSujet(x, pts, mien, meilleur) {
     var porteur = noms(x.porteur), statut = x.statut === "retenu" || x.statut === "ecarte" ? x.statut : "propose";
     var points = (pts && pts[x.id]) || 0, rang = mien ? mien.indexOf(x.id) + 1 : 0;
-    var libelle = STATUTS.filter(function (o) { return o[0] === statut; })[0][1];
+    var meta = [porteur ? "Porté par " + porteur : "Sans porteur"];
+    if (statut === "retenu" && txt(x.reponse)) meta.push("réponse d'Orange notée");
     return el("li", { class: "sujet statut-" + statut }, [
-      el("button", { type: "button", class: "carte-sujet", "data-cle": "ouvrir-" + x.id, onclick: function () { ouvrirSujet(x); } }, [
-        el("span", { class: "sujet-tete" }, [
-          el("span", { class: "pastille p-" + statut, text: libelle }),
-          el("span", { class: "sujet-porteur", text: porteur ? "Porté par " + porteur : "Sans porteur" })
+      el("button", { type: "button", class: "ligne-sujet", "data-cle": "ouvrir-" + x.id, onclick: function () { ouvrirSujet(x); } }, [
+        el("span", { class: "ls-corps" }, [
+          el("span", { class: "ls-texte" }, [pointNeuf("sujets", x.id), txt(x.sujet)]),
+          el("span", { class: "ls-meta", text: meta.join(", ") })
         ]),
-        el("span", { class: "sujet-texte item-texte", text: txt(x.sujet) }),
-        txt(x.preuve) ? el("span", { class: "sujet-preuve" }, [el("strong", { text: "Preuve. " }), txt(x.preuve)]) : null,
-        txt(x.reponse) ? el("span", { class: "sujet-preuve sujet-reponse" }, [el("strong", { text: "Réponse d'Orange. " }), txt(x.reponse)]) : null,
-        points || rang ? el("span", { class: "sujet-points" }, [
-          points ? el("span", { text: points + (points > 1 ? " points" : " point") }) : null,
-          rang ? el("span", { class: "mon-rang", text: "Votre n°" + rang }) : null
+        points || rang ? el("span", { class: "ls-score", "aria-hidden": "true" }, [
+          points ? el("span", { class: "ls-points" }, [el("strong", { text: String(points) }), points > 1 ? " pts" : " pt"]) : null,
+          rang ? el("span", { class: "mon-rang", text: "n°" + rang }) : null
         ]) : null,
+        points || rang ? invisible((points ? points + (points > 1 ? " points" : " point") : "") + (points && rang ? ", " : "") + (rang ? "votre numéro " + rang : "")) : null,
         points && meilleur ? el("span", { class: "sujet-barre", "aria-hidden": "true" }, [el("i", { css: { width: pct(points / meilleur) } })]) : null
       ])
     ]);
@@ -2385,14 +2773,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function ligneQuestion(x) {
     var prete = !!txt(x.reponse), qui = noms(x.qui);
     return el("li", { class: "question" + (prete ? " prete" : "") }, [
-      el("button", { type: "button", class: "carte-sujet", "data-cle": "ouvrir-" + x.id, onclick: function () { ouvrirQuestion(x); } }, [
-        el("span", { class: "sujet-tete" }, [
-          el("span", { class: "pastille " + (prete ? "p-retenu" : "p-propose"), text: prete ? "Réponse prête" : "Réponse à préparer" }),
-          el("span", { class: "sujet-porteur", text: qui ? "Répond : " + qui : "Qui répond : à désigner" })
-        ]),
-        el("span", { class: "sujet-texte item-texte", text: txt(x.question) }),
-        prete ? el("span", { class: "sujet-preuve question-reponse", text: txt(x.reponse) }) : null,
-        txt(x.preuve) ? el("span", { class: "sujet-preuve" }, [el("strong", { text: "Chiffre. " }), txt(x.preuve)]) : null
+      el("button", { type: "button", class: "ligne-sujet", "data-cle": "ouvrir-" + x.id, onclick: function () { ouvrirQuestion(x); } }, [
+        el("span", { class: "ls-corps" }, [
+          el("span", { class: "ls-texte" }, [pointNeuf("questions", x.id), txt(x.question)]),
+          el("span", { class: "ls-meta" }, [el("span", { class: "ls-etat", text: prete ? "Réponse prête" : "Réponse à préparer" }), qui ? ", répond : " + qui : ", qui répond : à désigner"])
+        ])
       ])
     ]);
   }
@@ -2428,7 +2813,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         el("h1", { text: nomComplet(i) }),
         txt(i.fonction) ? el("p", { class: "intro", text: txt(i.fonction) }) : null,
         choix,
-        el("div", { class: "page-actions" }, [el("button", { type: "button", class: "bouton", "data-cle": "imprimer-route", text: "Imprimer", onclick: function () { imprimer("feuille"); } })])
+        el("div", { class: "page-actions" }, [
+          el("button", { type: "button", class: "bouton", "data-cle": "agenda-route", onclick: function () { telechargerAgenda(i, miens); } }, [trait(ICONES.calendrier, 15), el("span", { text: id === compte.intervenant ? "Ajouter à mon agenda" : "Ajouter à l'agenda" })]),
+          el("button", { type: "button", class: "bouton secondaire", "data-cle": "imprimer-route", text: "Imprimer", onclick: function () { imprimer("feuille"); } })
+        ])
       ]),
       txt(i.jour) ? section("route-role", [titreSection("route-role", "Le rôle"), el("p", { class: "carte role-carte", text: txt(i.jour) })]) : null,
       section("route-creneaux", [
@@ -2458,6 +2846,91 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         el("div", { class: "carte" }, [el("ul", { class: "regles" }, regles.map(function (x) { return el("li", { class: "ref" }, [el("span", { text: txt(x.texte) })]); }))])
       ]) : null
     ];
+  }
+
+  /* ---------- Agenda : un fichier .ics que l'agenda du téléphone, Outlook ou Google ouvrent directement ---------- */
+
+  // Décalage de Paris sur l'heure universelle à un instant donné, heure d'été comprise.
+  function decalageParis(ms) {
+    try {
+      var p = {};
+      new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Paris", hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" })
+        .formatToParts(new Date(ms)).forEach(function (x) { p[x.type] = x.value; });
+      return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second) - Math.floor(ms / 1000) * 1000;
+    } catch (e) { return 3600000; }
+  }
+  // Un jour (AAAA-MM-JJ) et une heure de Paris en minutes, vers l'instant universel.
+  function instantParis(iso, minutes) {
+    var a = Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10), Math.floor(minutes / 60), minutes % 60);
+    return a - decalageParis(a - decalageParis(a));
+  }
+  function horodatage(ms) { return new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
+  function texteIcs(t) { return String(t || "").replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/([,;])/g, "\\$1"); }
+  // Une ligne d'agenda se plie à 75 octets, la suite commence par une espace.
+  function plier(ligne) {
+    var morceaux = [], courant = "", octets = 0, limite = 75;
+    Array.from(ligne).forEach(function (ch) {
+      var cp = ch.codePointAt(0), n = cp < 0x80 ? 1 : cp < 0x800 ? 2 : cp < 0x10000 ? 3 : 4;
+      if (octets + n > limite) { morceaux.push(courant); courant = ""; octets = 0; limite = 74; }
+      courant += ch; octets += n;
+    });
+    morceaux.push(courant);
+    return morceaux.join("\r\n ");
+  }
+  // La journée de la personne en blocs continus (toute la visite si elle n'a pas de créneau), puis le point d'étape avec Orange.
+  function fichierAgenda(i, miens) {
+    var inf = infos(), date = jourIso(inf.date), lieu = txt(inf.lieu), etape = jourIso(inf.point_etape), id = i.id;
+    var maintenant = horodatage(Date.now()), evenements = [];
+    function evenement(uid, debut, fin, titre, desc, jourEntier) {
+      var l = ["BEGIN:VEVENT", "UID:" + uid + "@lusko-bu-orange", "DTSTAMP:" + maintenant];
+      if (jourEntier) l.push("DTSTART;VALUE=DATE:" + debut, "DTEND;VALUE=DATE:" + fin, "TRANSP:TRANSPARENT");
+      else l.push("DTSTART:" + debut, "DTEND:" + fin);
+      l.push("SUMMARY:" + texteIcs(titre));
+      if (lieu) l.push("LOCATION:" + texteIcs(lieu));
+      if (desc) l.push("DESCRIPTION:" + texteIcs(desc));
+      l.push("END:VEVENT");
+      evenements.push(l);
+    }
+    if (date) {
+      var blocs = [];
+      miens.forEach(function (s) {
+        var h = horaire(s), dernier = blocs[blocs.length - 1];
+        if (!h) return;
+        if (dernier && h.de <= dernier.a) { dernier.a = Math.max(dernier.a, h.a); dernier.items.push(s); }
+        else blocs.push({ de: h.de, a: h.a, items: [s] });
+      });
+      if (!blocs.length) { var b = bornes(creneaux()); if (b) blocs.push({ de: b.de, a: b.a, items: [] }); }
+      blocs.forEach(function (bl, k) {
+        var titres = bl.items.map(function (s) { return txt(s.titre); }).filter(Boolean);
+        var titre = !titres.length ? "Visite d'Orange chez LUSKO" : "Visite Orange : " + titres[0] + (titres.length > 1 ? " et " + (titres.length - 1) + (titres.length > 2 ? " autres créneaux" : " autre créneau") : "");
+        var desc = bl.items.map(function (s) {
+          var autres = tableau(s.qui).filter(function (x) { return x !== id; });
+          return heureFr(s.de) + (txt(s.a) ? " à " + heureFr(s.a) : "") + " : " + txt(s.titre) + (autres.length ? " (avec " + quiTexte(autres) + ")" : "");
+        }).join("\n");
+        evenement("visite-" + date + "-" + id + "-" + (k + 1), horodatage(instantParis(date, bl.de)), horodatage(instantParis(date, bl.a)), titre, desc, false);
+      });
+    }
+    if (etape) evenement("etape-" + etape + "-" + id, etape.replace(/-/g, ""), decaler(etape, 1).replace(/-/g, ""), "Point d'étape avec Orange", "Suivi des décisions prises le jour de la visite.", true);
+    var lignes = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//LUSKO BU Orange//Espace projet//FR", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
+    evenements.forEach(function (l) { lignes = lignes.concat(l); });
+    lignes.push("END:VCALENDAR");
+    return lignes.map(plier).join("\r\n") + "\r\n";
+  }
+  function telechargerAgenda(i, miens) {
+    var nom = "visite-orange-" + (String(nomComplet(i)).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "agenda") + ".ics";
+    var blob = new Blob([fichierAgenda(i, miens)], { type: "text/calendar;charset=utf-8" });
+    var envoi;
+    if (telechargements) envoi = telechargements.save({ filename: nom, data: blob });
+    else {
+      envoi = new Promise(function (ok) {
+        var url = URL.createObjectURL(blob), a = el("a", { href: url, download: nom });
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { URL.revokeObjectURL(url); if (a.parentNode) a.parentNode.removeChild(a); }, 1000);
+        ok();
+      });
+    }
+    envoi.then(function () { annoncer("Fichier d'agenda téléchargé : ouvrez-le pour l'ajouter à votre agenda."); }, function () { alerter("Le fichier d'agenda n'a pas pu être téléchargé."); });
   }
 
   /* ---------- Pour Orange ---------- */
@@ -2636,7 +3109,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   function ligneReleve(x) {
     var st = statutReleve(x), retard = enRetardReleve(x), qui = quiReleve(x.qui), c = coteReleve(x.qui);
-    function changer(nouveau) { modifier("releve", x.id, { statut: nouveau }).then(null, function (err) { alerter(messageErreur(err)); }); }
+    function changer(nouveau) { modifier("releve", x.id, { statut: nouveau }, { texte: "Décision passée à « " + libelleStatutReleve(nouveau).toLowerCase() + " »." }).then(null, function (err) { alerter(messageErreur(err)); }); }
     var coche = null;
     if (st !== "visee") {
       coche = peutModifier
@@ -2646,7 +3119,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return el("li", { class: "decision-releve " + (st === "visee" ? "visee" : "suivie") + (st === "faite" ? " fini" : "") + (retard ? " en-retard" : "") }, [
       coche,
       el("button", { type: "button", class: "releve-corps", "data-cle": "ouvrir-" + x.id, onclick: function () { ouvrirReleve(x); } }, [
-        el("span", { class: "releve-quoi item-texte", text: txt(x.quoi) }),
+        el("span", { class: "releve-quoi item-texte" }, [pointNeuf("releve", x.id), txt(x.quoi)]),
         el("span", { class: "releve-meta" }, [
           el("span", { class: "pastille p-" + st, text: libelleStatutReleve(st) }),
           el("span", { class: "releve-qui" + (c ? " cote-" + c : "") }, [qui ? (/^[iv]:/.test(x.qui) ? qui + (c === "orange" ? ", Orange" : ", LUSKO") : qui) : "Qui : à préciser"]),
@@ -3081,6 +3554,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function ouvrirFeuille(opts) {
     var retour = document.activeElement;
     fermerFeuille();
+    fermerAnnonce();
     var erreurs = el("p", { class: "feuille-erreur", role: "alert" });
     var corps = [];
     if (opts.lecture) {
@@ -3094,10 +3568,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (opts.enregistrer) boutons.push(el("button", { type: "submit", class: "bouton", "data-cle": "enregistrer", text: opts.libelleEnregistrer || "Enregistrer" }));
     boutons.push(el("button", { type: "button", class: "bouton secondaire", "data-cle": "fermer", text: opts.enregistrer ? "Annuler" : "Fermer", onclick: fermerFeuille }));
     if (opts.supprimer) {
-      var confirme = false;
       boutons.push(el("button", { type: "button", class: "bouton danger", "data-cle": "supprimer", text: "Supprimer", onclick: function (e) {
         var b = e.currentTarget;
-        if (!confirme) { confirme = true; b.textContent = "Confirmer la suppression"; return; }
         b.disabled = true;
         opts.supprimer().then(fermerFeuille, function (err) { b.disabled = false; erreurs.textContent = messageErreur(err); });
       } }));
@@ -3243,7 +3715,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         var ids = v.sujets.filter(function (id) { return !!(etat.donnees.sujets || {})[id]; }).slice(0, MAX_SUJETS);
         if (!ids.length) return Promise.reject({ texte: "Touchez au moins un sujet." });
         var data = { qui: compte.intervenant || "", nom: compte.nom || compte.email || "", sujets: ids, le: aujourdhui() };
-        return existe ? modifier("votes", compte.id, data) : db.doc("votes/" + compte.id).set(data);
+        return existe ? modifier("votes", compte.id, data) : poserDoc("votes", compte.id, data);
       },
       supprimer: existe ? function () { return supprimer("votes", compte.id); } : null });
   }
@@ -3306,7 +3778,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       enregistrer: function (v) {
         if (!nouveau) return modifier(c, item.id, v);
         var data = Object.assign(v, { ordre: ordreSuivant(c) });
-        if (c === "intervenants") return db.doc("intervenants/" + identifiantLibre(v.nom)).set(data);
+        if (c === "intervenants") return poserDoc("intervenants", identifiantLibre(v.nom), data);
         return creer(c, data);
       },
       supprimer: nouveau ? null : function () { return supprimer(c, item.id); } });
@@ -3322,7 +3794,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ];
     ouvrirFeuille({ titre: "La visite", champs: champs, enregistrer: function (v) {
       if ((etat.donnees.general || {}).infos) return modifier("general", "infos", v);
-      return db.doc("general/infos").set(Object.assign({ titre: P.titre || "" }, v));
+      return poserDoc("general", "infos", Object.assign({ titre: P.titre || "" }, v));
     } });
   }
 
@@ -3470,6 +3942,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       el("button", { type: "button", class: "lien-action", text: "Fermer", onclick: function () { etat.alerte = ""; rendre(); } })
     ]) : null;
     document.body.setAttribute("data-vue", etat.vue);
+    document.body.classList.toggle("mode-edition", !!etat.modeEdition);
     document.body.classList.toggle("entree", !!entree);
     app.textContent = "";
     app.appendChild(barre());
@@ -3478,6 +3951,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       var n = app.querySelector('[data-cle="' + cleActive.replace(/"/g, "") + '"]');
       if (n && n.focus) { try { n.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
     }
+    etat.vientDOuvrir = "";
+    suivreLecture();
   }
 
   function demarrer(plateforme) {
@@ -3486,6 +3961,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     estAdmin = compte.role === "admin";
     if (!compte.intervenant) etat.filtre = "tous";
     if (!etat.feuilleDe) etat.feuilleDe = compte.intervenant || "";
+    noterPassage(true);
+    setInterval(function () { if (document.visibilityState === "visible") noterPassage(false); }, 60000);
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible") { if (noterPassage(true) && pret()) rendre(); }
+      else noterPassage(false);
+    });
     var t = lire("pvo-theme");
     if (t === "dark" || t === "light") appliquerTheme(t);
     rendre();
@@ -3513,6 +3994,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (feuille) { fermerFeuille(); return; }
     if (etat.menu) { etat.menu = false; rendre(); var b = app.querySelector(".compte-btn"); if (b) b.focus(); }
   });
+  window.addEventListener("scroll", function () {
+    if (suiviPrevu) return;
+    suiviPrevu = true;
+    (window.requestAnimationFrame || function (f) { return setTimeout(f, 16); })(suivreLecture);
+  }, { passive: true });
+  // Sur téléphone, la barre d'onglets du bas s'efface pendant la saisie pour ne pas flotter au-dessus du clavier.
+  function estSaisie(n) { return !!n && !!n.matches && n.matches("input:not([type=checkbox]):not([type=radio]):not([type=hidden]),textarea,select"); }
+  document.addEventListener("focusin", function (e) { if (estSaisie(e.target)) document.body.classList.add("en-saisie"); });
+  document.addEventListener("focusout", function () { setTimeout(function () { if (!estSaisie(document.activeElement)) document.body.classList.remove("en-saisie"); }, 0); });
   window.addEventListener("hashchange", function () {
     var v = vueDepuisAdresse(), f = feuilleDepuisAdresse();
     if (v !== etat.vue || (v === "feuille" && f && f !== etat.feuilleDe)) { etat.vue = v; if (f) etat.feuilleDe = f; rendre(); }
