@@ -122,7 +122,7 @@ h1{font-weight:700;font-size:clamp(30px,6.4vw,42px);line-height:1.06;letter-spac
 </head>
 <body>
 <div id="app"><noscript><p class="secours">Ce questionnaire a besoin de JavaScript pour s'afficher.</p></noscript></div>
-<script id="config">window.QUESTIONNAIRE_CONFIG = {"url": "https://rgsewrjkazqnizpyjzzm.supabase.co", "cle": "sb_publishable_f6Icf4lPGIT0U7HqKSiVLg_ULWQHyl2", "espace": "visite-orange", "jusqu_au": "2027-01-06", "reunion": "2027-01-08", "questions": [{"cle": "freins", "titre": "Qu'est-ce qui vous freine au quotidien ?", "aide": "Offres, outils, commandes, délais, relation avec Orange…"}, {"cle": "atouts", "titre": "Qu'est-ce qui marche bien et qu'il faut garder ?", "aide": "Ce qui vous aide à vendre ou à bien servir vos clients."}, {"cle": "demande", "titre": "Si vous pouviez demander une seule chose à Orange, ce serait quoi ?", "aide": "Une demande précise, même petite."}, {"cle": "autre", "titre": "Autre chose à dire ?", "aide": "Une idée, une remarque, un sujet qu'on n'a pas abordé."}], "metiers": [["tmk", "TMK"], ["vad", "VAD"], ["ic", "IC terrain"], ["back-office", "Back office"], ["encadrement", "Encadrement"]]};</script>
+<script id="config">window.QUESTIONNAIRE_CONFIG = {"url": "https://rgsewrjkazqnizpyjzzm.supabase.co", "cle": "sb_publishable_f6Icf4lPGIT0U7HqKSiVLg_ULWQHyl2", "espace": "visite-orange", "jusqu_au": "2027-01-18", "questions": [{"cle": "freins", "titre": "Qu'est-ce qui vous freine au quotidien ?", "aide": "Offres, outils, commandes, délais, relation avec Orange…"}, {"cle": "atouts", "titre": "Qu'est-ce qui marche bien et qu'il faut garder ?", "aide": "Ce qui vous aide à vendre ou à bien servir vos clients."}, {"cle": "demande", "titre": "Si vous pouviez demander une seule chose à Orange, ce serait quoi ?", "aide": "Une demande précise, même petite."}, {"cle": "autre", "titre": "Autre chose à dire ?", "aide": "Une idée, une remarque, un sujet qu'on n'a pas abordé."}], "metiers": [["tmk", "TMK"], ["vad", "VAD"], ["ic", "IC terrain"], ["back-office", "Back office"], ["encadrement", "Encadrement"]]};</script>
 <script id="code">(function () {
   "use strict";
 
@@ -188,8 +188,7 @@ h1{font-weight:700;font-size:clamp(30px,6.4vw,42px);line-height:1.06;letter-spac
   function enDate(s) { var p = s.split("-").map(Number); return new Date(Date.UTC(p[0], p[1] - 1, p[2])); }
   function quantieme(n) { return n === 1 ? "1er" : String(n); }
   function jourMois(s) { var d = enDate(s); return JOURS[d.getUTCDay()] + " " + quantieme(d.getUTCDate()) + " " + MOIS[d.getUTCMonth()]; }
-  function jourSeul(s) { var d = enDate(s); return quantieme(d.getUTCDate()) + " " + MOIS[d.getUTCMonth()]; }
-  var JUSQU = iso(C.jusqu_au), REUNION = iso(C.reunion);
+  var JUSQU = iso(C.jusqu_au);
   function ouvert() { return !JUSQU || aujourdhui() <= JUSQU; }
 
   /* ---------- Écrans ---------- */
@@ -217,7 +216,7 @@ h1{font-weight:700;font-size:clamp(30px,6.4vw,42px);line-height:1.06;letter-spac
     cadre([el("section", { class: "q-fin" }, [
       el("span", { class: "q-coche", "aria-hidden": "true" }),
       titre,
-      el("p", { class: "q-intro", text: REUNION ? "Vos réponses seront lues ensemble en réunion le " + jourSeul(REUNION) + "." : "Vos réponses seront lues ensemble en réunion." }),
+      el("p", { class: "q-intro", text: "Vos réponses seront lues ensemble avant notre échange avec Orange." }),
       el("p", { class: "q-intro", text: "Une autre idée vous vient plus tard ? Revenez par le même lien, ou ajoutez-la maintenant." }),
       el("button", { type: "button", class: "q-bouton secondaire", "data-cle": "encore", text: "Ajouter autre chose", onclick: function () { ecranQuestionnaire({}); } })
     ])]);
@@ -315,7 +314,7 @@ h1{font-weight:700;font-size:clamp(30px,6.4vw,42px);line-height:1.06;letter-spac
     cadre([
       el("section", { class: "q-tete" }, [
         el("h1", { text: "Ce que vous voulez faire remonter à Orange" }),
-        el("p", { class: "q-intro", text: "Nous préparons un échange avec Orange et voulons partir de ce que vous vivez au quotidien. Vos réponses seront lues ensemble en réunion" + (REUNION ? " le " + jourSeul(REUNION) : "") + ", pour choisir les sujets à porter auprès d'Orange." }),
+        el("p", { class: "q-intro", text: "Nous préparons un échange avec Orange et voulons partir de ce que vous vivez au quotidien. Vos réponses seront lues ensemble pour choisir les sujets à porter auprès d'Orange." }),
         el("div", { class: "q-anonyme" }, [
           el("span", { class: "q-cadenas", "aria-hidden": "true" }, [cadenas()]),
           el("p", {}, [el("strong", { text: "Anonyme. " }), "Ce questionnaire ne vous demande ni votre nom ni votre adresse, et n'enregistre ni l'un ni l'autre. Seul le jour de votre réponse est gardé."])
