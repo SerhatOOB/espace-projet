@@ -1496,6 +1496,92 @@ body.vue-mur{
 @media print{
   .appel-bandeau,.conducteur{position:static}
 }
+
+/* ---------- Créateurs : le radar dans le copilote ----------
+   Une liste à la manière des contacts du jour : des filets, pas de cartes arrondies. Le grand chiffre dit l'âge de l'entreprise,
+   le rose signale ce qui est nouveau, le bleu souligne ce qu'on ouvre, la zone du numéro se détache sur le papier. */
+.radar-filtres{display:flex;flex-direction:column;gap:16px}
+.radar-filtre{display:flex;flex-direction:column;gap:8px}
+.radar-ligne{display:grid;grid-template-columns:minmax(170px,220px) minmax(200px,280px) minmax(0,1fr);gap:12px 16px;align-items:end}
+.radar-ligne .champ{margin:0;display:flex;flex-direction:column;gap:6px}
+.radar-cases{display:flex;flex-wrap:wrap;gap:8px 24px}
+.radar-case{display:inline-flex;align-items:center;gap:9px;min-height:32px;font-size:14px;font-weight:600;cursor:pointer}
+.radar-case input{width:18px;height:18px;margin:0;accent-color:var(--suie)}
+:root[data-theme="dark"] .radar-case input{accent-color:var(--papier-lusko)}
+.chiffres-radar{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:-6px}
+.radar-lancer{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:6px}
+.radar-lancer .bouton{display:inline-flex;align-items:center;gap:8px}
+.radar-avance{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:16px 0 4px}
+.radar-avance .bouton-clair{display:inline-flex;align-items:center;gap:8px}
+.radar-avance-texte{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700}
+.radar-avance .vjauge{flex:1 1 220px;max-width:380px;height:8px}
+.leads{display:flex;flex-direction:column;margin:0;padding:0;list-style:none;border-top:1.5px solid var(--encre)}
+.lead{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 22px;padding:20px 0;border-bottom:1px solid var(--filet);scroll-margin-top:140px}
+.lead.nouveau::before{content:"";position:absolute;left:-14px;top:18px;bottom:18px;width:4px;background:var(--rose)}
+.lead.occupe{opacity:.6}
+.lead-age{display:flex;flex-direction:column;gap:3px;padding-top:2px}
+.lead-age strong{font-family:var(--titre);font-weight:600;font-size:44px;line-height:.9;letter-spacing:.01em}
+.lead-age span{font-size:12.5px;line-height:1.3;color:var(--discret)}
+.lead-corps{display:flex;flex-direction:column;align-items:stretch;gap:9px;min-width:0}
+.lead-tete{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 18px}
+.lead-nom{margin:0;font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.25;letter-spacing:0;text-transform:none;overflow-wrap:anywhere}
+.lead-lieu{font-size:13.5px;font-weight:700;color:var(--attenue);white-space:nowrap}
+.lead-activite{font-size:14.5px;line-height:1.45;max-width:78ch;text-wrap:pretty}
+.lead-dirigeant{display:flex;flex-wrap:wrap;gap:0 4px;font-size:13.5px;line-height:1.45;color:var(--attenue)}
+.lead-dirigeant strong{color:var(--encre)}
+.lead-contact{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 22px;margin-top:4px;padding:13px 16px;background:var(--fond-2);border:1px solid var(--filet)}
+.lead-numero{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.lead-numero .lead-lib{flex:1 0 100%}
+.lead-lib{font-family:var(--titre);font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--discret)}
+.lead-tel-saisie{width:190px;max-width:100%;padding:9px 12px;font-size:15.5px;font-weight:600;font-variant-numeric:tabular-nums;background:var(--papier)}
+.lead-tel{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;text-decoration:underline;text-decoration-color:var(--bleu);text-decoration-thickness:2px;text-underline-offset:3px}
+.lead-tel:hover{text-decoration-color:var(--rose)}
+.lead-liens{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:13.5px}
+.lead-liens .lead-lib{flex:1 0 100%}
+.lead-lien{display:inline-flex;align-items:center;gap:5px;min-height:28px;font-weight:700;text-decoration:underline;text-decoration-color:var(--bleu);text-decoration-thickness:1.5px;text-underline-offset:3px;transition:text-decoration-color .15s}
+.lead-lien:hover{text-decoration-color:var(--rose);text-decoration-thickness:3px}
+.lead-lien svg{flex:none;opacity:.7}
+.lead-contact > .statut,.lead-contact > .lead-info,.lead-contact > .lien-action{flex:1 0 100%}
+.lead-info{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--discret)}
+.lead-info.erreur{color:var(--rouge-texte)}
+.rond.petit{width:12px;height:12px;border-width:2px}
+.lead-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:2px}
+.lead-actions .bouton:disabled{background:var(--pierre);color:var(--discret);opacity:1}
+:root[data-theme="dark"] .lead-actions .bouton:disabled{background:var(--pierre);color:var(--discret)}
+.lien-action.discret{color:var(--discret);font-weight:600}
+.etiq.nouveau{background:var(--rose);color:var(--suie)}
+.etiq.a-confirmer{background:none;box-shadow:inset 0 0 0 1px var(--filet-2);color:var(--attenue)}
+.radar-plus{align-self:flex-start;margin-top:6px}
+.radar-regles{max-width:78ch}
+.cj-liste{display:flex;flex-direction:column;margin:0;padding:0;list-style:none;border-top:1px solid var(--filet)}
+.cj-liste li{border-bottom:1px solid var(--filet)}
+.cj-ligne{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:11px 0;text-align:left}
+.cj-ligne strong{font-size:15px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:text-decoration-color .15s}
+.cj-ligne:hover strong{text-decoration-color:var(--rose);text-decoration-thickness:2px}
+.cj-ligne span{font-size:13px;color:var(--attenue);overflow-wrap:anywhere}
+@media screen and (max-width:999px){
+  .radar-ligne{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .radar-cherche{grid-column:1 / -1}
+}
+@media screen and (max-width:759px){
+  .lead-dirigeant{flex-direction:column;gap:2px}
+  .lead-dirigeant .lead-sep{display:none}
+  .chiffres-radar{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .chiffres-radar .chiffre:nth-child(3){border-left:0;padding-left:0}
+  .chiffres-radar .chiffre:nth-child(4){border-left:1px solid var(--filet);padding-left:10px}
+  .chiffres-radar .chiffre:nth-child(n+3){border-top:1px solid var(--filet)}
+  .lead{grid-template-columns:58px minmax(0,1fr);gap:4px 12px;padding:16px 0}
+  .lead-age strong{font-size:30px}
+  .lead-age span{font-size:11.5px}
+  .lead.nouveau::before{left:-10px}
+  .lead-nom{font-size:17px}
+  .lead-contact{padding:12px;gap:10px 16px}
+  .lead-tel-saisie{width:100%}
+  .lead-actions .bouton{flex:1 1 100%;justify-content:center}
+}
+@media print{
+  .lead-contact,.lead-actions,.radar-filtres{display:none}
+}
 </style>
 </head>
 <body>
@@ -2080,7 +2166,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     "31": "200 à 249 salariés", "32": "250 à 499 salariés", "41": "500 à 999 salariés", "42": "1 000 à 1 999 salariés",
     "51": "2 000 à 4 999 salariés", "52": "5 000 à 9 999 salariés", "53": "10 000 salariés et plus"
   };
-  var VUES = ["journee", "appel", "prospects", "resultats", "scripts", "mur"];
+  var VUES = ["journee", "appel", "prospects", "createurs", "resultats", "scripts", "mur"];
   var DEFAUTS = { objectif_marge: 11000, objectifs: {}, tase_min: 50, annulation_max: 20, cible_accompagnement: 25, societe: "OOB", macrozones: [], offres: [], levier_macrozone: "" };
   // Le payplan 2027 : ses seuils vivent dans les réglages de l'équipe, dans la base. La page est publique : aucun seuil ici.
   var PAYPLAN = { debut: "", objectif: 0, declenchement: 0, acceleration: 0, boosters: 0, constance: 0, rdv_fp: 0, actes_mrl: 0, tase: 0, reprise: 0, visible: false };
@@ -2225,6 +2311,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     etat.menu = false;
     try { history.replaceState(null, "", "#" + v); } catch (e) { /* adresse inchangée */ }
     etat.entree = !meme;
+    if (v === "createurs" && !meme) entrerCreateurs();
     if (v === "resultats") assurerMois(etat.mois);
     if (v === "mur") assurerMois(moisDe(aujourdhui()));
     rendre();
@@ -2278,7 +2365,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     alerte: "M8 2.6 14 13H2zM8 6.6v3M8 11.4v.2",
     horloge: "M8 14.2A6.2 6.2 0 1 0 8 1.8a6.2 6.2 0 0 0 0 12.4zM8 4.6V8l2.4 1.5",
     loupe: "M7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM10.6 10.6 14 14",
-    crayon: "M10.6 2.8l2.6 2.6-7.6 7.6-3.3.7.7-3.3zM9.2 4.2l2.6 2.6"
+    crayon: "M10.6 2.8l2.6 2.6-7.6 7.6-3.3.7.7-3.3zM9.2 4.2l2.6 2.6",
+    createurs: "M8 14V8.2M8 8.2C8 5.6 6.3 3.8 3.2 3.8c0 2.9 1.9 4.4 4.8 4.4zM8 10.4c0-2.6 1.6-4.2 4.8-4.2 0 2.8-1.8 4.2-4.8 4.2z",
+    sortie: "M9.5 2.5h4v4M13.5 2.5 8 8M12 9.5v3.4c0 .3-.3.6-.6.6H3.1c-.3 0-.6-.3-.6-.6V4.6c0-.3.3-.6.6-.6h3.4"
   };
   function trait(d, taille) {
     var s = document.createElementNS(NS, "svg"), p = document.createElementNS(NS, "path"), t = String(taille || 16);
@@ -2307,6 +2396,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       onglet("journee", "Ma journée", signal, "Journée"),
       onglet("appel", etat.appel ? "Appel en cours" : "Appel", 0, "Appel", !!etat.appel),
       onglet("prospects", "Fiches", 0),
+      onglet("createurs", "Créateurs", 0),
       onglet("resultats", "Résultats", 0),
       onglet("scripts", "Scripts", 0)
     ];
@@ -2955,7 +3045,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       chiffresDuJour(),
       bandeauMois(),
       el("div", { class: "jour-grille" }, [
-        el("div", { class: "jour-colonne" }, [blocContacts()]),
+        el("div", { class: "jour-colonne" }, [blocContacts(), blocCreateursJour()]),
         el("div", { class: "jour-colonne cote" }, [blocSession(), blocAppelsDuJour()])
       ])
     ];
@@ -4140,6 +4230,764 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     })));
   }
 
+  /* ---------- Créateurs : les entreprises nées ces dernières semaines, à appeler ---------- */
+
+  // La recherche se fait à la demande, depuis la page : les annonces de création du BODACC, puis chaque entreprise vérifiée dans Sirene.
+  // Rien n'est stocké, sauf les créateurs pris (leur fiche) et ceux qu'on écarte, pour que personne ne les rappelle.
+  // Les entrepreneurs qui ont refusé la diffusion de leurs données ne sont jamais proposés.
+  var BODACC = "https://bodacc-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/annonces-commerciales/records";
+  var SIRENE = "https://recherche-entreprises.api.gouv.fr/search";
+  var OUTRE_MER = ["971", "972", "973", "974", "975", "976"];
+  var REGIONS_RADAR = [
+    ["ara", "Auvergne-Rhône-Alpes", ["01", "03", "07", "15", "26", "38", "42", "43", "63", "69", "73", "74"]],
+    ["bfc", "Bourgogne-Franche-Comté", ["21", "25", "39", "58", "70", "71", "89", "90"]],
+    ["bretagne", "Bretagne", ["22", "29", "35", "56"]],
+    ["centre", "Centre-Val de Loire", ["18", "28", "36", "37", "41", "45"]],
+    ["corse", "Corse", ["2A", "2B"]],
+    ["grand-est", "Grand Est", ["08", "10", "51", "52", "54", "55", "57", "67", "68", "88"]],
+    ["hdf", "Hauts-de-France", ["02", "59", "60", "62", "80"]],
+    ["idf", "Île-de-France", ["75", "77", "78", "91", "92", "93", "94", "95"]],
+    ["normandie", "Normandie", ["14", "27", "50", "61", "76"]],
+    ["naq", "Nouvelle-Aquitaine", ["16", "17", "19", "23", "24", "33", "40", "47", "64", "79", "86", "87"]],
+    ["occitanie", "Occitanie", ["09", "11", "12", "30", "31", "32", "34", "46", "48", "65", "66", "81", "82"]],
+    ["pdl", "Pays de la Loire", ["44", "49", "53", "72", "85"]],
+    ["paca", "Provence-Alpes-Côte d'Azur", ["04", "05", "06", "13", "83", "84"]]
+  ];
+  // Pour chaque activité : les codes NAF qui la définissent, et les mots qui la repèrent dans l'annonce du BODACC.
+  var FAMILLES_RADAR = [
+    ["batiment", "Bâtiment", ["41", "42", "43"], ["batiment", "btp", "maconnerie", "macon", "plombier", "plomberie", "electricien", "electricite", "menuiserie", "menuisier", "peinture", "peintre", "platrerie", "plaquiste", "carrelage", "carreleur", "couvreur", "charpente", "chauffagiste", "chauffage", "isolation", "terrassement", "serrurerie", "climatisation", "ravalement", "second oeuvre", "gros oeuvre"]],
+    ["commerce", "Commerce", ["46", "47"], ["commerce de detail", "boutique", "magasin", "epicerie", "negoce", "boulangerie", "patisserie", "boucherie", "fleuriste", "vetements", "pret-a-porter", "tabac", "primeur", "caviste", "bijouterie", "opticien", "e-commerce"]],
+    ["restauration", "Restauration et hôtellerie", ["55", "56"], ["restaur*", "snack*", "pizz*", "traiteur*", "brasserie*", "cafe", "kebab*", "burger*", "sandwich*", "creperie*", "salon de the", "hotel*", "hebergement*", "gite*"]],
+    ["conseil", "Conseil et libéral", ["62", "63", "69", "70", "71", "72", "73", "74"], ["consultant", "consulting", "informatique", "logiciel", "logiciels", "digital", "marketing", "comptable", "comptabilite", "avocat", "architecte", "architecture", "ingenierie", "graphiste", "graphisme", "developpeur", "programmation", "audit", "conseil en"]],
+    ["sante", "Santé et beauté", ["75", "86", "96.02", "96.04"], ["sante", "medical*", "medecin*", "infirmi*", "kine*", "osteopath*", "dentaire*", "paramedical*", "psycholog*", "coiff*", "esthetique*", "beaute", "onglerie*", "massage*", "bien-etre", "veterinaire*"]],
+    ["auto", "Auto et réparation", ["45", "95"], ["automobile*", "garage", "mecanique", "carrosserie", "pneumatiques", "depannage", "controle technique", "reparation automobile"]],
+    ["immobilier", "Agences immobilières", ["68.31"], ["agence immobiliere", "agent immobilier", "mandataire immobilier", "transaction immobiliere", "transactions immobilieres"]],
+    ["services", "Autres services", ["66", "77", "78", "79", "80", "81", "82", "85", "88", "93", "96.01", "96.03", "96.09"], ["nettoyage", "proprete", "securite", "gardiennage", "assurance", "courtage", "salle de sport", "fitness", "coach sportif", "pressing", "demenagement", "aide a domicile", "recrutement", "evenementiel"]],
+    ["toutes", "Toutes les activités", [], []]
+  ];
+  var PERIODES_RADAR = [[7, "Les 7 derniers jours"], [30, "Les 30 derniers jours"], [91, "Les 3 derniers mois"], [182, "Les 6 derniers mois"]];
+  var NAF_EXCLUS = ["64.20Z", "68.20A", "68.20B", "70.10Z"];
+  var MOTIFS_ECART = [["hors_cible", "Hors cible"], ["deja_client", "Déjà client chez Orange"], ["fermee", "Fermée ou injoignable"], ["sans_numero", "Aucun numéro trouvé"], ["doublon", "Doublon"], ["autre", "Autre raison"]];
+  var CLE_FILTRES_RADAR = "vad-radar-filtres", CLE_RECHERCHE_RADAR = "vad-radar-recherche", PAS_SIRENE = 250;
+
+  function filtresRadarDefaut() { return { regions: [], familles: ["batiment", "commerce", "restauration", "conseil"], periode: 30, societes: false, motcle: "" }; }
+  function filtresRadarLus() {
+    var d = filtresRadarDefaut(), l = null;
+    try { l = JSON.parse(lire(CLE_FILTRES_RADAR) || "null"); } catch (e) { l = null; }
+    if (!l || typeof l !== "object") return d;
+    var regions = REGIONS_RADAR.map(function (r) { return r[0]; }), familles = FAMILLES_RADAR.map(function (f) { return f[0]; });
+    d.regions = tableau(l.regions).filter(function (r) { return regions.indexOf(r) >= 0; });
+    var f = tableau(l.familles).filter(function (x) { return familles.indexOf(x) >= 0; });
+    if (f.length) d.familles = f;
+    if (PERIODES_RADAR.some(function (p) { return p[0] === Number(l.periode); })) d.periode = Number(l.periode);
+    d.societes = !!l.societes;
+    d.motcle = txt(l.motcle).slice(0, 60);
+    return d;
+  }
+  function filtresRadarEcrits() { ecrire(CLE_FILTRES_RADAR, JSON.stringify(etat.radar.filtres)); }
+
+  etat.radar = { filtres: filtresRadarLus(), r: null, numeros: {}, occupe: {}, suivi: null, suiviCharge: false, suiviEnCours: false, restaure: false };
+
+  function departementsRadar(f) {
+    var l = [];
+    REGIONS_RADAR.forEach(function (r) { if (f.regions.indexOf(r[0]) >= 0) l = l.concat(r[2]); });
+    return l;
+  }
+  function famille(cle) { return FAMILLES_RADAR.filter(function (x) { return x[0] === cle; })[0] || null; }
+  function prefixesNaf(f) {
+    if (f.familles.indexOf("toutes") >= 0) return [];
+    var l = [];
+    f.familles.forEach(function (c) { var x = famille(c); if (x) l = l.concat(x[2]); });
+    return l;
+  }
+  function motsFamilles(f) {
+    if (f.familles.indexOf("toutes") >= 0) return [];
+    var l = [];
+    f.familles.forEach(function (c) { var x = famille(c); if (x) l = l.concat(x[3]); });
+    return l;
+  }
+  function cleRadar(f) { return JSON.stringify([f.regions.slice().sort(), f.familles.slice().sort(), f.periode, f.societes, txt(f.motcle)]); }
+  // La requête au BODACC : les créations publiées sur la période, dans la zone, repérées par les mots de l'activité.
+  function clauseBodacc(f) {
+    var w = ['familleavis="creation"', "dateparution>=date'" + decaler(aujourdhui(), -f.periode) + "'"];
+    var deps = departementsRadar(f);
+    w.push(deps.length ? "numerodepartement in (" + deps.map(function (d) { return '"' + d + '"'; }).join(",") + ")"
+      : "not numerodepartement in (" + OUTRE_MER.map(function (d) { return '"' + d + '"'; }).join(",") + ")");
+    var mots = motsFamilles(f);
+    if (mots.length) w.push("(" + mots.map(function (m) { return 'search(listeetablissements,"' + m + '")'; }).join(" or ") + ")");
+    if (f.societes) w.push('search(listepersonnes,"pm")');
+    var mc = txt(f.motcle).replace(/["\\*]/g, " ").replace(/\s+/g, " ").trim();
+    if (mc) w.push('search("' + mc + '")');
+    return w.join(" and ");
+  }
+  function urlBodacc(where, decalage) {
+    return BODACC + "?limit=100&offset=" + decalage + "&order_by=" + encodeURIComponent("dateparution desc, id") +
+      "&select=" + encodeURIComponent("id,dateparution,numerodepartement,registre,commercant,ville,cp,listepersonnes,listeetablissements,acte") +
+      "&where=" + encodeURIComponent(where);
+  }
+  function json(s) { if (s && typeof s === "object") return s; try { return JSON.parse(s || "null"); } catch (e) { return null; } }
+  function premier(o, cle) { var v = o && o[cle]; return Array.isArray(v) ? v[0] : v; }
+  // Une annonce du BODACC, ramenée à ce qui sert : l'entreprise, sa forme, son dirigeant, son activité.
+  function annonceDe(rec) {
+    var pers = premier(json(rec.listepersonnes), "personne") || {}, etab = premier(json(rec.listeetablissements), "etablissement") || {}, acte = json(rec.acte) || {};
+    var reg = Array.isArray(rec.registre) ? rec.registre[0] : rec.registre;
+    var siren = String(reg || (pers.numeroImmatriculation || {}).numeroIdentification || "").replace(/\D/g, "");
+    if (!/^\d{9}$/.test(siren)) return null;
+    var pm = pers.typePersonne === "pm", forme = pm ? txt(pers.formeJuridique) : "Entreprise individuelle";
+    if (/civile immobili|construction.vente|groupement foncier|civile de placement|placement immobilier|groupement forestier/.test(plat(forme))) return { siren: siren, sci: true };
+    var dir = "", qualite = "";
+    if (pm) { var d = dirigeantBodacc(pers.administration); dir = d.nom; qualite = d.qualite; }
+    else { dir = txt([txt(pers.prenom).split(",")[0], pers.nom].filter(Boolean).join(" ")); qualite = "Exploitant"; }
+    var capital = pm && pers.capital ? Number(pers.capital.montantCapital) : NaN;
+    return {
+      siren: siren, bodacc_id: txt(rec.id), annoncee_le: txt(rec.dateparution), departement: txt(rec.numerodepartement),
+      nom: pm ? (txt(pers.denomination) || txt(rec.commercant)) : (txt(pers.nomCommercial) || dir || txt(rec.commercant)),
+      forme: forme, capital: isFinite(capital) ? capital : null, dirigeant: dir, qualite: qualite, activite: txt(etab.activite), origine: txt(etab.origineFonds),
+      commence_le: txt(acte.dateCommencementActivite) || txt(acte.dateImmatriculation), code_postal: txt(rec.cp), commune: txt(rec.ville), est_ei: !pm
+    };
+  }
+  // « Président : LUMAIRYS ; Directeur général : MAIRESSE Baptiste » : on retient la première personne physique, ici Baptiste MAIRESSE.
+  function dirigeantBodacc(adm) {
+    var segments = txt(adm).split(/\s*;\s*|,\s*(?=[A-ZÉÈ][a-zéèêëàâîïôûüç' \-]{2,40}\s:)/), premier = null;
+    for (var i = 0; i < segments.length; i++) {
+      var k = segments[i].indexOf(":");
+      if (k < 0) continue;
+      var p = personneBodacc(segments[i].slice(k + 1)), d = { qualite: txt(segments[i].slice(0, k)), nom: p.nom };
+      if (!d.nom) continue;
+      if (p.pp) return d;
+      if (!premier) premier = d;
+    }
+    return premier || { qualite: "", nom: "" };
+  }
+  // « MESCHINO Lucas Antoine Paul nom d'usage : MESCHINO » devient « Lucas MESCHINO », « Alamé, Mahmoud » devient « Mahmoud Alamé ».
+  // Un nom seul en capitales (« LUMAIRYS ») est sans doute une société : il ne sert qu'à défaut de personne.
+  function personneBodacc(s) {
+    s = txt(s).replace(/\s+nom d'usage.*$/i, "").replace(/\s+/g, " ");
+    var parts = s.split(",").map(txt).filter(Boolean), tete = parts[0] || "", mots = tete.split(" ").filter(Boolean), i = 0, nom = [];
+    while (i < mots.length && (/^(de|du|des|d'|le|la|van|von|di|da|del|ben|el)$/i.test(mots[i]) || (/[A-ZÀ-Ö]/.test(mots[i]) && mots[i] === mots[i].toUpperCase()))) nom.push(mots[i++]);
+    if (nom.length && mots[i] && /[A-ZÀ-Ö]/.test(nom.join(""))) return { nom: mots[i] + " " + nom.join(" "), pp: true };
+    if (parts.length > 1) return { nom: parts[1].split(" ")[0] + " " + tete, pp: true };
+    return { nom: tete, pp: false };
+  }
+  // L'activité décrite dans l'annonce, rapprochée des familles choisies : utile quand Sirene ne connaît pas encore l'entreprise.
+  function familleTexte(texte, f) {
+    var t = plat(texte);
+    if (!t) return null;
+    var choix = f.familles.indexOf("toutes") >= 0 ? FAMILLES_RADAR.map(function (x) { return x[0]; }) : f.familles;
+    for (var i = 0; i < choix.length; i++) {
+      var x = famille(choix[i]);
+      if (x && x[3].some(function (m) { return t.indexOf(m.replace(/\*$/, "")) >= 0; })) return x[0];
+    }
+    return null;
+  }
+  var HORS_CIBLE_TEXTE = /holding|prises? de participations?|gestion de (son|leur|tout|tous)? ?patrimoine|portefeuille de (valeurs|titres)|location (de biens|immobili|de locaux|d'immeubles)/;
+  function scenarioFamille(cle) { return cle === "batiment" ? "s6" : (cle === "commerce" || cle === "restauration" ? "s7" : (cle === "conseil" ? "s8" : "s2")); }
+  function scenarioNaf(naf) {
+    if (/^(41|42|43)\./.test(naf)) return "s6";
+    if (/^(47|56)\./.test(naf)) return "s7";
+    if (/^(62|63|69|70|71|72|73|74)\./.test(naf)) return "s8";
+    return "s2";
+  }
+  function finRemise(iso) {
+    if (!jourIso(iso)) return "";
+    var d = enDate(iso);
+    d.setUTCMonth(d.getUTCMonth() + 24);
+    d.setUTCDate(d.getUTCDate() - 1);
+    return d.toISOString().slice(0, 10);
+  }
+  function scoreLead(x) {
+    var s = 0, j = joursDepuis(x.creee_le);
+    if (["s6", "s7", "s8"].indexOf(x.scenario) >= 0) s += 25;
+    if (!x.est_ei) s += 20;
+    if (isFinite(j)) s += Math.max(0, Math.min(15, 15 - j / 12));
+    if (num(x.capital) >= 5000) s += 5;
+    return s;
+  }
+  function parScore(a, b) { return (b.score - a.score) || String(b.creee_le).localeCompare(String(a.creee_le)) || a.siren.localeCompare(b.siren); }
+  // Sirene confirme ou écarte : diffusion refusée, entreprise fermée ou ancienne, activité hors sélection.
+  function evaluer(a, r, f) {
+    if (!r || r.siren !== a.siren) {
+      // Sirene n'a pas encore l'entreprise (annonce du jour). Une société reste proposée, avec les données du BODACC ;
+      // un entrepreneur individuel non, faute de savoir s'il a refusé la diffusion de ses données.
+      var fam = familleTexte(a.activite, f);
+      if (a.est_ei) return { raison: "introuvables" };
+      if (HORS_CIBLE_TEXTE.test(plat(a.activite)) || (f.familles.indexOf("toutes") < 0 && !fam)) return { raison: "activite" };
+      var y = {
+        siren: a.siren, siret: "", nom: a.nom, dirigeant: a.dirigeant, qualite: a.qualite, creee_le: a.commence_le, annoncee_le: a.annoncee_le,
+        fin_remise: finRemise(a.commence_le), departement: a.departement, code_postal: a.code_postal, commune: a.commune, code_insee: "",
+        naf: "", activite: a.activite, forme: a.forme, capital: a.capital, origine: a.origine, est_ei: false, effectif: "",
+        scenario: scenarioFamille(fam), bodacc_id: a.bodacc_id, aConfirmer: true
+      };
+      y.score = scoreLead(y) - 5;
+      return { lead: y };
+    }
+    if (r.statut_diffusion === "P" || JSON.stringify(r).toLowerCase().indexOf("non-diffusible") >= 0) return { raison: "non_diffusibles" };
+    var siege = r.siege || {}, creee = txt(r.date_creation) || a.commence_le;
+    if (jourIso(creee) && joursDepuis(creee) > 365) return { raison: "anciennes" };
+    if (r.etat_administratif === "F" || r.etat_administratif === "C") return { raison: "fermees" };
+    var naf = txt(r.activite_principale || siege.activite_principale), prefixes = prefixesNaf(f);
+    if (NAF_EXCLUS.indexOf(naf) >= 0 || (prefixes.length && !prefixes.some(function (p) { return naf.indexOf(p) === 0; }))) return { raison: "activite" };
+    var ei = !!(r.complements && r.complements.est_entrepreneur_individuel) || a.est_ei;
+    if (f.societes && ei) return { raison: "activite" };
+    var dirs = r.dirigeants || [];
+    var pps = dirs.filter(function (d) { return d.type_dirigeant === "personne physique"; });
+    var pp = pps.filter(function (d) { return /pr[ée]sident|g[ée]rant/i.test(txt(d.qualite)); })[0] || pps[0];
+    var pmd = dirs.filter(function (d) { return d.type_dirigeant === "personne morale"; })[0];
+    var x = {
+      siren: a.siren, siret: txt(siege.siret), nom: a.nom || txt(r.nom_complet),
+      dirigeant: pp ? [txt(pp.prenoms).split(/\s+/)[0], txt(pp.nom).replace(/\s*\(.*\)\s*$/, "")].filter(Boolean).join(" ") : (pmd ? txt(pmd.denomination) : a.dirigeant),
+      qualite: pp ? txt(pp.qualite) : (pmd ? txt(pmd.qualite) : a.qualite),
+      creee_le: creee, annoncee_le: a.annoncee_le, fin_remise: finRemise(creee),
+      departement: txt(siege.departement) || a.departement, code_postal: txt(siege.code_postal) || a.code_postal,
+      commune: txt(siege.libelle_commune) || a.commune, code_insee: txt(siege.commune),
+      naf: naf, activite: a.activite, forme: a.forme, capital: a.capital, origine: a.origine, est_ei: ei,
+      effectif: txt(r.tranche_effectif_salarie || siege.tranche_effectif_salarie), scenario: scenarioNaf(naf), bodacc_id: a.bodacc_id
+    };
+    x.score = scoreLead(x);
+    return { lead: x };
+  }
+
+  /* La recherche : une page de 100 annonces, puis la vérification une à une, au rythme qu'accepte Sirene */
+  function attendre(ms) { return new Promise(function (ok) { setTimeout(ok, ms); }); }
+  var dernierRenduRadar = 0, minuteurRenduRadar = null;
+  function rendreRadar() {
+    if (etat.vue !== "createurs" && etat.vue !== "journee") return;
+    var t = Date.now();
+    if (t - dernierRenduRadar > 900) { dernierRenduRadar = t; rendreSiCalme(); return; }
+    if (!minuteurRenduRadar) minuteurRenduRadar = setTimeout(function () { minuteurRenduRadar = null; dernierRenduRadar = Date.now(); rendreSiCalme(); }, 900);
+  }
+  function rpcRadar(nom, args) {
+    if (!sb) return Promise.reject({ code: "hors_ligne" });
+    return sb.rpc(nom, Object.assign({ p_espace: ESPACE }, args || {})).then(verifier);
+  }
+  function lirePageBodacc(r) {
+    if (typeof window.fetch !== "function") return Promise.reject({ texte: "La recherche n'est pas disponible sur ce navigateur." });
+    return window.fetch(urlBodacc(r.where, r.decalage)).then(function (rep) {
+      if (!rep.ok) throw { texte: rep.status === 429 ? "Le BODACC reçoit trop de demandes : relancez dans une minute." : "Le BODACC ne répond pas pour l'instant : relancez dans un moment." };
+      return rep.json();
+    }, function () { throw { texte: "Le BODACC est injoignable. Vérifiez votre connexion, puis relancez." }; }).then(function (j) {
+      var l = (j && j.results) || [];
+      r.total = num(j && j.total_count);
+      r.decalage += l.length;
+      r.lues += l.length;
+      return l.map(annonceDe).filter(Boolean);
+    });
+  }
+  function verifierSirene(a) {
+    return window.fetch(SIRENE + "?q=" + a.siren + "&per_page=1").then(function (rep) {
+      if (rep.status === 429) return { attendre: 3 };
+      if (!rep.ok) return { erreur: true };
+      return rep.json().then(function (j) { return { r: (j && j.results && j.results[0]) || null }; }, function () { return { erreur: true }; });
+    }, function () { return { erreur: true }; });
+  }
+  var pasSirene = PAS_SIRENE;
+  // Chaque tour de vérification porte un jeton : « Arrêter » ou un nouveau tour périme le précédent,
+  // et ce qui n'a pas été vérifié est gardé pour le tour suivant.
+  function verifierFile(r, file, jeton) {
+    var i = 0, essais = 0, prec = 0;
+    function suivant() {
+      if (etat.radar.r !== r || i >= file.length) return Promise.resolve();
+      if (r.jeton !== jeton) { r.aReprendre = r.aReprendre.concat(file.slice(i)); i = file.length; sauverRecherche(r); rendreSiCalme(); return Promise.resolve(); }
+      var a = file[i];
+      return attendre(Math.max(0, pasSirene - (Date.now() - prec))).then(function () {
+        if (r.jeton !== jeton) return { interrompu: true };
+        prec = Date.now();
+        return verifierSirene(a);
+      }).then(function (res) {
+        if (res.interrompu) return suivant();
+        // Sirene accepte 7 demandes par seconde et par adresse : plusieurs conseillers au même bureau se partagent ce débit.
+        if (res.attendre) {
+          pasSirene = Math.min(1500, pasSirene * 2);
+          if (essais < 3) { essais++; return attendre(res.attendre * 1000 * essais).then(suivant); }
+        } else if (!res.erreur) pasSirene = Math.max(PAS_SIRENE, pasSirene - 20);
+        i++;
+        essais = 0;
+        r.faitPage++;
+        if (res.erreur || res.attendre) { r.ecart.erreurs++; r.aReprendre.push(a); }
+        else {
+          r.verifiees++;
+          var ev = evaluer(a, res.r, r.filtres);
+          if (ev.lead) { r.leads.push(ev.lead); r.leads.sort(parScore); }
+          else r.ecart[ev.raison] = (r.ecart[ev.raison] || 0) + 1;
+        }
+        rendreRadar();
+        return suivant();
+      });
+    }
+    return suivant();
+  }
+  function pageSuivante(r) {
+    var jeton = r.jeton = (r.jeton || 0) + 1, cand = [];
+    r.enCours = true;
+    r.erreur = "";
+    r.etape = "annonces";
+    r.aVerifier = 0;
+    r.faitPage = 0;
+    rendreRadar();
+    var lecture = r.total === null || resteAnnonces(r) > 0 ? lirePageBodacc(r) : Promise.resolve([]);
+    return lecture.then(function (annonces) {
+      cand = annonces.filter(function (a) {
+        if (a.sci) { r.ecart.sci++; return false; }
+        if (r.vus[a.siren]) return false;
+        r.vus[a.siren] = true;
+        return true;
+      });
+      if (r.aReprendre.length) cand = r.aReprendre.splice(0, 150).concat(cand);
+      if (!cand.length) return null;
+      return rpcRadar("radar_deja", { p_sirens: cand.map(function (a) { return a.siren; }) }).then(function (deja) {
+        deja = deja || {};
+        cand = cand.filter(function (a) { if (deja[a.siren]) { r.ecart.deja++; return false; } return true; });
+        r.aVerifier = cand.length;
+        r.etape = "sirene";
+        rendreRadar();
+        return verifierFile(r, cand, jeton);
+      }, function (e) {
+        r.aReprendre = cand.concat(r.aReprendre);
+        throw e;
+      });
+    }).then(function () {
+      if (etat.radar.r !== r || r.jeton !== jeton) return;
+      r.enCours = false;
+      r.etape = "";
+      sauverRecherche(r);
+      rendreSiCalme();
+    }, function (e) {
+      if (etat.radar.r !== r || r.jeton !== jeton) return;
+      r.enCours = false;
+      r.etape = "";
+      r.erreur = (e && e.texte) || (codeDe(e) === "42501" ? "La recherche est réservée aux conseillers du copilote." : "La recherche n'a pas abouti. Vérifiez votre connexion, puis relancez.");
+      sauverRecherche(r);
+      rendreSiCalme();
+    });
+  }
+  function lancerRecherche() {
+    var R = etat.radar, f = R.filtres;
+    var r = R.r = {
+      cle: cleRadar(f), filtres: JSON.parse(JSON.stringify(f)), where: clauseBodacc(f), total: null, decalage: 0, lues: 0, verifiees: 0, faitPage: 0, aVerifier: 0,
+      leads: [], vus: {}, aReprendre: [], ecart: { sci: 0, deja: 0, non_diffusibles: 0, fermees: 0, anciennes: 0, activite: 0, introuvables: 0, erreurs: 0 },
+      enCours: true, jeton: 0, etape: "annonces", erreur: "", le: Date.now()
+    };
+    rendre();
+    pageSuivante(r);
+  }
+  function continuerRecherche() { var r = etat.radar.r; if (!r || r.enCours) return; pageSuivante(r); rendre(); }
+  function arreterRecherche() { var r = etat.radar.r; if (!r) return; r.jeton = (r.jeton || 0) + 1; r.enCours = false; r.etape = ""; sauverRecherche(r); rendre(); }
+  function resteAnnonces(r) { return r && r.total !== null ? Math.max(0, Math.min(r.total, 10000) - r.decalage) : 0; }
+  function encoreAnnonces(r) { return !!r && (resteAnnonces(r) > 0 || (r.aReprendre || []).length > 0); }
+  // La dernière recherche reste à portée pendant huit heures, même après un rechargement de la page.
+  function sauverRecherche(r) {
+    if (!r) return;
+    var o = { cle: r.cle, filtres: r.filtres, where: r.where, total: r.total, decalage: r.decalage, lues: r.lues, verifiees: r.verifiees, leads: r.leads, aReprendre: r.aReprendre, ecart: r.ecart, le: r.le };
+    try { ecrire(CLE_RECHERCHE_RADAR, JSON.stringify(o)); } catch (e) { /* trop lourd pour la mémoire du navigateur : tant pis */ }
+  }
+  function restaurerRecherche() {
+    var R = etat.radar;
+    if (R.r || R.restaure) return;
+    R.restaure = true;
+    var o = null;
+    try { o = JSON.parse(lire(CLE_RECHERCHE_RADAR) || "null"); } catch (e) { o = null; }
+    if (!o || !Array.isArray(o.leads) || !(Date.now() - num(o.le) < 8 * 3600000)) return;
+    var r = R.r = Object.assign({ vus: {}, enCours: false, jeton: 0, etape: "", erreur: "", aVerifier: 0, faitPage: 0 }, o);
+    if (!Array.isArray(r.aReprendre)) r.aReprendre = [];
+    r.leads.forEach(function (x) { r.vus[x.siren] = true; });
+    r.aReprendre.forEach(function (a) { r.vus[a.siren] = true; });
+    if (!r.leads.length || !sb) return;
+    rpcRadar("radar_deja", { p_sirens: r.leads.map(function (x) { return x.siren; }).slice(0, 300) }).then(function (deja) {
+      deja = deja || {};
+      r.leads = r.leads.filter(function (x) { return !deja[x.siren]; });
+      rendreSiCalme();
+    }, function () { /* la liste reste telle quelle */ });
+  }
+  function entrerCreateurs() { restaurerRecherche(); etat.radar.suiviCharge = false; }
+  function retirerLead(siren) { var r = etat.radar.r; if (r) { r.leads = r.leads.filter(function (l) { return l.siren !== siren; }); sauverRecherche(r); } }
+  function remettreLead(x) {
+    var r = etat.radar.r;
+    if (!r || r.leads.some(function (l) { return l.siren === x.siren; })) return;
+    r.leads.push(x);
+    r.leads.sort(parScore);
+    sauverRecherche(r);
+  }
+
+  /* Mise en forme */
+  // « PP BOULANGERIE » devient « PP Boulangerie » : un mot sans voyelle est un sigle et reste en capitales.
+  function nomLead(x) {
+    var brut = txt(x.nom), t = particules(titreFr(brut)), sigles = {};
+    if (!t) return "Sans nom";
+    brut.split(/[\s\-'’&.,()]+/).forEach(function (m) { if (/^[A-Z]{2,5}$/.test(m) && !/[AEIOUY]/.test(m)) sigles[m.toLowerCase()] = m; });
+    return t.replace(/[A-Za-zÀ-ÿ]+/g, function (m) { return sigles[m.toLowerCase()] || m; }).replace(/\bP'T(its?|ites?)\b/g, "P't$1");
+  }
+  // « Correa De Oliveira » devient « Correa de Oliveira », « Boulangerie Des Halles » devient « Boulangerie des Halles ».
+  function particules(s) { return s.replace(/(\s)(De|Du|Des)(?=\s)/g, function (m, a, b) { return a + b.toLowerCase(); }); }
+  // « Jean-Marc DUPONT (MARTIN) » devient « Jean-Marc Dupont (Martin) ».
+  function nomPropre(s) { return particules(txt(s).toLowerCase().replace(/\s+/g, " ").replace(/(^|[\s\-'’(])([a-zà-öø-ÿ])/g, function (m, a, b) { return a + b.toUpperCase(); })); }
+  function personneLead(x) { return nomPropre(x.dirigeant); }
+  // « IVRY-SUR-SEINE » devient « Ivry-sur-Seine », « LONGNY LES VILLAGES » devient « Longny les Villages ».
+  function villeLead(x) {
+    return nomPropre(x.commune).replace(/([\s\-])(Sur|Sous|En|Le|La|Les|De|Du|Des|Et|Lès|Lez|Aux|Au)(?=[\s\-])/g, function (m, a, b) { return a + b.toLowerCase(); })
+      .replace(/([\s\-])(D|L)’|([\s\-])(D|L)'/g, function (m) { return m.toLowerCase(); });
+  }
+  function sectionNaf(naf) {
+    var d = parseInt(String(naf || "").slice(0, 2), 10);
+    if (!isFinite(d)) return "";
+    var bornes = [[3, "A"], [9, "B"], [33, "C"], [35, "D"], [39, "E"], [43, "F"], [47, "G"], [53, "H"], [56, "I"], [63, "J"], [66, "K"], [68, "L"], [75, "M"], [82, "N"], [84, "O"], [85, "P"], [88, "Q"], [93, "R"], [96, "S"], [98, "T"], [99, "U"]];
+    for (var i = 0; i < bornes.length; i++) if (d <= bornes[i][0]) return SECTIONS_NAF[bornes[i][1]] || "";
+    return "";
+  }
+  function activiteLead(x, court) {
+    var a = txt(x.activite).replace(/\s+/g, " ").replace(/[.;,\s]+$/, "");
+    if (!a) return sectionNaf(x.naf);
+    a = a === a.toUpperCase() ? majuscule(a.toLowerCase()) : majuscule(a);
+    var max = court ? 70 : 158;
+    return a.length >= max ? a.slice(0, max).replace(/[\s,;:.\-]+\S*$/, "") + "…" : a;
+  }
+  function formeCourte(x) {
+    if (x.est_ei) return "Entrepreneur individuel";
+    var f = plat(x.forme);
+    if (!f) return "Société";
+    if (f.indexOf("exercice liberal") >= 0) return f.indexOf("responsabilite limitee") >= 0 ? "SELARL" : (f.indexOf("actions simplifiee") >= 0 ? "SELAS" : "Société d'exercice libéral");
+    if (f.indexOf("actions simplifiee unipersonnelle") >= 0) return "SASU";
+    if (f.indexOf("actions simplifiee") >= 0) return "SAS";
+    if (f.indexOf("unipersonnelle a responsabilite limitee") >= 0) return "EURL";
+    if (f.indexOf("responsabilite limitee") >= 0) return "SARL";
+    if (f.indexOf("nom collectif") >= 0) return "SNC";
+    if (f.indexOf("anonyme") >= 0) return "SA";
+    if (f.indexOf("cooperative") >= 0) return "Coopérative";
+    if (f.indexOf("civile") >= 0) return "Société civile";
+    return txt(x.forme).length <= 24 ? txt(x.forme) : "Société";
+  }
+  function joursDepuis(iso) { iso = txt(iso).slice(0, 10); return jourIso(iso) ? Math.round((enDate(aujourdhui()) - enDate(iso)) / 86400000) : NaN; }
+  function dateCourteFr(iso) { iso = txt(iso).slice(0, 10); return jourIso(iso) ? iso.slice(8, 10) + "/" + iso.slice(5, 7) + "/" + iso.slice(0, 4) : ""; }
+  function ageLead(x) {
+    var j = joursDepuis(x.creee_le);
+    if (!isFinite(j)) return "";
+    if (j < 0) return "démarre le " + dateFr(txt(x.creee_le).slice(0, 10));
+    if (j === 0) return "créée aujourd'hui";
+    if (j === 1) return "créée hier";
+    if (j < 60) return "créée il y a " + j + NB + "jours";
+    return "créée il y a " + Math.round(j / 30.4) + NB + "mois";
+  }
+  function blocAge(x) {
+    var j = joursDepuis(x.creee_le), grand, petit;
+    if (!isFinite(j)) { grand = "?"; petit = "date inconnue"; }
+    else if (j < 0) { grand = "J" + j; petit = "démarre le " + jourCourt(txt(x.creee_le).slice(0, 10)); }
+    else if (j < 60) { grand = String(j); petit = (j > 1 ? "jours" : "jour") + " d'existence"; }
+    else { grand = String(Math.round(j / 30.4)); petit = "mois d'existence"; }
+    return el("div", { class: "lead-age", "aria-hidden": "true" }, [el("strong", { text: grand }), el("span", { text: petit })]);
+  }
+  function remiseLead(x) {
+    var fin = txt(x.fin_remise).slice(0, 10), reste = jourIso(fin) ? -joursDepuis(fin) : NaN;
+    if (!isFinite(reste) || reste < 0) return null;
+    return reste <= 90 ? etiquette("Remise créateur : plus que " + pluriel(reste, "jour", "jours"), "rouge") : etiquette("Remise créateur jusqu'au " + dateFr(fin));
+  }
+  function qualiteLead(x) { return txt(x.qualite).toLowerCase().replace(/\b(sas|sasu|sarl|eurl|sa|snc|selarl|selas)\b/g, function (m) { return m.toUpperCase(); }); }
+  function nomScenarioCourt(sc) { return txt(sc && sc.nom).replace(/^Créateur\s*:\s*/i, "").replace(/\s*\([^)]*\)\s*$/, ""); }
+  function telValide(t) { var c = String(t || "").replace(/[\s.\-()]/g, ""); return /^(?:\+33|0033|0)[1-9]\d{8}$/.test(c); }
+  function noteLead(x) {
+    var l = ["Créateur repéré par le radar."];
+    if (jourIso(txt(x.creee_le).slice(0, 10))) l.push("Créée le " + dateCourteFr(x.creee_le) + (jourIso(txt(x.annoncee_le).slice(0, 10)) ? ", annoncée au BODACC le " + dateCourteFr(x.annoncee_le) : "") + ".");
+    if (jourIso(x.fin_remise)) l.push("Remise créateur ouverte jusqu'au " + dateCourteFr(x.fin_remise) + ".");
+    var qui = personneLead(x);
+    if (qui) l.push("Dirigeant : " + qui + (txt(x.qualite) && !x.est_ei ? ", " + qualiteLead(x) : "") + ".");
+    if (x.aConfirmer) l.push("Entreprise pas encore dans Sirene au moment de la recherche : activité et dirigeant à confirmer.");
+    l.push(formeCourte(x) + (num(x.capital) > 0 && !x.est_ei ? " au capital de " + euros(x.capital) : "") + ".");
+    if (txt(x.origine) && !/^cr/i.test(txt(x.origine))) l.push("Origine du fonds : " + minuscule(txt(x.origine)) + ".");
+    l.push("Full Prospect probable : SIREN tout neuf, à vérifier dans les outils Orange.");
+    return l.join(" ");
+  }
+  function liensLead(x) {
+    var nom = nomLead(x), ville = villeLead(x);
+    var l = [
+      ["google", "Google", "https://www.google.com/search?q=" + encodeURIComponent([nom, ville, "téléphone"].filter(Boolean).join(" "))],
+      ["pj", "PagesJaunes", "https://www.pagesjaunes.fr/annuaire/chercherlespros?quoiqui=" + encodeURIComponent(nom) + "&ou=" + encodeURIComponent(ville || txt(x.code_postal))],
+      x.dirigeant ? ["linkedin", "LinkedIn", "https://www.linkedin.com/search/results/people/?keywords=" + encodeURIComponent(personneLead(x) + " " + nom)] : null,
+      ["annuaire", "Annuaire des entreprises", "https://annuaire-entreprises.data.gouv.fr/entreprise/" + x.siren],
+      x.bodacc_id ? ["bodacc", "Annonce BODACC", "https://www.bodacc.fr/pages/annonces-commerciales-detail/?q.id=id:" + encodeURIComponent(x.bodacc_id)] : null
+    ].filter(Boolean);
+    return el("p", { class: "lead-liens" }, [el("span", { class: "lead-lib", text: "Trouver le numéro" })].concat(l.map(function (a) {
+      return el("a", { class: "lead-lien", href: a[2], target: "_blank", rel: "noopener noreferrer", "data-cle": "lien-" + a[0] + "-" + x.siren }, [a[1], trait(ICONES.sortie, 12), invisible(" (nouvel onglet)")]);
+    })));
+  }
+
+  /* Prendre un créateur : sa fiche se crée, et l'appel guidé s'ouvre avec le bon script */
+  function prendreLead(x, appeler) {
+    var R = etat.radar;
+    if (R.occupe[x.siren]) return;
+    var tel = txt(R.numeros[x.siren]);
+    if (appeler && !telValide(tel)) {
+      annoncer("Indiquez d'abord le numéro à appeler.");
+      var champTel = document.getElementById("tel-" + x.siren);
+      if (champTel) champTel.focus();
+      return;
+    }
+    R.occupe[x.siren] = true;
+    rendre();
+    var fiche = {
+      societe: nomLead(x), contact: personneLead(x), ville: villeLead(x), telephone: telValide(tel) ? tel : "", activite: activiteLead(x, true),
+      siret: x.siret, code_insee: x.code_insee, effectif: EFFECTIFS[x.effectif] || "", scenario: x.scenario, note: noteLead(x)
+    };
+    rpcRadar("radar_prendre", { p_siren: x.siren, p_fiche: fiche }).then(function (r) {
+      delete R.occupe[x.siren];
+      if (!r || r.erreur) {
+        retirerLead(x.siren);
+        var e = r && r.erreur;
+        alerter(e === "deja_pris" ? (r.par === "vous" ? nomLead(x) + " est déjà dans vos fiches." : nomLead(x) + " vient d'être pris par " + r.par + ".")
+          : (e === "deja_en_fiche" ? nomLead(x) + " a déjà une fiche dans le copilote." : nomLead(x) + " n'est plus disponible."));
+        return;
+      }
+      var n = r.fiche;
+      poserProspect(n);
+      retirerLead(x.siren);
+      delete R.numeros[x.siren];
+      R.suiviCharge = false;
+      var defaire = function () {
+        return rpcRadar("radar_rendre", { p_siren: x.siren }).then(function (d) {
+          if (d && d.erreur) throw { code: "deja_appele" };
+          oterProspect(n.id);
+          var enAppel = etat.appel && etat.appel.prospectId === n.id;
+          if (enAppel) finirAppel();
+          remettreLead(x);
+          if (enAppel) changerVue("createurs"); else rendre();
+        });
+      };
+      if (appeler) {
+        nouvelAppel(n);
+        annoncer("Fiche créée pour " + nomFiche(n) + ". Le script est prêt, bon appel.", defaire);
+      } else {
+        rendre();
+        annoncer(nomFiche(n) + " est dans vos fiches, à appeler.", defaire);
+      }
+    }, function (err) {
+      delete R.occupe[x.siren];
+      alerter(messageErreur(err));
+    });
+  }
+  function ecarterLead(x) {
+    ouvrirFeuille({
+      titre: "Écarter " + nomLead(x),
+      avant: el("p", { class: "feuille-intro", text: "Il sort des recherches de toute l'équipe. Vous pourrez annuler juste après." }),
+      champs: [{ cle: "motif", lib: "Pourquoi ?", type: "choix", options: MOTIFS_ECART, valeur: "hors_cible" }],
+      libelleEnregistrer: "Écarter",
+      enregistrer: function (v) {
+        return rpcRadar("radar_ecarter", { p_siren: x.siren, p_motif: v.motif }).then(function () {
+          retirerLead(x.siren);
+          rendre();
+          annoncer(nomLead(x) + " est écarté.", function () {
+            return rpcRadar("radar_retablir", { p_siren: x.siren }).then(function () { remettreLead(x); rendre(); });
+          });
+        });
+      }
+    });
+  }
+
+  /* La carte d'un créateur */
+  function carteLead(x) {
+    var R = etat.radar, sc = scenarioPar(x.scenario), occupe = !!R.occupe[x.siren];
+    var champTel = el("input", { class: "saisie lead-tel-saisie", type: "tel", inputmode: "tel", id: "tel-" + x.siren, "data-cle": "tel-" + x.siren, placeholder: "Numéro à appeler", autocomplete: "off" });
+    champTel.value = txt(R.numeros[x.siren]);
+    var appeler = el("button", { type: "button", class: "bouton petit", "data-cle": "appeler-" + x.siren, onclick: function () { prendreLead(x, true); } }, [trait(ICONES.appel, 14), occupe ? " Création de la fiche" : " Prendre et appeler"]);
+    function majBouton() { appeler.disabled = occupe || !telValide(champTel.value); }
+    champTel.addEventListener("input", function () { R.numeros[x.siren] = champTel.value; majBouton(); });
+    champTel.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); prendreLead(x, true); } });
+    majBouton();
+    var forme = formeCourte(x) + (num(x.capital) > 0 && !x.est_ei ? " au capital de " + euros(x.capital) : "");
+    var details = [majuscule(ageLead(x)), forme, x.effectif && EFFECTIFS[x.effectif] ? EFFECTIFS[x.effectif] : ""].filter(Boolean);
+    var qui = personneLead(x);
+    return el("li", { class: "lead" + (occupe ? " occupe" : ""), id: "lead-" + x.siren }, [
+      blocAge(x),
+      el("div", { class: "lead-corps" }, [
+        el("div", { class: "lead-tete" }, [
+          el("h3", { class: "lead-nom", text: nomLead(x) }),
+          el("span", { class: "lead-lieu", text: [txt(x.code_postal), villeLead(x)].filter(Boolean).join(" ") })
+        ]),
+        el("p", { class: "lead-activite", text: activiteLead(x, false) }),
+        el("p", { class: "etiqs" }, [
+          sc ? etiquette("Script : " + nomScenarioCourt(sc), "scenario") : null,
+          x.aConfirmer ? etiquette("Pas encore dans Sirene", "a-confirmer") : null,
+          remiseLead(x),
+          estMacrozone({ code_insee: x.code_insee }) ? etiquette("Macrozone Rouge", "rouge") : null,
+          txt(x.origine) && !/^cr/i.test(txt(x.origine)) ? etiquette(majuscule(txt(x.origine).toLowerCase())) : null
+        ]),
+        el("p", { class: "lead-dirigeant" }, [
+          qui ? el("span", {}, ["Dirigeant : ", el("strong", { text: qui }), txt(x.qualite) && !x.est_ei ? ", " + qualiteLead(x) : ""]) : el("span", { text: "Dirigeant non publié" }),
+          el("span", { class: "lead-sep", "aria-hidden": "true", text: " · " }),
+          el("span", { text: details.join(" · ") })
+        ]),
+        el("div", { class: "lead-contact" }, [
+          el("div", { class: "lead-numero" }, [el("label", { class: "lead-lib", for: "tel-" + x.siren, text: "Numéro trouvé" }), champTel]),
+          liensLead(x)
+        ]),
+        el("div", { class: "lead-actions" }, [
+          appeler,
+          el("button", { type: "button", class: "bouton-clair", "data-cle": "prendre-" + x.siren, disabled: occupe ? true : null, onclick: function () { prendreLead(x, false); } }, [trait(ICONES.plus, 13), "Prendre sans appeler"]),
+          el("button", { type: "button", class: "lien-action discret", "data-cle": "ecarter-" + x.siren, disabled: occupe ? true : null, text: "Écarter", onclick: function () { ecarterLead(x); } })
+        ])
+      ])
+    ]);
+  }
+
+  /* Les filtres et le bouton de recherche */
+  function caseRadar(id, texte, valeur, changer) {
+    var b = el("input", { type: "checkbox", id: id, "data-cle": id });
+    b.checked = !!valeur;
+    b.addEventListener("change", function () { changer(b.checked); });
+    return el("label", { class: "radar-case", for: id }, [b, el("span", { text: texte })]);
+  }
+  function filtresCreateurs() {
+    var R = etat.radar, f = R.filtres;
+    function basculer(liste, cle) { var i = liste.indexOf(cle); if (i >= 0) liste.splice(i, 1); else liste.push(cle); }
+    function changer() { filtresRadarEcrits(); rendre(); }
+    function bouton(cle, texte, on, action) {
+      return el("button", { type: "button", class: "seg-btn" + (on ? " actif" : ""), "aria-pressed": on ? "true" : "false", "data-cle": cle, text: texte, onclick: action });
+    }
+    var zones = el("div", { class: "filtres-cat", role: "group", "aria-label": "Zone" }, [
+      bouton("zone-toutes", "Toute la France", !f.regions.length, function () { f.regions = []; changer(); })
+    ].concat(REGIONS_RADAR.map(function (r) {
+      return bouton("zone-" + r[0], r[1], f.regions.indexOf(r[0]) >= 0, function () { basculer(f.regions, r[0]); changer(); });
+    })));
+    var activites = el("div", { class: "filtres-cat", role: "group", "aria-label": "Activité" }, FAMILLES_RADAR.map(function (a) {
+      var on = f.familles.indexOf(a[0]) >= 0;
+      return bouton("famille-" + a[0], a[1], on, function () {
+        if (a[0] === "toutes") f.familles = on ? filtresRadarDefaut().familles : ["toutes"];
+        else {
+          f.familles = f.familles.filter(function (x) { return x !== "toutes"; });
+          basculer(f.familles, a[0]);
+          if (!f.familles.length) f.familles = filtresRadarDefaut().familles;
+        }
+        changer();
+      });
+    }));
+    var periode = el("select", { class: "saisie", id: "radar-periode", "data-cle": "radar-periode" }, optionsSelection(PERIODES_RADAR.map(function (p) { return [String(p[0]), p[1]]; })));
+    periode.value = String(f.periode);
+    periode.addEventListener("change", function () { f.periode = Number(periode.value); changer(); });
+    var motcle = el("input", { class: "saisie", type: "search", id: "radar-motcle", "data-cle": "radar-motcle", placeholder: "Une ville, un métier, un nom", autocomplete: "off" });
+    motcle.value = f.motcle || "";
+    motcle.addEventListener("input", function () { f.motcle = motcle.value.slice(0, 60); filtresRadarEcrits(); });
+    motcle.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); lancerRecherche(); } });
+    var r = R.r, aJour = r && r.cle === cleRadar(f);
+    return el("div", { class: "radar-filtres" }, [
+      el("div", { class: "radar-filtre" }, [el("span", { class: "champ-lib", text: "Zone" }), zones]),
+      el("div", { class: "radar-filtre" }, [el("span", { class: "champ-lib", text: "Activité" }), activites]),
+      el("div", { class: "radar-ligne" }, [
+        el("div", { class: "champ" }, [el("label", { class: "champ-lib", for: "radar-periode", text: "Créations annoncées" }), periode]),
+        el("div", { class: "champ radar-cherche" }, [el("label", { class: "champ-lib", for: "radar-motcle", text: "Mot-clé, facultatif" }), motcle])
+      ]),
+      el("div", { class: "radar-cases" }, [caseRadar("radar-societes", "Sociétés seulement", f.societes, function (v) { f.societes = v; changer(); })]),
+      el("div", { class: "radar-lancer" }, [
+        el("button", { type: "button", class: "bouton", "data-cle": "radar-chercher", onclick: lancerRecherche }, [trait(ICONES.loupe, 15), r && aJour ? " Relancer la recherche" : " Chercher les créateurs"]),
+        r && !aJour ? el("span", { class: "note-discrete", text: "La sélection a changé : relancez pour la prendre en compte." }) : null
+      ])
+    ]);
+  }
+
+  /* L'avancement et les chiffres de la recherche */
+  function chiffresCreateurs(r) {
+    var e = r.ecart, ecartes = e.non_diffusibles + e.anciennes + e.activite + e.fermees + e.introuvables + e.deja + e.sci;
+    function chiffre(cle, valeur, lib, sous) {
+      return el("div", { class: "chiffre", "data-cle": "radar-" + cle }, [el("strong", { text: valeur === null ? "…" : entier(valeur) }), el("span", { class: "chiffre-lib", text: lib }), sous ? el("span", { class: "chiffre-sous", text: sous }) : null]);
+    }
+    var details = [[e.activite, "d'une autre activité", "d'une autre activité"], [e.non_diffusibles, "non diffusible", "non diffusibles"], [e.anciennes, "trop ancienne", "trop anciennes"],
+      [e.introuvables, "pas encore dans Sirene", "pas encore dans Sirene"], [e.fermees, "fermée", "fermées"], [e.sci, "société civile", "sociétés civiles"], [e.deja, "déjà prise", "déjà prises"]]
+      .filter(function (d) { return d[0] > 0; }).sort(function (a, b) { return b[0] - a[0]; }).slice(0, 3)
+      .map(function (d) { return entier(d[0]) + NB + (d[0] > 1 ? d[2] : d[1]); }).join(", ");
+    return el("section", { class: "chiffres-jour chiffres-radar", "aria-label": "La recherche en chiffres" }, [
+      chiffre("annonces", r.total, r.total !== null && r.total > 1 ? "annonces de création" : "annonce de création", "pour cette sélection"),
+      chiffre("verifiees", r.verifiees, r.verifiees > 1 ? "vérifiées dans Sirene" : "vérifiée dans Sirene", "sur " + entier(r.lues) + NB + "lues"),
+      chiffre("leads", r.leads.length, r.leads.length > 1 ? "créateurs à appeler" : "créateur à appeler", r.leads.length > 1 ? "prêts pour l'appel" : "prêt pour l'appel"),
+      chiffre("ecartees", ecartes, ecartes > 1 ? "écartées d'office" : "écartée d'office", details || null)
+    ]);
+  }
+  function avancementRecherche(r) {
+    if (r.erreur) return el("div", { class: "vide-action" }, [el("span", { text: r.erreur }), el("button", { type: "button", class: "bouton-clair", "data-cle": "radar-reprendre", text: "Relancer", onclick: function () { if (r.lues) continuerRecherche(); else lancerRecherche(); } })]);
+    if (r.enCours) {
+      var fait = r.faitPage || 0, part = r.aVerifier ? fait / r.aVerifier : 0;
+      var texte = r.etape === "sirene" ? "Vérification dans Sirene : " + entier(fait) + " sur " + entier(r.aVerifier) : "Lecture des annonces du BODACC";
+      return el("div", { class: "radar-avance", role: "status" }, [
+        el("p", { class: "radar-avance-texte" }, [el("span", { class: "rond petit", "aria-hidden": "true" }), texte]),
+        r.etape === "sirene" ? jauge(part) : null,
+        el("button", { type: "button", class: "lien-action", "data-cle": "radar-arreter", text: "Arrêter", onclick: arreterRecherche })
+      ]);
+    }
+    if (encoreAnnonces(r)) {
+      var reste = resteAnnonces(r), rep = r.aReprendre.length;
+      var notes = [reste ? entier(reste) + NB + (reste > 1 ? "annonces restent à vérifier, des plus récentes aux plus anciennes." : "annonce reste à vérifier.") : "",
+        rep ? (rep > 1 ? entier(rep) + NB + "entreprises déjà repérées attendent leur vérification dans Sirene." : "Une entreprise déjà repérée attend sa vérification dans Sirene.") : ""];
+      return el("div", { class: "radar-avance" }, [
+        el("button", { type: "button", class: "bouton-clair", "data-cle": "radar-suite", onclick: continuerRecherche }, [trait(ICONES.loupe, 13),
+          reste ? "Vérifier " + Math.min(100, reste) + (Math.min(100, reste) > 1 ? " annonces" : " annonce") + " de plus" : (rep > 1 ? "Vérifier les " + entier(rep) + " entreprises restantes" : "Vérifier l'entreprise restante")]),
+        el("span", { class: "note-discrete", text: notes.filter(Boolean).join(" ") })
+      ]);
+    }
+    return r.total !== null ? el("p", { class: "note-discrete", text: "Toutes les annonces de cette sélection sont vérifiées." }) : null;
+  }
+  function blocSuiviCreateurs() {
+    var R = etat.radar;
+    if (!R.suiviCharge && !R.suiviEnCours) {
+      R.suiviEnCours = true;
+      rpcRadar("radar_suivi", { p_jours: 30 }).then(function (l) { R.suivi = l || []; }, function () { R.suivi = null; })
+        .then(function () { R.suiviEnCours = false; R.suiviCharge = true; rendreSiCalme(); });
+    }
+    var l = R.suivi || [], corps;
+    if (!R.suiviCharge) corps = [el("p", { class: "chargement" }, [el("span", { class: "rond", "aria-hidden": "true" }), "Chargement du suivi"])];
+    else if (!R.suivi) corps = [el("p", { class: "vide", text: "Le suivi ne s'est pas chargé." })];
+    else if (!l.length) corps = [el("p", { class: "vide", text: "Personne n'a encore pris de créateur ces 30 derniers jours." })];
+    else corps = [el("div", { class: "table-defile" }, [el("table", { class: "table-equipe" }, [
+      el("thead", {}, [el("tr", {}, ["Conseiller", "Pris", "Appelés", "Décrochés", "Argumentés", "R1P", "Ventes", "Marge nette"].map(function (x, i) { return el("th", { scope: "col", class: i ? "num" : "", text: x }); }))]),
+      el("tbody", {}, l.map(function (c) {
+        return el("tr", { class: c.conseiller === compte.id ? "moi" : "" }, [
+          el("th", { scope: "row", text: c.nom }),
+          el("td", { class: "num" }, [el("strong", { text: entier(c.pris) })]),
+          el("td", { class: "num", text: entier(c.appeles) + (num(c.pris) ? " (" + pourcent(taux(num(c.appeles), num(c.pris))) + ")" : "") }),
+          el("td", { class: "num", text: entier(c.decroches) }),
+          el("td", { class: "num", text: entier(c.argumentes) }),
+          el("td", { class: "num", text: entier(c.r1p) }),
+          el("td", { class: "num", text: entier(c.ventes) }),
+          el("td", { class: "num", text: euros(c.marge) })
+        ]);
+      }))
+    ])])];
+    return section("radar-suivi", [
+      titreSection("radar-suivi", "Ce que deviennent les créateurs pris"),
+      el("p", { class: "section-intro", text: "Les 30 derniers jours, par conseiller : les créateurs pris, puis appelés, décrochés, argumentés, transformés en R1P et en ventes." })
+    ].concat(corps));
+  }
+
+  /* La page */
+  function vueCreateurs() {
+    if (!peutSaisir) return vueMur();
+    var R = etat.radar, r, corps = [];
+    restaurerRecherche();
+    r = R.r;
+    if (r) {
+      if (r.leads.length) corps.push(el("ol", { class: "leads", "aria-label": "Créateurs à appeler" }, r.leads.map(carteLead)));
+      else if (!r.enCours && !r.erreur && r.total !== null) corps.push(el("p", { class: "vide", text: r.lues ? "Aucun créateur à appeler dans ces annonces. Vérifiez les suivantes, ou élargissez la zone ou l'activité." : "Aucune annonce de création pour cette sélection. Élargissez la zone, l'activité ou la période." }));
+      corps.push(avancementRecherche(r));
+    }
+    return [
+      teteDePage("Radar créateurs", "Créateurs à appeler", "Les entreprises qui viennent de naître, partout en France. La recherche lit les annonces de création du BODACC, puis vérifie chaque entreprise dans Sirene, en direct. Toutes ont droit à la remise créateur de 30 % pendant 12 mois, Connect Pro compris.", null),
+      section("radar-filtres", [titreSection("radar-filtres", "Ma recherche"), filtresCreateurs()]),
+      r ? chiffresCreateurs(r) : null,
+      r ? section("radar-liste", [titreSection("radar-liste", r.leads.length ? entier(r.leads.length) + NB + (r.leads.length > 1 ? "créateurs" : "créateur") + " à appeler" : "À appeler")].concat(corps)) : null,
+      estAdmin ? blocSuiviCreateurs() : null,
+      el("p", { class: "note-discrete radar-regles", text: "Chaque appel dit qui appelle et pourquoi. Un créateur qui ne veut plus être appelé passe en «\u00a0Perdu\u00a0» dans sa fiche : il ne revient plus dans les recherches. Les entrepreneurs qui ont refusé la diffusion de leurs données ne sont jamais proposés. Outre-mer exclu : les offres Orange y relèvent d'Orange Caraïbe et d'Orange Réunion." })
+    ];
+  }
+
+  /* Dans « Ma journée » : un raccourci vers la recherche, et la dernière liste s'il y en a une */
+  function blocCreateursJour() {
+    restaurerRecherche();
+    var r = etat.radar.r, n = r ? r.leads.length : 0;
+    return section("createurs-jour", [
+      titreSection("createurs-jour", "Créateurs à appeler", el("button", { type: "button", class: "lien-action", "data-cle": "voir-createurs", text: n ? "Voir les " + entier(n) : "Lancer une recherche", onclick: function () { changerVue("createurs"); } })),
+      el("p", { class: "section-intro", text: n ? pluriel(n, "créateur trouvé", "créateurs trouvés") + " par votre dernière recherche, prêts à être appelés." : "Les entreprises qui viennent de naître, partout en France. Toutes ont droit à la remise créateur de 30 % pendant 12 mois." }),
+      n ? el("ol", { class: "cj-liste" }, r.leads.slice(0, 3).map(function (x) {
+        return el("li", {}, [el("button", { type: "button", class: "cj-ligne", "data-cle": "apercu-" + x.siren, onclick: function () { changerVue("createurs", "lead-" + x.siren); } }, [
+          el("strong", { text: nomLead(x) }),
+          el("span", { text: [activiteLead(x, true), villeLead(x), ageLead(x)].filter(Boolean).join(" · ") })
+        ])]);
+      })) : null
+    ]);
+  }
+
   /* ---------- Résultats ---------- */
 
   function porteeEffective() { return compte.role === "lecture" ? "equipe" : etat.portee; }
@@ -4888,7 +5736,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     } else if (!pret()) {
       corps = [el("p", { class: "chargement", role: "status" }, [el("span", { class: "rond", "aria-hidden": "true" }), "Chargement du copilote"])];
     } else {
-      var vues = { journee: vueJournee, appel: vueAppel, prospects: vueProspects, resultats: vueResultats, scripts: vueScripts, mur: vueMur };
+      var vues = { journee: vueJournee, appel: vueAppel, prospects: vueProspects, createurs: vueCreateurs, resultats: vueResultats, scripts: vueScripts, mur: vueMur };
       corps = (vues[etat.vue] || vueJournee)();
     }
     var alerte = etat.alerte ? el("div", { class: "alerte", role: "alert" }, [
@@ -4919,7 +5767,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   // Les mises à jour venues du serveur attendent qu'on ait fini d'écrire dans une feuille ou pendant un appel.
   function rendreSiCalme() {
     var n = document.activeElement;
-    if (feuille || (etat.vue === "appel" && estSaisie(n) && app.contains(n))) { etat.differe = true; return; }
+    if (feuille || (etat.vue === "appel" && estSaisie(n) && app.contains(n)) || (etat.vue === "createurs" && n && n.classList && n.classList.contains("lead-tel-saisie"))) { etat.differe = true; return; }
     rendre();
   }
 
@@ -4955,6 +5803,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }).then(function () {
       etat.tables = true;
       etat.majMur = Date.now();
+      if (etat.vue === "createurs") entrerCreateurs();
       rendre();
     }, function () { etat.erreur = true; rendre(); });
 
@@ -4997,7 +5846,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   });
   window.addEventListener("hashchange", function () {
     var v = vueDepuisAdresse();
-    if (v !== etat.vue) { etat.vue = v; if (v === "resultats" || v === "mur") assurerMois(v === "mur" ? moisDe(aujourdhui()) : etat.mois); rendre(); }
+    if (v !== etat.vue) { etat.vue = v; if (v === "createurs") entrerCreateurs(); if (v === "resultats" || v === "mur") assurerMois(v === "mur" ? moisDe(aujourdhui()) : etat.mois); rendre(); }
   });
   window.addEventListener("beforeunload", function () { if (etat.appel) sauverBrouillon(); });
   // La courbe se redessine à la nouvelle largeur quand on tourne le téléphone ou qu'on redimensionne la fenêtre.
