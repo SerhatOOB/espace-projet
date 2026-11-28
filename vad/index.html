@@ -1792,6 +1792,122 @@ body.vue-mur{
 .honores-origine{margin-top:10px}
 .table-donnees.motifs th[scope=row]{font-weight:600;white-space:normal}
 @media screen and (max-width:759px){.contact > .confirmer-actions{grid-area:action;justify-self:start;justify-content:flex-start;margin-left:92px}}
+
+/* ---------- Lot 3 : la recherche partout, les touches, les dates en un clic ---------- */
+.touche.clavier{margin-left:2px;min-width:20px;height:20px;padding:0 5px;font-size:11.5px;opacity:.62}
+.bouton .touche.clavier,.issue-btn.actif .touche.clavier{opacity:.7}
+.issue-btn{display:inline-flex;align-items:center;gap:7px}
+.issue-btn .touche.clavier,.choix-nd .touche.clavier{margin-left:0}
+.issue-btn .touche.clavier{min-width:18px;height:18px;padding:0 4px;font-size:11px}
+@media (hover:hover) and (pointer:fine){.issue-btn{padding:9px 12px}}
+.choix-nd{display:inline-flex;align-items:center;gap:8px}
+.prochain-appeler .touche.clavier{margin-left:6px}
+@media (hover:none),(pointer:coarse){.touche.clavier{display:none}}
+.cherche-btn{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 12px;flex:none;border:1.5px solid var(--filet-2);border-radius:999px;background:var(--papier);color:var(--attenue);transition:border-color .15s,color .15s,background .15s}
+.cherche-btn:hover,.cherche-btn:focus-visible{border-color:var(--encre);color:var(--encre)}
+.cherche-btn .touche.clavier{margin:0;white-space:nowrap}
+@media screen and (max-width:1099px),(hover:none),(pointer:coarse){
+  .cherche-btn{width:34px;padding:0;justify-content:center;border-color:var(--encre);color:var(--encre)}
+  .cherche-btn .touche.clavier{display:none}
+}
+@media screen and (max-width:759px){.cherche-btn{width:32px;height:32px}}
+body.palette-ouverte{overflow:hidden}
+.palette-voile{position:fixed;inset:0;z-index:70;background:var(--voile);display:flex;justify-content:center;align-items:flex-start;padding:11vh 16px 16px}
+.palette{width:min(640px,100%);max-height:min(580px,78vh);display:flex;flex-direction:column;margin:0 10px 10px 0;background:var(--papier);border:1px solid var(--filet-2);box-shadow:5px 5px 0 var(--rose),10px 10px 0 var(--bleu),var(--ombre-haute)}
+.palette-tete{display:flex;align-items:center;gap:12px;padding:14px 14px 14px 18px;border-bottom:1px solid var(--filet)}
+.palette-tete svg{flex:none;color:var(--discret)}
+.palette-saisie{flex:1;min-width:0;padding:2px 0;border:0;background:none;font-size:18px;line-height:1.4;color:var(--encre);outline:none}
+.palette-saisie::placeholder{color:var(--discret);opacity:1}
+.palette-fermer{flex:none;padding:3px 8px;border:1px solid var(--filet-2);border-radius:4px;font-size:11.5px;font-weight:700;color:var(--discret)}
+.palette-fermer:hover{border-color:var(--encre);color:var(--encre)}
+.palette-liste{flex:1;min-height:0;overflow:auto;padding:4px 0 8px;overscroll-behavior:contain}
+.palette-groupe{padding:12px 18px 4px;font-family:var(--titre);font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--discret)}
+.palette-ligne{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1px 14px;padding:8px 18px 8px 14px;border-left:4px solid transparent;cursor:pointer}
+.palette-ligne.actif{background:var(--rose-teinte);border-left-color:var(--rose)}
+.palette-ligne strong{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl-details{grid-column:1;font-size:13px;color:var(--discret);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.palette-ligne.actif .pl-details{color:var(--attenue)}
+.pl-cote{grid-column:2;grid-row:1 / span 2;display:inline-flex;align-items:center;gap:10px;font-size:12.5px;color:var(--attenue);white-space:nowrap}
+.pl-quand{font-weight:600}
+.palette-vide{padding:18px;color:var(--discret);font-size:14px}
+.palette-pied{display:flex;flex-wrap:wrap;gap:6px 18px;padding:9px 18px;border-top:1px solid var(--filet);background:var(--fond-2);font-size:12.5px;color:var(--discret)}
+.palette-pied span{display:inline-flex;align-items:center;gap:5px}
+.palette-pied kbd{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border:1px solid var(--filet-2);border-radius:4px;background:var(--papier);font-family:var(--sans);font-size:11.5px;font-weight:700;color:var(--attenue)}
+@media (hover:none),(pointer:coarse){.palette-pied{display:none}.palette-fermer{padding:6px 10px;font-size:13px}}
+@media screen and (max-width:759px){
+  .palette-voile{padding:10px 10px 0;align-items:flex-start}
+  .palette{max-height:calc(100dvh - 20px);margin:0 8px 8px 0}
+  .palette-saisie{font-size:17px}
+  .pl-quand{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .palette-voile{animation:apparait .15s ease both}
+  .palette{animation:monte .28s var(--ease) both}
+}
+.ab-nondecroche.compact .ab-nd-lib{font-weight:600;color:var(--attenue)}
+.aide-clavier dt{white-space:nowrap}
+.dr-zone:empty{display:none}
+.dates-rapides{display:flex;flex-direction:column;gap:8px;margin:4px 0 8px}
+.dr-ligne{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.dr-lib{min-width:46px;font-family:var(--titre);font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--discret)}
+.dr-btn{min-height:30px;padding:4px 11px;border:1.5px solid var(--filet-2);border-radius:15px;background:var(--papier);font-size:13px;font-weight:600;white-space:nowrap;transition:background .12s,border-color .12s,color .12s}
+.dr-btn:hover{border-color:var(--encre)}
+.dr-btn.actif{background:var(--encre);border-color:var(--encre);color:var(--fond);font-weight:700}
+.dr-agenda{font-size:13.5px;line-height:1.5;color:var(--attenue);text-wrap:pretty}
+.dr-agenda strong{font-weight:700;color:var(--encre)}
+.dr-conflit{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;background:var(--rouge-teinte);color:var(--rouge-texte);font-size:13.5px;font-weight:600;line-height:1.45;box-shadow:inset 4px 0 0 var(--rouge)}
+.dr-conflit svg{flex:none;margin-top:2px}
+@media screen and (max-width:759px){.dr-btn{min-height:34px;padding:5px 12px}}
+
+/* ---------- Lot 3, suite : créateurs, résumé de fiche, heures qui décrochent, fête ---------- */
+.lead-touches{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--discret)}
+.lead-touches .touche.clavier{margin-left:6px}
+.lead-touches .touche.clavier:first-child{margin-left:0}
+@media (hover:none),(pointer:coarse){.lead-touches{display:none}}
+.resume-fiche{display:flex;flex-direction:column;gap:8px;margin:2px 0 8px;padding:13px 16px;background:var(--fond-2);border:1px solid var(--filet);box-shadow:inset 4px 0 0 var(--bleu)}
+.rf-etape{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:14px}
+.rf-etape strong{font-weight:700}
+.rf-etape span:not(.etiq){color:var(--attenue)}
+.rf-dernier{font-size:13.5px;line-height:1.5;color:var(--attenue);text-wrap:pretty}
+.rf-dernier:empty{display:none}
+.rf-decouverte{margin-top:2px}
+.annuaire-replie{margin:4px 0 8px}
+.annuaire-replie > summary{cursor:pointer;font-size:13.5px;font-weight:700;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.annuaire-replie[open] > summary{margin-bottom:8px}
+.efficacite .heures{grid-column:1 / -1;display:flex;flex-direction:column;gap:10px;margin-top:6px;padding-top:18px;border-top:1px solid var(--filet)}
+.heures-barres{display:flex;align-items:stretch;gap:clamp(4px,1vw,12px);height:150px;max-width:760px}
+.heure-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.heure-val{height:16px;font-size:12px;font-weight:700;color:var(--attenue);white-space:nowrap}
+.heure-barre{flex:1;width:100%;display:flex;align-items:flex-end;border-bottom:1.5px solid var(--encre)}
+.heure-barre i{display:block;width:100%;background:var(--bleu);border-radius:3px 3px 0 0}
+.heure-col.tete .heure-barre i{background:var(--rose)}
+.heure-col.tete .heure-val{color:var(--rose-texte)}
+.heure-col.mince .heure-barre i{background:var(--filet-2)}
+.heure-lib{font-size:12px;color:var(--discret);white-space:nowrap}
+.conseil-heure{margin-top:-8px;padding:9px 13px;background:var(--fond-2);box-shadow:inset 3px 0 0 var(--filet-2);color:var(--attenue)}
+.conseil-heure.bonne{background:var(--vert-teinte);box-shadow:inset 3px 0 0 var(--vert)}
+.conseil-heure strong{color:var(--encre)}
+.fete{position:fixed;inset:0;z-index:65;pointer-events:none;overflow:hidden}
+.fete i{position:absolute;bottom:64px;width:11px;height:11px;will-change:transform,opacity}
+.fete i:nth-child(3n){clip-path:polygon(50% 0,100% 100%,0 100%)}
+.fete i:nth-child(3n+1){border-radius:50%}
+
+/* ---------- Lot 3, la trame de rendez-vous : métier, chiffrage, arguments ---------- */
+.decideur-question{display:flex;flex-direction:column;gap:6px;margin:-6px 0 2px}
+.decideur-question .script-texte{font-weight:600}
+.metier .points{margin-top:4px}
+.il-a-dit .lecture{margin:2px 0 0}
+.arguments-zone{display:flex;flex-direction:column;gap:12px}
+.arguments-carte .points,.si-script .points.arguments{margin-top:6px}
+.points.arguments li strong{font-weight:700}
+.si-script .points.arguments{padding:0 0 12px 34px}
+.chiffrage{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px 18px;margin-top:10px}
+.chiffrage-bloc{display:flex;flex-direction:column;gap:2px;padding:12px 14px 14px;background:var(--papier);border:1px solid var(--filet)}
+.chiffrage-bloc .champ{margin:6px 0}
+.chiffre-resultat{margin-top:6px;font-size:14px;font-weight:700;line-height:1.45;text-wrap:pretty}
+.chiffre-resultat:empty{display:none}
+.chiffrage-bloc .bouton-clair{align-self:flex-start;margin-top:8px}
+.sc-arguments .points{margin-top:2px}
 </style>
 </head>
 <body>
@@ -2367,7 +2483,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   var SOURCES = [["prospection", "Ma prospection"], ["tmk", "RDV de la TMK"], ["recommandation", "Recommandation"], ["autre", "Autre origine"]];
   var NON_DECROCHE = ["Répondeur", "Occupé", "Faux numéro", "Pas de réponse"];
   var PARCOURS = [["accroche", "Accroche"], ["decouverte", "Découverte"], ["reformulation", "Reformulation"], ["proposition", "Proposition"], ["objections", "Objections"], ["negociation", "Négociation"], ["conclusion", "Conclusion"]];
-  var CATEGORIES = ["Prix", "Concurrent", "Timing", "Interne", "Besoin"];
+  var CATEGORIES = ["Prix", "Concurrent", "Timing", "Interne", "Besoin", "Téléphonie et internet", "Cybersécurité", "Mobile et wifi"];
   var DROITS = [["edition", "Conseiller"], ["lecture", "Lecture seule (écran du mur)"], ["admin", "Administrateur"]];
   // Tranches d'effectif de l'Insee, telles que les renvoie l'annuaire des entreprises.
   var EFFECTIFS = {
@@ -2413,8 +2529,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     });
     return n;
   }
-  function lire(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
-  function ecrire(k, v) { try { if (v === null) window.localStorage.removeItem(k); else window.localStorage.setItem(k, v); } catch (e) { /* mémoire indisponible */ } }
+  // Le bac à sable vit à la même adresse que le copilote : ses réglages et son brouillon d'appel portent un préfixe, pour ne rien mélanger.
+  var PREFIXE_MEMOIRE = typeof window.MEMOIRE_PREFIXE === "string" ? window.MEMOIRE_PREFIXE : "";
+  function lire(k) { try { return window.localStorage.getItem(PREFIXE_MEMOIRE + k); } catch (e) { return null; } }
+  function ecrire(k, v) { try { if (v === null) window.localStorage.removeItem(PREFIXE_MEMOIRE + k); else window.localStorage.setItem(PREFIXE_MEMOIRE + k, v); } catch (e) { /* mémoire indisponible */ } }
   function txt(x) { return typeof x === "string" ? x.trim() : (typeof x === "number" && isFinite(x) ? String(x) : ""); }
   function num(x) { var n = Number(x); return isFinite(n) ? n : 0; }
   function ordre(x) { var n = Number(x && x.ordre); return isFinite(n) ? n : 9999; }
@@ -2819,6 +2937,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     document.body.appendChild(voile);
     document.body.classList.add("feuille-ouverte");
     feuille = { voile: voile, retour: retour, form: form };
+    if (opts.apresOuverture) opts.apresOuverture(form);
     var premier = opts.sansFocus ? null : form.querySelector(".feuille-corps input:not([type=checkbox]):not([type=radio]):not([type=hidden]), .feuille-corps textarea, .feuille-corps select");
     premier = premier || form.querySelector(".feuille-fermer");
     if (premier && premier.focus) { try { premier.focus({ preventScroll: !!opts.sansFocus }); } catch (e) { /* sans focus */ } }
@@ -3377,6 +3496,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         });
       }
     });
+    brancherDates(feuille && feuille.form, { aujourdhui: !r1p });
   }
 
   function blocAppelsDuJour() {
@@ -3443,6 +3563,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       categorie: "", cherche: ""
     };
     if (opts.decroche) etat.appel.preDecroche = true;
+    if (opts.retour) etat.appel.retour = opts.retour;
     sauverBrouillon();
     changerVue("appel");
   }
@@ -3628,6 +3749,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!liste.length) return [enTeteEtape("Découverte"), el("p", { class: "vide", text: "Les questions de découverte ne sont pas encore écrites." }), piedEtape(a)];
     if (!axePar(a.axe)) a.axe = cleAxe(liste[0]);
     var ax = axePar(a.axe), cle = a.axe, val = d.axes[cle] || {};
+    var cadre = script("cadrage"), metier = tableau((scenarioPar(a.scenario) || {}).metier);
     var decideur = el("div", { class: "segments compacts", role: "radiogroup", "aria-label": "Votre interlocuteur décide-t-il ?" }, [["oui", "Il décide"], ["non", "Il ne décide pas seul"], ["", "Je ne sais pas encore"]].map(function (o) {
       var on = (d.decideur || "") === o[0];
       return el("button", { type: "button", role: "radio", "aria-checked": on ? "true" : "false", class: "seg-btn" + (on ? " actif" : ""), "data-cle": "decideur-" + (o[0] || "inconnu"), text: o[1], onclick: function () { d.decideur = o[0]; sauverBrouillon(); rendre(); } });
@@ -3661,11 +3783,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return [
       enTeteEtape("Découverte", "Situation, problème, implication, besoin : faites-le parler, et notez avec ses mots."),
       el("div", { class: "decideur" }, [el("p", { class: "champ-lib", text: "Interlocuteur" }), decideur]),
+      txt(cadre.decideur) ? el("div", { class: "decideur-question" }, [texteScript(cadre.decideur, { classe: "petit" }), d.decideur === "non" && txt(cadre.decideur_non) ? el("p", { class: "cs-conseil", text: cadre.decideur_non }) : null]) : null,
+      metier.length ? el("div", { class: "carte-script discret metier", "data-cle": "metier" }, [el("p", { class: "cs-titre", text: "Son métier, pour commencer" }), el("ul", { class: "points" }, metier.map(function (x) { return el("li", {}, [texteScript(x, { balise: "span" })]); }))]) : null,
       estCreateur(a) ? champOuverture(d) : null,
       onglets,
       el("div", { class: "axe-panneau", id: "axe-panneau", role: "tabpanel" }, [
         el("div", { class: "spins" }, spin),
-        estCreateur(a) ? replier("contrat-" + cle, "Son contrat actuel, s'il en a un", [el("div", { class: "axe-champs" }, champsAxe)]) : el("div", { class: "axe-champs" }, champsAxe),
+        !champsAxe.length ? null : (estCreateur(a) ? replier("contrat-" + cle, "Son contrat actuel, s'il en a un", [el("div", { class: "axe-champs" }, champsAxe)]) : el("div", { class: "axe-champs" }, champsAxe)),
         el("div", { class: "champ" }, [el("label", { class: "champ-lib", for: "dc-" + cle + "-note", text: "Ce qu'il dit sur " + minuscule(ax.nom) }), noteAxe]),
         prio
       ]),
@@ -3673,7 +3797,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         el("h3", { class: "sous-titre", text: "Ce que vous allez reformuler" }),
         grandChamp("priorite", "Sa priorité, avec ses mots", null, "ne plus perdre d'appels de clients"),
         grandChamp("probleme", "Le problème", "Ce qui ne va pas aujourd'hui.", "le standard sonne dans le vide quand l'accueil est occupé"),
-        grandChamp("impact", "Ce que ça lui coûte", "En temps, en chiffre d'affaires, en image : un chiffre s'il le donne.", "deux ou trois devis perdus par mois")
+        grandChamp("impact", "Ce que ça lui coûte", "En temps, en chiffre d'affaires, en image : un chiffre s'il le donne.", "deux ou trois devis perdus par mois"),
+        blocChiffrage(a)
       ]),
       apercuReformulation(a),
       piedEtape(a, "Reformuler")
@@ -3723,6 +3848,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return [
       enTeteEtape("Proposition", "Une réponse par problème cité, puis le prix, puis le silence."),
       points.length ? el("ul", { class: "points" }, points.map(function (x) { return el("li", {}, [texteScript(x, { balise: "span" })]); })) : null,
+      ilVousADit(a),
+      blocArguments(a),
       ap,
       estMacrozone(a.fiche) && txt(r.levier_macrozone) ? el("div", { class: "carte-script rouge" }, [el("p", { class: "cs-titre", text: "Il est en macrozone Rouge" }), el("p", { class: "script-texte", text: r.levier_macrozone })]) : null,
       carteScript("Les services engageants", pr.engageants),
@@ -3927,7 +4054,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   /* Les relances : un essai sans réponse, et le suivant change de moment de la journée */
   function creneauDe(min) { return min < 12 * 60 + 30 ? 0 : (min < 16 * 60 + 30 ? 1 : 2); }
-  function prochainEssai(p, essais) {
+  // L'heure où ce contact a déjà décroché, arrondie à cinq minutes : c'est là qu'on a le plus de chances de le retrouver.
+  function heureQuiDecroche(d, maintenant) {
+    var h = d && typeof d.heureDecroche === "number" && isFinite(d.heureDecroche) ? Math.round(d.heureDecroche / 5) * 5 : -1;
+    // Pas si c'est justement l'heure qui vient d'échouer : mieux vaut alors changer de moment.
+    return h >= 8 * 60 && h <= 19 * 60 && Math.abs(h - minutesParis(maintenant)) > 60 ? h : -1;
+  }
+  function prochainEssai(p, essais, dernier) {
     var maintenant = Date.now();
     if (p.etape === "r1p" || p.etape === "r2") {
       var t = maintenant + 15 * 60000, j = jourParis(new Date(t));
@@ -3935,6 +4068,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       return t;
     }
     var auj = aujourdhui(), m = minutesParis(maintenant), cr = creneauDe(m);
+    var hd = (essais || 0) < SEUIL_PAUSE ? heureQuiDecroche(dernier, maintenant) : -1;
+    if (hd >= 0) return instantParis(estOuvre(auj) && hd >= m + 90 ? auj : prochainOuvre(auj), hd);
     if ((essais || 0) < SEUIL_PAUSE && estOuvre(auj)) {
       for (var k = cr + 1; k < CRENEAUX.length; k++) if (CRENEAUX[k] >= m + 90) return instantParis(auj, CRENEAUX[k]);
     }
@@ -4275,14 +4410,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function avecDate(issue) { return issue === "R1P pris" || issue === "R2 prévu" || issue === "Rappel prévu"; }
   function etapeConclusion(a) {
     var c = script("conclusion"), r = reglages(), arg = argumenteDe(a);
-    var choix = el("div", { class: "issues", role: "radiogroup", "aria-label": "Issue de l'appel" }, (ISSUES[a.nature] || ISSUES.prospection).map(function (o) {
+    var choix = el("div", { class: "issues", role: "radiogroup", "aria-label": "Issue de l'appel" }, (ISSUES[a.nature] || ISSUES.prospection).map(function (o, i) {
       var on = a.issue === o[0];
-      return el("button", { type: "button", role: "radio", "aria-checked": on ? "true" : "false", class: "issue-btn" + (on ? " actif" : "") + (o[0] === "Vente signée" ? " vente" : ""), "data-cle": "issue-" + plat(o[0]).replace(/[^a-z0-9]+/g, "-"), text: o[1], onclick: function () {
+      return el("button", { type: "button", role: "radio", "aria-checked": on ? "true" : "false", class: "issue-btn" + (on ? " actif" : "") + (o[0] === "Vente signée" ? " vente" : ""), "data-cle": "issue-" + plat(o[0]).replace(/[^a-z0-9]+/g, "-"), onclick: function () {
         a.issue = o[0];
-        if (avecDate(o[0]) && !a.rdv.date) { var d = decaler(aujourdhui(), o[0] === "Rappel prévu" ? 1 : 2); while (!estOuvre(d)) d = decaler(d, 1); a.rdv = { date: d, heure: a.rdv.heure || "10:00" }; }
+        if (avecDate(o[0]) && !a.rdv.date) { var d = decaler(aujourdhui(), o[0] === "Rappel prévu" ? 1 : 2); while (!estOuvre(d)) d = decaler(d, 1); a.rdv = { date: d, heure: a.rdv.heure || (o[0] === "Rappel prévu" ? "10:00" : heureLibre(d, a.prospectId)) }; }
         sauverBrouillon();
         rendre();
-      } });
+      } }, [el("kbd", { class: "touche clavier", "aria-hidden": "true", text: String(i + 1) }), el("span", { text: o[1] })]);
     }));
     function liaison(n, chemin) {
       n.addEventListener("input", function () { var o = a; for (var i = 0; i < chemin.length - 1; i++) o = o[chemin[i]]; o[chemin[chemin.length - 1]] = n.type === "checkbox" ? n.checked : n.value; sauverBientot(); });
@@ -4361,10 +4496,29 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       details.push(el("div", { class: "ines-ligne" }, [boutonInes(a.fiche, a.vente), el("span", { class: "champ-aide", text: "Les champs de la vente, prêts à coller dans INES, Type FULL PROSPECT compris." })]));
     }
     if (avecDate(a.issue)) {
+      var champDate = liaison(saisie("date", a.rdv.date, "rdv-date"), ["rdv", "date"]), champHeure = liaison(saisie("time", a.rdv.heure, "rdv-heure"), ["rdv", "heure"]);
+      var zoneDates = el("div", { class: "dr-zone" });
+      // Les puces et l'agenda se redessinent seuls : les champs de date, eux, ne bougent pas pendant qu'on y écrit.
+      var majDates = function (cle) {
+        zoneDates.textContent = "";
+        zoneDates.appendChild(datesRapides({ date: a.rdv.date, heure: a.rdv.heure, aujourdhui: a.issue === "Rappel prévu", saufId: a.prospectId, choisir: function (jour, heure, cleChoisie) {
+          a.rdv = { date: jour, heure: heure };
+          champDate.value = jour;
+          champHeure.value = heure;
+          sauverBrouillon();
+          majDates(cleChoisie);
+        } }));
+        var n = cle ? zoneDates.querySelector('[data-cle="' + cle + '"]') : null;
+        if (n) { try { n.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+      };
+      champDate.addEventListener("change", function () { majDates(); });
+      champHeure.addEventListener("change", function () { majDates(); });
+      majDates();
       details.push(el("div", { class: "deux" }, [
-        zone("rdv-date", a.issue === "R1P pris" ? "Date du R1" : (a.issue === "R2 prévu" ? "Date du R2" : "Date du prochain contact"), liaison(saisie("date", a.rdv.date, "rdv-date"), ["rdv", "date"])),
-        zone("rdv-heure", "Heure", liaison(saisie("time", a.rdv.heure, "rdv-heure"), ["rdv", "heure"]))
+        zone("rdv-date", a.issue === "R1P pris" ? "Date du R1" : (a.issue === "R2 prévu" ? "Date du R2" : "Date du prochain contact"), champDate),
+        zone("rdv-heure", "Heure", champHeure)
       ]));
+      details.push(zoneDates);
     }
     var ech = echeanceDe(a);
     if (a.issue === "Rappel prévu" && ech && a.rdv.date !== ech.rappel) details.push(el("p", { class: "echeance-raccourci" }, [el("button", { type: "button", class: "lien-action", "data-cle": "rappel-echeance", text: "Plutôt le " + jourEtAn(ech.rappel) + ", " + ech.note, onclick: function () { a.rdv = { date: ech.rappel, heure: "10:00" }; sauverBrouillon(); rendre(); } })]));
@@ -4393,7 +4547,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       erreurs,
       el("div", { class: "etape-pied" }, [
         el("button", { type: "button", class: "bouton secondaire", "data-cle": "etape-precedente", onclick: function () { allerEtape("negociation"); } }, [trait(ICONES.retour, 14), " Négociation"]),
-        el("button", { type: "button", class: "bouton fort", "data-cle": "enregistrer-appel", onclick: function (e) { enregistrerAppel(e.currentTarget, erreurs); } }, [trait(ICONES.coche, 15), " Enregistrer l'appel"])
+        el("button", { type: "button", class: "bouton fort", "data-cle": "enregistrer-appel", onclick: function (e) { enregistrerAppel(e.currentTarget, erreurs); } }, [trait(ICONES.coche, 15), " Enregistrer l'appel", el("kbd", { class: "touche clavier", "aria-hidden": "true", title: "Ctrl Entrée", text: (SUR_MAC ? "\u2318" : "Ctrl") + " \u21b5" })])
       ])
     ];
   }
@@ -4483,8 +4637,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       etat.envoi = false;
       var ids = a.ids, issue = a.issue, nom = txt(a.fiche.societe) || txt(a.fiche.contact);
       finirAppel();
-      changerVue("journee");
-      lancerEnchainement();
+      apresAppel(a.retour);
+      if (issue === "Vente signée") feter(true); else if (issue === "R1P pris") feter(false);
       annoncer("Appel enregistré : " + minuscule(issue === "Rappel prévu" && a.nature !== "prospection" ? "rendez-vous reporté" : issue) + (nom ? ", " + nom : "") + ".", function () {
         var l = [];
         if (ids.vente) l.push(supprimerLigne("vad_ventes", ids.vente));
@@ -4526,6 +4680,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       titre: "Pas décroché",
       avant: p ? el("p", { class: "feuille-intro", text: nomFiche(p) + (isFinite(msDe(p.rappel_le)) ? " : contact prévu " + minuscule(quand(msDe(p.rappel_le))) + "." : ".") }) : null,
       champs: champs,
+      apresOuverture: function (form) { brancherDates(form, { aujourdhui: true, saufId: p ? p.id : null }); },
       libelleEnregistrer: "Noter et fermer l'appel",
       enregistrer: function (v) {
         var nouveau = jourIso(v.date) && heureMin(v.heure) >= 0 ? new Date(instantParis(v.date, heureMin(v.heure))).toISOString() : null;
@@ -4537,7 +4692,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           var ancien = p ? p.rappel_le : null;
           return maj.then(function () {
             finirAppel();
-            changerVue("journee");
+            if (a.retour === "createurs") apresAppel(a.retour); else changerVue("journee");
             annoncer(v.raison + " noté" + (nouveau ? ", prochain essai " + minuscule(quand(msDe(nouveau))) : "") + ".", function () {
               return supprimerLigne("vad_appels", l.id).then(function () {
                 etat.appelsJour = etat.appelsJour.filter(function (x) { return x.id !== l.id; });
@@ -4710,7 +4865,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     champs.push({ cle: "note", lib: "Note", type: "long", valeur: f.note, lignes: 3 });
     var insee = el("input", { type: "hidden", name: "code_insee", value: f.code_insee || "" });
-    var avant = el("div", {}, [opts.intro ? el("p", { class: "feuille-intro", text: opts.intro }) : null, insee]);
+    var avant = el("div", {}, [opts.intro ? el("p", { class: "feuille-intro", text: opts.intro }) : null, opts.resume || null, insee]);
     var form = ouvrirFeuille({
       titre: opts.titre, champs: champs, avant: avant, apres: opts.apres || null, boutons: opts.boutons, supprimer: opts.supprimer, confirmer: true, libelleSupprimer: "Supprimer la fiche",
       large: true, sansFocus: !!opts.apres,
@@ -4729,7 +4884,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         return opts.enregistrer(v);
       }
     });
-    form.querySelector(".feuille-corps").insertBefore(zoneRecherche(form), form.querySelector(".feuille-corps").firstChild.nextSibling);
+    // L'entreprise est déjà retrouvée (elle a son SIRET) : la recherche dans l'annuaire se replie.
+    var annuaire = zoneRecherche(form);
+    if (opts.resume && txt(f.siret)) annuaire = el("details", { class: "replie annuaire-replie" }, [el("summary", { "data-cle": "annuaire-ouvrir" }, [el("span", { text: "Changer d'entreprise avec l'annuaire" })]), annuaire]);
+    form.querySelector(".feuille-corps").insertBefore(annuaire, form.querySelector(".feuille-corps").firstChild.nextSibling);
+    if (opts.suivi) brancherDates(form, { aujourdhui: true, saufId: f.id || null });
     return form;
   }
   function ouvrirFiche(p) {
@@ -4749,9 +4908,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     var mien = p.conseiller === compte.id;
     var histo = el("div", { class: "historique" }, [el("p", { class: "champ-aide", text: "Chargement de l'historique" })]);
-    var boutons = mien ? [el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-appeler", onclick: function () { fermerFeuille(); nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 14), "Appeler"])] : [];
+    var resume = resumeFiche(p);
+    var actif = ["signe", "perdu"].indexOf(p.etape) < 0;
+    var boutons = mien ? [
+      el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-appeler", onclick: function () { fermerFeuille(); nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 14), "Appeler"]),
+      actif ? el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-en-ligne", title: "Il vous rappelle : l'appel guidé s'ouvre sans composer le numéro", onclick: function () { fermerFeuille(); nouvelAppel(p, { decroche: true }); } }, ["Il est en ligne"]) : null
+    ].filter(Boolean) : [];
     ouvrirFeuilleFiche(p, {
-      titre: nomFiche(p), suivi: true, apres: histo, boutons: boutons,
+      titre: nomFiche(p), suivi: true, apres: histo, boutons: boutons, resume: resume.noeud,
       intro: mien ? null : "Fiche de " + nomDe(p.conseiller) + ".",
       enregistrer: function (v) {
         var avant = JSON.parse(JSON.stringify(p));
@@ -4777,7 +4941,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         });
       }
     });
-    historique(p.id).then(function (r) { remplirHistorique(histo, r[0] || [], r[1] || []); }, function () {
+    historique(p.id).then(function (r) { remplirHistorique(histo, r[0] || [], r[1] || []); resume.dernier.textContent = texteDernierAppel(r[0] || []); }, function () {
       histo.textContent = "";
       histo.appendChild(el("p", { class: "champ-aide", text: "L'historique ne s'est pas chargé." }));
     });
@@ -5269,7 +5433,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       x.bodacc_id ? ["bodacc", "Annonce BODACC", "https://www.bodacc.fr/pages/annonces-commerciales-detail/?q.id=id:" + encodeURIComponent(x.bodacc_id)] : null
     ].filter(Boolean);
     return el("p", { class: "lead-liens" }, [el("span", { class: "lead-lib", text: "Trouver le numéro" })].concat(l.map(function (a) {
-      return el("a", { class: "lead-lien", href: a[2], target: "_blank", rel: "noopener noreferrer", "data-cle": "lien-" + a[0] + "-" + x.siren }, [a[1], trait(ICONES.sortie, 12), invisible(" (nouvel onglet)")]);
+      return el("a", { class: "lead-lien", href: a[2], target: "_blank", rel: "noopener noreferrer", "data-cle": "lien-" + a[0] + "-" + x.siren, onclick: function () { etat.radar.enRecherche = { siren: x.siren, t: Date.now() }; } }, [a[1], trait(ICONES.sortie, 12), invisible(" (nouvel onglet)")]);
     })));
   }
 
@@ -5301,6 +5465,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       }
       var n = r.fiche;
       poserProspect(n);
+      // Le créateur suivant dans la liste : c'est à lui que le curseur ira.
+      var apres = null;
+      ((R.r && R.r.leads) || []).forEach(function (y, k, l) { if (y.siren === x.siren) apres = (l[k + 1] || l[k - 1] || {}).siren || null; });
+      if (R.enRecherche && R.enRecherche.siren === x.siren) R.enRecherche = null;
       retirerLead(x.siren);
       delete R.numeros[x.siren];
       R.suiviCharge = false;
@@ -5315,10 +5483,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         });
       };
       if (appeler) {
-        nouvelAppel(n, { composer: true });
+        nouvelAppel(n, { composer: true, retour: "createurs" });
         annoncer("Fiche créée pour " + nomFiche(n) + ". Le script est prêt, bon appel.", defaire);
       } else {
         rendre();
+        var champSuivant = apres ? document.getElementById("tel-" + apres) : null;
+        if (champSuivant) { try { champSuivant.focus({ preventScroll: true }); champSuivant.scrollIntoView({ block: "center" }); } catch (e) { /* sans focus */ } }
         annoncer(nomFiche(n) + " est dans vos fiches, à appeler.", defaire);
       }
     }, function (err) {
@@ -5352,7 +5522,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var appeler = el("button", { type: "button", class: "bouton petit", "data-cle": "appeler-" + x.siren, onclick: function () { prendreLead(x, true); } }, [trait(ICONES.appel, 14), occupe ? " Création de la fiche" : " Prendre et appeler"]);
     function majBouton() { appeler.disabled = occupe || !telValide(champTel.value); }
     champTel.addEventListener("input", function () { R.numeros[x.siren] = champTel.value; majBouton(); });
-    champTel.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); prendreLead(x, true); } });
+    champTel.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); prendreLead(x, !e.shiftKey); } });
     majBouton();
     var forme = formeCourte(x) + (num(x.capital) > 0 && !x.est_ei ? " au capital de " + euros(x.capital) : "");
     var details = [majuscule(ageLead(x)), forme, x.effectif && EFFECTIFS[x.effectif] ? EFFECTIFS[x.effectif] : ""].filter(Boolean);
@@ -5378,7 +5548,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("span", { text: details.join(" · ") })
         ]),
         el("div", { class: "lead-contact" }, [
-          el("div", { class: "lead-numero" }, [el("label", { class: "lead-lib", for: "tel-" + x.siren, text: "Numéro trouvé" }), champTel]),
+          el("div", { class: "lead-numero" }, [el("label", { class: "lead-lib", for: "tel-" + x.siren, text: "Numéro trouvé" }), champTel, el("span", { class: "lead-touches", "aria-hidden": "true" }, [el("kbd", { class: "touche clavier", text: "\u21b5" }), el("span", { class: "clavier-seul", text: "appeler" }), el("kbd", { class: "touche clavier", text: "Maj \u21b5" }), el("span", { class: "clavier-seul", text: "prendre sans appeler" })])]),
           liensLead(x)
         ]),
         el("div", { class: "lead-actions" }, [
@@ -5686,7 +5856,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("div", {}, [el("dt", { text: "R2 prévus" }), el("dd", { text: entier(t.r2) })]),
           el("div", {}, [el("dt", { text: "R1 honorés" }), el("dd", { text: texteHonores(t) })])
         ]),
-        honoresParOrigine(lignes || [])
+        honoresParOrigine(lignes || []),
+        blocHeures()
       ])
     ]);
   }
@@ -5983,6 +6154,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         return ecriture.then(function (n) {
           return (fiche ? creerSuivisSaisie(fiche, c) : Promise.resolve([])).then(function (suivis) {
             var texte = !neuve ? (c.annulee_le && !v.annulee_le ? "Annulation enregistrée." : "Vente enregistrée.") : "Vente ajoutée.";
+            if (neuve) feter(true);
             annoncer(texte, neuve ? function () {
               var ids = suivis.map(function (y) { return y.id; });
               return Promise.all(ids.map(function (id) { return supprimerLigne("vad_suivis", id); })).then(function () {
@@ -6032,7 +6204,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           statsScenario(s.id),
           el("dl", { class: "sc-textes" }, [["Accueil", s.barrage], ["Accroche", s.accroche], ["Si ça bloque", s.alternative], ["Ce qu'on vise", s.leviers]].filter(function (x) { return txt(x[1]); }).map(function (x) {
             return el("div", {}, [el("dt", { text: x[0] }), el("dd", {}, [texteSeul(x[1])])]);
-          }))
+          }).concat(tableau(s.metier).length ? [el("div", {}, [el("dt", { text: "Son métier, en découverte" }), el("dd", {}, [el("ul", { class: "points" }, tableau(s.metier).map(function (x) { return el("li", {}, [texteScript(x, { balise: "span" })]); }))])])] : []))
         ]);
       })) : el("p", { class: "vide", text: "Aucun scénario pour l'instant." })
     ]);
@@ -6050,6 +6222,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         { cle: "accroche", lib: "L'accroche", type: "long", lignes: 4, valeur: s.accroche, requis: true },
         { cle: "alternative", lib: "Si ça bloque", type: "long", lignes: 3, valeur: s.alternative },
         { cle: "leviers", lib: "Ce qu'on vise", type: "long", lignes: 3, valeur: s.leviers },
+        { cle: "metier", lib: "Questions sur son métier, une par ligne", type: "lignes", lignes: 3, valeur: s.metier, aide: "Elles ouvrent la découverte, avant les axes." },
         { cle: "ordre", lib: "Place dans la liste", type: "nombre", valeur: s.ordre }
       ],
       enregistrer: function (v) {
@@ -6065,13 +6238,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var l = axes();
     return section("decouverte", [
       titreSection("decouverte", "Découverte"),
-      el("p", { class: "section-intro", text: "Quatre axes, quatre temps : la situation, le problème, ce qu'il coûte, le besoin. Le conseiller note les réponses et la reformulation s'écrit à partir de l'axe prioritaire." }),
+      el("p", { class: "section-intro", text: "Un axe par sujet, quatre temps : la situation, le problème, ce qu'il coûte, le besoin. Le conseiller note les réponses, la reformulation s'écrit à partir de l'axe prioritaire, et les arguments de l'axe reviennent à la proposition." }),
       el("div", { class: "scripts-grille" }, l.map(function (a) {
         return el("article", { class: "script-carte" }, [
           el("div", { class: "sc-tete" }, [el("h3", { text: a.nom }), estAdmin ? lienModifier("modifier-" + a.id, function () { editerAxe(a); }) : null]),
           el("dl", { class: "sc-textes spin-liste" }, [["S", "Situation", a.S], ["P", "Problème", a.P], ["I", "Implication", a.I], ["N", "Besoin", a.N]].filter(function (x) { return txt(x[2]); }).map(function (x) {
             return el("div", {}, [el("dt", {}, [el("span", { class: "spin-lettre petite", "aria-hidden": "true", text: x[0] }), x[1]]), el("dd", {}, [texteSeul(x[2])])]);
-          }))
+          }).concat(tableau(a.arguments).length ? [el("div", { class: "sc-arguments" }, [el("dt", { text: "Arguments, à la proposition" }), el("dd", {}, [el("ul", { class: "points" }, tableau(a.arguments).map(ligneArgument))])])] : []))
         ]);
       }))
     ]);
@@ -6084,14 +6257,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         { cle: "S", lib: "Situation", type: "long", lignes: 3, valeur: a.S },
         { cle: "P", lib: "Problème", type: "long", lignes: 3, valeur: a.P },
         { cle: "I", lib: "Implication", type: "long", lignes: 3, valeur: a.I },
-        { cle: "N", lib: "Besoin", type: "long", lignes: 3, valeur: a.N }
+        { cle: "N", lib: "Besoin", type: "long", lignes: 3, valeur: a.N },
+        { cle: "arguments", lib: "Les arguments, un par ligne", type: "lignes", lignes: 5, valeur: a.arguments, aide: "Ils s'affichent à la proposition quand cet axe a été abordé. Avant les deux-points, le nom de l'argument." }
       ],
       enregistrer: function (v) { return modifierDoc("scripts", a.id, v, "Axe enregistré."); }
     });
   }
 
   var ETAPES_SCRIPT = [
-    ["cadrage", "Cadrer l'appel", [["texte", "Le cadrage", 3], ["pas_le_moment", "Pas le moment", 2], ["conseil", "Le conseil", 2], ["r1", "Ouvrir un R1", 4], ["r2", "Ouvrir un R2", 3]]],
+    ["cadrage", "Cadrer l'appel", [["texte", "Le cadrage", 3], ["pas_le_moment", "Pas le moment", 2], ["conseil", "Le conseil", 2], ["presentation", "Qui nous sommes", 3], ["decideur", "Qui décide ?", 2], ["decideur_non", "S'il ne décide pas seul", 2], ["r1", "Ouvrir un R1", 4], ["r2", "Ouvrir un R2", 3]]],
     ["reformulation", "Reformuler", [["texte", "La phrase", 3], ["conseil", "Le conseil", 2]]],
     ["proposition", "Proposer", [["points", "Les points, un par ligne", 4, "lignes"], ["accompagnement", "L'Accompagnement Pro", 3], ["engageants", "Les services engageants", 2], ["prix", "Le prix", 2]]],
     ["negociation", "Négocier et conclure", [["froid", "Froid", 2], ["tiede", "Tiède", 2], ["chaud", "Chaud", 2], ["assumptif", "Le choix de la date", 2], ["alternatif", "Le choix entre deux options", 2], ["urgence", "La fin d'engagement", 2], ["concession", "Une concession", 2]]],
@@ -6290,6 +6464,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function composer(numero) {
     var n = numeroCompose(numero);
     if (!n || !composerActif()) return false;
+    // Données fictives : tout se passe comme si le numéro était composé, sans rien appeler.
+    if (window.SANS_COMPOSER) return true;
     var web = adresse3cx(reglages().webclient_3cx);
     if (web) {
       window.open(web + "/webclient/#/call?phone=" + encodeURIComponent(n), "copilote-3cx");
@@ -6309,7 +6485,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!a || etat.envoi) return;
     var p = a.prospectId ? prospectPar(a.prospectId) : null;
     var essais = ((a.dernier && a.dernier.sansReponse) || 0) + 1, pause = !!p && p.etape !== "r1p" && p.etape !== "r2" && essais >= SEUIL_PAUSE;
-    var nouveau = p && ACTIVES.indexOf(p.etape) >= 0 && raison !== "Faux numéro" ? new Date(prochainEssai(p, essais)).toISOString() : null;
+    var nouveau = p && ACTIVES.indexOf(p.etape) >= 0 && raison !== "Faux numéro" ? new Date(prochainEssai(p, essais, a.dernier)).toISOString() : null;
+    var memeHeure = !!nouveau && !pause && p.etape !== "r1p" && p.etape !== "r2" && heureQuiDecroche(a.dernier, Date.now()) >= 0;
     var ancien = p ? p.rappel_le : null;
     etat.envoi = true;
     if (bouton) bouton.disabled = true;
@@ -6319,9 +6496,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         etat.envoi = false;
         if (p && !nouveau) { etat.passes = etat.passes || {}; etat.passes[p.id] = Date.now(); }
         finirAppel();
-        changerVue("journee");
-        lancerEnchainement();
-        annoncer(raison + " noté" + (nouveau ? (pause ? ", " + essais + "e essai sans réponse. Pause de quinze jours, nouvel essai " : ". Nouvel essai ") + minuscule(quand(msDe(nouveau))) : (raison === "Faux numéro" && p ? ". Corrigez le numéro dans la fiche" : "")) + ".", function () {
+        apresAppel(a.retour);
+        annoncer(raison + " noté" + (nouveau ? (pause ? ", " + essais + "e essai sans réponse. Pause de quinze jours, nouvel essai " : ". Nouvel essai ") + minuscule(quand(msDe(nouveau))) + (memeHeure ? ", l'heure où il a déjà décroché" : "") : (raison === "Faux numéro" && p ? ". Corrigez le numéro dans la fiche" : "")) + ".", function () {
           return supprimerLigne("vad_appels", l.id).then(function () {
             etat.appelsJour = etat.appelsJour.filter(function (x) { return x.id !== l.id; });
             return nouveau ? majLigne("vad_prospects", p.id, { rappel_le: ancien }).then(poserProspect) : null;
@@ -6354,7 +6530,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     r.prets.sort(parDate);
     r.plusTard.sort(parDate);
     r.prochainsJours.sort(parDate);
-    r.aAppeler.sort(function (a, b) { return (msDe(a.cree_le) || 0) - (msDe(b.cree_le) || 0); });
+    // Les recommandations d'abord : la personne qui a recommandé a prévenu, l'appel est attendu. Puis des plus anciennes aux plus récentes.
+    r.aAppeler.sort(function (a, b) { return ((b.source === "recommandation") - (a.source === "recommandation")) || ((msDe(a.cree_le) || 0) - (msDe(b.cree_le) || 0)); });
     var passes = etat.passes || {}, tous = r.prets.concat(r.aAppeler);
     r.file = tous.filter(function (p) { return !passes[p.id]; }).concat(tous.filter(function (p) { return passes[p.id]; }));
     r.prochain = r.file[0] || null;
@@ -6403,7 +6580,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("p", { class: "etiqs" }, [sc ? etiquette("Script : " + sc.nom, "scenario") : null, p.full_prospect ? etiquette("Full Prospect", "fp") : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null])
         ]),
         el("div", { class: "prochain-actions" }, [
-          el("button", { type: "button", class: "bouton fort prochain-appeler", "data-cle": "prochain-appeler", onclick: function () { annulerEnchainement(); nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 17), tel && composerActif() ? " Appeler le " + tel : " Ouvrir l'appel"]),
+          el("button", { type: "button", class: "bouton fort prochain-appeler", "data-cle": "prochain-appeler", onclick: function () { annulerEnchainement(); nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 17), tel && composerActif() ? " Appeler le " + tel : " Ouvrir l'appel", el("kbd", { class: "touche clavier", "aria-hidden": "true", title: "Touche A", text: "A" })]),
           autres > 0 ? el("button", { type: "button", class: "lien-action", "data-cle": "prochain-passer", text: "Passer, je l'appelle plus tard", onclick: function () { annulerEnchainement(); etat.passes = etat.passes || {}; etat.passes[p.id] = Date.now(); rendre(); } }) : null
         ]),
         enchainer
@@ -6487,7 +6664,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       teteDePage(jourLong(auj), "Ma journée", null, null),
       blocBienDemarrer(),
       el("div", { class: "jour-grille" }, [
-        el("div", { class: "jour-colonne" }, [blocProchainAppel(f), blocAlertes(), blocSuivis(), blocAConfirmer(), blocContacts(f), blocCreateursJour()]),
+        el("div", { class: "jour-colonne" }, [blocProchainAppel(f), conseilHeure(), blocAlertes(), blocSuivis(), blocAConfirmer(), blocContacts(f), blocCreateursJour()]),
         el("div", { class: "jour-colonne cote" }, [chiffresDuJour(), blocSession(), blocAppelsDuJour()])
       ]),
       bandeauMois()
@@ -6519,9 +6696,20 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("li", {}, [el("strong", { text: "Appeler compose le numéro dans 3CX" }), " et ouvre le script. Avancez d'étape en étape avec le bouton du bas ; les objections sont à portée de clic."]),
           el("li", {}, [el("strong", { text: "En fin d'appel, choisissez l'issue." }), " Pas décroché : un clic sur la raison, le nouvel essai se programme tout seul."])
         ]),
+        peutSaisir ? el("h3", { text: "Au clavier, pour aller vite" }) : null,
+        peutSaisir ? el("dl", { class: "lecture aide-mots aide-clavier" }, [
+          [(SUR_MAC ? "\u2318 K" : "Ctrl K") + ", ou /", "Chercher une fiche par nom, numéro, ville ou SIRET, une action, une objection. Il vous rappelle ? Tapez son numéro."],
+          ["Dans la journée", "A appelle le prochain de la file, P le passe."],
+          ["Dans l'appel", "Flèches gauche et droite pour changer d'étape, O pour les objections, C pour la conclusion, F pour la fiche. Pas décroché : 1 à 4 tant que les raisons sont affichées, N pour les afficher."],
+          ["À la conclusion", "1 à 6 pour choisir l'issue, Ctrl Entrée pour enregistrer l'appel."],
+          ["Créateurs", "Entrée prend le créateur et l'appelle, Maj Entrée le prend sans l'appeler."],
+          ["Échap", "Sort d'un champ, ferme une fenêtre."]
+        ].map(function (m) { return el("div", { class: "lecture-ligne" }, [el("dt", { text: m[0] }), el("dd", { text: m[1] })]); })) : null,
         el("h3", { text: "Si 3CX ne compose pas" }),
         el("p", { text: "La première fois, le navigateur demande s'il peut ouvrir 3CX : cochez «\u00a0Toujours autoriser\u00a0», puis Ouvrir. Si rien ne se passe, 3CX n'est pas l'application choisie pour les numéros de téléphone : sous Windows, Paramètres, Applications par défaut, cherchez TEL et choisissez 3CX. Votre responsable peut aussi régler l'adresse du 3CX du navigateur." }),
         el("p", { text: "Pour ouvrir l'appel sans composer, le temps d'un essai : menu de votre compte, «\u00a0Ne plus composer avec 3CX\u00a0»." }),
+        LIEN_ESSAI && peutSaisir && !window.APERCU ? el("h3", { text: "S'entraîner sans risque" }) : null,
+        LIEN_ESSAI && peutSaisir && !window.APERCU ? el("p", {}, ["Le bac à sable est une copie du copilote avec des fiches inventées : rien n'y est enregistré, aucun numéro n'est composé, vos chiffres ne bougent pas. ", el("a", { class: "lien-action", href: LIEN_ESSAI, target: "_blank", rel: "noopener", "data-cle": "bac-a-sable", text: "Ouvrir le bac à sable" }), "."]) : null,
         el("h3", { text: "Les mots du métier" }),
         el("dl", { class: "lecture aide-mots" }, mots.map(function (m) { return el("div", { class: "lecture-ligne" }, [el("dt", { text: m[0] }), el("dd", { text: m[1] })]); }))
       ])
@@ -6548,7 +6736,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           el("span", { class: "marque-bu", text: "Copilote VAD" })
         ]),
         el("nav", { class: "onglets", "aria-label": "Pages du copilote" }, onglets),
-        el("div", { class: "barre-droite" }, [boutonAide(), boutonCompte()])
+        el("div", { class: "barre-droite" }, [peutSaisir ? boutonRecherche() : null, boutonAide(), boutonCompte()])
       ])
     ]);
   }
@@ -6606,7 +6794,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     if (a.nature !== "prospection") {
       corps.push(carteScript(a.nature === "r1" ? "Ouvrir le rendez-vous" : "Relancer la proposition", a.nature === "r1" ? cad.r1 : cad.r2, { grand: true, classe: "principal" }));
-      corps.push(el("div", { class: "si-scripts" }, [siScript("Ce n'est pas le moment", cad.pas_le_moment)]));
+      corps.push(el("div", { class: "si-scripts" }, [siScript("Il demande qui vous êtes", cad.presentation), siScript("Ce n'est pas le moment", cad.pas_le_moment)]));
     } else if (sc) {
       corps.push(carteScript("Vous dites", sc.accroche, { grand: true, classe: "principal" }));
       corps.push(carteScript("Il répond oui : vous cadrez", cad.texte, { conseil: cad.conseil }));
@@ -6614,6 +6802,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         el("p", { class: "si-titre", text: "Et si..." }),
         siScript("Vous tombez sur l'accueil", sc.barrage),
         siScript("Il hésite, ça bloque", sc.alternative),
+        siScript("Il demande qui vous êtes", cad.presentation),
         siScript("Ce n'est pas le moment", cad.pas_le_moment),
         siScript("Ce qu'on vise avec ce script", sc.leviers, { conseil: true })
       ]));
@@ -6628,6 +6817,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var details = [txt(f.contact), txt(f.ville), txt(f.activite)].filter(Boolean);
     var tel = txt(f.telephone);
     var abandon = false;
+    // Tant que rien n'est commencé, les raisons du « pas décroché » sont là, à un clic. Le bouton ouvre la version complète.
+    var essaisNd = ((a.dernier && a.dernier.sansReponse) || 0) + 1;
+    var ndAuto = !a.preDecroche && a.pas === "accroche" && a.vus.length === 1 && !a.issue;
+    var ndComplet = !!a.nonDecroche || (ndAuto && a.nature === "prospection" && !!a.prospectId && essaisNd >= SEUIL_PAUSE);
+    var ndVisible = ndComplet || ndAuto;
     return el("div", { class: "appel-bandeau" }, [
       el("div", { class: "ab-qui" }, [
         el("p", { class: "ab-nature", text: a.nature === "r1" ? "R1" + (a.etapeInitiale === "r1p" && a.prospectId && (prospectPar(a.prospectId) || {}).source === "tmk" ? " issu de la TMK" : "") : (a.nature === "r2" ? "R2" : "Prospection") }),
@@ -6642,22 +6836,22 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       el("div", { class: "ab-actions" }, [
         el("p", { class: "chrono", "aria-label": "Durée de l'appel" }, [trait(ICONES.horloge, 14), el("span", { class: "chrono-temps", text: duree(a) })]),
         el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-appel", onclick: ficheDeLAppel }, [trait(ICONES.crayon, 14), "Fiche"]),
-        el("button", { type: "button", class: "bouton-clair" + (a.nonDecroche ? " actif" : ""), "aria-expanded": a.nonDecroche ? "true" : "false", "data-cle": "pas-decroche", text: "Pas décroché", onclick: function () { a.nonDecroche = !a.nonDecroche; rendre(); } }),
+        el("button", { type: "button", class: "bouton-clair" + (ndComplet ? " actif" : ""), "aria-expanded": ndComplet ? "true" : "false", "data-cle": "pas-decroche", title: "Touche N", text: "Pas décroché", onclick: function () { a.nonDecroche = !a.nonDecroche; rendre(); } }),
         el("button", { type: "button", class: "lien-action danger", "data-cle": "abandonner", text: "Abandonner", onclick: function (e) {
           if (appelEntame(a) && !abandon) { abandon = true; e.currentTarget.textContent = "Confirmer l'abandon"; return; }
           finirAppel();
           annoncer((a.recos || []).length ? "Appel abandonné. Les fiches des recommandations, elles, sont gardées." : "Appel abandonné, rien n'a été enregistré.");
-          changerVue("journee");
+          if (a.retour === "createurs") apresAppel(a.retour); else changerVue("journee");
         } })
       ]),
-      a.nonDecroche ? el("div", { class: "ab-nondecroche", role: "group", "aria-label": "Pas décroché : pourquoi ?" }, [
+      ndVisible ? el("div", { class: "ab-nondecroche" + (ndComplet ? "" : " compact"), role: "group", "aria-label": "Pas décroché : pourquoi ?" }, [
         el("span", { class: "ab-nd-lib", text: "Pas décroché, un clic :" }),
-        NON_DECROCHE.map(function (r) {
-          return el("button", { type: "button", class: "choix-nd", "data-cle": "nd-" + plat(r).replace(/[^a-z0-9]+/g, "-"), text: r, onclick: function (e) { noterNonDecroche(r, e.currentTarget); } });
+        NON_DECROCHE.map(function (r, i) {
+          return el("button", { type: "button", class: "choix-nd", "data-cle": "nd-" + plat(r).replace(/[^a-z0-9]+/g, "-"), onclick: function (e) { noterNonDecroche(r, e.currentTarget); } }, [el("kbd", { class: "touche clavier", "aria-hidden": "true", text: String(i + 1) }), el("span", { text: r })]);
         }),
-        el("button", { type: "button", class: "lien-action", "data-cle": "nd-creneau", text: "Choisir moi-même le prochain essai", onclick: pasDecroche })
+        ndComplet ? el("button", { type: "button", class: "lien-action", "data-cle": "nd-creneau", text: "Choisir moi-même le prochain essai", onclick: pasDecroche }) : null
       ]) : null,
-      a.nonDecroche ? blocRepondeur(a) : null
+      ndComplet ? blocRepondeur(a) : null
     ]);
   }
 
@@ -6670,7 +6864,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       var sansReponse = 0;
       for (var i = 0; i < l.length && !l[i].decroche; i++) sansReponse++;
       var annote = l.filter(function (x) { return txt(x.note); })[0];
-      a.dernier = l.length ? { le: l[0].le, issue: txt(l[0].issue), decroche: !!l[0].decroche, sansReponse: sansReponse, note: annote ? txt(annote.note) : "" } : null;
+      var decroche = l.filter(function (x) { return x.decroche; })[0];
+      a.dernier = l.length ? { le: l[0].le, issue: txt(l[0].issue), decroche: !!l[0].decroche, sansReponse: sansReponse, note: annote ? txt(annote.note) : "", heureDecroche: decroche ? minutesParis(msDe(decroche.le)) : null } : null;
       a.chargeDernier = false;
       if (etat.appel === a) rendreSiCalme();
     }, function () { a.chargeDernier = false; a.dernier = null; });
@@ -6782,7 +6977,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (etat.decompte !== d) return;
       annulerEnchainement();
       var q = prospectPar(d.id);
-      if (!q || etat.appel || etat.vue !== "journee" || feuille) { rendre(); return; }
+      if (!q || etat.appel || etat.vue !== "journee" || feuille || palette) { rendre(); return; }
       nouvelAppel(q, { composer: true });
     }, DELAI_ENCHAINEMENT);
     d.tic = setInterval(function () {
@@ -6986,6 +7181,595 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ];
   }
 
+  /* ---------- La recherche partout : Ctrl+K, ou la touche / ---------- */
+  var palette = null;
+  // L'adresse du bac à sable. Vide : il n'est proposé nulle part. Il contient les scripts, donc il ne s'héberge que derrière la connexion.
+  var LIEN_ESSAI = "";
+  var SUR_MAC = /Mac|iPhone|iPad/.test(String((window.navigator && (navigator.platform || navigator.userAgent)) || ""));
+  function auDoigt() { try { return window.matchMedia("(hover:none),(pointer:coarse)").matches; } catch (e) { return false; } }
+  function telLisible(n) { return /^0\d{9}$/.test(n) ? n.replace(/(\d\d)(?=\d)/g, "$1 ") : n; }
+  // Les chiffres d'un numéro, au format national : « +33 6 12 » et « 06.12 » se retrouvent.
+  function chiffresTel(s) {
+    var n = String(s || "").replace(/[^\d+]/g, "");
+    if (/^\+33/.test(n)) n = "0" + n.slice(3); else if (/^0033/.test(n)) n = "0" + n.slice(4);
+    return n.replace(/\D/g, "");
+  }
+  function boutonRecherche() {
+    return el("button", { type: "button", class: "cherche-btn", "data-cle": "recherche", "aria-label": "Chercher une fiche, une action, une objection", title: "Chercher (" + (SUR_MAC ? "⌘ K" : "Ctrl K") + ", ou la touche /)", onclick: function (e) { e.stopPropagation(); etat.menu = false; ouvrirPalette(); } }, [
+      trait(ICONES.loupe, 15), el("kbd", { class: "touche clavier", "aria-hidden": "true", text: SUR_MAC ? "⌘ K" : "Ctrl K" })
+    ]);
+  }
+  function chercherFiches(q) {
+    var brut = String(q || "").trim(), mots = plat(brut).split(/\s+/).filter(Boolean);
+    var chiffres = chiffresTel(brut), numerique = chiffres.length >= 3 && /^[\d\s.+()\-\/]+$/.test(brut);
+    var l = [];
+    (estAdmin ? etat.prospects : mesProspects()).forEach(function (p) {
+      var score = 0;
+      if (numerique) {
+        var t = chiffresTel(p.telephone), siret = String(p.siret || "");
+        if (t && t.indexOf(chiffres) >= 0) score = t === chiffres ? 100 : (t.indexOf(chiffres) === 0 ? 80 : 60);
+        else if (siret && siret.indexOf(brut.replace(/\D/g, "")) === 0) score = 70;
+        else return;
+      } else {
+        var tout = plat([p.societe, p.contact, p.ville, p.email, p.activite].join(" "));
+        if (!mots.every(function (m) { return tout.indexOf(m) >= 0; })) return;
+        score = plat(nomFiche(p)).indexOf(mots[0]) === 0 ? 90 : (plat(p.contact).indexOf(mots[0]) === 0 ? 80 : 50);
+      }
+      if (ACTIVES.indexOf(p.etape) >= 0) score += 5;
+      if (p.conseiller === compte.id) score += 3;
+      l.push({ p: p, score: score });
+    });
+    l.sort(function (x, y) { return (y.score - x.score) || ((msDe(y.p.maj_le) || 0) - (msDe(x.p.maj_le) || 0)); });
+    return l.slice(0, 7).map(function (x) { return x.p; });
+  }
+  function ficheEnPalette(p, groupe) {
+    var mien = p.conseiller === compte.id && ["signe", "perdu"].indexOf(p.etape) < 0;
+    return { type: "fiche", groupe: groupe, cle: "fiche-" + p.id, lib: nomFiche(p), p: p, fn: function () { ouvrirFiche(p); }, fn2: mien ? function () { nouvelAppel(p, { composer: true }); } : null };
+  }
+  function actionsPalette() {
+    var l = [];
+    function a(cle, lib, fn, mots) { l.push({ type: "action", cle: "action-" + cle, lib: lib, fn: fn, mots: plat(lib + " " + (mots || "")) }); }
+    if (etat.appel) a("appel", "Revenir à l'appel en cours", function () { changerVue("appel"); }, "aller");
+    a("nouvelle-fiche", "Nouvelle fiche", function () { ouvrirFiche(null); }, "creer ajouter prospect");
+    a("appel-libre", "Appel guidé sans fiche", function () { nouvelAppel(null); }, "appeler nouveau prospect");
+    a("vente", "Ajouter une vente", function () { ouvrirVente(null); }, "signer signee");
+    a("journee", "Ma journée", function () { changerVue("journee"); }, "aller file accueil");
+    a("fiches", "Mes fiches", function () { changerVue("prospects"); }, "aller prospects liste");
+    a("createurs", "Chercher des créateurs", function () { changerVue("createurs"); }, "aller radar bodacc leads");
+    a("resultats", "Mes résultats", function () { changerVue("resultats"); }, "aller chiffres marge tase mois");
+    a("scripts", "Les scripts", function () { changerVue("scripts"); }, "aller objections scenarios decouverte");
+    a("mur", "Afficher le mur de l'équipe", function () { changerVue("mur"); }, "aller ecran");
+    a("theme", theme() === "dark" ? "Passer en thème clair" : "Passer en thème sombre", basculerTheme, "couleur nuit jour");
+    a("aide", "Aide et raccourcis clavier", ouvrirAide, "clavier mots");
+    if (LIEN_ESSAI && !window.APERCU) a("essai", "Ouvrir le bac à sable, pour s'entraîner", function () { window.open(LIEN_ESSAI, "_blank", "noopener"); }, "entrainement essai test formation");
+    return l;
+  }
+  function resultatsPalette(q) {
+    var brut = String(q || "").trim(), mots = plat(brut).split(/\s+/).filter(Boolean), l = [];
+    if (!mots.length) {
+      fileAppels().file.slice(0, 5).forEach(function (p) { l.push(ficheEnPalette(p, "À appeler maintenant")); });
+      actionsPalette().forEach(function (a) { a.groupe = "Aller plus vite"; l.push(a); });
+      return l;
+    }
+    var fiches = chercherFiches(brut);
+    fiches.forEach(function (p) { l.push(ficheEnPalette(p, "Fiches")); });
+    var numero = telValide(brut) ? numeroCompose(brut) : "";
+    if (numero && !fiches.some(function (p) { return chiffresTel(p.telephone) === numero; })) {
+      l.push({ type: "action", groupe: "Ce numéro", cle: "action-appeler-numero", lib: "Appeler le " + telLisible(numero), details: "Appel guidé sans fiche : elle se crée avec l'appel.", fn: function () {
+        var avant = etat.appel;
+        nouvelAppel(null);
+        if (etat.appel && etat.appel !== avant && !etat.appel.prospectId) { etat.appel.fiche.telephone = telLisible(numero); sauverBrouillon(); composer(numero); rendre(); }
+      } });
+      l.push({ type: "action", groupe: "Ce numéro", cle: "action-fiche-numero", lib: "Créer une fiche avec le " + telLisible(numero), fn: function () {
+        ouvrirFiche(null);
+        if (feuille && feuille.form.elements.telephone) feuille.form.elements.telephone.value = telLisible(numero);
+      } });
+    }
+    objections().filter(function (o) { var t = plat(txt(o.objection) + " " + txt(o.reponse)); return mots.every(function (m) { return t.indexOf(m) >= 0; }); }).slice(0, 4).forEach(function (o) {
+      l.push({ type: "objection", groupe: "Objections", cle: "objection-" + o.id, lib: "« " + txt(o.objection) + " »", o: o, fn: function () {
+        var a = etat.appel;
+        if (!a) { etat.ongletScripts = "objections"; etat.chercheScripts = txt(o.objection); changerVue("scripts"); return; }
+        if (a.ouvertes.indexOf(o.id) < 0) a.ouvertes.push(o.id);
+        if (a.objections.indexOf(o.id) < 0 && a.objections.length < 30) a.objections.push(o.id);
+        a.categorie = ""; a.cherche = "";
+        if (etat.vue !== "appel") changerVue("appel");
+        allerEtape("objections");
+        var n = app.querySelector('[data-cle="objection-' + o.id + '"]');
+        if (n) { try { n.scrollIntoView({ block: "center" }); n.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+      } });
+    });
+    actionsPalette().filter(function (a) { return mots.every(function (m) { return a.mots.indexOf(m) >= 0; }); }).forEach(function (a) { a.groupe = "Actions"; l.push(a); });
+    if (!numero && brut.length >= 2 && !/^[\d\s.+()\-\/]+$/.test(brut)) {
+      if (!fiches.length) l.push({ type: "action", groupe: "Pas de fiche à ce nom", cle: "action-creer-nom", lib: "Créer la fiche « " + brut + " »", fn: function () {
+        ouvrirFiche(null);
+        if (feuille && feuille.form.elements.societe) feuille.form.elements.societe.value = brut;
+      } });
+      l.push({ type: "action", groupe: "Scripts", cle: "action-chercher-scripts", lib: "Chercher « " + brut + " » dans les scripts", fn: function () { etat.chercheScripts = brut; changerVue("scripts"); } });
+    }
+    return l;
+  }
+  function fermerPalette() {
+    if (!palette) return;
+    var pal = palette;
+    palette = null;
+    if (pal.voile.parentNode) pal.voile.parentNode.removeChild(pal.voile);
+    document.body.classList.remove("palette-ouverte");
+    if (pal.retour && document.contains(pal.retour)) { try { pal.retour.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+  }
+  function lancerPalette(i, second) {
+    var x = palette && palette.items[i];
+    if (!x) return;
+    var fn = second && x.fn2 ? x.fn2 : x.fn;
+    palette.retour = null;
+    fermerPalette();
+    fn();
+  }
+  // Un script sur une ligne : un repère rempli montre sa valeur, un repère vide dit entre crochets ce qu'il attend.
+  function texteAPlat(t) {
+    return txt(t).replace(/\{([a-z_]+)\}/g, function (m, k) { return valeurTrou(k) || "[" + (TROUS[k] || k) + "]"; });
+  }
+  function lignePalette(x, i) {
+    var details = x.details || "", cote = null;
+    if (x.type === "fiche") {
+      var p = x.p, t = msDe(p.rappel_le);
+      details = [txt(p.contact), txt(p.ville), txt(p.telephone), p.conseiller !== compte.id ? nomDe(p.conseiller) : ""].filter(Boolean).join(" · ");
+      cote = el("span", { class: "pl-cote" }, [isFinite(t) && ACTIVES.indexOf(p.etape) >= 0 ? el("span", { class: "pl-quand", text: minuscule(quand(t)) }) : null, etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape)]);
+    } else if (x.type === "objection") {
+      details = texteAPlat(x.o.reponse);
+      cote = el("span", { class: "pl-cote" }, [etiquette(txt(x.o.categorie) || "Objection")]);
+    }
+    var actif = i === palette.actif;
+    return el("li", { class: "palette-ligne" + (actif ? " actif" : ""), role: "option", id: "palette-o-" + i, "aria-selected": actif ? "true" : "false", "data-cle": "palette-" + x.cle,
+      onmousemove: function () { if (palette && palette.actif !== i) { palette.actif = i; marquerPalette(); } },
+      onclick: function (e) { lancerPalette(i, e.ctrlKey || e.metaKey); } }, [
+      el("strong", { text: x.lib }), cote, details ? el("span", { class: "pl-details", text: details }) : null
+    ]);
+  }
+  function marquerPalette() {
+    var pal = palette;
+    if (!pal) return;
+    [].slice.call(pal.liste.querySelectorAll(".palette-ligne")).forEach(function (n, i) {
+      n.classList.toggle("actif", i === pal.actif);
+      n.setAttribute("aria-selected", i === pal.actif ? "true" : "false");
+    });
+    pal.saisie.setAttribute("aria-activedescendant", pal.items.length ? "palette-o-" + pal.actif : "");
+    var x = pal.items[pal.actif];
+    pal.second.hidden = !(x && x.fn2);
+  }
+  function dessinerPalette() {
+    var pal = palette;
+    if (!pal) return;
+    pal.items = resultatsPalette(pal.saisie.value);
+    if (pal.actif >= pal.items.length) pal.actif = Math.max(0, pal.items.length - 1);
+    pal.liste.textContent = "";
+    var groupe = null;
+    pal.items.forEach(function (x, i) {
+      if (x.groupe !== groupe) { groupe = x.groupe; pal.liste.appendChild(el("li", { class: "palette-groupe", role: "presentation", text: groupe })); }
+      pal.liste.appendChild(lignePalette(x, i));
+    });
+    if (!pal.items.length) pal.liste.appendChild(el("li", { class: "palette-vide", role: "presentation", text: "Rien à ce nom." }));
+    marquerPalette();
+  }
+  function ouvrirPalette(depart) {
+    if (palette || feuille || !pret() || !peutSaisir) return;
+    annulerEnchainement();
+    var retour = document.activeElement;
+    var saisie = el("input", { class: "palette-saisie", type: "text", id: "palette-saisie", "data-cle": "palette-saisie", role: "combobox", "aria-expanded": "true", "aria-controls": "palette-liste", "aria-autocomplete": "list", "aria-label": "Chercher une fiche, une action ou une objection", placeholder: "Une société, un nom, un numéro, une objection...", autocomplete: "off", spellcheck: "false" });
+    var liste = el("ul", { class: "palette-liste", id: "palette-liste", role: "listbox", "aria-label": "Résultats" });
+    var second = el("span", { class: "pp-second" }, [el("kbd", { text: (SUR_MAC ? "⌘" : "Ctrl") + " ↵" }), " appeler"]);
+    var boite = el("div", { class: "palette", role: "dialog", "aria-modal": "true", "aria-label": "Recherche", onclick: stop }, [
+      el("div", { class: "palette-tete" }, [trait(ICONES.loupe, 18), saisie, el("button", { type: "button", class: "palette-fermer", "aria-label": "Fermer la recherche", "data-cle": "palette-fermer", text: auDoigt() ? "Fermer" : "Échap", onclick: fermerPalette })]),
+      liste,
+      el("p", { class: "palette-pied", "aria-hidden": "true" }, [el("span", {}, [el("kbd", { text: "↑" }), el("kbd", { text: "↓" }), " choisir"]), el("span", {}, [el("kbd", { text: "↵" }), " ouvrir"]), second])
+    ]);
+    var voile = el("div", { class: "palette-voile", onclick: fermerPalette }, [boite]);
+    palette = { voile: voile, saisie: saisie, liste: liste, second: second, items: [], actif: 0, retour: retour };
+    saisie.value = depart || "";
+    saisie.addEventListener("input", function () { if (palette) { palette.actif = 0; dessinerPalette(); } });
+    saisie.addEventListener("keydown", function (e) {
+      var pal = palette, k = e.key, n = pal ? pal.items.length : 0;
+      e.stopPropagation();
+      if (!pal) return;
+      if (k === "Escape") { e.preventDefault(); fermerPalette(); return; }
+      if (k === "Tab") { e.preventDefault(); return; }
+      if (k === "Enter") { e.preventDefault(); lancerPalette(pal.actif, e.ctrlKey || e.metaKey); return; }
+      if ((k === "ArrowDown" || k === "ArrowUp") && n) {
+        e.preventDefault();
+        pal.actif = (pal.actif + (k === "ArrowDown" ? 1 : n - 1)) % n;
+        marquerPalette();
+        var ligne = document.getElementById("palette-o-" + pal.actif);
+        if (ligne && ligne.scrollIntoView) { try { ligne.scrollIntoView({ block: "nearest" }); } catch (err) { /* sans défilement */ } }
+      }
+    });
+    document.body.appendChild(voile);
+    document.body.classList.add("palette-ouverte");
+    dessinerPalette();
+    try { saisie.focus(); } catch (e) { /* sans focus */ }
+  }
+
+  /* ---------- L'appel au clavier ---------- */
+  // Hors d'un champ : flèches pour changer d'étape, O objections, C conclusion, F fiche, N pas décroché.
+  // Les chiffres choisissent la raison du pas décroché quand elle est affichée, sinon l'issue à la conclusion.
+  var gardeChiffres = 0;
+  function raccourciAppel(e) {
+    var a = etat.appel, k = e.key, bas = k.length === 1 ? k.toLowerCase() : k;
+    if (/^[1-9]$/.test(k)) {
+      var raisons = app.querySelectorAll(".ab-nondecroche .choix-nd"), n = Number(k);
+      if (raisons.length) {
+        // Une seconde de garde à l'ouverture de l'appel, trois après un pas décroché noté d'une touche : une touche de trop ne note rien.
+        if (n <= raisons.length && Date.now() - a.debut > 1000 && Date.now() >= gardeChiffres && !etat.envoi) { e.preventDefault(); gardeChiffres = Date.now() + 3000; raisons[n - 1].click(); }
+        return;
+      }
+      var issues = a.pas === "conclusion" ? app.querySelectorAll(".issues .issue-btn") : [];
+      if (n <= issues.length) { e.preventDefault(); issues[n - 1].click(); }
+      return;
+    }
+    if (k === "ArrowRight" || k === "ArrowLeft") {
+      var voisine = etapeVoisine(k === "ArrowRight" ? 1 : -1);
+      if (voisine) { e.preventDefault(); allerEtape(voisine); }
+      return;
+    }
+    if (bas === "n") { e.preventDefault(); a.nonDecroche = !a.nonDecroche; rendre(); return; }
+    if (bas === "c") { e.preventDefault(); allerEtape("conclusion"); return; }
+    if (bas === "f") { e.preventDefault(); ficheDeLAppel(); return; }
+    if (bas === "o") {
+      e.preventDefault();
+      allerEtape("objections");
+      var cherche = document.getElementById("cherche-objection");
+      if (cherche) { try { cherche.focus(); } catch (err) { /* sans focus */ } }
+    }
+  }
+
+  /* ---------- Jours et heures en un clic, et l'agenda du jour choisi ---------- */
+  var HEURES_RAPIDES = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+  function jourPuce(iso) { var j = enDate(iso); return JOURS[j.getUTCDay()] + " " + quantieme(j.getUTCDate()); }
+  function joursRapides(avecAujourdhui) {
+    var auj = aujourdhui(), l = [], j = auj, vus = {};
+    function ajouter(iso, lib) { if (!vus[iso]) { vus[iso] = true; l.push([iso, lib]); } }
+    if (avecAujourdhui && estOuvre(auj) && minutesParis(Date.now()) < 17 * 60 + 45) ajouter(auj, "Aujourd'hui");
+    for (var i = 0; i < 5; i++) { j = prochainOuvre(j); ajouter(j, j === decaler(auj, 1) ? "Demain" : jourPuce(j)); }
+    ajouter(ouvreApres(decaler(auj, 7)), "Dans 1 semaine");
+    ajouter(ouvreApres(decaler(auj, 14)), "Dans 15 jours");
+    ajouter(ouvreApres(plusMois(auj, 1)), "Dans 1 mois");
+    return l;
+  }
+  // Mes rappels et rendez-vous d'un jour, dans l'ordre.
+  function agendaDu(jour, saufId) {
+    if (!jourIso(jour) || !peutSaisir) return [];
+    return mesProspects().filter(function (p) {
+      var t = msDe(p.rappel_le);
+      return p.id !== saufId && ["r1p", "r2", "rappel"].indexOf(p.etape) >= 0 && isFinite(t) && jourParis(new Date(t)) === jour;
+    }).sort(function (x, y) { return msDe(x.rappel_le) - msDe(y.rappel_le); });
+  }
+  // La première heure ronde sans rendez-vous à moins d'une demi-heure : ce que le copilote propose d'office pour un R1 ou un R2.
+  function heureLibre(jour, saufId) {
+    var pris = agendaDu(jour, saufId).filter(function (p) { return p.etape === "r1p" || p.etape === "r2"; }).map(function (p) { return minutesParis(msDe(p.rappel_le)); });
+    return ["10:00", "11:00", "14:00", "15:00", "16:00", "09:00", "17:00"].filter(function (h) { return !pris.some(function (m) { return Math.abs(m - heureMin(h)) < 30; }); })[0] || "10:00";
+  }
+  // o : date, heure, choisir(date, heure, cle), aujourdhui (un simple rappel peut être pour tout à l'heure), saufId
+  function datesRapides(o) {
+    var date = jourIso(o.date), heure = heureMin(o.heure) >= 0 ? o.heure : "";
+    var auj = aujourdhui(), maintenant = minutesParis(Date.now());
+    function puce(cle, lib, actif, action) { return el("button", { type: "button", class: "dr-btn" + (actif ? " actif" : ""), "aria-pressed": actif ? "true" : "false", "data-cle": cle, text: lib, onclick: action }); }
+    var jours = joursRapides(!!o.aujourdhui).map(function (j) {
+      return puce("dr-jour-" + j[0], j[1], date === j[0], function () { o.choisir(j[0], heure || "10:00", "dr-jour-" + j[0]); });
+    });
+    var heures = HEURES_RAPIDES.filter(function (h) { return date !== auj || heureMin(h) > maintenant + 10; }).map(function (h) {
+      var cle = "dr-heure-" + h.replace(":", "");
+      return puce(cle, minutesFr(heureMin(h)), heure === h, function () { o.choisir(date || prochainOuvre(auj), h, cle); });
+    });
+    var corps = [
+      el("div", { class: "dr-ligne", role: "group", "aria-label": "Jour" }, [el("span", { class: "dr-lib", "aria-hidden": "true", text: "Jour" })].concat(jours)),
+      el("div", { class: "dr-ligne", role: "group", "aria-label": "Heure" }, [el("span", { class: "dr-lib", "aria-hidden": "true", text: "Heure" })].concat(heures))
+    ];
+    if (date) {
+      var l = agendaDu(date, o.saufId), t = heure ? instantParis(date, heureMin(heure)) : NaN;
+      var rdv = function (p) { return p.etape === "r1p" || p.etape === "r2"; };
+      var genre = function (p) { return p.etape === "r1p" ? "R1" : (p.etape === "r2" ? "R2" : "rappel"); };
+      var conflit = isFinite(t) ? l.filter(function (p) { return rdv(p) && Math.abs(msDe(p.rappel_le) - t) < 30 * 60000; })[0] : null;
+      if (conflit) corps.push(el("p", { class: "dr-conflit", role: "status", "data-cle": "dr-conflit" }, [trait(ICONES.alerte, 14), el("span", { text: "Déjà un rendez-vous à " + heureFr(msDe(conflit.rappel_le)) + " ce jour-là : " + nomFiche(conflit) + " (" + genre(conflit) + ")." })]));
+      var montres = l.length > 6 ? l.filter(rdv) : l;
+      var texte = montres.map(function (p) { return heureFr(msDe(p.rappel_le)) + " " + nomFiche(p) + " (" + genre(p) + ")"; }).join(" · ");
+      corps.push(el("p", { class: "dr-agenda", "data-cle": "dr-agenda" }, l.length ? [
+        el("strong", { text: majuscule(jourPuce(date)) + " : " }),
+        l.length > 6 ? pluriel(l.length, "contact prévu", "contacts prévus") + (montres.length ? ", dont " + texte : "") : texte
+      ] : [el("strong", { text: majuscule(jourPuce(date)) + " : " }), "rien de prévu ce jour-là."]));
+    }
+    return el("div", { class: "dates-rapides" }, corps);
+  }
+  // Dans une feuille : les mêmes puces, branchées sur ses champs « date » et « heure ».
+  function brancherDates(form, o) {
+    var d = form && form.elements.date, h = form && form.elements.heure;
+    if (!d || !h) return;
+    var zone = el("div", { class: "dr-zone" });
+    function dessiner(cle) {
+      zone.textContent = "";
+      zone.appendChild(datesRapides({ date: d.value, heure: h.value, aujourdhui: o.aujourdhui, saufId: o.saufId, choisir: function (jour, heure, cleChoisie) { d.value = jour; h.value = heure; dessiner(cleChoisie); } }));
+      var n = cle ? zone.querySelector('[data-cle="' + cle + '"]') : null;
+      if (n) { try { n.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+    }
+    d.addEventListener("change", function () { dessiner(); });
+    h.addEventListener("change", function () { dessiner(); });
+    var groupe = d.closest ? (d.closest(".deux") || d.closest(".champ")) : null;
+    if (!groupe || !groupe.parentNode) return;
+    groupe.parentNode.insertBefore(zone, groupe.nextSibling);
+    dessiner();
+  }
+
+  /* ---------- Après l'appel : retour d'où l'on vient ---------- */
+  // Lancé depuis Créateurs, l'appel fini y ramène, le curseur dans le numéro du créateur suivant. Sinon : la journée, et la file s'enchaîne.
+  function apresAppel(retour) {
+    if (retour === "createurs") {
+      changerVue("createurs", "bloc-radar-liste");
+      var premier = app.querySelector(".lead-tel-saisie");
+      if (premier) { try { premier.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+      return;
+    }
+    changerVue("journee");
+    lancerEnchainement();
+  }
+
+  /* ---------- Créateurs : le numéro trouvé ailleurs revient tout seul dans son champ ---------- */
+  // Un numéro français dans un texte copié : « Tél. : +33 (0)2 31 44 55 66 » donne 02 31 44 55 66.
+  function numeroDansTexte(t) {
+    var m = /(?:\+33|0033|0)[\s.\-]*(?:\(0\)[\s.\-]*)?[1-9](?:[\s.\-]*\d{2}){4}/.exec(String(t || "").replace(/[  ]/g, " "));
+    if (!m) return "";
+    var n = m[0].replace(/\(0\)/, "").replace(/[^\d+]/g, "");
+    if (/^\+33/.test(n)) n = "0" + n.slice(3); else if (/^0033/.test(n)) n = "0" + n.slice(4);
+    return /^0[1-9]\d{8}$/.test(n) ? n : "";
+  }
+  // Coller dans un champ de téléphone ne garde que le numéro, bien écrit.
+  document.addEventListener("paste", function (e) {
+    var n = e.target, presse = e.clipboardData || window.clipboardData;
+    if (!n || n.tagName !== "INPUT" || n.type !== "tel" || !presse) return;
+    var numero = numeroDansTexte(presse.getData("text"));
+    if (!numero) return;
+    e.preventDefault();
+    n.value = telLisible(numero);
+    n.dispatchEvent(new Event("input", { bubbles: true }));
+    n.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  // De retour de Google ou de PagesJaunes : le curseur est déjà dans le champ du créateur qu'on cherchait.
+  function reprendreNumero() {
+    var R = etat.radar, r = R && R.enRecherche;
+    if (!r || etat.vue !== "createurs" || feuille || palette || Date.now() - r.t > 15 * 60000) return;
+    var n = document.getElementById("tel-" + r.siren);
+    if (!n || txt(n.value) || document.activeElement === n) return;
+    try { n.focus({ preventScroll: true }); n.scrollIntoView({ block: "center" }); } catch (e) { /* sans focus */ }
+  }
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") setTimeout(reprendreNumero, 80); });
+  window.addEventListener("focus", function () { setTimeout(reprendreNumero, 80); });
+
+  /* ---------- La fiche : l'essentiel en tête ---------- */
+  function texteDernierAppel(appels) {
+    var l = (appels || []).filter(function (x) { return isFinite(msDe(x.le)); }).sort(function (x, y) { return msDe(y.le) - msDe(x.le); });
+    if (!l.length) return "Aucun appel enregistré sur cette fiche.";
+    var sans = 0;
+    for (var i = 0; i < l.length && !l[i].decroche; i++) sans++;
+    var annote = l.filter(function (x) { return txt(x.note); })[0];
+    return "Dernier échange : " + minuscule(txt(l[0].issue) || (l[0].decroche ? "décroché" : "pas décroché")) + ", " + minuscule(quand(msDe(l[0].le))) +
+      (sans >= 2 ? ", " + sans + " essais sans réponse d'affilée" : "") + (annote ? ". Noté : « " + txt(annote.note) + " »" : ".");
+  }
+  // Où en est la fiche, le dernier échange, et ce que la découverte a appris : de quoi répondre à celui qui rappelle sans rien chercher.
+  function resumeFiche(p) {
+    var t = msDe(p.rappel_le), dc = p.decouverte && typeof p.decouverte === "object" ? p.decouverte : {}, lignes = [];
+    function ligne(lib, v) { if (txt(v)) lignes.push(el("div", { class: "lecture-ligne" }, [el("dt", { text: lib }), el("dd", { text: txt(v) })])); }
+    ligne("Sa priorité", dc.priorite);
+    ligne("Le problème", dc.probleme);
+    ligne("Ce que ça lui coûte", dc.impact);
+    Object.keys(dc.axes && typeof dc.axes === "object" ? dc.axes : {}).forEach(function (k) {
+      var ax = axePar(k), x = dc.axes[k] || {};
+      if (!ax) return;
+      var morceaux = (Array.isArray(ax.champs) ? ax.champs : []).map(function (ch) {
+        var v = txt(x[ch[0]]);
+        return v ? minuscule(ch[1]) + " : " + (ch[0] === "dfe" && jourIso(v) ? dateFr(v) : v) : "";
+      }).filter(Boolean);
+      if (txt(x.note)) morceaux.push("« " + txt(x.note) + " »");
+      if (morceaux.length) ligne(ax.nom + (dc.axe_prioritaire === k ? " (sa priorité)" : ""), morceaux.join(", "));
+    });
+    if (jourIso(dc.ouverture)) ligne("Ouverture prévue", dateFr(dc.ouverture));
+    if (dc.decideur === "oui" || dc.decideur === "non") ligne("Interlocuteur", dc.decideur === "oui" ? "Il décide." : "Il ne décide pas seul.");
+    var dernier = el("p", { class: "rf-dernier", "data-cle": "resume-dernier", text: "" });
+    var actif = ACTIVES.indexOf(p.etape) >= 0;
+    return {
+      dernier: dernier,
+      noeud: el("div", { class: "resume-fiche", "data-cle": "resume-fiche" }, [
+        el("p", { class: "rf-etape" }, [
+          etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape),
+          actif ? el("strong", { text: isFinite(t) ? "Prochain contact " + minuscule(quand(t)) : "Pas de date de contact" }) : null,
+          txt(p.recommande_par) ? el("span", { text: "Recommandé par " + txt(p.recommande_par) }) : null
+        ]),
+        dernier,
+        lignes.length ? el("dl", { class: "lecture rf-decouverte" }, lignes) : null
+      ])
+    };
+  }
+
+  /* ---------- Quand ça décroche : les heures où la prospection porte ---------- */
+  var SEUIL_HEURE = 20;
+  function assurerStatsHeures() {
+    if (!sb || enCharge.heures) return;
+    if (etat.statsHeures && Date.now() - etat.statsHeures.le < 30 * 60000) return;
+    enCharge.heures = true;
+    sb.rpc("vad_heures_stats", { p_espace: ESPACE, p_jours: 60 }).then(function (res) {
+      var r = verifier(res) || {};
+      etat.statsHeures = { le: Date.now(), jours: num(r.jours) || 60, heures: Array.isArray(r.heures) ? r.heures.filter(function (x) { return x && isFinite(x.h); }) : [] };
+      enCharge.heures = false;
+      rendreSiCalme();
+    }, function () { enCharge.heures = false; etat.statsHeures = { le: Date.now(), jours: 60, heures: [], erreur: true }; });
+  }
+  function pourCent(v) { return Math.round(v * 100) + NB + "%"; }
+  // Le taux de décroché de l'équipe, heure par heure. Rien tant qu'il n'y a pas assez d'appels pour le dire.
+  function blocHeures() {
+    assurerStatsHeures();
+    var st = etat.statsHeures, par = {}, total = 0, heures = [];
+    if (!st || st.erreur) return null;
+    st.heures.forEach(function (x) { par[x.h] = x; total += num(x.appels); });
+    if (total < 60) return null;
+    for (var h = 8; h <= 19; h++) heures.push(h);
+    function taux(h) { return num(par[h].decroches) / num(par[h].appels); }
+    var solides = heures.filter(function (h) { return par[h] && num(par[h].appels) >= SEUIL_HEURE; });
+    if (solides.length < 3) return null;
+    var tri = solides.slice().sort(function (a, b) { return taux(b) - taux(a); });
+    var max = taux(tri[0]) || 0.01, creux = tri[tri.length - 1];
+    var phrase = taux(tri[0]) - taux(creux) >= 0.08 ? "Ça décroche le mieux à " + tri[0] + NB + "h (" + pourCent(taux(tri[0])) + ") et à " + tri[1] + NB + "h, le moins bien à " + creux + NB + "h (" + pourCent(taux(creux)) + "). " : "";
+    return el("div", { class: "heures", "data-cle": "heures" }, [
+      el("h3", { class: "sous-titre", text: "Quand ça décroche" }),
+      el("div", { class: "heures-barres", role: "img", "aria-label": "Part des appels de prospection qui décrochent, heure par heure : " + solides.map(function (h) { return h + " h, " + pourCent(taux(h)); }).join(" ; ") }, heures.map(function (h) {
+        var x = par[h], n = x ? num(x.appels) : 0, solide = n >= SEUIL_HEURE;
+        return el("div", { class: "heure-col" + (solide ? "" : " mince") + (solide && h === tri[0] ? " tete" : "") }, [
+          el("span", { class: "heure-val", text: solide ? pourCent(taux(h)) : "" }),
+          el("span", { class: "heure-barre" }, [el("i", { css: { height: (solide ? Math.max(6, taux(h) / max * 100) : (n ? 6 : 0)).toFixed(1) + "%" } })]),
+          el("span", { class: "heure-lib", text: h + NB + "h" })
+        ]);
+      })),
+      el("p", { class: "note-discrete", text: phrase + "Part des appels de prospection de l'équipe qui décrochent, sur " + st.jours + " jours. En gris : moins de " + SEUIL_HEURE + " appels, trop peu pour un taux." })
+    ]);
+  }
+  // Dans la journée : un mot quand l'heure en cours décroche nettement mieux, ou nettement moins bien, que la moyenne.
+  function conseilHeure() {
+    assurerStatsHeures();
+    var st = etat.statsHeures, appels = 0, decroches = 0;
+    if (!st || st.erreur) return null;
+    st.heures.forEach(function (x) { appels += num(x.appels); decroches += num(x.decroches); });
+    var h = Math.floor(minutesParis(Date.now()) / 60), x = st.heures.filter(function (y) { return y.h === h; })[0];
+    if (!x || appels < 60 || num(x.appels) < 30) return null;
+    var t = num(x.decroches) / num(x.appels), g = decroches / appels;
+    if (Math.abs(t - g) < 0.07) return null;
+    return el("p", { class: "note-discrete conseil-heure" + (t > g ? " bonne" : ""), "data-cle": "conseil-heure" }, [
+      el("strong", { text: t > g ? "C'est une heure qui décroche. " : "Heure creuse. " }),
+      "Entre " + h + NB + "h et " + (h + 1) + NB + "h, " + pourCent(t) + " des appels de prospection décrochent d'habitude, contre " + pourCent(g) + " sur la journée." + (t > g ? "" : " Bon moment pour trouver les numéros de vos prochains créateurs.")
+    ]);
+  }
+
+  /* ---------- Une fiche ouverte par son numéro : « ?tel=0612345678 » dans l'adresse ---------- */
+  // De quoi brancher 3CX : son client web peut ouvrir cette adresse à chaque appel entrant, avec le numéro de celui qui appelle.
+  function ouvrirParNumero() {
+    var m = /[?&]tel=([^&#]*)/.exec(String(location.search || ""));
+    if (!m || !peutSaisir) return;
+    var brut = m[1];
+    try { brut = decodeURIComponent(brut); } catch (e) { /* adresse abîmée : on garde le texte tel quel */ }
+    try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) { /* adresse inchangée */ }
+    var n = chiffresTel(brut);
+    if (/^33[1-9]\d{8}$/.test(n)) n = "0" + n.slice(2);
+    if (n.length < 6) return;
+    var l = (estAdmin ? etat.prospects : mesProspects()).filter(function (p) { return chiffresTel(p.telephone) === n; });
+    if (l.length === 1) ouvrirFiche(l[0]); else ouvrirPalette(telLisible(n));
+  }
+
+  /* ---------- Une vente, un rendez-vous : ça se fête, une seconde ---------- */
+  function feter(fort) {
+    if (mouvementReduit() || typeof document.body.animate !== "function") return;
+    var couleurs = ["#FF97CA", "#6490FF", "#BDDB81"], n = fort ? 44 : 14, zone = el("div", { class: "fete", "aria-hidden": "true" });
+    document.body.appendChild(zone);
+    for (var i = 0; i < n; i++) {
+      var p = el("i", { css: { background: couleurs[i % 3], left: (50 + (Math.random() - 0.5) * 24).toFixed(1) + "%" } });
+      zone.appendChild(p);
+      var dx = (Math.random() - 0.5) * (fort ? 900 : 440), dy = -(160 + Math.random() * (fort ? 520 : 240)), tour = (Math.random() - 0.5) * 900;
+      p.animate([
+        { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
+        { transform: "translate(" + (dx * 0.7).toFixed(0) + "px," + dy.toFixed(0) + "px) rotate(" + (tour * 0.6).toFixed(0) + "deg)", opacity: 1, offset: 0.45 },
+        { transform: "translate(" + dx.toFixed(0) + "px," + (dy + 280).toFixed(0) + "px) rotate(" + tour.toFixed(0) + "deg)", opacity: 0 }
+      ], { duration: 1400 + Math.random() * 700, easing: "cubic-bezier(.2,.7,.3,1)", fill: "forwards" });
+    }
+    setTimeout(function () { if (zone.parentNode) zone.parentNode.removeChild(zone); }, 2400);
+  }
+
+  /* ---------- La trame de rendez-vous : chiffrer avec lui, puis proposer avec ses mots ---------- */
+  function nombreSaisi(v) { var t = String(v === undefined || v === null ? "" : v).replace(/[\s  ]/g, "").replace(",", "."); return /^\d+(\.\d+)?$/.test(t) ? Number(t) : NaN; }
+  // Deux calculs faits avec le client : ce que coûtent ses appels ratés, et ce que coûte une journée d'arrêt.
+  // Appels ratés par semaine × ce que rapporte un client × 4 semaines ; chiffre d'affaires ÷ jours travaillés dans l'année.
+  function blocChiffrage(a) {
+    var d = a.decouverte;
+    if (!d.chiffrage || typeof d.chiffrage !== "object") d.chiffrage = {};
+    var ch = d.chiffrage, texteAppels = "", texteArret = "";
+    var resAppels = el("p", { class: "chiffre-resultat", "data-cle": "chiffre-appels", "aria-live": "polite" });
+    var resArret = el("p", { class: "chiffre-resultat", "data-cle": "chiffre-arret", "aria-live": "polite" });
+    function reprendre(texte) {
+      if (!texte) return;
+      var actuel = txt(d.impact), nouveau = !actuel ? texte : (actuel.indexOf(texte) >= 0 ? actuel : actuel + ", et " + texte);
+      var zone = document.getElementById("decouverte-impact");
+      if (zone) zone.value = nouveau;
+      saisirDecouverte(["impact"], nouveau);
+      annoncer("Chiffre repris : la reformulation et la réponse au prix le diront.");
+    }
+    var btnAppels = el("button", { type: "button", class: "bouton-clair", "data-cle": "chiffre-appels-reprendre", hidden: true, text: "Reprendre ce chiffre", onclick: function () { reprendre(texteAppels); } });
+    var btnArret = el("button", { type: "button", class: "bouton-clair", "data-cle": "chiffre-arret-reprendre", hidden: true, text: "Reprendre ce chiffre", onclick: function () { reprendre(texteArret); } });
+    function valeur(cle, defaut) { return ch[cle] === undefined ? defaut : ch[cle]; }
+    function calculer() {
+      var rates = nombreSaisi(ch.rates), panier = nombreSaisi(ch.panier);
+      if (rates > 0 && panier > 0) {
+        resAppels.textContent = pluriel(rates, "appel raté", "appels ratés") + " par semaine × " + euros(panier) + " × 4 semaines = " + euros(rates * panier * 4) + " par mois.";
+        texteAppels = "environ " + euros(rates * panier * 4) + " par mois d'appels ratés";
+      } else { resAppels.textContent = ""; texteAppels = ""; }
+      btnAppels.hidden = !texteAppels;
+      var ca = nombreSaisi(ch.ca), jours = nombreSaisi(valeur("jours", "5")), ferme = nombreSaisi(valeur("fermeture", "5"));
+      var an = jours > 0 && jours <= 7 && ferme >= 0 && ferme < 52 ? Math.round(jours * (52 - ferme)) : 0;
+      if (ca > 0 && an > 0) {
+        resArret.textContent = euros(ca) + " ÷ " + an + " jours travaillés = " + euros(ca / an) + " de chiffre d'affaires par jour.";
+        texteArret = "environ " + euros(ca / an) + " de chiffre d'affaires par jour d'arrêt";
+      } else { resArret.textContent = ""; texteArret = ""; }
+      btnArret.hidden = !texteArret;
+    }
+    function champNb(cle, lib, defaut, exemple) {
+      var n = el("input", { class: "saisie", type: "text", inputmode: "decimal", id: "chiffre-" + cle, "data-cle": "chiffre-" + cle, autocomplete: "off", placeholder: exemple || null });
+      n.value = valeur(cle, defaut || "");
+      n.addEventListener("input", function () { ch[cle] = n.value; sauverBientot(); calculer(); });
+      return el("div", { class: "champ" }, [el("label", { class: "champ-lib", for: "chiffre-" + cle, text: lib }), n]);
+    }
+    var corps = el("div", { class: "chiffrage" }, [
+      el("div", { class: "chiffrage-bloc" }, [
+        el("p", { class: "cs-titre", text: "Ses appels ratés" }),
+        el("div", { class: "deux" }, [champNb("rates", "Appels ratés par semaine", "", "ex. 8"), champNb("panier", "Un client lui rapporte, en moyenne (€)", "", "ex. 150")]),
+        resAppels, btnAppels
+      ]),
+      el("div", { class: "chiffrage-bloc" }, [
+        el("p", { class: "cs-titre", text: "Une journée d'arrêt" }),
+        champNb("ca", "Chiffre d'affaires annuel (€)", "", "ex. 350 000"),
+        el("div", { class: "deux" }, [champNb("jours", "Jours travaillés par semaine", "5"), champNb("fermeture", "Semaines de fermeture par an", "5")]),
+        resArret, btnArret
+      ])
+    ]);
+    calculer();
+    return replier("chiffrer", "Chiffrer avec lui : appels ratés, journée d'arrêt", [
+      el("p", { class: "champ-aide", text: "Posez la question simplement, comme une question technique. Laissez-le réagir au chiffre : vous le ressortirez à la proposition." }),
+      corps
+    ], !!(txt(ch.rates) || txt(ch.ca)));
+  }
+  // À la proposition : ce qu'il a dit, avec ses mots, juste au-dessus des arguments.
+  function ilVousADit(a) {
+    var v = valeursReformulation(a), l = [["Sa priorité", v.priorite], ["Le problème", v.probleme], ["Ce que ça lui coûte", v.impact]].filter(function (x) { return x[1]; });
+    if (!l.length) return null;
+    return el("div", { class: "carte-script discret il-a-dit", "data-cle": "il-a-dit" }, [
+      el("p", { class: "cs-titre", text: "Il vous a dit" }),
+      el("dl", { class: "lecture" }, l.map(function (x) { return el("div", { class: "lecture-ligne" }, [el("dt", { text: x[0] }), el("dd", { text: x[1] })]); }))
+    ]);
+  }
+  // « Appels simultanés : plus aucun client ne tombe sur occupé » : le nom de l'argument en gras, le bénéfice ensuite.
+  function ligneArgument(t) {
+    var texte = String(t || ""), i = texte.indexOf(" : ");
+    return el("li", {}, i > 0 && i < 60 ? [el("strong", { text: texte.slice(0, i) }), document.createTextNode(" : " + texte.slice(i + 3))] : [document.createTextNode(texte)]);
+  }
+  // Les arguments des sujets abordés en découverte, sa priorité d'abord. Les autres sujets restent à un clic.
+  function blocArguments(a) {
+    var d = a.decouverte || {}, l = axes().filter(function (x) { return tableau(x.arguments).length; });
+    if (!l.length) return null;
+    var prio = d.axe_prioritaire;
+    var vus = l.filter(function (x) { var k = cleAxe(x); return k === prio || axeRempli(d, k); }).sort(function (x, y) { return (cleAxe(y) === prio) - (cleAxe(x) === prio); });
+    var autres = l.filter(function (x) { return vus.indexOf(x) < 0; });
+    function liste(x) { return el("ul", { class: "points arguments" }, tableau(x.arguments).map(ligneArgument)); }
+    function plie(x) {
+      var cle = "args-" + cleAxe(x);
+      etat.siOuverts = etat.siOuverts || {};
+      var n = el("details", { class: "si-script", open: etat.siOuverts[cle] ? true : null }, [el("summary", { "data-cle": cle }, [el("span", { text: x.nom })]), liste(x)]);
+      n.addEventListener("toggle", function () { etat.siOuverts[cle] = n.open; });
+      return n;
+    }
+    return el("div", { class: "arguments-zone", "data-cle": "arguments" }, vus.map(function (x) {
+      return el("div", { class: "carte-script arguments-carte" }, [el("p", { class: "cs-titre", text: "Vos arguments : " + minuscule(x.nom) + (cleAxe(x) === prio ? ", sa priorité" : "") }), liste(x)]);
+    }).concat(autres.length ? [el("div", { class: "si-scripts" }, [el("p", { class: "si-titre", text: vus.length ? "Les autres sujets" : "Vos arguments, sujet par sujet" })].concat(autres.map(plie)))] : []));
+  }
+
   /* ---------- Rendu ---------- */
 
   function pret() { return COLLECTIONS.every(function (c) { return etat.charge[c]; }) && etat.tables; }
@@ -7028,6 +7812,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       }
     }
     etat.differe = false;
+    majTitre();
+  }
+  // Le titre de l'onglet dit combien de contacts attendent : utile quand le copilote est derrière une autre fenêtre.
+  var TITRE_PAGE = document.title;
+  function majTitre() {
+    var n = 0;
+    if (peutSaisir && pret()) { var r = aRappeler(); n = r.retard + r.jour; }
+    var t = (n ? "(" + n + ") " : "") + TITRE_PAGE;
+    if (etat.titreAvant) etat.titreAvant = t; else if (document.title !== t) document.title = t;
   }
   // Les mises à jour venues du serveur attendent qu'on ait fini d'écrire dans une feuille ou pendant un appel.
   function rendreSiCalme() {
@@ -7070,6 +7863,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       etat.majMur = Date.now();
       if (etat.vue === "createurs") entrerCreateurs();
       rendre();
+      ouvrirParNumero();
     }, function () { etat.erreur = true; rendre(); });
 
     // Les chiffres se mettent à jour seuls : toutes les deux minutes sur le copilote, toutes les minutes sur le mur.
@@ -7089,18 +7883,39 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   document.addEventListener("click", function () { if (etat.menu) { etat.menu = false; rendre(); } });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
+    if (palette) return;
+    var k = e.key, enSaisie = estSaisie(document.activeElement);
+    if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && (k === "k" || k === "K")) { e.preventDefault(); ouvrirPalette(); return; }
+    if (k === "Escape") {
       if (feuille) { fermerFeuille(); return; }
       if (etat.menu) { etat.menu = false; rendre(); var b = app.querySelector(".compte-btn"); if (b) b.focus(); return; }
       if (etat.vue === "journee" && etat.saisie.pas !== "decroche") { reculerSaisie(); return; }
+      // Sortir d'un champ rend la main aux raccourcis.
+      if (enSaisie && app.contains(document.activeElement)) { try { document.activeElement.blur(); } catch (err) { /* sans focus */ } }
       return;
     }
-    // La saisie rapide au clavier : 1 à 4 pour choisir, retour arrière pour revenir.
-    if (etat.vue !== "journee" || feuille || e.altKey || e.ctrlKey || e.metaKey || !pret() || !peutSaisir) return;
-    if (estSaisie(document.activeElement)) return;
-    var pas = PAS[etat.saisie.pas], n = Number(e.key);
-    if (pas && n >= 1 && n <= pas.o.length && /^[1-9]$/.test(e.key)) { e.preventDefault(); choisirSaisie(pas.o[n - 1][0]); return; }
-    if (e.key === "Backspace" && etat.saisie.pas !== "decroche") { e.preventDefault(); reculerSaisie(); }
+    // Ctrl+Entrée : enregistrer l'appel, même en pleine saisie. Hors de la conclusion, on y va.
+    if ((e.ctrlKey || e.metaKey) && k === "Enter" && !feuille && etat.vue === "appel" && etat.appel && pret()) {
+      e.preventDefault();
+      var enreg = app.querySelector('[data-cle="enregistrer-appel"]');
+      if (enreg) { if (!enreg.disabled) enreg.click(); } else allerEtape("conclusion");
+      return;
+    }
+    if (feuille || e.altKey || e.ctrlKey || e.metaKey || !pret() || enSaisie) return;
+    if (k === "/") { e.preventDefault(); ouvrirPalette(); return; }
+    if (k === "?") { e.preventDefault(); ouvrirAide(); return; }
+    if (!peutSaisir) return;
+    if (etat.vue === "journee") {
+      // La saisie rapide au clavier : 1 à 4 pour choisir, retour arrière pour revenir.
+      var pas = PAS[etat.saisie.pas], n = Number(k);
+      if (pas && n >= 1 && n <= pas.o.length && /^[1-9]$/.test(k)) { e.preventDefault(); if (Date.now() >= gardeChiffres) choisirSaisie(pas.o[n - 1][0]); return; }
+      if (k === "Backspace" && etat.saisie.pas !== "decroche") { e.preventDefault(); reculerSaisie(); return; }
+      var cible = k === "a" || k === "A" ? "prochain-appeler" : (k === "p" || k === "P" ? "prochain-passer" : "");
+      var bouton = cible ? app.querySelector('[data-cle="' + cible + '"]') : null;
+      if (bouton) { e.preventDefault(); bouton.click(); }
+      return;
+    }
+    if (etat.vue === "appel" && etat.appel) raccourciAppel(e);
   });
   document.addEventListener("focusin", function (e) { if (estSaisie(e.target)) document.body.classList.add("en-saisie"); });
   document.addEventListener("focusout", function () {
