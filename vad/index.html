@@ -3954,7 +3954,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ]);
   }
 
-  /* Le suivi après la vente : dix jours après, avant la fin de la première année, et un merci à qui a recommandé */
+  /* Après une vente : le merci à la personne qui a recommandé le client */
   function chargerSuivis() {
     if (!peutSaisir) return Promise.resolve();
     return sb.from("vad_suivis").select("*").eq("espace", ESPACE).is("fait_le", null).order("prevu_le", { ascending: true }).range(0, 499)
@@ -3966,21 +3966,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return (etat.suivis || []).filter(function (x) { return !x.fait_le && x.conseiller === compte.id && String(x.prevu_le).slice(0, 10) <= auj; })
       .sort(function (x, y) { return String(x.prevu_le) < String(y.prevu_le) ? -1 : 1; });
   }
-  // Les suivis d'une vente, comptés depuis la signature : l'installation dix jours après, le point avant la fin de la première année,
-  // et le merci à la personne qui a recommandé. Une date déjà passée (vente saisie en retard) est ramenée à aujourd'hui.
-  function listeSuivisVente(prospectId, fi, source, signee) {
-    var auj = aujourdhui(), base = jourIso(signee) || auj;
-    function pasAvant(j) { return ouvreApres(j < auj ? auj : j); }
-    var l = [
-      { prospect: prospectId, type: "installation", prevu_le: pasAvant(decaler(base, 10)) },
-      { prospect: prospectId, type: "remise", prevu_le: pasAvant(plusMois(base, 11)) }
-    ];
-    if (source === "recommandation" && fi.recommande_par_fiche) l.push({ prospect: fi.recommande_par_fiche, type: "merci", prevu_le: ouvreApres(auj), recommande: (txt(fi.contact) || txt(fi.societe)).slice(0, 200), note: (nomFiche(fi) + " vient de signer, sur sa recommandation.").slice(0, 400) });
-    return l;
+  // Après une vente, un seul suivi : le merci à la personne qui a recommandé le client, le jour même.
+  // Pas d'appel d'installation ni de point à onze mois : les conseillers restent sur la prospection.
+  function listeSuivisVente(fi, source) {
+    if (source !== "recommandation" || !fi.recommande_par_fiche) return [];
+    return [{ prospect: fi.recommande_par_fiche, type: "merci", prevu_le: ouvreApres(aujourdhui()), recommande: (txt(fi.contact) || txt(fi.societe)).slice(0, 200), note: (nomFiche(fi) + " vient de signer, sur sa recommandation.").slice(0, 400) }];
   }
   function creerSuivisVente(a, prospectId, source) {
     if (!prospectId) { a.ids.suivis = []; return Promise.resolve(); }
-    var l = listeSuivisVente(prospectId, a.fiche || {}, source, aujourdhui());
+    var l = listeSuivisVente(a.fiche || {}, source);
     return Promise.all(l.map(function (x) { return inserer("vad_suivis", x); })).then(function (rows) {
       a.ids.suivis = rows.map(function (r) { return r.id; });
       rows.forEach(poserSuivi);
@@ -4004,12 +3998,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return (etat.prospects || []).filter(function (p) { return p.conseiller === compte.id && cleSociete(txt(p.societe) || txt(p.contact)) === cle; })
       .sort(function (x, y) { return ((y.etape === "signe") - (x.etape === "signe")) || (String(x.maj_le) < String(y.maj_le) ? 1 : -1); })[0] || null;
   }
-  // Les suivis d'une vente saisie à la main, sans doublon avec un suivi encore ouvert sur la même fiche.
+  // Le merci d'une vente saisie à la main, sans doublon avec un merci encore ouvert pour le même client.
   // Un suivi refusé n'empêche pas la vente d'être enregistrée.
   function creerSuivisSaisie(p, vente) {
     var ouverts = (etat.suivis || []).filter(function (y) { return !y.fait_le; });
-    var l = listeSuivisVente(p.id, p, p.recommande_par_fiche ? "recommandation" : vente.source, vente.signee_le).filter(function (x) {
-      return !ouverts.some(function (y) { return y.prospect === x.prospect && y.type === x.type; });
+    var l = listeSuivisVente(p, p.recommande_par_fiche ? "recommandation" : vente.source).filter(function (x) {
+      return !ouverts.some(function (y) { return y.prospect === x.prospect && y.type === x.type && txt(y.recommande) === txt(x.recommande); });
     });
     return Promise.all(l.map(function (x) { return inserer("vad_suivis", x).then(null, function () { return null; }); }))
       .then(function (rows) { rows = rows.filter(Boolean); rows.forEach(poserSuivi); return rows; });
@@ -5963,7 +5957,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ouvrirFeuille({
       titre: neuve ? "Ajouter une vente" : "Vente du " + dateFr(v.signee_le), champs: champs, large: true,
       boutons: neuve ? null : [boutonInes(Object.assign({ societe: v.societe }, v.prospect ? prospectPar(v.prospect) : null), { marge: v.marge, actes: v.actes, engageants: v.actes_engageants, mrl: v.actes_mrl, fp: v.full_prospect, ap: v.accompagnement_pro, offres: v.offres, note: v.note })],
-      avant: neuve ? el("p", { class: "feuille-intro", text: "Pour une vente signée hors appel guidé, celles de l'appel guidé s'enregistrent toutes seules. Écrivez la société comme sur sa fiche : les suivis du client se programment tout seuls." }) : null,
+      avant: neuve ? el("p", { class: "feuille-intro", text: "Pour une vente signée hors appel guidé. Celles de l'appel guidé s'enregistrent toutes seules." }) : null,
       enregistrer: function (x) {
         var marge = montantSaisi(x.marge), actes = Number(x.actes), eng = Number(x.actes_engageants || 0);
         if (!jourIso(x.signee_le)) return Promise.reject({ texte: "Indiquez la date de signature." });
@@ -5988,10 +5982,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         var ecriture = neuve ? inserer("vad_ventes", c) : majLigne("vad_ventes", v.id, c);
         return ecriture.then(function (n) {
           return (fiche ? creerSuivisSaisie(fiche, c) : Promise.resolve([])).then(function (suivis) {
-            var inst = suivis.filter(function (y) { return y.type === "installation"; })[0];
-            var texte = !neuve ? (c.annulee_le && !v.annulee_le ? "Annulation enregistrée." : "Vente enregistrée.")
-              : fiche ? "Vente ajoutée." + (inst ? " Suivi d'installation prévu le " + jourEtAn(inst.prevu_le) + "." : "")
-              : "Vente ajoutée." + (txt(c.societe) ? " Aucune fiche à ce nom, donc pas de suivi prévu." : "");
+            var texte = !neuve ? (c.annulee_le && !v.annulee_le ? "Annulation enregistrée." : "Vente enregistrée.") : "Vente ajoutée.";
             annoncer(texte, neuve ? function () {
               var ids = suivis.map(function (y) { return y.id; });
               return Promise.all(ids.map(function (id) { return supprimerLigne("vad_suivis", id); })).then(function () {
@@ -6105,7 +6096,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ["proposition", "Proposer", [["points", "Les points, un par ligne", 4, "lignes"], ["accompagnement", "L'Accompagnement Pro", 3], ["engageants", "Les services engageants", 2], ["prix", "Le prix", 2]]],
     ["negociation", "Négocier et conclure", [["froid", "Froid", 2], ["tiede", "Tiède", 2], ["chaud", "Chaud", 2], ["assumptif", "Le choix de la date", 2], ["alternatif", "Le choix entre deux options", 2], ["urgence", "La fin d'engagement", 2], ["concession", "Une concession", 2]]],
     ["conclusion", "Conclure l'appel", [["signature", "La signature", 2], ["relance", "La prochaine étape", 2], ["sortie", "Avant de raccrocher, une ligne par point", 4, "lignes"], ["recommandation", "La recommandation, une ligne par point", 5, "lignes"]]],
-    ["suivi", "Suivre un client", [["installation", "Dix jours après la vente", 3], ["remise", "Avant la fin de la première année", 4], ["merci", "Remercier qui a recommandé", 3], ["conseil", "Le conseil", 2]]],
+    ["suivi", "Remercier qui a recommandé", [["merci", "Quand le client recommandé signe", 3]]],
     ["messages", "Les messages écrits", [["confirmation_objet", "Confirmation du rendez-vous : l'objet", 1], ["confirmation", "Confirmation du rendez-vous : le texte", 10], ["veille_objet", "Rappel la veille : l'objet", 1], ["veille", "Rappel la veille : le texte", 6], ["relance_objet", "Après six essais : l'objet", 1], ["relance", "Après six essais : le texte", 10], ["repondeur", "Le message sur le répondeur", 2]]]
   ];
   function blocEtapesScripts() {
