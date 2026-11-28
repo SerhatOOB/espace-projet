@@ -1768,6 +1768,30 @@ body.vue-mur{
 .reco-liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600}
 .reco-liste li{display:flex;align-items:center;gap:8px}
 .reco-lien{margin:0}
+/* Suivis, confirmations, relances, chiffres des scripts */
+.reco-form{display:flex;flex-direction:column;gap:12px}
+.lecture-script{white-space:pre-line}
+.contacts .contact.fait .contact-nom{opacity:.6}
+.confirmer-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 12px}
+.suivi-feuille{display:flex;flex-direction:column;gap:12px}
+.suivi-reco{display:flex;flex-direction:column;gap:10px;padding:14px 16px;background:var(--fond-2);border:1px solid var(--filet)}
+.suivi-reco .champ{margin:4px 0}
+.confirmation{display:flex;flex-direction:column;gap:8px;margin-top:8px;padding-top:12px;border-top:1px solid var(--filet)}
+.auto-rappel{margin-top:6px}
+.echeance-raccourci{margin:4px 0 0}
+.ouverture{max-width:280px}
+.ab-repondeur{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.ab-nd-pause{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 14px;background:var(--fond-2);border:1px solid var(--filet)}
+.ab-nd-pause p{margin:0;flex-basis:100%;font-size:14px}
+.sc-stats{font-size:13.5px;color:var(--attenue)}
+.obj-stats{font-size:13px;color:var(--discret)}
+.obj-frequentes{display:flex;flex-direction:column;gap:10px;padding:14px 18px;margin-bottom:14px;background:var(--fond-2);border:1px solid var(--filet)}
+.obj-top{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.obj-top li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 14px}
+.obj-top-chiffre{font-weight:700;white-space:nowrap}
+.honores-origine{margin-top:10px}
+.table-donnees.motifs th[scope=row]{font-weight:600;white-space:normal}
+@media screen and (max-width:759px){.contact > .confirmer-actions{grid-area:action;justify-self:start;justify-content:flex-start;margin-left:92px}}
 </style>
 </head>
 <body>
@@ -2538,6 +2562,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   var NS = "http://www.w3.org/2000/svg";
   var ICONES = {
+    mail: "M2.6 3.8h10.8c.6 0 1 .4 1 1v6.4c0 .6-.4 1-1 1H2.6c-.6 0-1-.4-1-1V4.8c0-.6.4-1 1-1zM1.9 4.4 8 8.9l6.1-4.5",
     journee: "M3.4 3.4h9.2c.5 0 1 .4 1 1v8.2c0 .5-.5 1-1 1H3.4c-.6 0-1-.5-1-1V4.4c0-.6.4-1 1-1zM2.4 6.8h11.2M5.4 2v2.6M10.6 2v2.6",
     appel: "M5.4 2.6 6.6 5.3c.2.4.1.9-.3 1.2l-1 .8c.7 1.5 1.9 2.7 3.4 3.4l.8-1c.3-.4.8-.5 1.2-.3l2.7 1.2c.4.2.6.6.5 1l-.4 1.6c-.1.5-.6.8-1.1.8C6.9 13.8 2.2 9.1 2 3.6c0-.5.3-1 .8-1.1l1.6-.4c.4-.1.8.1 1 .5z",
     prospects: "M6 7.2a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8zM1.8 13.4c.3-2.4 2-3.8 4.2-3.8s3.9 1.4 4.2 3.8M10.6 2.6a2.3 2.3 0 0 1 0 4.4M12 9.8c1.2.5 2 1.6 2.2 3.4",
@@ -2967,7 +2992,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* ---------- Les totaux et ce qu'ils disent ---------- */
 
   // Chaque total compte le jour de son événement : la vente à sa signature, l'annulation le jour où elle arrive.
-  var CHAMPS_ACT = ["appels", "decroches", "argumentes", "r1p", "r1_tenus", "r1_signes", "r2", "ap_proposes", "rdv_tenus", "rdv_fp", "ventes", "marge", "actes", "engageants", "actes_mrl", "full_prospect", "accompagnement", "annulations", "actes_annules", "marge_annulee", "marge_fp_nette", "recos"];
+  var CHAMPS_ACT = ["appels", "decroches", "argumentes", "r1p", "r1_tenus", "r1_signes", "r2", "ap_proposes", "rdv_tenus", "rdv_fp", "ventes", "marge", "actes", "engageants", "actes_mrl", "full_prospect", "accompagnement", "annulations", "actes_annules", "marge_annulee", "marge_fp_nette", "recos", "r1_honores", "r1_manques"];
   function somme(lignes, filtre) {
     var t = {};
     CHAMPS_ACT.forEach(function (k) { t[k] = 0; });
@@ -3096,7 +3121,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       .then(function (l) { if (m === etat.mois) { etat.ventes = l; etat.ventesDe = m; } });
   }
   function chargerActivite(m) {
-    return sb.rpc("vad_activite", { p_espace: ESPACE, p_debut: premierJour(m), p_fin: dernierJour(m) }).then(function (res) { etat.activite[m] = verifier(res) || []; });
+    etat.annulations = etat.annulations || {};
+    return Promise.all([
+      sb.rpc("vad_activite", { p_espace: ESPACE, p_debut: premierJour(m), p_fin: dernierJour(m) }).then(function (res) { etat.activite[m] = verifier(res) || []; }),
+      sb.rpc("vad_annulations", { p_espace: ESPACE, p_debut: premierJour(m), p_fin: dernierJour(m) }).then(function (res) { etat.annulations[m] = verifier(res) || []; }, function () { etat.annulations[m] = etat.annulations[m] || []; })
+    ]);
   }
   function chargerMembres() {
     return P.membres ? P.membres.lister().then(function (l) { etat.membres = l || []; }) : Promise.resolve();
@@ -3122,7 +3151,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   // Après une saisie, et régulièrement : les fiches, les appels du jour, les totaux du mois en cours et du mois regardé.
   function rafraichir() {
     var mc = moisDe(aujourdhui());
-    var l = [chargerProspects(), chargerAppelsJour(), chargerActivite(mc)];
+    var l = [chargerProspects(), chargerAppelsJour(), chargerActivite(mc), chargerSuivis()];
     if (etat.mois && etat.mois !== mc) l.push(chargerActivite(etat.mois));
     if (peutSaisir && etat.mois) l.push(chargerVentes(etat.mois));
     return Promise.all(l).then(function () { etat.tables = true; etat.majMur = Date.now(); rendreSiCalme(); }, function () { if (!etat.tables) etat.erreur = true; rendreSiCalme(); });
@@ -3370,7 +3399,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   var BROUILLON = "vad-appel";
   function natureDe(etape) { return etape === "r1p" ? "r1" : (etape === "r2" ? "r2" : "prospection"); }
-  function ficheVide() { return { societe: "", contact: "", telephone: "", email: "", ville: "", siret: "", code_insee: "", activite: "", effectif: "", source: "prospection", full_prospect: false, note: "", recommande_par: "" }; }
+  function ficheVide() { return { societe: "", contact: "", telephone: "", email: "", ville: "", siret: "", code_insee: "", activite: "", effectif: "", source: "prospection", full_prospect: false, note: "", recommande_par: "", recommande_par_fiche: null }; }
   function copieFiche(p) {
     var f = ficheVide();
     if (p) Object.keys(f).forEach(function (k) { f[k] = p[k] === null || p[k] === undefined ? f[k] : p[k]; });
@@ -3454,7 +3483,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
 
   // Les repères d'un script : {prenom}, {contact}, {societe}, {entreprise} et ceux de la reformulation.
-  var TROUS = { prenom: "votre prénom", contact: "le nom du contact", societe: "OOB", entreprise: "la société", priorite: "sa priorité", probleme: "le problème", impact: "ce que ça lui coûte", axe: "l'axe", dfe: "la fin d'engagement", recommandeur: "la personne qui recommande" };
+  var TROUS = { prenom: "votre prénom", contact: "le nom du contact", societe: "OOB", entreprise: "la société", priorite: "sa priorité", probleme: "le problème", impact: "ce que ça lui coûte", axe: "l'axe", dfe: "la fin d'engagement", recommandeur: "la personne qui recommande", recommande: "le client recommandé", date_rdv: "la date du rendez-vous", telephone: "son numéro", agenda: "le lien d'agenda" };
   var CHAMP_DU_TROU = { priorite: "decouverte-priorite", probleme: "decouverte-probleme", impact: "decouverte-impact", axe: "decouverte-axe", dfe: "decouverte-dfe" };
   function valeursReformulation(a) {
     var d = a.decouverte || {}, ax = axePar(d.axe_prioritaire), axd = (d.axes || {})[d.axe_prioritaire] || {};
@@ -3483,7 +3512,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (!m) return;
       var k = /^\{([a-z_]+)\}$/.exec(m);
       if (k) {
-        var v = valeurTrou(k[1]);
+        var v = opts.valeurs && Object.prototype.hasOwnProperty.call(opts.valeurs, k[1]) ? txt(opts.valeurs[k[1]]) : valeurTrou(k[1]);
         if (v) { elider(p, v); var apres = p.lastChild && p.lastChild.nodeType === 3 && /'$/.test(p.lastChild.nodeValue); p.appendChild(el("mark", { class: "rempli" + (apres ? " apres-elision" : ""), text: v })); return; }
         if (opts.cliquable && CHAMP_DU_TROU[k[1]]) {
           p.appendChild(el("button", { type: "button", class: "trou", "data-cle": "trou-" + k[1], text: TROUS[k[1]] || k[1], onclick: function () { allerAuChamp(k[1]); } }));
@@ -3632,6 +3661,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return [
       enTeteEtape("Découverte", "Situation, problème, implication, besoin : faites-le parler, et notez avec ses mots."),
       el("div", { class: "decideur" }, [el("p", { class: "champ-lib", text: "Interlocuteur" }), decideur]),
+      estCreateur(a) ? champOuverture(d) : null,
       onglets,
       el("div", { class: "axe-panneau", id: "axe-panneau", role: "tabpanel" }, [
         el("div", { class: "spins" }, spin),
@@ -3786,6 +3816,386 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ];
   }
 
+  /* ---------- Les messages écrits, les dates qui rappellent, les suivis ---------- */
+  var MESSAGES_DEFAUT = {"confirmation_objet": "Notre rendez-vous du {date_rdv}", "confirmation": "Bonjour {contact},\n\nMerci pour notre échange. Je vous confirme notre rendez-vous téléphonique du {date_rdv}.\nJe vous appellerai au {telephone}.\n\nSi vous avez votre dernière facture de téléphone et d'internet sous la main, on ira plus vite.\n\nPour l'ajouter à votre agenda : {agenda}\n\nUn empêchement ? Répondez simplement à ce mail, on trouvera un autre moment.\n\n{prenom}\n{societe}, partenaire Orange", "veille_objet": "Notre rendez-vous de {date_rdv}", "veille": "Bonjour {contact},\n\nPetit rappel : je vous appelle {date_rdv}, comme prévu.\nSi l'horaire ne vous convient plus, répondez à ce message et on le décale.\n\n{prenom}\n{societe}, partenaire Orange", "relance_objet": "{entreprise} : je n'arrive pas à vous joindre", "relance": "Bonjour {contact},\n\nJ'ai essayé de vous joindre plusieurs fois ces derniers jours, sans succès. Je suis {prenom}, de {societe}, partenaire Orange : j'aide les petites entreprises à y voir clair sur leurs téléphones et leur internet.\n\nSi c'est plus simple, répondez à ce mail avec un moment qui vous arrange, et je vous rappelle à ce moment-là.\n\nEt si le sujet ne vous intéresse pas, dites-le-moi simplement : je ne vous relancerai plus.\n\n{prenom}\n{societe}, partenaire Orange", "repondeur": "Bonjour {contact}, c'est {prenom}, de {societe}, partenaire Orange. Je vous rappelle [jour] en fin de journée, ou rappelez-moi si c'est plus simple. Bonne journée."};
+  var SUIVI_DEFAUT = {"installation": "Bonjour {contact}, c'est {prenom}, de {societe}. Je vous appelle comme promis : depuis la mise en service, tout fonctionne comme prévu ?", "remise": "Bonjour {contact}, c'est {prenom}, de {societe}. Ça fait bientôt un an : je voulais faire le point avant la fin de votre première année, pour que rien ne vous surprenne sur la facture. Tout se passe bien ? Et chez vous, quelque chose a changé : une embauche, un nouveau local, une ligne à ajouter ?", "merci": "Bonjour {contact}, c'est {prenom}, de {societe}. Je voulais vous remercier : {recommande} a signé chez nous, grâce à vous. Si quelqu'un d'autre autour de vous a besoin du même coup de main, je m'en occupe avec le même soin.", "conseil": "Un souci ? Notez-le et réglez-le avant qu'il ne tourne à l'annulation. Tout va bien ? C'est le moment de demander une recommandation."};
+  var TYPES_SUIVI = { installation: "Dix jours après la vente", remise: "Avant la fin de la première année", merci: "Remercier pour une recommandation" };
+  var ISSUES_SUIVI = {
+    installation: [["ok", "Tout va bien"], ["souci", "Un souci à régler"], ["injoignable", "Pas joignable"], ["plus_tard", "Plus tard"]],
+    merci: [["ok", "C'est fait"], ["injoignable", "Pas joignable"]]
+  };
+  var MOTIFS_ANNULATION = ["Le client a changé d'avis", "Son opérateur l'a retenu", "Dossier incomplet ou refusé", "Pas éligible ou installation impossible", "Prix ou engagement mal compris", "Erreur de saisie ou doublon", "Autre"];
+  // Six essais sans réponse d'affilée : la fiche fait une pause de quinze jours.
+  var SEUIL_PAUSE = 6;
+  // Les trois moments de la journée où l'on retente : matin, début d'après-midi, fin de journée.
+  var CRENEAUX = [10 * 60, 14 * 60 + 15, 17 * 60 + 30];
+  var FACULTATIFS = ["telephone", "agenda", "recommande"];
+
+  function message(k) { var m = script("messages"); return typeof m[k] === "string" && m[k].trim() ? m[k] : (MESSAGES_DEFAUT[k] || ""); }
+  function texteSuivi(k) { var m = script("suivi"); return typeof m[k] === "string" && m[k].trim() ? m[k] : (SUIVI_DEFAUT[k] || ""); }
+  function aideEtape(id) {
+    if (id === "reformulation") return "Repères de la reformulation : {priorite}, {probleme}, {impact}, {axe} et {dfe} (fin d'engagement de l'axe prioritaire).";
+    if (id === "messages") return "Repères : {contact}, {prenom} (le conseiller), {societe} (OOB), {entreprise}, {date_rdv} (le jour et l'heure), {telephone} (son numéro), {agenda} (le lien pour l'ajouter à son agenda). Une ligne dont le numéro ou le lien manque disparaît du message.";
+    if (id === "suivi") return "Repères : {contact}, {prenom} (le conseiller), {societe} (OOB), {entreprise}, {recommande} (le client recommandé qui vient de signer).";
+    return AIDE_REPERES;
+  }
+  // Un message écrit, repères remplis. Une ligne dont un repère facultatif reste vide disparaît.
+  function remplirTexte(t, valeurs) {
+    return String(t || "").split("\n").map(function (ligne) {
+      var manque = false;
+      var r = ligne.replace(/\{([a-z_]+)\}/g, function (m, k) {
+        var v = Object.prototype.hasOwnProperty.call(valeurs, k) ? txt(valeurs[k]) : txt(valeurTrou(k));
+        if (!v && FACULTATIFS.indexOf(k) >= 0) manque = true;
+        return v;
+      });
+      if (manque) return null;
+      r = r.replace(/ +,/g, ",").replace(/ {2,}/g, " ");
+      if (/^\s*:\s*/.test(r)) r = majuscule(r.replace(/^\s*:\s*/, ""));
+      return r;
+    }).filter(function (l) { return l !== null; }).join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+  function valeursMessage(f, extra) {
+    f = f || {};
+    return Object.assign({ contact: txt(f.contact), entreprise: txt(f.societe), telephone: txt(f.telephone), prenom: prenomDe(compte.nom), societe: txt(reglages().societe) }, extra || {});
+  }
+  function mailValide(m) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(txt(m)); }
+  function lienMail(a, objet, corps) { return "mailto:" + txt(a) + "?subject=" + encodeURIComponent(objet) + "&body=" + encodeURIComponent(String(corps).replace(/\r?\n/g, "\r\n")); }
+  // « lundi 15 mars », avec l'année quand ce n'est pas cette année.
+  function jourEtAn(j) { return minuscule(jourLong(j)) + (j.slice(0, 4) !== aujourdhui().slice(0, 4) ? " " + j.slice(0, 4) : ""); }
+  function prochainOuvre(j) { var d = decaler(j, 1); while (!estOuvre(d)) d = decaler(d, 1); return d; }
+  function ouvreApres(j) { var d = j; while (!estOuvre(d)) d = decaler(d, 1); return d; }
+  function plusMois(j, n) {
+    var d = enDate(j), jour = d.getUTCDate();
+    d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() + n);
+    var fin = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate();
+    d.setUTCDate(Math.min(jour, fin));
+    return d.toISOString().slice(0, 10);
+  }
+  // « mardi 3 décembre à 10 h », ou « demain à 10 h » quand on écrit la veille.
+  function dateRdv(ms, relatif) {
+    var j = jourParis(new Date(ms));
+    if (relatif && j === decaler(aujourdhui(), 1)) return "demain à " + heureFr(ms);
+    return minuscule(jourLong(j)) + " à " + heureFr(ms);
+  }
+  // Un lien court vers la page qui ajoute le rendez-vous à n'importe quel agenda. Aucune donnée personnelle dedans.
+  function lienAgenda(ms, minutes) {
+    var dd = new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""), base;
+    try { base = new URL("agenda.html", window.location.href).href.split("#")[0]; } catch (e) { base = "agenda.html"; }
+    return base + "#d=" + dd + "&m=" + (minutes || 30) + "&s=" + encodeURIComponent(txt(reglages().societe) || "OOB");
+  }
+  function messageConfirmation(a) {
+    if (!jourIso(a.rdv.date) || heureMin(a.rdv.heure) < 0) return null;
+    var t = instantParis(a.rdv.date, heureMin(a.rdv.heure)), v = valeursMessage(a.fiche, { date_rdv: dateRdv(t, false), agenda: lienAgenda(t, 30) });
+    return { objet: remplirTexte(message("confirmation_objet"), v), corps: remplirTexte(message("confirmation"), v) };
+  }
+  function messageVeille(p) {
+    var t = msDe(p.rappel_le), v = valeursMessage(p, { date_rdv: dateRdv(t, true) });
+    return { objet: remplirTexte(message("veille_objet"), v), corps: remplirTexte(message("veille"), v) };
+  }
+  function messageRelance(f) {
+    var v = valeursMessage(f);
+    return { objet: remplirTexte(message("relance_objet"), v) || "Je n'arrive pas à vous joindre", corps: remplirTexte(message("relance"), v) };
+  }
+  function copierEtDire(texte, dire, siOk) {
+    copier(texte).then(function () { annoncer(dire); if (siOk) siOk(); }, function () { alerter("La copie n'a pas marché : sélectionnez le texte à la main."); });
+  }
+
+  // La prochaine bonne date pour rappeler : trois mois avant une fin d'engagement, trois semaines avant une ouverture.
+  function echeanceDe(a) {
+    var dc = (a && a.decouverte) || {}, auj = aujourdhui(), min = decaler(auj, 7), l = [];
+    Object.keys(dc.axes || {}).forEach(function (k) {
+      var dfe = jourIso((dc.axes[k] || {}).dfe), ax = axePar(k);
+      if (!dfe || dfe <= auj) return;
+      var r = decaler(dfe, -90), tot = r < min;
+      l.push({ rappel: ouvreApres(tot ? min : r), note: (tot ? "avant" : "trois mois avant") + " la fin d'engagement" + (ax ? " " + minuscule(ax.nom) : "") + " (" + dateFr(dfe) + ")" });
+    });
+    var ouv = jourIso(dc.ouverture);
+    if (ouv && ouv > auj) {
+      var r2 = decaler(ouv, -21);
+      if (r2 >= min) l.push({ rappel: ouvreApres(r2), note: "trois semaines avant l'ouverture (" + dateFr(ouv) + ")" });
+    }
+    l.sort(function (x, y) { return x.rappel < y.rappel ? -1 : (x.rappel > y.rappel ? 1 : 0); });
+    return l[0] || null;
+  }
+  function champOuverture(dc) {
+    var n = el("input", { class: "saisie", type: "date", id: "decouverte-ouverture", "data-cle": "decouverte-ouverture" });
+    n.value = jourIso(dc.ouverture) || "";
+    n.addEventListener("input", function () { saisirDecouverte(["ouverture"], n.value); });
+    n.addEventListener("change", function () { saisirDecouverte(["ouverture"], n.value); });
+    return el("div", { class: "champ ouverture" }, [el("label", { class: "champ-lib", for: "decouverte-ouverture", text: "Ouverture prévue le" }), n, el("p", { class: "champ-aide", text: "S'il n'est pas prêt, le copilote proposera de le rappeler trois semaines avant." })]);
+  }
+
+  /* Les relances : un essai sans réponse, et le suivant change de moment de la journée */
+  function creneauDe(min) { return min < 12 * 60 + 30 ? 0 : (min < 16 * 60 + 30 ? 1 : 2); }
+  function prochainEssai(p, essais) {
+    var maintenant = Date.now();
+    if (p.etape === "r1p" || p.etape === "r2") {
+      var t = maintenant + 15 * 60000, j = jourParis(new Date(t));
+      if (j !== aujourdhui() || !estOuvre(j) || minutesParis(t) > 18 * 60 + 30) t = instantParis(prochainOuvre(aujourdhui()), 10 * 60);
+      return t;
+    }
+    var auj = aujourdhui(), m = minutesParis(maintenant), cr = creneauDe(m);
+    if ((essais || 0) < SEUIL_PAUSE && estOuvre(auj)) {
+      for (var k = cr + 1; k < CRENEAUX.length; k++) if (CRENEAUX[k] >= m + 90) return instantParis(auj, CRENEAUX[k]);
+    }
+    var jour = (essais || 0) >= SEUIL_PAUSE ? ouvreApres(decaler(auj, 14)) : prochainOuvre(auj);
+    return instantParis(jour, CRENEAUX[(cr + 1) % CRENEAUX.length]);
+  }
+  function blocRepondeur(a) {
+    var n = ((a.dernier && a.dernier.sansReponse) || 0) + 1, pause = a.nature === "prospection" && a.prospectId && n >= SEUIL_PAUSE;
+    var m = pause ? messageRelance(a.fiche) : null, mailOk = mailValide(a.fiche.email);
+    return el("div", { class: "ab-repondeur" }, [
+      siScript("Message à laisser sur le répondeur", message("repondeur")),
+      pause ? el("div", { class: "ab-nd-pause", role: "note" }, [
+        el("p", { text: "Ce sera le " + n + "e essai sans réponse. Laissez ce message, envoyez le mail, et la fiche reviendra dans quinze jours au lieu d'encombrer votre journée." }),
+        mailOk ? el("a", { class: "bouton-clair", "data-cle": "relance-mail", href: lienMail(a.fiche.email, m.objet, m.corps) }, [trait(ICONES.mail, 14), "Mail de relance"]) : el("span", { class: "champ-aide", text: "Pas de mail sur la fiche : ajoutez-le avec le bouton Fiche, ou copiez le texte." }),
+        el("button", { type: "button", class: "lien-action", "data-cle": "relance-copier", text: "Copier le texte", onclick: function () { copierEtDire(m.corps, "Texte copié."); } })
+      ]) : null
+    ]);
+  }
+
+  /* Le suivi après la vente : dix jours après, avant la fin de la première année, et un merci à qui a recommandé */
+  function chargerSuivis() {
+    if (!peutSaisir) return Promise.resolve();
+    return sb.from("vad_suivis").select("*").eq("espace", ESPACE).is("fait_le", null).order("prevu_le", { ascending: true }).range(0, 499)
+      .then(function (r) { etat.suivis = verifier(r) || []; }, function () { etat.suivis = etat.suivis || []; });
+  }
+  function poserSuivi(x) { etat.suivis = (etat.suivis || []).filter(function (y) { return y.id !== x.id; }); if (!x.fait_le) etat.suivis.push(x); }
+  function suivisDus() {
+    var auj = aujourdhui();
+    return (etat.suivis || []).filter(function (x) { return !x.fait_le && x.conseiller === compte.id && String(x.prevu_le).slice(0, 10) <= auj; })
+      .sort(function (x, y) { return String(x.prevu_le) < String(y.prevu_le) ? -1 : 1; });
+  }
+  function creerSuivisVente(a, prospectId, source) {
+    if (!prospectId) { a.ids.suivis = []; return Promise.resolve(); }
+    var auj = aujourdhui(), fi = a.fiche || {};
+    var l = [
+      { prospect: prospectId, type: "installation", prevu_le: ouvreApres(decaler(auj, 10)) },
+      { prospect: prospectId, type: "remise", prevu_le: ouvreApres(plusMois(auj, 11)) }
+    ];
+    if (source === "recommandation" && fi.recommande_par_fiche) l.push({ prospect: fi.recommande_par_fiche, type: "merci", prevu_le: ouvreApres(auj), recommande: (txt(fi.contact) || txt(fi.societe)).slice(0, 200), note: (nomFiche(fi) + " vient de signer, sur sa recommandation.").slice(0, 400) });
+    return Promise.all(l.map(function (x) { return inserer("vad_suivis", x); })).then(function (rows) {
+      a.ids.suivis = rows.map(function (r) { return r.id; });
+      rows.forEach(poserSuivi);
+      sauverBrouillon();
+    }, function () { a.ids.suivis = a.ids.suivis || []; });
+  }
+  function noterSurFiche(p, texte) {
+    if (!p || !p.id || p.conseiller !== compte.id) return Promise.resolve();
+    var ligne = aujourdhui().split("-").reverse().join("/") + " : " + texte;
+    return majLigne("vad_prospects", p.id, { note: [txt(p.note), ligne].filter(Boolean).join("\n").slice(-4000) }).then(poserProspect, function () { /* la note reste dans le suivi */ });
+  }
+  function blocSuivis() {
+    var l = suivisDus();
+    if (!l.length) return null;
+    return section("suivis", [
+      titreSection("suivis", "Suivis clients"),
+      el("ol", { class: "contacts suivis" }, l.map(function (x) {
+        var p = prospectPar(x.prospect) || {}, retard = String(x.prevu_le).slice(0, 10) < aujourdhui();
+        return el("li", { class: "contact" + (retard ? " retard" : "") }, [
+          el("div", { class: "contact-quand" }, [el("strong", { text: retard ? "En retard" : "Aujourd'hui" }), el("span", { text: TYPES_SUIVI[x.type] || "Suivi" })]),
+          el("div", { class: "contact-qui" }, [
+            el("button", { type: "button", class: "contact-nom", "data-cle": "suivi-fiche-" + x.id, text: nomFiche(p), onclick: function () { ouvrirSuivi(x, false); } }),
+            el("span", { class: "contact-details", text: [txt(p.contact), txt(p.telephone)].filter(Boolean).join(" · ") }),
+            txt(x.note) ? el("span", { class: "contact-details", text: x.note }) : null
+          ]),
+          el("button", { type: "button", class: "bouton petit", "data-cle": "suivi-" + x.id, onclick: function () { ouvrirSuivi(x, true); } }, [trait(ICONES.appel, 14), " Appeler"])
+        ]);
+      }))
+    ]);
+  }
+  function ouvrirSuivi(x, composerNum) {
+    var p = prospectPar(x.prospect) || { id: x.prospect };
+    var tel = txt(p.telephone);
+    if (composerNum && tel) composer(tel);
+    var valeurs = { contact: txt(p.contact), entreprise: txt(p.societe), recommande: txt(x.recommande) };
+    var choix = { issue: "" }, ctx = { reco: recoVide(), recos: [], fiche: p, prospectId: p.id };
+    var reco = x.type === "merci" ? null : el("div", { class: "suivi-reco", hidden: true }, [
+      el("p", { class: "cs-titre", text: "Il est content : demandez une recommandation" }),
+      el("div", { class: "reco-script" }, tableau(script("conclusion").recommandation).map(function (t) { return texteScript(t, { valeurs: valeurs }); })),
+      formReco(ctx, { aide: "La fiche part dans vos fiches à appeler, avec le nom de " + (txt(p.contact) || nomFiche(p)) + "." })
+    ]);
+    var boutonsIssue = el("div", { class: "issues", role: "radiogroup", "aria-label": "Comment ça s'est passé ?" }, (ISSUES_SUIVI[x.type] || ISSUES_SUIVI.installation).map(function (o) {
+      return el("button", { type: "button", role: "radio", "aria-checked": "false", class: "issue-btn", "data-cle": "suivi-issue-" + o[0], text: o[1], onclick: function (e) {
+        choix.issue = o[0];
+        [].slice.call(boutonsIssue.children).forEach(function (b) { var on = b === e.currentTarget; b.classList.toggle("actif", on); b.setAttribute("aria-checked", on ? "true" : "false"); });
+        if (reco) reco.hidden = o[0] !== "ok";
+      } });
+    }));
+    ouvrirFeuille({
+      titre: (TYPES_SUIVI[x.type] || "Suivi") + " : " + nomFiche(p), large: true, sansFocus: true,
+      avant: el("div", { class: "suivi-feuille" }, [
+        el("p", { class: "feuille-intro" }, [txt(x.note) ? txt(x.note) + " " : "", tel ? el("a", { class: "ab-tel", href: "tel:" + (numeroCompose(tel) || tel.replace(/[^\d+]/g, "")), "data-cle": "suivi-tel", onclick: function (e) { if (composer(tel)) e.preventDefault(); } }, [trait(ICONES.appel, 13), tel]) : "Pas de numéro sur la fiche."]),
+        el("div", { class: "carte-script principal" }, [el("p", { class: "cs-titre", text: "Vous dites" }), texteScript(texteSuivi(x.type), { valeurs: valeurs, classe: "grand" })]),
+        x.type !== "merci" ? el("p", { class: "cs-conseil", text: texteSuivi("conseil") }) : null,
+        el("p", { class: "champ-lib", text: "Comment ça s'est passé ?" }),
+        boutonsIssue,
+        reco
+      ]),
+      champs: [{ cle: "retour", lib: "Note", type: "long", lignes: 2 }],
+      libelleEnregistrer: "Enregistrer le suivi",
+      enregistrer: function (v) {
+        if (!choix.issue) return Promise.reject({ texte: "Choisissez comment ça s'est passé." });
+        if (choix.issue === "souci" && !txt(v.retour)) return Promise.reject({ texte: "Dites en une phrase ce qui ne va pas : c'est ce qui permettra de le régler." });
+        if (recoEnAttente(ctx)) return Promise.reject({ texte: "Une recommandation est notée sans fiche : cliquez sur Créer sa fiche, ou videz ses champs." });
+        var avant = { prevu_le: x.prevu_le, fait_le: x.fait_le || null, issue: x.issue || "", retour: x.retour || "" };
+        var reporte = choix.issue === "injoignable" || choix.issue === "plus_tard";
+        var ch = reporte ? { prevu_le: ouvreApres(decaler(aujourdhui(), choix.issue === "plus_tard" ? 7 : 1)), issue: choix.issue, retour: txt(v.retour).slice(0, 1000) }
+          : { fait_le: new Date().toISOString(), issue: choix.issue, retour: txt(v.retour).slice(0, 1000) };
+        return majLigne("vad_suivis", x.id, ch).then(function (n) {
+          poserSuivi(n);
+          return (choix.issue === "souci" ? noterSurFiche(p, "Suivi, " + minuscule(TYPES_SUIVI[x.type] || "suivi") + " : " + txt(v.retour)) : Promise.resolve()).then(function () {
+            rendre();
+            annoncer(reporte ? "Suivi reporté au " + jourEtAn(ch.prevu_le) + "." : "Suivi noté.", function () { return majLigne("vad_suivis", x.id, avant).then(function (y) { poserSuivi(y); rendre(); }); });
+          });
+        });
+      }
+    });
+  }
+
+  /* La veille d'un R1 ou d'un R2 : un message pour le confirmer */
+  function blocAConfirmer() {
+    var demain = prochainOuvre(aujourdhui());
+    var l = mesProspects().filter(function (p) { var t = msDe(p.rappel_le); return (p.etape === "r1p" || p.etape === "r2") && isFinite(t) && jourParis(new Date(t)) === demain; })
+      .sort(function (x, y) { return msDe(x.rappel_le) - msDe(y.rappel_le); });
+    if (!l.length) return null;
+    return section("confirmer", [
+      titreSection("confirmer", demain === decaler(aujourdhui(), 1) ? "À confirmer pour demain" : "À confirmer pour " + minuscule(jourLong(demain))),
+      el("ol", { class: "contacts confirmer" }, l.map(function (p) {
+        var t = msDe(p.rappel_le), cle = "vad-confirme-" + p.id, fait = lire(cle) === p.rappel_le, m = messageVeille(p);
+        function marquer() { ecrire(cle, p.rappel_le); rendre(); }
+        var mail = mailValide(p.email) ? el("a", { class: "bouton-clair", "data-cle": "veille-mail-" + p.id, href: lienMail(p.email, m.objet, m.corps), onclick: function () { setTimeout(marquer, 400); } }, [trait(ICONES.mail, 14), "Mail"]) : null;
+        var copie = el("button", { type: "button", class: "lien-action", "data-cle": "veille-copier-" + p.id, text: mail ? "Copier pour un SMS" : "Copier le texte", onclick: function () { copierEtDire(m.corps, "Texte copié : collez-le dans un SMS.", marquer); } });
+        return el("li", { class: "contact" + (fait ? " fait" : "") }, [
+          el("div", { class: "contact-quand" }, [el("strong", { text: heureFr(t) }), el("span", { text: p.etape === "r1p" ? "R1" : "R2" })]),
+          el("div", { class: "contact-qui" }, [
+            el("button", { type: "button", class: "contact-nom", "data-cle": "confirmer-fiche-" + p.id, text: nomFiche(p), onclick: function () { ouvrirFiche(p); } }),
+            el("span", { class: "contact-details", text: fait ? "Message envoyé" : [txt(p.contact), txt(p.telephone)].filter(Boolean).join(" · ") })
+          ]),
+          el("div", { class: "confirmer-actions" }, fait ? [el("span", { class: "etiq", text: "Envoyé" })] : [mail, copie])
+        ]);
+      }))
+    ]);
+  }
+
+  /* Ce que disent les appels des scripts : sur 30 jours, pour toute l'équipe */
+  function assurerStatsScripts() {
+    if (!sb || enCharge.stats) return;
+    if (etat.statsScripts && Date.now() - etat.statsScripts.le < 10 * 60000) return;
+    enCharge.stats = true;
+    sb.rpc("vad_scripts_stats", { p_espace: ESPACE, p_jours: 30 }).then(function (res) {
+      var r = verifier(res) || {};
+      etat.statsScripts = { le: Date.now(), scenarios: r.scenarios || {}, objections: r.objections || {} };
+      enCharge.stats = false;
+      rendreSiCalme();
+    }, function () { enCharge.stats = false; etat.statsScripts = { le: Date.now(), scenarios: {}, objections: {}, erreur: true }; });
+  }
+  function statsScenario(id) {
+    var st = etat.statsScripts;
+    if (!st || st.erreur) return null;
+    var x = st.scenarios[id], dec = x ? num(x.decroches) : 0;
+    if (!x || !num(x.appels)) return el("p", { class: "sc-stats", text: "Pas encore d'appel avec ce script sur 30 jours." });
+    if (dec < 30) return el("p", { class: "sc-stats", text: "Sur 30 jours : " + pluriel(dec, "appel décroché", "appels décrochés") + ", trop peu pour un taux." });
+    return el("p", { class: "sc-stats" }, ["Sur 30 jours : " + pluriel(dec, "décroché", "décrochés") + ", ", el("strong", { text: pourcent(num(x.argumentes) / dec) }), " argumentés, ", el("strong", { text: pourcent(num(x.r1p) / dec) }), " de R1P" + (num(x.ventes) ? ", " + pluriel(num(x.ventes), "vente", "ventes") : "") + "."]);
+  }
+  function statsObjection(id) {
+    var st = etat.statsScripts, x = st && st.objections[id], n = x ? num(x.appels) : 0;
+    if (!n) return null;
+    return el("p", { class: "obj-stats", text: "Entendue " + pluriel(n, "fois", "fois") + " sur 30 jours" + (n >= 10 ? ", " + pourcent(num(x.perdus) / n) + " des appels perdus ensuite" : "") + "." });
+  }
+  function objectionsFrequentes() {
+    var st = etat.statsScripts;
+    if (!st || st.erreur) return null;
+    var l = objections().map(function (o) { return { o: o, x: st.objections[o.id] }; }).filter(function (y) { return y.x && num(y.x.appels); })
+      .sort(function (a, b) { return num(b.x.appels) - num(a.x.appels); }).slice(0, 5);
+    if (!l.length) return null;
+    return el("div", { class: "obj-frequentes" }, [
+      el("h3", { class: "sous-titre", text: "Les plus entendues sur 30 jours" }),
+      el("ol", { class: "obj-top" }, l.map(function (y) {
+        var n = num(y.x.appels);
+        return el("li", {}, [el("span", { class: "obj-top-texte", text: "«\u00a0" + txt(y.o.objection) + "\u00a0»" }), el("span", { class: "obj-top-chiffre", text: pluriel(n, "fois", "fois") + (n >= 10 ? ", " + pourcent(num(y.x.perdus) / n) + " perdus" : "") })]);
+      }))
+    ]);
+  }
+
+  /* Les R1 honorés : un R1 compte par jour et par fiche, honoré si l'échange a eu lieu ce jour-là */
+  function tauxHonores(t) { var dn = num(t.r1_honores) + num(t.r1_manques); return dn ? { taux: num(t.r1_honores) / dn, n: num(t.r1_honores), d: dn } : null; }
+  function texteHonores(t) { var h = tauxHonores(t); return h ? pourcent(h.taux) + " (" + h.n + " sur " + h.d + ")" : "Pas encore de R1"; }
+  function honoresParOrigine(lignes) {
+    var morceaux = [["tmk", "venus de la TMK"], ["prospection", "pris en prospection"]].map(function (o) {
+      var h = tauxHonores(somme(lignes, function (r) { return r.source === o[0]; }));
+      return h ? o[1] + " : " + pourcent(h.taux) + " (" + h.n + " sur " + h.d + ")" : null;
+    }).filter(Boolean);
+    return morceaux.length ? el("p", { class: "note-discrete honores-origine", text: "R1 honorés " + morceaux.join(" · ") + "." }) : null;
+  }
+
+  /* Les annulations : leurs motifs, classés */
+  function categorieMotif(v) {
+    v = txt(v);
+    if (!v || v === "Sans motif") return { categorie: v ? "Sans motif" : "", precision: "" };
+    for (var i = 0; i < MOTIFS_ANNULATION.length; i++) {
+      var cat = MOTIFS_ANNULATION[i];
+      if (v === cat) return { categorie: cat, precision: "" };
+      if (v.indexOf(cat + " : ") === 0) return { categorie: cat, precision: v.slice(cat.length + 3) };
+    }
+    return { categorie: "Autre", precision: v };
+  }
+  function motifSaisi(x) { var ca = txt(x.motif_annulation), pr = txt(x.motif_precision); return (ca && pr ? ca + " : " + pr : (ca || pr)).slice(0, 400); }
+  function motifsAnnulation(m, portee) {
+    var l = ((etat.annulations || {})[m] || []).filter(function (r) { return portee === "equipe" || r.conseiller === compte.id; });
+    if (!l.length) return null;
+    var par = {};
+    l.forEach(function (r) { var ca = categorieMotif(r.motif).categorie || "Sans motif", x = par[ca] = par[ca] || { motif: ca, ventes: 0, marge: 0 }; x.ventes += num(r.ventes); x.marge += num(r.marge); });
+    var rangs = Object.keys(par).map(function (k) { return par[k]; }).sort(function (a, b) { return b.marge - a.marge || b.ventes - a.ventes; });
+    var total = rangs.reduce(function (t, x) { return t + x.marge; }, 0);
+    return section("annulations", [
+      titreSection("annulations", "Pourquoi des ventes s'annulent"),
+      el("div", { class: "table-defile" }, [el("table", { class: "table-donnees motifs" }, [
+        el("thead", {}, [el("tr", {}, ["Motif", "Ventes", "Marge annulée", "Part"].map(function (x, i) { return el("th", { scope: "col", class: i ? "num" : "", text: x }); }))]),
+        el("tbody", {}, rangs.map(function (x) { return el("tr", {}, [el("th", { scope: "row", text: x.motif }), el("td", { class: "num", text: entier(x.ventes) }), el("td", { class: "num", text: euros(x.marge) }), el("td", { class: "num", text: total ? pourcent(x.marge / total) : "" })]); }))
+      ])]),
+      el("p", { class: "note-discrete", text: "Le motif se choisit quand une annulation est déclarée dans Mes ventes." })
+    ]);
+  }
+
+  /* La recommandation : un formulaire commun à la fin d'appel et au suivi client */
+  function formReco(ctx, opts) {
+    opts = opts || {};
+    ctx.reco = ctx.reco || recoVide();
+    var erreur = el("p", { class: "erreur", role: "alert", id: "erreur-reco" });
+    var liste = el("ul", { class: "reco-liste" }), champs = {};
+    function remplirListe() {
+      liste.textContent = "";
+      (ctx.recos || []).forEach(function (x) { liste.appendChild(el("li", {}, [trait(ICONES.coche, 13), el("span", { text: x.nom + " : fiche créée, à appeler." })])); });
+      liste.hidden = !(ctx.recos || []).length;
+    }
+    function champ(k, lib, type, attrs) {
+      var n = el("input", Object.assign({ class: "saisie", id: "reco-" + k, type: type, "data-cle": "reco-" + k, autocomplete: "off" }, attrs || {}));
+      n.value = ctx.reco[k] || "";
+      n.addEventListener("input", function () { ctx.reco[k] = n.value; if (opts.surSaisie) opts.surSaisie(); });
+      n.addEventListener("change", function () { if (!n.isConnected) return; ctx.reco[k] = n.value; if (opts.surSaisie) opts.surSaisie(); });
+      champs[k] = n;
+      return el("div", { class: "champ" }, [el("label", { class: "champ-lib", for: "reco-" + k, text: lib }), n]);
+    }
+    var bouton = el("button", { type: "button", class: "bouton-clair", "data-cle": "reco-creer", disabled: recoEnCours ? true : null, onclick: function () { lancer(false); } }, [trait(ICONES.plus, 13), "Créer sa fiche"]);
+    function lancer(clavier) {
+      creerReco(ctx, erreur, bouton).then(function (p) {
+        if (!p) return;
+        if (opts.apres) { opts.apres(p, clavier); return; }
+        Object.keys(champs).forEach(function (k) { champs[k].value = ""; });
+        remplirListe();
+        if (clavier && champs.contact) { try { champs.contact.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+      });
+    }
+    remplirListe();
+    return el("div", { class: "reco-form", onkeydown: function (e) { if (e.key === "Enter" && e.target.tagName === "INPUT") { e.preventDefault(); lancer(true); } } }, [
+      el("div", { class: "quatre" }, [champ("contact", "Nom", "text", { maxlength: 200 }), champ("societe", "Société", "text", { maxlength: 200 }), champ("telephone", "Téléphone", "tel", { maxlength: 40 }), champ("precision", "Lien ou activité", "text", { maxlength: 300, placeholder: "son beau-frère, plombier" })]),
+      el("div", { class: "reco-pied" }, [bouton, opts.aide ? el("span", { class: "champ-aide", text: opts.aide }) : null]),
+      erreur,
+      liste
+    ]);
+  }
+
   /* La recommandation : un contact satisfait donne un nom, et sa fiche se crée sans quitter l'appel. */
   var ISSUES_RECO = ["Vente signée", "R1P pris", "R2 prévu"];
   var recoEnCours = false;
@@ -3794,42 +4204,42 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function recoVide() { return { contact: "", societe: "", telephone: "", precision: "" }; }
   function recoEnAttente(a) { var r = (a && a.reco) || {}; return !!(txt(r.contact) || txt(r.societe) || txt(r.telephone)); }
   function telCourt(t) { var n = String(t || "").replace(/\D/g, ""); return n.length > 9 ? n.slice(-9) : n; }
-  function creerReco(a, erreur, bouton, clavier) {
-    if (!a || recoEnCours) return;
+  function creerReco(ctx, erreur, bouton) {
+    if (!ctx || recoEnCours) return Promise.resolve(null);
     // Le champ en cours de saisie rend sa valeur maintenant : plus tard, il l'écrirait dans la recommandation suivante.
     var actif = document.activeElement;
     if (actif && actif.tagName === "INPUT" && actif.blur) actif.blur();
-    var r = a.reco || recoVide(), f = a.fiche || {};
+    var r = ctx.reco || recoVide(), f = ctx.fiche || {};
     erreur.textContent = "";
-    if (!txt(r.contact) && !txt(r.societe)) { erreur.textContent = "Indiquez au moins son nom ou sa société."; return; }
+    if (!txt(r.contact) && !txt(r.societe)) { erreur.textContent = "Indiquez au moins son nom ou sa société."; return Promise.resolve(null); }
     var tel = txt(r.telephone), court = telCourt(tel);
     var deja = court.length >= 9 ? etat.prospects.filter(function (p) { return telCourt(p.telephone) === court; })[0] : null;
-    if (deja) { erreur.textContent = "Ce numéro est déjà dans vos fiches : " + nomFiche(deja) + "."; return; }
+    if (deja) { erreur.textContent = "Ce numéro est déjà dans vos fiches : " + nomFiche(deja) + "."; return Promise.resolve(null); }
     var qui = txt(f.contact) || txt(f.societe), sc = scenarioReco();
     var note = (qui ? "Recommandé par " + qui + (txt(f.contact) && txt(f.societe) ? " (" + txt(f.societe) + ")" : "") + "." : "Recommandation.") + (txt(r.precision) ? " " + txt(r.precision) : "");
-    var fiche = { societe: txt(r.societe).slice(0, 200), contact: txt(r.contact).slice(0, 200), telephone: tel.slice(0, 40), etape: "a_appeler", source: "recommandation", recommande_par: qui.slice(0, 200), note: note.slice(0, 4000), scenario: sc ? sc.id : "", full_prospect: false };
+    var fiche = { societe: txt(r.societe).slice(0, 200), contact: txt(r.contact).slice(0, 200), telephone: tel.slice(0, 40), etape: "a_appeler", source: "recommandation", recommande_par: qui.slice(0, 200), recommande_par_fiche: ctx.prospectId || null, note: note.slice(0, 4000), scenario: sc ? sc.id : "", full_prospect: false };
     recoEnCours = true;
     bouton.disabled = true;
-    inserer("vad_prospects", fiche).then(function (p) {
+    return inserer("vad_prospects", fiche).then(function (p) {
       recoEnCours = false;
+      bouton.disabled = false;
       poserProspect(p);
-      a.recos = (a.recos || []).concat([{ id: p.id, nom: nomFiche(p) }]);
-      a.reco = recoVide();
-      sauverBrouillon();
-      rendre();
-      var suivant = clavier ? document.getElementById("reco-contact") : null;
-      if (suivant) { try { suivant.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+      ctx.recos = (ctx.recos || []).concat([{ id: p.id, nom: nomFiche(p) }]);
+      ctx.reco = recoVide();
       annoncer("Fiche créée : " + nomFiche(p) + ", à appeler.", function () {
         return supprimerLigne("vad_prospects", p.id).then(function () {
           oterProspect(p.id);
-          if (etat.appel === a) { a.recos = (a.recos || []).filter(function (x) { return x.id !== p.id; }); sauverBrouillon(); }
+          ctx.recos = (ctx.recos || []).filter(function (x) { return x.id !== p.id; });
+          if (ctx === etat.appel) sauverBrouillon();
           rendre();
         });
       });
+      return p;
     }, function (err) {
       recoEnCours = false;
       bouton.disabled = false;
       erreur.textContent = messageErreur(err);
+      return null;
     });
   }
 
@@ -3865,23 +4275,42 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         if (!a.issue || a.issue === "Barrage") return null;
         return el("p", { class: "reco-lien" }, [el("button", { type: "button", class: "lien-action", "data-cle": "reco-ouvrir", text: "L'échange s'est bien passé ? Demander une recommandation", onclick: function () { a.recoOuverte = true; sauverBrouillon(); rendre(); } })]);
       }
-      a.reco = a.reco || recoVide();
       var qui = txt(a.fiche.contact) || txt(a.fiche.societe), sc = scenarioReco();
-      var erreur = el("p", { class: "erreur", role: "alert", id: "erreur-reco" });
-      var bouton = el("button", { type: "button", class: "bouton-clair", "data-cle": "reco-creer", disabled: recoEnCours ? true : null, onclick: function () { creerReco(a, erreur, bouton); } }, [trait(ICONES.plus, 13), "Créer sa fiche"]);
       var aide = "La fiche part dans vos fiches à appeler." + (sc ? (qui ? " Le script " + sc.nom + " citera " + qui + "." : " Remplissez la fiche de l'appel, pour que le script cite votre contact.") : "");
-      return el("section", { class: "reco", "aria-label": "Recommandation", onkeydown: function (e) { if (e.key === "Enter" && e.target.tagName === "INPUT") { e.preventDefault(); creerReco(a, erreur, bouton, true); } } }, [
+      return el("section", { class: "reco", "aria-label": "Recommandation" }, [
         el("h3", { class: "sous-titre", text: "Recommandation" }),
         lignes.length ? el("div", { class: "reco-script" }, lignes.map(function (x) { return texteScript(x); })) : null,
-        el("div", { class: "quatre" }, [
-          zone("reco-contact", "Nom", liaison(saisie("text", a.reco.contact, "reco-contact", { maxlength: 200 }), ["reco", "contact"])),
-          zone("reco-societe", "Société", liaison(saisie("text", a.reco.societe, "reco-societe", { maxlength: 200 }), ["reco", "societe"])),
-          zone("reco-telephone", "Téléphone", liaison(saisie("tel", a.reco.telephone, "reco-telephone", { maxlength: 40 }), ["reco", "telephone"])),
-          zone("reco-precision", "Lien ou activité", liaison(saisie("text", a.reco.precision, "reco-precision", { maxlength: 300, placeholder: "son beau-frère, plombier" }), ["reco", "precision"]))
-        ]),
-        el("div", { class: "reco-pied" }, [bouton, el("span", { class: "champ-aide", text: aide })]),
-        erreur,
-        (a.recos || []).length ? el("ul", { class: "reco-liste" }, a.recos.map(function (x) { return el("li", {}, [trait(ICONES.coche, 13), el("span", { text: x.nom + " : fiche créée, à appeler." })]); })) : null
+        formReco(a, { aide: aide, surSaisie: sauverBientot, apres: function (p, clavier) {
+          sauverBrouillon();
+          rendre();
+          var n = clavier ? document.getElementById("reco-contact") : null;
+          if (n) { try { n.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+        } })
+      ]);
+    }
+    // Confirmer le rendez-vous par écrit, pendant que le contact est encore en ligne.
+    function blocConfirmation() {
+      var erreur = el("p", { class: "erreur", role: "alert" });
+      var lien = el("a", { class: "bouton-clair", "data-cle": "confirmation-mail", href: "#", onclick: function (e) {
+        var m = messageConfirmation(a);
+        if (!m) { e.preventDefault(); erreur.textContent = "Indiquez d'abord la date et l'heure."; return; }
+        if (!mailValide(a.fiche.email)) { e.preventDefault(); erreur.textContent = "Ajoutez son mail, ou copiez le texte pour un SMS."; return; }
+        erreur.textContent = "";
+        lien.href = lienMail(a.fiche.email, m.objet, m.corps);
+        a.confirmationFaite = true;
+        sauverBrouillon();
+      } }, [trait(ICONES.mail, 14), "Mail de confirmation"]);
+      var copie = el("button", { type: "button", class: "lien-action", "data-cle": "confirmation-copier", text: "Copier le texte", onclick: function () {
+        var m = messageConfirmation(a);
+        if (!m) { erreur.textContent = "Indiquez d'abord la date et l'heure."; return; }
+        copierEtDire(m.corps, "Texte copié : collez-le dans un SMS ou un mail.");
+      } });
+      var mail = mailValide(a.fiche.email) ? null : zone("confirmation-email", "Son mail, pour la confirmation", liaison(saisie("email", a.fiche.email, "confirmation-email", { maxlength: 200 }), ["fiche", "email"]));
+      return el("div", { class: "confirmation" }, [
+        el("p", { class: "cs-titre", text: "Confirmer par écrit" }),
+        mail,
+        el("div", { class: "ines-ligne" }, [lien, copie, el("span", { class: "champ-aide", text: "Date, heure, son numéro, un lien pour l'ajouter à son agenda, et sa dernière facture à garder sous la main." })]),
+        erreur
       ]);
     }
     var details = [];
@@ -3914,7 +4343,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         zone("rdv-heure", "Heure", liaison(saisie("time", a.rdv.heure, "rdv-heure"), ["rdv", "heure"]))
       ]));
     }
+    var ech = echeanceDe(a);
+    if (a.issue === "Rappel prévu" && ech && a.rdv.date !== ech.rappel) details.push(el("p", { class: "echeance-raccourci" }, [el("button", { type: "button", class: "lien-action", "data-cle": "rappel-echeance", text: "Plutôt le " + jourEtAn(ech.rappel) + ", " + ech.note, onclick: function () { a.rdv = { date: ech.rappel, heure: "10:00" }; sauverBrouillon(); rendre(); } })]));
+    if (a.issue === "R1P pris" || a.issue === "R2 prévu" || (a.issue === "Rappel prévu" && a.nature !== "prospection")) details.push(blocConfirmation());
     if (a.issue === "Pas intéressé" || a.issue === "Perdu") details.push(zone("motif", "Pourquoi ?", liaison(saisie("text", a.motif, "motif"), ["motif"]), "Une phrase suffit : elle aide l'équipe à affiner les scripts."));
+    if ((a.issue === "Pas intéressé" || a.issue === "Perdu") && ech) details.push(el("label", { class: "case-lib auto-rappel" }, [el("input", { type: "checkbox", "data-cle": "rappel-auto", checked: !a.rappelAutoNon, onchange: function (e) { a.rappelAutoNon = !e.target.checked; sauverBrouillon(); } }), el("span", { text: "Le rappeler le " + jourEtAn(ech.rappel) + ", " + ech.note + ", plutôt que de classer la fiche" })]));
     var note = el("textarea", { class: "saisie", id: "appel-note", rows: 2, "data-cle": "appel-note" });
     note.value = a.note || "";
     liaison(note, ["note"]);
@@ -3986,6 +4419,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       vente = { marge: Math.round(marge * 100) / 100, actes: actes, actes_engageants: eng, actes_mrl: mrl, full_prospect: !!a.vente.fp, accompagnement_pro: !!a.vente.ap, offres: tableau(a.vente.offres).slice(0, 20), note: txt(a.vente.note) };
     }
     var suite = suiteDeLAppel(a, a.issue, quandMs);
+    var ech = (a.issue === "Pas intéressé" || a.issue === "Perdu") && !a.rappelAutoNon ? echeanceDe(a) : null;
+    if (ech) suite = { etape: "rappel", rappel_le: new Date(instantParis(ech.rappel, 10 * 60)).toISOString() };
     var besoinFiche = suite && suite.etape !== "perdu";
     if (besoinFiche && !a.prospectId && !a.ids.prospect && !identifiee(a.fiche)) {
       ficheDeLAppel();
@@ -3993,6 +4428,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     var arg = argumenteDe(a) || ["R1P pris", "R2 prévu", "Vente signée"].indexOf(a.issue) >= 0;
     var note = [txt(a.note), txt(a.motif) ? "Motif : " + txt(a.motif) : ""].filter(Boolean).join("\n");
+    if (ech) note = [note, "Rappel programmé le " + dateFr(ech.rappel) + ", " + ech.note + "."].filter(Boolean).join("\n");
     var avant = a.prospectId ? prospectPar(a.prospectId) : null;
     var champs = Object.assign(champsFiche(a.fiche), { decouverte: Object.assign({}, a.decouverte, { maj: aujourdhui() }), scenario: a.scenario || "" });
     if (suite) Object.assign(champs, suite);
@@ -4019,6 +4455,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (!vente || a.ids.vente) return null;
       return inserer("vad_ventes", Object.assign({ prospect: prospectId || null, source: source, societe: txt(a.fiche.societe) || txt(a.fiche.contact) }, vente)).then(function (l) { a.ids.vente = l.id; sauverBrouillon(); });
     }).then(function () {
+      return vente && !a.ids.suivis ? creerSuivisVente(a, prospectId, source) : null;
+    }).then(function () {
       etat.envoi = false;
       var ids = a.ids, issue = a.issue, nom = txt(a.fiche.societe) || txt(a.fiche.contact);
       finirAppel();
@@ -4027,6 +4465,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       annoncer("Appel enregistré : " + minuscule(issue === "Rappel prévu" && a.nature !== "prospection" ? "rendez-vous reporté" : issue) + (nom ? ", " + nom : "") + ".", function () {
         var l = [];
         if (ids.vente) l.push(supprimerLigne("vad_ventes", ids.vente));
+        (ids.suivis || []).forEach(function (id) { l.push(supprimerLigne("vad_suivis", id).then(function () { etat.suivis = (etat.suivis || []).filter(function (x) { return x.id !== id; }); })); });
         if (ids.appel) l.push(supprimerLigne("vad_appels", ids.appel));
         return Promise.all(l).then(function () {
           etat.appelsJour = etat.appelsJour.filter(function (x) { return x.id !== ids.appel; });
@@ -5135,7 +5574,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!lignes) return [tete, el("p", { class: "chargement", role: "status" }, [el("span", { class: "rond", "aria-hidden": "true" }), "Chargement des chiffres"])];
     var objectif = portee === "equipe" ? objectifEquipe(activiteDu(m), m) : objectifDe(compte.email, m);
     var t = somme(lignes), L = lecture(t, objectif), R = rythme(m, t.marge_nette, objectif);
-    var detail = [tuilesSecondaires(L, lignes), entonnoir(L), courbeMarge(m, lignes, objectif)];
+    var detail = [tuilesSecondaires(L, lignes), entonnoir(L, lignes), motifsAnnulation(m, portee), courbeMarge(m, lignes, objectif)];
     var blocs = [tete, tuilesObjectifs(L, R, m, portee), payplanVisible() ? blocPayplan(m, portee, objectif) : null];
     if (portee === "moi" && peutSaisir) blocs.push(mesVentes(m), replier("resultats-detail", "Le détail du mois : ventes, Full Prospect, efficacité, marge jour après jour", detail));
     else blocs = blocs.concat(detail);
@@ -5200,7 +5639,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
 
   // L'efficacité de la prospection, étape par étape, puis la transformation des rendez-vous.
-  function entonnoir(L) {
+  function entonnoir(L, lignes) {
     var t = L.t, max = Math.max(1, t.appels);
     var etapes = [
       ["Appels de prospection", t.appels, null],
@@ -5221,8 +5660,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         el("dl", { class: "rdv-chiffres" }, [
           el("div", {}, [el("dt", { text: "R1 tenus" }), el("dd", { text: entier(t.r1_tenus) })]),
           el("div", {}, [el("dt", { text: "Signés pendant le R1" }), el("dd", { text: t.r1_tenus ? entier(t.r1_signes) + " (" + pourcent(L.closing) + ")" : entier(t.r1_signes) })]),
-          el("div", {}, [el("dt", { text: "R2 prévus" }), el("dd", { text: entier(t.r2) })])
-        ])
+          el("div", {}, [el("dt", { text: "R2 prévus" }), el("dd", { text: entier(t.r2) })]),
+          el("div", {}, [el("dt", { text: "R1 honorés" }), el("dd", { text: texteHonores(t) })])
+        ]),
+        honoresParOrigine(lignes || [])
       ])
     ]);
   }
@@ -5431,7 +5872,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return section("equipe", [
       titreSection("equipe", "L'équipe"),
       el("div", { class: "table-defile" }, [el("table", { class: "table-equipe" }, [
-        el("thead", {}, [el("tr", {}, ["Conseiller", "Marge nette", "Objectif", "TASE", "Annulations", "Appels", "Décrochés", "Argumentés", "R1P", "R1 tenus", "Ventes", "Full Prospect", "Recos"].map(function (x, i) { return el("th", { scope: "col", class: i ? "num" : "", text: x }); }))]),
+        el("thead", {}, [el("tr", {}, ["Conseiller", "Marge nette", "Objectif", "TASE", "Annulations", "Appels", "Décrochés", "Argumentés", "R1P", "R1 tenus", "R1 honorés", "Ventes", "Full Prospect", "Recos"].map(function (x, i) { return el("th", { scope: "col", class: i ? "num" : "", text: x }); }))]),
         el("tbody", {}, rangs.map(function (x) {
           var t = x.L.t;
           return el("tr", { class: x.c.uid === compte.id ? "moi" : "" }, [
@@ -5445,6 +5886,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             el("td", { class: "num", text: t.decroches ? pourcent(x.L.argumente) : "" }),
             el("td", { class: "num", text: entier(t.r1p) }),
             el("td", { class: "num", text: entier(t.r1_tenus) }),
+            el("td", { class: "num", text: tauxHonores(t) ? pourcent(tauxHonores(t).taux) : "" }),
             el("td", { class: "num", text: entier(t.ventes) }),
             el("td", { class: "num", text: entier(t.full_prospect) }),
             el("td", { class: "num", text: entier(t.recos) })
@@ -5486,7 +5928,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!neuve) {
       champs.push({ cle: "annulee", lib: "Orange a annulé tout ou partie de cette vente", type: "case", valeur: !!v.annulee_le });
       champs.push({ groupe: [{ cle: "annulee_le", lib: "Annulée le", type: "date", valeur: v.annulee_le || "" }, { cle: "actes_annules", lib: "Actes annulés", type: "nombre", valeur: v.actes_annules || "" }] });
-      champs.push({ groupe: [{ cle: "marge_annulee", lib: "Marge annulée (€)", type: "nombre", valeur: v.marge_annulee ? String(v.marge_annulee).replace(".", ",") : "" }, { cle: "motif_annulation", lib: "Motif", type: "texte", valeur: v.motif_annulation }] });
+      champs.push({ groupe: [{ cle: "marge_annulee", lib: "Marge annulée (€)", type: "nombre", valeur: v.marge_annulee ? String(v.marge_annulee).replace(".", ",") : "" }, { cle: "motif_annulation", lib: "Motif", type: "selection", options: [["", "Choisir un motif"]].concat(MOTIFS_ANNULATION.map(function (x) { return [x, x]; })), valeur: categorieMotif(v.motif_annulation).categorie === "Sans motif" ? "" : categorieMotif(v.motif_annulation).categorie }] });
+      champs.push({ cle: "motif_precision", lib: "Précision sur le motif", type: "texte", valeur: categorieMotif(v.motif_annulation).precision });
     }
     ouvrirFeuille({
       titre: neuve ? "Ajouter une vente" : "Vente du " + dateFr(v.signee_le), champs: champs, large: true,
@@ -5508,7 +5951,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             if (!Number.isInteger(aa) || aa < 0 || aa > actes) return Promise.reject({ texte: "Les actes annulés vont de 0 au nombre d'actes." });
             if (!isFinite(ma) || ma < 0 || ma > marge) return Promise.reject({ texte: "La marge annulée va de 0 à la marge de la vente." });
             if (!aa && !ma) return Promise.reject({ texte: "Indiquez les actes ou la marge annulés." });
-            Object.assign(c, { annulee_le: x.annulee_le, actes_annules: aa, marge_annulee: Math.round(ma * 100) / 100, motif_annulation: x.motif_annulation });
+            Object.assign(c, { annulee_le: x.annulee_le, actes_annules: aa, marge_annulee: Math.round(ma * 100) / 100, motif_annulation: motifSaisi(x) });
           } else Object.assign(c, { annulee_le: null, actes_annules: 0, marge_annulee: 0, motif_annulation: "" });
         }
         var ecriture = neuve ? inserer("vad_ventes", c) : majLigne("vad_ventes", v.id, c);
@@ -5552,6 +5995,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         return el("article", { class: "script-carte" }, [
           el("div", { class: "sc-tete" }, [el("h3", { text: s.nom || "Scénario" }), estAdmin ? lienModifier("modifier-" + s.id, function () { editerScenario(s); }) : null]),
           txt(s.angle) ? el("p", { class: "sc-angle", text: s.angle }) : null,
+          statsScenario(s.id),
           el("dl", { class: "sc-textes" }, [["Accueil", s.barrage], ["Accroche", s.accroche], ["Si ça bloque", s.alternative], ["Ce qu'on vise", s.leviers]].filter(function (x) { return txt(x[1]); }).map(function (x) {
             return el("div", {}, [el("dt", { text: x[0] }), el("dd", {}, [texteSeul(x[1])])]);
           }))
@@ -5617,7 +6061,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ["reformulation", "Reformuler", [["texte", "La phrase", 3], ["conseil", "Le conseil", 2]]],
     ["proposition", "Proposer", [["points", "Les points, un par ligne", 4, "lignes"], ["accompagnement", "L'Accompagnement Pro", 3], ["engageants", "Les services engageants", 2], ["prix", "Le prix", 2]]],
     ["negociation", "Négocier et conclure", [["froid", "Froid", 2], ["tiede", "Tiède", 2], ["chaud", "Chaud", 2], ["assumptif", "Le choix de la date", 2], ["alternatif", "Le choix entre deux options", 2], ["urgence", "La fin d'engagement", 2], ["concession", "Une concession", 2]]],
-    ["conclusion", "Conclure l'appel", [["signature", "La signature", 2], ["relance", "La prochaine étape", 2], ["sortie", "Avant de raccrocher, une ligne par point", 4, "lignes"], ["recommandation", "La recommandation, une ligne par point", 5, "lignes"]]]
+    ["conclusion", "Conclure l'appel", [["signature", "La signature", 2], ["relance", "La prochaine étape", 2], ["sortie", "Avant de raccrocher, une ligne par point", 4, "lignes"], ["recommandation", "La recommandation, une ligne par point", 5, "lignes"]]],
+    ["suivi", "Suivre un client", [["installation", "Dix jours après la vente", 3], ["remise", "Avant la fin de la première année", 4], ["merci", "Remercier qui a recommandé", 3], ["conseil", "Le conseil", 2]]],
+    ["messages", "Les messages écrits", [["confirmation_objet", "Confirmation du rendez-vous : l'objet", 1], ["confirmation", "Confirmation du rendez-vous : le texte", 10], ["veille_objet", "Rappel la veille : l'objet", 1], ["veille", "Rappel la veille : le texte", 6], ["relance_objet", "Après six essais : l'objet", 1], ["relance", "Après six essais : le texte", 10], ["repondeur", "Le message sur le répondeur", 2]]]
   ];
   function blocEtapesScripts() {
     return section("etapes", [
@@ -5638,7 +6084,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var d = script(e[0]);
     ouvrirFeuille({
       titre: e[1], large: true,
-      avant: el("p", { class: "feuille-intro", text: e[0] === "reformulation" ? "Repères de la reformulation : {priorite}, {probleme}, {impact}, {axe} et {dfe} (fin d'engagement de l'axe prioritaire)." : AIDE_REPERES }),
+      avant: el("p", { class: "feuille-intro", text: aideEtape(e[0]) }),
       champs: e[2].map(function (c) { return { cle: c[0], lib: c[1], type: c[3] === "lignes" ? "lignes" : "long", lignes: c[2], valeur: d[c[0]] }; }),
       enregistrer: function (v) { return modifierDoc("scripts", e[0], v, "Étape enregistrée."); }
     });
@@ -5648,6 +6094,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var l = objections();
     return section("objections", [
       titreSection("objections", "Réponses aux objections", estAdmin ? boutonAjout("Ajouter une objection", "ajouter-objection", function () { editerObjection(null); }) : null),
+      objectionsFrequentes(),
       el("div", { class: "objections-groupes" }, CATEGORIES.concat(["Autre"]).map(function (cat) {
         var g = l.filter(function (o) { return cat === "Autre" ? CATEGORIES.indexOf(o.categorie) < 0 : o.categorie === cat; });
         if (!g.length) return null;
@@ -5657,7 +6104,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             return el("li", { class: "obj-item" }, [
               el("p", { class: "obj-texte" }, ["« " + txt(o.objection) + " »", estAdmin ? " " : null, estAdmin ? lienModifier("modifier-" + o.id, function () { editerObjection(o); }) : null]),
               texteSeul(o.reponse),
-              txt(o.conseil) ? el("p", { class: "cs-conseil", text: o.conseil }) : null
+              txt(o.conseil) ? el("p", { class: "cs-conseil", text: o.conseil }) : null,
+              statsObjection(o.id)
             ]);
           }))
         ]);
@@ -5822,20 +6270,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   /* ---------- Pas décroché en un clic ---------- */
   // Le prochain essai : un quart d'heure pour un rendez-vous, deux heures sinon ; après 18 h 30, le jour ouvré suivant à 10 h.
-  function prochainEssai(p) {
-    var t = Date.now() + ((p.etape === "r1p" || p.etape === "r2") ? 15 : 120) * 60000, j = jourParis(new Date(t));
-    if (j !== aujourdhui() || !estOuvre(j) || minutesParis(t) > 18 * 60 + 30) {
-      var d = decaler(aujourdhui(), 1);
-      while (!estOuvre(d)) d = decaler(d, 1);
-      t = instantParis(d, 10 * 60);
-    }
-    return t;
-  }
   function noterNonDecroche(raison, bouton) {
     var a = etat.appel;
     if (!a || etat.envoi) return;
     var p = a.prospectId ? prospectPar(a.prospectId) : null;
-    var nouveau = p && ACTIVES.indexOf(p.etape) >= 0 && raison !== "Faux numéro" ? new Date(prochainEssai(p)).toISOString() : null;
+    var essais = ((a.dernier && a.dernier.sansReponse) || 0) + 1, pause = !!p && p.etape !== "r1p" && p.etape !== "r2" && essais >= SEUIL_PAUSE;
+    var nouveau = p && ACTIVES.indexOf(p.etape) >= 0 && raison !== "Faux numéro" ? new Date(prochainEssai(p, essais)).toISOString() : null;
     var ancien = p ? p.rappel_le : null;
     etat.envoi = true;
     if (bouton) bouton.disabled = true;
@@ -5847,7 +6287,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         finirAppel();
         changerVue("journee");
         lancerEnchainement();
-        annoncer(raison + " noté" + (nouveau ? ". Nouvel essai " + minuscule(quand(msDe(nouveau))) : (raison === "Faux numéro" && p ? ". Corrigez le numéro dans la fiche" : "")) + ".", function () {
+        annoncer(raison + " noté" + (nouveau ? (pause ? ", " + essais + "e essai sans réponse. Pause de quinze jours, nouvel essai " : ". Nouvel essai ") + minuscule(quand(msDe(nouveau))) : (raison === "Faux numéro" && p ? ". Corrigez le numéro dans la fiche" : "")) + ".", function () {
           return supprimerLigne("vad_appels", l.id).then(function () {
             etat.appelsJour = etat.appelsJour.filter(function (x) { return x.id !== l.id; });
             return nouveau ? majLigne("vad_prospects", p.id, { rappel_le: ancien }).then(poserProspect) : null;
@@ -6013,7 +6453,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       teteDePage(jourLong(auj), "Ma journée", null, null),
       blocBienDemarrer(),
       el("div", { class: "jour-grille" }, [
-        el("div", { class: "jour-colonne" }, [blocProchainAppel(f), blocAlertes(), blocContacts(f), blocCreateursJour()]),
+        el("div", { class: "jour-colonne" }, [blocProchainAppel(f), blocAlertes(), blocSuivis(), blocAConfirmer(), blocContacts(f), blocCreateursJour()]),
         el("div", { class: "jour-colonne cote" }, [chiffresDuJour(), blocSession(), blocAppelsDuJour()])
       ]),
       bandeauMois()
@@ -6182,7 +6622,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           return el("button", { type: "button", class: "choix-nd", "data-cle": "nd-" + plat(r).replace(/[^a-z0-9]+/g, "-"), text: r, onclick: function (e) { noterNonDecroche(r, e.currentTarget); } });
         }),
         el("button", { type: "button", class: "lien-action", "data-cle": "nd-creneau", text: "Choisir moi-même le prochain essai", onclick: pasDecroche })
-      ]) : null
+      ]) : null,
+      a.nonDecroche ? blocRepondeur(a) : null
     ]);
   }
 
@@ -6336,6 +6777,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   /* ---------- Scripts : une partie à la fois, et une recherche ---------- */
   function vueScripts() {
+    assurerStatsScripts();
     var parties = [["scenarios", "Scénarios", blocScenarios], ["decouverte", "Découverte", blocAxesScripts], ["etapes", "Étapes de l'appel", blocEtapesScripts], ["objections", "Objections", blocObjectionsScripts]];
     var actif = parties.filter(function (o) { return o[0] === etat.ongletScripts; })[0] || parties[0];
     var q = plat(etat.chercheScripts || "");
@@ -6381,7 +6823,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       Promise.all([chargerActivite(moisDe(aujourdhui())), chargerFil()]).then(function () { etat.majMur = Date.now(); rendreSiCalme(); }, function () { /* on réessaie dans trente secondes */ });
     }, 30000);
   }
-  var FIL_MUR = { "R1P pris": "décroche un rendez-vous", "R2 prévu": "cale un R2", "Vente signée": "signe une vente" };
+  var FIL_MUR = { "R1P pris": "décroche un rendez-vous", "R2 prévu": "cale un R2", "Vente signée": "signe une vente", "Recommandation": "obtient une recommandation" };
   function vueMur() {
     var mc = moisDe(aujourdhui()), auj = aujourdhui(), lignes = activiteDu(mc);
     assurerMois(mc);
@@ -6588,7 +7030,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           rendreSiCalme();
         }, function () { etat.erreur = true; rendre(); });
       });
-      return Promise.all([chargerMembres(), chargerProspects(), chargerAppelsJour(), chargerActivite(etat.mois), peutSaisir ? chargerVentes(etat.mois) : null]);
+      return Promise.all([chargerMembres(), chargerProspects(), chargerAppelsJour(), chargerActivite(etat.mois), peutSaisir ? chargerVentes(etat.mois) : null, chargerSuivis()]);
     }).then(function () {
       etat.tables = true;
       etat.majMur = Date.now();

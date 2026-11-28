@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ajouter le rendez-vous à votre agenda</title>
+<style>
+/*
+  VOICE   : sobre et serviable, une seule action à faire.
+  IDEA    : un carton de rendez-vous, comme ceux qu'on glisse dans un agenda papier.
+  PICTURE : la date en grand, découpée comme une page d'éphéméride.
+  COLOUR  : ivoire, encre, une pointe d'orange.
+  TYPE    : la police du système, quatre tailles. LAYOUT : une colonne centrée.
+*/
+:root{color-scheme:light dark;--fond:#FBF8F2;--carte:#FFFFFF;--encre:#1C1C1E;--doux:#5E5B55;--filet:#E7E1D6;--accent:#FF6B1A;--accent-encre:#B5440B}
+@media (prefers-color-scheme:dark){:root{--fond:#161514;--carte:#1F1E1C;--encre:#F4F1EA;--doux:#B4AEA3;--filet:#34312C;--accent:#FF7F3A;--accent-encre:#FFB083}}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;background:var(--fond);color:var(--encre);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.carte{width:100%;max-width:440px;background:var(--carte);border:1px solid var(--filet);border-radius:18px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(0,0,0,.35)}
+.ephem{display:flex;align-items:stretch;border-bottom:1px solid var(--filet)}
+.ephem-jour{flex:0 0 112px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 10px;background:var(--accent);color:#fff;text-align:center}
+.ephem-jour .mois{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.ephem-jour .num{font-size:52px;font-weight:800;line-height:1}
+.ephem-jour .sem{font-size:13px;font-weight:600}
+.ephem-texte{padding:18px 20px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+h1{margin:0;font-size:22px;line-height:1.15;text-wrap:balance}
+.heure{margin:0;font-size:17px;font-weight:700}
+.qui{margin:0;font-size:14px;color:var(--doux)}
+.actions{display:flex;flex-direction:column;gap:10px;padding:20px}
+.actions a,.actions button{display:flex;align-items:center;justify-content:center;min-height:48px;padding:12px 16px;border-radius:12px;border:1.5px solid var(--encre);background:transparent;color:var(--encre);font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.actions .premier{background:var(--encre);color:var(--carte)}
+.actions a:focus-visible,.actions button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pied{margin:0;padding:0 20px 20px;font-size:13px;color:var(--doux)}
+.erreur{padding:28px 22px;text-align:center}
+.erreur h1{margin-bottom:8px}
+</style>
+</head>
+<body>
+<main class="carte" id="carte" aria-live="polite">
+  <div class="erreur" id="vide">
+    <h1>Ce lien de rendez-vous n'est pas complet</h1>
+    <p class="qui">Demandez à votre conseiller de vous le renvoyer.</p>
+  </div>
+</main>
+<script>
+{
+  const NB = "\u00a0";
+  const JOURS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+  const MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  const params = new URLSearchParams(location.hash.slice(1));
+  const brut = params.get("d") || "";
+  const minutes = Math.min(240, Math.max(10, parseInt(params.get("m"), 10) || 30));
+  const societe = (params.get("s") || "OOB").replace(/[\u0000-\u001f]/g, "").slice(0, 60);
+  const m = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/.exec(brut);
+  const debut = m ? new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6])) : null;
+
+  if (debut && !isNaN(debut)) {
+    const fin = new Date(debut.getTime() + minutes * 60000);
+    const enParis = (d) => {
+      const p = {};
+      new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", weekday: "long", day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
+        .formatToParts(d).forEach((x) => { p[x.type] = x.value; });
+      return p;
+    };
+    const p = enParis(debut);
+    const heure = Number(p.hour) + NB + "h" + (p.minute !== "00" ? NB + p.minute : "");
+    const titre = "Rendez-vous téléphonique avec " + societe;
+    const texte = societe + " vous appelle à l'heure prévue.";
+    const compact = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    const google = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(titre) +
+      "&dates=" + compact(debut) + "/" + compact(fin) + "&details=" + encodeURIComponent(texte);
+    const outlook = "https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=" + encodeURIComponent(titre) +
+      "&startdt=" + encodeURIComponent(debut.toISOString()) + "&enddt=" + encodeURIComponent(fin.toISOString()) + "&body=" + encodeURIComponent(texte);
+    const echapper = (t) => t.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+    const ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//LUSKO//Copilote VAD//FR", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+      "BEGIN:VEVENT", "UID:" + compact(debut) + "-" + Math.random().toString(36).slice(2) + "@copilote-vad", "DTSTAMP:" + compact(new Date()),
+      "DTSTART:" + compact(debut), "DTEND:" + compact(fin), "SUMMARY:" + echapper(titre), "DESCRIPTION:" + echapper(texte),
+      "BEGIN:VALARM", "TRIGGER:-PT15M", "ACTION:DISPLAY", "DESCRIPTION:" + echapper("Rendez-vous dans 15 minutes"), "END:VALARM",
+      "END:VEVENT", "END:VCALENDAR", ""
+    ].join("\r\n");
+
+    const carte = document.getElementById("carte");
+    carte.textContent = "";
+    const el = (tag, attrs, enfants) => {
+      const n = document.createElement(tag);
+      Object.entries(attrs || {}).forEach(([k, v]) => { if (k === "text") n.textContent = v; else n.setAttribute(k, v); });
+      (enfants || []).forEach((c) => n.appendChild(c));
+      return n;
+    };
+    carte.append(
+      el("div", { class: "ephem" }, [
+        el("div", { class: "ephem-jour", "aria-hidden": "true" }, [el("span", { class: "mois", text: p.month }), el("span", { class: "num", text: p.day }), el("span", { class: "sem", text: p.weekday })]),
+        el("div", { class: "ephem-texte" }, [
+          el("h1", { text: "Votre rendez-vous téléphonique" }),
+          el("p", { class: "heure", text: p.weekday.charAt(0).toUpperCase() + p.weekday.slice(1) + " " + p.day + " " + p.month + " à " + heure }),
+          el("p", { class: "qui", text: "Avec " + societe + ", partenaire Orange · " + minutes + NB + "minutes" })
+        ])
+      ]),
+      el("div", { class: "actions" }, [
+        el("a", { class: "premier", href: google, target: "_blank", rel: "noopener", text: "Ajouter à Google Agenda" }),
+        el("a", { href: outlook, target: "_blank", rel: "noopener", text: "Ajouter à Outlook" }),
+        el("button", { type: "button", id: "ics", text: "Autre agenda (iPhone, Mac, Outlook installé)" })
+      ]),
+      el("p", { class: "pied", text: "Rien n'est enregistré sur cette page : elle prépare seulement l'événement pour votre agenda." })
+    );
+    document.getElementById("ics").addEventListener("click", () => {
+      const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+      const a = el("a", { href: url, download: "rendez-vous.ics" });
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    });
+    document.title = "Rendez-vous du " + p.day + " " + p.month + " à " + heure;
+  }
+}
+</script>
+</body>
+</html>
