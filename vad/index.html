@@ -3966,14 +3966,21 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return (etat.suivis || []).filter(function (x) { return !x.fait_le && x.conseiller === compte.id && String(x.prevu_le).slice(0, 10) <= auj; })
       .sort(function (x, y) { return String(x.prevu_le) < String(y.prevu_le) ? -1 : 1; });
   }
-  function creerSuivisVente(a, prospectId, source) {
-    if (!prospectId) { a.ids.suivis = []; return Promise.resolve(); }
-    var auj = aujourdhui(), fi = a.fiche || {};
+  // Les suivis d'une vente, comptés depuis la signature : l'installation dix jours après, le point avant la fin de la première année,
+  // et le merci à la personne qui a recommandé. Une date déjà passée (vente saisie en retard) est ramenée à aujourd'hui.
+  function listeSuivisVente(prospectId, fi, source, signee) {
+    var auj = aujourdhui(), base = jourIso(signee) || auj;
+    function pasAvant(j) { return ouvreApres(j < auj ? auj : j); }
     var l = [
-      { prospect: prospectId, type: "installation", prevu_le: ouvreApres(decaler(auj, 10)) },
-      { prospect: prospectId, type: "remise", prevu_le: ouvreApres(plusMois(auj, 11)) }
+      { prospect: prospectId, type: "installation", prevu_le: pasAvant(decaler(base, 10)) },
+      { prospect: prospectId, type: "remise", prevu_le: pasAvant(plusMois(base, 11)) }
     ];
     if (source === "recommandation" && fi.recommande_par_fiche) l.push({ prospect: fi.recommande_par_fiche, type: "merci", prevu_le: ouvreApres(auj), recommande: (txt(fi.contact) || txt(fi.societe)).slice(0, 200), note: (nomFiche(fi) + " vient de signer, sur sa recommandation.").slice(0, 400) });
+    return l;
+  }
+  function creerSuivisVente(a, prospectId, source) {
+    if (!prospectId) { a.ids.suivis = []; return Promise.resolve(); }
+    var l = listeSuivisVente(prospectId, a.fiche || {}, source, aujourdhui());
     return Promise.all(l.map(function (x) { return inserer("vad_suivis", x); })).then(function (rows) {
       a.ids.suivis = rows.map(function (r) { return r.id; });
       rows.forEach(poserSuivi);
@@ -3984,6 +3991,28 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!p || !p.id || p.conseiller !== compte.id) return Promise.resolve();
     var ligne = aujourdhui().split("-").reverse().join("/") + " : " + texte;
     return majLigne("vad_prospects", p.id, { note: [txt(p.note), ligne].filter(Boolean).join("\n").slice(-4000) }).then(poserProspect, function () { /* la note reste dans le suivi */ });
+  }
+  // « CARCINUS SAS » et « Carcinus » désignent la même société : on compare les noms sans casse, accents, forme juridique ni ponctuation.
+  function cleSociete(t) {
+    return txt(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/\b(sarl|sasu|sas|eurl|sa|sci|snc|eirl|ei|scop|selarl|scm)\b/g, " ").replace(/[^a-z0-9]+/g, "");
+  }
+  // La fiche du conseiller qui porte ce nom. S'il y en a plusieurs : la signée d'abord, puis la plus récente.
+  function ficheDeSociete(nom) {
+    var cle = cleSociete(nom);
+    if (!cle) return null;
+    return (etat.prospects || []).filter(function (p) { return p.conseiller === compte.id && cleSociete(txt(p.societe) || txt(p.contact)) === cle; })
+      .sort(function (x, y) { return ((y.etape === "signe") - (x.etape === "signe")) || (String(x.maj_le) < String(y.maj_le) ? 1 : -1); })[0] || null;
+  }
+  // Les suivis d'une vente saisie à la main, sans doublon avec un suivi encore ouvert sur la même fiche.
+  // Un suivi refusé n'empêche pas la vente d'être enregistrée.
+  function creerSuivisSaisie(p, vente) {
+    var ouverts = (etat.suivis || []).filter(function (y) { return !y.fait_le; });
+    var l = listeSuivisVente(p.id, p, p.recommande_par_fiche ? "recommandation" : vente.source, vente.signee_le).filter(function (x) {
+      return !ouverts.some(function (y) { return y.prospect === x.prospect && y.type === x.type; });
+    });
+    return Promise.all(l.map(function (x) { return inserer("vad_suivis", x).then(null, function () { return null; }); }))
+      .then(function (rows) { rows = rows.filter(Boolean); rows.forEach(poserSuivi); return rows; });
   }
   function blocSuivis() {
     var l = suivisDus();
@@ -5934,7 +5963,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ouvrirFeuille({
       titre: neuve ? "Ajouter une vente" : "Vente du " + dateFr(v.signee_le), champs: champs, large: true,
       boutons: neuve ? null : [boutonInes(Object.assign({ societe: v.societe }, v.prospect ? prospectPar(v.prospect) : null), { marge: v.marge, actes: v.actes, engageants: v.actes_engageants, mrl: v.actes_mrl, fp: v.full_prospect, ap: v.accompagnement_pro, offres: v.offres, note: v.note })],
-      avant: neuve ? el("p", { class: "feuille-intro", text: "Pour une vente signée hors appel guidé. Celles de l'appel guidé s'enregistrent toutes seules." }) : null,
+      avant: neuve ? el("p", { class: "feuille-intro", text: "Pour une vente signée hors appel guidé, celles de l'appel guidé s'enregistrent toutes seules. Écrivez la société comme sur sa fiche : les suivis du client se programment tout seuls." }) : null,
       enregistrer: function (x) {
         var marge = montantSaisi(x.marge), actes = Number(x.actes), eng = Number(x.actes_engageants || 0);
         if (!jourIso(x.signee_le)) return Promise.reject({ texte: "Indiquez la date de signature." });
@@ -5954,10 +5983,24 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             Object.assign(c, { annulee_le: x.annulee_le, actes_annules: aa, marge_annulee: Math.round(ma * 100) / 100, motif_annulation: motifSaisi(x) });
           } else Object.assign(c, { annulee_le: null, actes_annules: 0, marge_annulee: 0, motif_annulation: "" });
         }
+        var fiche = neuve ? ficheDeSociete(c.societe) : null;
+        if (fiche) c.prospect = fiche.id;
         var ecriture = neuve ? inserer("vad_ventes", c) : majLigne("vad_ventes", v.id, c);
         return ecriture.then(function (n) {
-          annoncer(neuve ? "Vente ajoutée." : (c.annulee_le && !v.annulee_le ? "Annulation enregistrée." : "Vente enregistrée."), neuve ? function () { return supprimerLigne("vad_ventes", n.id).then(rafraichir); } : null);
-          return rafraichir();
+          return (fiche ? creerSuivisSaisie(fiche, c) : Promise.resolve([])).then(function (suivis) {
+            var inst = suivis.filter(function (y) { return y.type === "installation"; })[0];
+            var texte = !neuve ? (c.annulee_le && !v.annulee_le ? "Annulation enregistrée." : "Vente enregistrée.")
+              : fiche ? "Vente ajoutée." + (inst ? " Suivi d'installation prévu le " + jourEtAn(inst.prevu_le) + "." : "")
+              : "Vente ajoutée." + (txt(c.societe) ? " Aucune fiche à ce nom, donc pas de suivi prévu." : "");
+            annoncer(texte, neuve ? function () {
+              var ids = suivis.map(function (y) { return y.id; });
+              return Promise.all(ids.map(function (id) { return supprimerLigne("vad_suivis", id); })).then(function () {
+                etat.suivis = (etat.suivis || []).filter(function (y) { return ids.indexOf(y.id) < 0; });
+                return supprimerLigne("vad_ventes", n.id);
+              }).then(rafraichir);
+            } : null);
+            return rafraichir();
+          });
         });
       },
       supprimer: neuve ? null : function () { return supprimerLigne("vad_ventes", v.id).then(function () { annoncer("Vente supprimée."); return rafraichir(); }); },
