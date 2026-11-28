@@ -1582,6 +1582,192 @@ body.vue-mur{
 @media print{
   .lead-contact,.lead-actions,.radar-filtres{display:none}
 }
+.radar-resume{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding:14px 18px;background:var(--papier);border:1px solid var(--filet)}
+.radar-resume-texte{font-size:14.5px;font-weight:600;line-height:1.45}
+.radar-resume-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+/* Ma journée : le prochain appel en tête */
+.bloc-prochain .bloc-tete{align-items:baseline}
+.prochain-compte{font-size:13px;font-weight:700;color:var(--attenue)}
+.prochain{display:flex;flex-direction:column;gap:18px;padding:22px 24px;margin:0 10px 10px 0;background:var(--papier);border:1px solid var(--filet-2);box-shadow:5px 5px 0 var(--rose),10px 10px 0 var(--bleu)}
+.prochain-raison{font-family:var(--titre);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--rose-texte)}
+.prochain.retard .prochain-raison{color:var(--rouge-texte)}
+.prochain-nom{margin-top:4px;font-family:var(--titre);font-weight:600;font-size:32px;line-height:1.05;letter-spacing:.01em;text-transform:uppercase}
+.prochain-nom .contact-nom{font:inherit;letter-spacing:inherit;text-transform:inherit;text-align:left}
+.prochain-details{margin-top:6px;font-size:14.5px;line-height:1.45;color:var(--attenue)}
+.prochain .etiqs{margin-top:10px}
+.prochain-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
+.bouton.fort.prochain-appeler{padding:15px 26px;font-size:16px}
+.prochain.vide{gap:16px;box-shadow:5px 5px 0 var(--vert)}
+.prochain-texte{max-width:56ch;font-size:15px;line-height:1.5;color:var(--attenue);text-wrap:pretty}
+/* Bien démarrer */
+.bloc-demarrer{gap:12px;padding:18px 22px 16px;background:var(--bleu-teinte);border-left:4px solid var(--bleu)}
+.bloc-demarrer .note-discrete{margin-top:0}
+.demarrer{display:flex;flex-direction:column;gap:8px;padding-left:22px;list-style:decimal;font-size:14.5px;line-height:1.5}
+.demarrer li::marker{font-weight:700}
+/* La colonne de côté : les chiffres du jour en tête, sans rester collée */
+.jour-colonne.cote{position:static}
+.jour-colonne.cote .chiffres-jour{grid-template-columns:repeat(3,minmax(0,1fr))}
+.jour-colonne.cote .chiffre:nth-child(4){border-left:0;padding-left:0}
+.jour-colonne.cote .chiffre:nth-child(n+4){border-top:1px solid var(--filet)}
+.jour-colonne.cote .chiffre strong{font-size:34px}
+.session-intro{margin-top:-6px;max-width:46ch}
+/* L'aide */
+.barre-droite{display:flex;align-items:center;gap:14px;margin-left:auto}
+.barre-droite .compte{margin-left:0}
+.aide-btn{width:34px;height:34px;display:grid;place-items:center;flex:none;border:1.5px solid var(--encre);border-radius:50%;background:var(--papier);color:var(--encre);font-family:var(--titre);font-weight:600;font-size:17px;line-height:1;transition:background .15s,color .15s}
+.aide-btn:hover,.aide-btn:focus-visible{background:var(--encre);color:var(--papier)}
+.aide{display:flex;flex-direction:column;gap:12px;font-size:14.5px;line-height:1.55;text-wrap:pretty}
+.aide h3{margin-top:8px;font-family:var(--titre);font-weight:600;font-size:17px;letter-spacing:.03em;text-transform:uppercase}
+.aide h3:first-child{margin-top:0}
+.aide-mots dt{font-weight:700}
+/* L'accroche : le script choisi en grand, le reste replié */
+.scenario-ligne{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.scenario-ligne .saisie{width:auto;max-width:100%;min-width:260px}
+.si-scripts{display:flex;flex-direction:column}
+.si-titre{padding:4px 0 6px;font-family:var(--titre);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--discret)}
+.si-script{border-top:1px solid var(--filet)}
+.si-script:last-child{border-bottom:1px solid var(--filet)}
+.si-script summary{display:flex;align-items:center;gap:10px;padding:12px 0;font-size:14.5px;font-weight:700;list-style:none;cursor:pointer}
+.si-script summary::-webkit-details-marker{display:none}
+.si-script summary::before{content:"+";flex:none;display:grid;place-items:center;width:20px;height:20px;border:1.5px solid var(--encre);border-radius:50%;font-size:14px;line-height:1}
+.si-script[open] summary::before{content:"\2212"}
+.si-script > .script-texte,.si-script > .cs-conseil{padding:0 0 14px 30px}
+.si-script.conseil summary{color:var(--attenue)}
+/* Pas décroché : la raison en un clic, depuis le bandeau */
+.ab-tel{display:inline-flex;align-items:center;gap:5px}
+.bouton-clair.actif{background:var(--encre);border-color:var(--encre);color:var(--papier)}
+.ab-nondecroche{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-top:2px}
+.ab-nd-lib{margin-right:4px;font-size:13.5px;font-weight:700}
+.choix-nd{padding:8px 14px;border:1.5px solid var(--encre);border-radius:999px;background:var(--papier);font-size:13.5px;font-weight:700;transition:background .15s,border-color .15s}
+.choix-nd:hover,.choix-nd:focus-visible{background:var(--rose);border-color:var(--rose);color:var(--suie)}
+@media screen and (max-width:759px){
+  .prochain{padding:18px 16px}
+  .prochain-nom{font-size:25px}
+  .prochain-actions .bouton{flex:1 1 100%;justify-content:center}
+  .barre-droite{gap:10px}
+  .aide-btn{width:32px;height:32px}
+  .scenario-ligne .saisie{min-width:0;width:100%}
+  .choix-nd{flex:1 1 40%}
+}
+/* Le dernier échange, dans le bandeau d'appel */
+.ab-dernier{max-width:min(760px,100%);margin-top:6px;overflow:hidden;font-size:13px;line-height:1.4;color:var(--attenue);white-space:nowrap;text-overflow:ellipsis}
+/* Enchaîner les appels */
+.decompte{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:-6px 0 0;padding:10px 14px;background:var(--rose-teinte);font-size:14px;font-weight:700}
+.decompte strong{font-family:var(--titre);font-size:20px}
+.enchainer{font-size:13.5px;color:var(--attenue)}
+.alertes-offre{margin-top:-18px}
+/* INES */
+.ines-ligne{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:6px}
+/* Scripts : une partie à la fois */
+.scripts-outils{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px}
+.scripts-cherche{flex:0 1 380px;min-width:240px}
+.scripts-corps{display:flex;flex-direction:column;gap:36px}
+.scripts-corps [hidden]{display:none !important}
+/* Ce qui est plié : résultats du mois, contrat actuel */
+.replie{border-top:1px solid var(--filet);border-bottom:1px solid var(--filet)}
+.replie > summary{display:flex;align-items:center;gap:10px;padding:14px 0;font-size:15px;font-weight:700;list-style:none;cursor:pointer}
+.replie > summary::-webkit-details-marker{display:none}
+.replie > summary::before{content:"+";flex:none;display:grid;place-items:center;width:22px;height:22px;border:1.5px solid var(--encre);border-radius:50%;font-size:15px;line-height:1}
+.replie[open] > summary::before{content:"\2212"}
+.replie[open]{padding-bottom:24px}
+.replie > .section + .section{margin-top:36px}
+.axe-panneau .replie{margin:4px 0}
+.axe-panneau .replie[open]{padding-bottom:14px}
+/* Élision : l'apostrophe reste visible devant le texte surligné */
+.script-texte mark.rempli.apres-elision{margin-left:2px}
+@media screen and (max-width:759px){
+  .scripts-cherche{flex-basis:100%}
+  .ab-dernier{white-space:normal}
+}
+/* ---------- Le mur en direct ---------- */
+.mur-direct{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:clamp(13px,1vw,17px);letter-spacing:.06em;text-transform:uppercase;color:var(--vert)}
+.mur-point{width:10px;height:10px;flex:none;border-radius:50%;background:var(--vert);animation:mur-pouls 1.6s ease-in-out infinite}
+@keyframes mur-pouls{0%,100%{box-shadow:0 0 0 0 rgba(189,219,129,.7)}60%{box-shadow:0 0 0 9px rgba(189,219,129,0)}}
+.mur-compteurs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.3vw,24px)}
+.mur-compteur{display:flex;flex-direction:column;gap:4px;padding:clamp(10px,1vw,18px) clamp(12px,1.2vw,22px);background:#363636;border-top:4px solid var(--rose)}
+.mur-compteur:nth-child(2){border-top-color:#FFFDF8}
+.mur-compteur:nth-child(3){border-top-color:var(--bleu)}
+.mur-compteur:nth-child(4){border-top-color:var(--vert)}
+.mur-compteur:nth-child(5){border-top-color:var(--orange)}
+.mur-c-val{font-family:var(--titre);font-weight:600;font-size:clamp(50px,5.4vw,104px);line-height:.85;color:var(--encre)}
+.mur-c-lib{font-family:var(--titre);font-weight:600;font-size:clamp(16px,1.4vw,26px);letter-spacing:.04em;text-transform:uppercase;color:var(--attenue)}
+.mur-c-moy{font-size:clamp(13px,1vw,17px);color:var(--discret)}
+.mur-c-moy.dessus{color:var(--vert);font-weight:700}
+.mur-compteur.monte .mur-c-val{animation:mur-monte 1.4s ease-out}
+@keyframes mur-monte{0%{color:var(--rose);transform:scale(1.12)}100%{color:var(--encre);transform:scale(1)}}
+.mur-milieu{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(260px,1fr);gap:clamp(12px,1.6vw,28px);align-items:start}
+.mur-milieu.sans-fil{grid-template-columns:minmax(0,1fr)}
+.mur-c-tete{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.mur-etat{display:inline-flex;align-items:center;gap:8px;font-size:clamp(13px,1vw,17px);color:var(--discret)}
+.mur-conseiller.actif .mur-etat{color:var(--vert);font-weight:700}
+.mur-conseiller.actif{box-shadow:inset 0 3px 0 var(--vert)}
+.mur-barre{display:grid;grid-template-columns:minmax(80px,auto) minmax(0,1fr) auto;align-items:center;gap:10px;font-size:clamp(13px,1.05vw,18px);color:var(--attenue)}
+.mur-b-piste{height:clamp(10px,.9vw,16px);background:#4A4A4A;overflow:hidden}
+.mur-b-rempli{display:block;height:100%;background:var(--bleu);transition:width .8s ease}
+.mur-barre.tete .mur-b-rempli{background:var(--rose)}
+.mur-barre.tete .mur-b-lib::after{content:" · en tête";color:var(--rose);font-weight:700}
+.mur-b-val{min-width:2ch;text-align:right;font-family:var(--titre);font-weight:600;font-size:clamp(20px,1.8vw,32px);color:var(--encre)}
+.mur-vente{color:var(--orange)}
+.mur-fil{display:flex;flex-direction:column;gap:10px;padding:clamp(12px,1.1vw,20px) clamp(14px,1.3vw,24px);background:#363636}
+.mur-fil{min-width:0}
+.mur-fil-liste{display:flex;flex-direction:column;align-items:stretch;margin:0;padding:0;list-style:none}
+.mur-evt{width:100%;min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px solid #4E4E4E;font-size:clamp(15px,1.15vw,20px)}
+.mur-evt:last-child{border-bottom:0}
+.mur-evt-h{font-family:var(--titre);font-weight:600;color:var(--discret)}
+.mur-evt.fort .mur-evt-t{color:var(--orange);font-weight:700}
+.mur-evt.palier .mur-evt-t{color:var(--vert)}
+.mur-evt.mur-nouveau{animation:mur-neuf 2.4s ease-out}
+@keyframes mur-neuf{0%{background:rgba(255,151,202,.45);transform:translateX(-12px)}25%{transform:translateX(0)}100%{background:transparent}}
+.mur{justify-content:space-between}
+.mur-bas{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(260px,1fr);gap:clamp(12px,1.6vw,28px);align-items:stretch}
+.mur-bas.sans-heures{grid-template-columns:minmax(0,1fr)}
+.mur-heures{display:flex;flex-direction:column;gap:10px}
+.mur-h-barres{display:flex;align-items:stretch;gap:clamp(4px,.6vw,10px);height:clamp(100px,11vh,170px)}
+.mur-h{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.mur-h-val{font-size:clamp(12px,.95vw,16px);font-weight:700;color:var(--attenue);min-height:1.2em}
+.mur-h-zone{flex:1;width:100%;display:flex;align-items:flex-end}
+.mur-h-col{display:flex;flex-direction:column;justify-content:flex-end;width:100%;min-height:2px;background:#5A5A5A;transition:height .8s ease}
+.mur-h-arg{display:block;width:100%;background:var(--bleu)}
+.mur-h.maintenant .mur-h-col{background:var(--rose)}
+.mur-h.maintenant .mur-h-lib{color:var(--rose);font-weight:700}
+.mur-h.avenir .mur-h-col{background:transparent;box-shadow:inset 0 -2px 0 #4E4E4E}
+.mur-h-lib{font-size:clamp(11px,.9vw,15px);color:var(--discret);white-space:nowrap}
+.mur-legende{display:flex;align-items:center;gap:8px;font-size:clamp(12px,.95vw,15px);color:var(--discret)}
+.mur-leg{display:inline-block;width:12px;height:12px;background:#5A5A5A}
+.mur-leg.arg{background:var(--bleu);margin-left:10px}
+.mur-mois{display:flex;flex-direction:column;gap:10px;padding:clamp(12px,1.1vw,20px) clamp(14px,1.3vw,24px);background:#363636}
+.mur-mois .mur-montant strong{font-size:clamp(40px,4vw,76px)}
+.mur-mois .vjauge{height:clamp(10px,1vw,16px);background:#4A4A4A}
+@media (prefers-reduced-motion:reduce){.mur-point,.mur-compteur.monte .mur-c-val,.mur-evt.mur-nouveau{animation:none}}
+/* Écrans bas (télé HD Ready, portable 1366 x 768) : le mur tient sans défiler */
+@media screen and (min-width:1000px) and (max-height:820px){
+.mur{gap:12px;padding-top:12px;padding-bottom:10px}
+.mur-compteur{padding:8px 14px}
+.mur-c-val{font-size:clamp(42px,4.2vw,68px)}
+.mur-c-lib{font-size:clamp(14px,1.15vw,20px)}
+.mur-conseiller{gap:5px;padding:10px 14px}
+.mur-nom{font-size:clamp(22px,2vw,32px)}
+.mur-b-val{font-size:clamp(18px,1.5vw,26px)}
+.mur-evt{padding:4px 0}
+.mur-h-barres{height:96px}
+.mur-mois{gap:6px;padding:10px 14px}
+}
+@media screen and (max-width:999px){
+  .mur-compteurs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .mur-milieu,.mur-bas{grid-template-columns:minmax(0,1fr)}
+}
+@media screen and (max-width:599px){
+  .mur-compteurs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* La recommandation, en fin d'appel */
+.reco{display:flex;flex-direction:column;gap:12px;padding:16px 20px 18px;background:var(--papier);border:1px solid var(--filet);box-shadow:inset 4px 0 0 var(--rose)}
+.reco .champ{margin:4px 0}
+.reco-script{display:flex;flex-direction:column;gap:6px}
+.reco-pied{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.reco-liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600}
+.reco-liste li{display:flex;align-items:center;gap:8px}
+.reco-lien{margin:0}
 </style>
 </head>
 <body>
@@ -2167,7 +2353,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     "51": "2 000 à 4 999 salariés", "52": "5 000 à 9 999 salariés", "53": "10 000 salariés et plus"
   };
   var VUES = ["journee", "appel", "prospects", "createurs", "resultats", "scripts", "mur"];
-  var DEFAUTS = { objectif_marge: 11000, objectifs: {}, tase_min: 50, annulation_max: 20, cible_accompagnement: 25, societe: "OOB", macrozones: [], offres: [], levier_macrozone: "" };
+  var DEFAUTS = { objectif_marge: 11000, objectifs: {}, tase_min: 50, annulation_max: 20, cible_accompagnement: 25, societe: "OOB", macrozones: [], offres: [], levier_macrozone: "", webclient_3cx: "" };
   // Le payplan 2027 : ses seuils vivent dans les réglages de l'équipe, dans la base. La page est publique : aucun seuil ici.
   var PAYPLAN = { debut: "", objectif: 0, declenchement: 0, acceleration: 0, boosters: 0, constance: 0, rdv_fp: 0, actes_mrl: 0, tase: 0, reprise: 0, visible: false };
 
@@ -2388,30 +2574,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   /* ---------- En-tête, onglets, compte ---------- */
 
-  function barre() {
-    var a = aRappeler(), signal = a.retard + a.jour;
-    var onglets = compte.role === "lecture" ? [
-      onglet("resultats", "Résultats", 0), onglet("scripts", "Scripts", 0), onglet("mur", "Mur", 0)
-    ] : [
-      onglet("journee", "Ma journée", signal, "Journée"),
-      onglet("appel", etat.appel ? "Appel en cours" : "Appel", 0, "Appel", !!etat.appel),
-      onglet("prospects", "Fiches", 0),
-      onglet("createurs", "Créateurs", 0),
-      onglet("resultats", "Résultats", 0),
-      onglet("scripts", "Scripts", 0)
-    ];
-    return el("header", { class: "barre" }, [
-      el("div", { class: "barre-int" }, [
-        el("a", { class: "marque", href: "#journee", "aria-label": "LUSKO, BU Orange : retour à ma journée", onclick: function (e) { e.preventDefault(); changerVue(compte.role === "lecture" ? "mur" : "journee"); } }, [
-          el("span", { class: "logo", role: "img", "aria-label": "LUSKO" }),
-          el("span", { class: "marque-sep", "aria-hidden": "true" }),
-          el("span", { class: "marque-bu", text: "Copilote VAD" })
-        ]),
-        el("nav", { class: "onglets", "aria-label": "Pages du copilote" }, onglets),
-        boutonCompte()
-      ])
-    ]);
-  }
   function onglet(v, libelleLong, badge, court, enCours) {
     var actif = etat.vue === v;
     return el("button", { type: "button", class: "onglet" + (actif ? " actif" : ""), "aria-current": actif ? "page" : null, "data-cle": "onglet-" + v, onclick: function () { changerVue(v); } }, [
@@ -2428,26 +2590,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ]);
     if (etat.menu) conteneur.appendChild(menuCompte());
     return conteneur;
-  }
-  function menuCompte() {
-    var items = [
-      ["theme", theme() === "dark" ? "Passer en thème clair" : "Passer en thème sombre", basculerTheme],
-      ["mur", "Afficher le mur de l'équipe", function () { changerVue("mur"); }],
-      estAdmin ? ["reglages", "Objectifs et réglages", ouvrirReglages] : null,
-      estAdmin ? ["acces", "Gérer les accès", ouvrirAcces] : null,
-      peutSaisir && telechargements ? ["sauvegarde", "Télécharger mes fiches", sauvegarder] : null,
-      ["deconnexion", "Se déconnecter", function () { if (P.deconnecter) P.deconnecter(); }]
-    ].filter(Boolean);
-    return el("div", { class: "compte-menu", role: "menu", onclick: stop }, [
-      el("div", { class: "compte-qui" }, [
-        el("strong", { text: compte.nom || compte.email || "" }),
-        el("span", { text: compte.email || "" }),
-        el("span", { text: libelle(DROITS, compte.role) })
-      ]),
-      items.map(function (i) {
-        return el("button", { type: "button", role: "menuitem", class: "compte-item", "data-cle": "menu-" + i[0], text: i[1], onclick: function () { etat.menu = false; rendre(); i[2](); } });
-      })
-    ]);
   }
 
   /* ---------- Briques communes ---------- */
@@ -2825,7 +2967,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* ---------- Les totaux et ce qu'ils disent ---------- */
 
   // Chaque total compte le jour de son événement : la vente à sa signature, l'annulation le jour où elle arrive.
-  var CHAMPS_ACT = ["appels", "decroches", "argumentes", "r1p", "r1_tenus", "r1_signes", "r2", "ap_proposes", "rdv_tenus", "rdv_fp", "ventes", "marge", "actes", "engageants", "actes_mrl", "full_prospect", "accompagnement", "annulations", "actes_annules", "marge_annulee", "marge_fp_nette"];
+  var CHAMPS_ACT = ["appels", "decroches", "argumentes", "r1p", "r1_tenus", "r1_signes", "r2", "ap_proposes", "rdv_tenus", "rdv_fp", "ventes", "marge", "actes", "engageants", "actes_mrl", "full_prospect", "accompagnement", "annulations", "actes_annules", "marge_annulee", "marge_fp_nette", "recos"];
   function somme(lignes, filtre) {
     var t = {};
     CHAMPS_ACT.forEach(function (k) { t[k] = 0; });
@@ -2919,24 +3061,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function prospectPar(id) { return etat.prospects.filter(function (p) { return p.id === id; })[0] || null; }
   function mesProspects() { return etat.prospects.filter(function (p) { return p.conseiller === compte.id; }); }
   function estMacrozone(p) { var l = reglages().macrozones; return !!(p && p.code_insee && l.indexOf(p.code_insee) >= 0); }
+  function origine(p) { return p && p.source === "recommandation" && txt(p.recommande_par) ? "Recommandé par " + txt(p.recommande_par) : libelle(SOURCES, p && p.source); }
   function nomFiche(p) { return txt(p && p.societe) || txt(p && p.contact) || txt(p && p.telephone) || "Fiche sans nom"; }
-  // Les contacts prévus : en retard, aujourd'hui, plus tard ; et les fiches actives sans date.
-  function aRappeler() {
-    var maintenant = Date.now(), auj = aujourdhui(), r = { retard: 0, jour: 0, liste: [], plusTard: [], sansDate: [] };
-    if (!peutSaisir) return r;
-    mesProspects().forEach(function (p) {
-      if (["rappel", "r1p", "r2"].indexOf(p.etape) < 0) return;
-      var t = msDe(p.rappel_le);
-      if (!isFinite(t)) { r.sansDate.push(p); return; }
-      var j = jourParis(new Date(t));
-      if (t < maintenant) { r.retard++; r.liste.push(p); }
-      else if (j === auj) { r.jour++; r.liste.push(p); }
-      else r.plusTard.push(p);
-    });
-    var tri = function (a, b) { return msDe(a.rappel_le) - msDe(b.rappel_le); };
-    r.liste.sort(tri); r.plusTard.sort(tri);
-    return r;
-  }
 
   /* ---------- Lectures ---------- */
 
@@ -3017,7 +3143,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   // Mes fiches, à ouvrir dans un tableur : point-virgule et marque d'ordre pour Excel en français.
   function sauvegarder() {
     if (!telechargements) return;
-    var cols = [["societe", "Société"], ["contact", "Contact"], ["telephone", "Téléphone"], ["email", "Mail"], ["ville", "Ville"], ["siret", "SIRET"], ["etape", "Étape"], ["source", "Origine"], ["rappel_le", "Prochain contact"], ["note", "Note"]];
+    var cols = [["societe", "Société"], ["contact", "Contact"], ["telephone", "Téléphone"], ["email", "Mail"], ["ville", "Ville"], ["siret", "SIRET"], ["etape", "Étape"], ["source", "Origine"], ["recommande_par", "Recommandé par"], ["rappel_le", "Prochain contact"], ["note", "Note"]];
     var lignes = [cols.map(function (c) { return c[1]; })].concat(mesProspects().map(function (p) {
       return cols.map(function (c) {
         if (c[0] === "etape") return libelle(ETAPES, p.etape);
@@ -3036,19 +3162,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function mesAppelsDuJour() {
     var auj = aujourdhui();
     return etat.appelsJour.filter(function (a) { return a.conseiller === compte.id && jourParis(new Date(msDe(a.le))) === auj; });
-  }
-  function vueJournee() {
-    if (!peutSaisir) return vueMur();
-    var auj = aujourdhui();
-    return [
-      teteDePage(jourLong(auj), "Ma journée", null, null),
-      chiffresDuJour(),
-      bandeauMois(),
-      el("div", { class: "jour-grille" }, [
-        el("div", { class: "jour-colonne" }, [blocContacts(), blocCreateursJour()]),
-        el("div", { class: "jour-colonne cote" }, [blocSession(), blocAppelsDuJour()])
-      ])
-    ];
   }
 
   // Aujourd'hui, en direct : compté sur les appels de la journée, sans attendre les totaux du serveur.
@@ -3097,7 +3210,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         L.annulation === null ? null : statut(L.annulationOk, L.annulationOk ? "Sous les " + pourcent(L.plafond) : "Au-dessus des " + pourcent(L.plafond))
       ]),
       bouton,
-      payplanVisible() && payplanEnVigueur(mc) ? payplanCompact(L.t, mc, obj) : null
+      payplanVisible() ? payplanCompact(L.t, mc, obj) : null
     ]);
   }
   // Les critères du payplan du mois, en une ligne : de quoi savoir où l'on en est sans ouvrir les résultats.
@@ -3105,7 +3218,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     var Pp = lecturePayplan(t, m, margesDuTrimestre(m, compte.id), obj);
     var constance = { perdue: [false, "Constance perdue ce trimestre"], acquise: [true, "Constance acquise ce trimestre"], incomplete: [null, "Constance : un mois sans données"], "en-cours": [null, "Constance : " + euros(Pp.s.constance) + " chaque mois"] }[Pp.etatConstance];
     return el("div", { class: "bm-payplan", "data-cle": "payplan-compact" }, [
-      el("p", { class: "bm-lib", text: "Payplan" }),
+      el("p", { class: "bm-lib", text: payplanEnVigueur(m) ? "Payplan" : "Payplan 2027, en essai" }),
       critere(Pp.deblocage, Pp.debloque ? "Boosters débloqués" : "Boosters dès " + euros(Pp.s.boosters)),
       critere(Pp.fp.etat, "Full Prospect " + Pp.fp.n + "/" + Pp.fp.cible),
       critere(Pp.mrl.etat, "Mon Réseau Local " + Pp.mrl.n + "/" + Pp.mrl.cible),
@@ -3114,47 +3227,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ]);
   }
 
-  // Les contacts prévus : en retard d'abord, puis la journée, puis les prochains jours.
-  function blocContacts() {
-    var a = aRappeler();
-    var corps = [];
-    if (!a.liste.length) {
-      corps.push(el("div", { class: "vide-contacts" }, [
-        el("p", { text: a.plusTard.length ? "Rien de prévu pour l'instant aujourd'hui. Votre prochain contact : " + nomFiche(a.plusTard[0]) + ", " + minuscule(quand(msDe(a.plusTard[0].rappel_le))) + "." : "Aucun rappel ni rendez-vous prévu. C'est le moment d'une session de prospection." })
-      ]));
-    } else {
-      corps.push(el("ol", { class: "contacts" }, a.liste.map(ligneContact)));
-    }
-    if (a.plusTard.length) {
-      corps.push(el("h3", { class: "sous-titre", text: "Les prochains jours" }));
-      corps.push(el("ol", { class: "contacts plus-tard" }, a.plusTard.slice(0, 6).map(ligneContact)));
-      if (a.plusTard.length > 6) corps.push(el("button", { type: "button", class: "lien-action", "data-cle": "voir-fiches", text: "Voir les " + a.plusTard.length + " contacts prévus", onclick: function () { etat.filtre = "actifs"; changerVue("prospects"); } }));
-    }
-    if (a.sansDate.length) {
-      corps.push(el("p", { class: "note-discrete" }, [
-        pluriel(a.sansDate.length, "fiche active n'a", "fiches actives n'ont") + " pas de date de contact. ",
-        el("button", { type: "button", class: "lien-action", "data-cle": "sans-date", text: "Les planifier", onclick: function () { etat.filtre = "sans_date"; changerVue("prospects"); } })
-      ]));
-    }
-    var titre = a.retard ? "À appeler maintenant" : "Mes contacts du jour";
-    return section("contacts", [titre ? titreSection("contacts", titre, boutonAjout("Nouvelle fiche", "nouvelle-fiche", function () { ouvrirFiche(null); })) : null].concat(corps));
-  }
-  function ligneContact(p) {
-    var t = msDe(p.rappel_le), retard = t < Date.now(), auj = jourParis(new Date(t)) === aujourdhui();
-    var details = [txt(p.contact), txt(p.telephone), txt(p.ville)].filter(Boolean).join(" · ");
-    return el("li", { class: "contact" + (retard ? " retard" : "") }, [
-      el("div", { class: "contact-quand" }, [
-        el("strong", { text: auj ? heureFr(t) : jourCourt(jourParis(new Date(t))) }),
-        el("span", { text: retard ? (auj ? "En retard" : "En retard, " + minuscule(quand(t))) : (auj ? libelle(ETAPES, p.etape) : heureFr(t)) })
-      ]),
-      el("div", { class: "contact-qui" }, [
-        el("button", { type: "button", class: "contact-nom", "data-cle": "fiche-" + p.id, text: nomFiche(p), onclick: function () { ouvrirFiche(p); } }),
-        details ? el("span", { class: "contact-details", text: details }) : null,
-        el("span", { class: "etiqs" }, [etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape), p.source !== "prospection" ? etiquette(libelle(SOURCES, p.source)) : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null])
-      ]),
-      el("button", { type: "button", class: "bouton petit", "data-cle": "appeler-" + p.id, onclick: function () { nouvelAppel(p); } }, [trait(ICONES.appel, 14), " Appeler"])
-    ]);
-  }
 
   /* ---------- Session de prospection : la saisie rapide, au clavier ---------- */
 
@@ -3176,6 +3248,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (s.argumente !== undefined) chemin.push(s.argumente ? "argumenté" : "non argumenté");
     return section("session", [
       titreSection("session", "Session de prospection"),
+      el("p", { class: "note-discrete session-intro", text: "Pour les numéros composés hors du copilote : chaque appel se note en deux touches, et vos chiffres suivent." }),
       el("div", { class: "session" }, [
         el("div", { class: "session-scenario" }, [el("label", { class: "champ-lib", for: "session-scenario", text: "Scénario" }), choixScenario]),
         el("div", { class: "session-pas", role: "group", "aria-labelledby": "session-question" }, [
@@ -3190,7 +3263,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           ])
         ])
       ]),
-      el("button", { type: "button", class: "bouton large", "data-cle": "appel-guide", onclick: function () { nouvelAppel(null); } }, [trait(ICONES.appel, 16), " Lancer un appel guidé"])
+      el("button", { type: "button", class: "bouton secondaire large", "data-cle": "appel-guide", onclick: function () { nouvelAppel(null); } }, [trait(ICONES.appel, 16), " Appel guidé sans fiche"])
     ], "bloc-session");
   }
   function reculerSaisie() {
@@ -3297,7 +3370,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   var BROUILLON = "vad-appel";
   function natureDe(etape) { return etape === "r1p" ? "r1" : (etape === "r2" ? "r2" : "prospection"); }
-  function ficheVide() { return { societe: "", contact: "", telephone: "", email: "", ville: "", siret: "", code_insee: "", activite: "", effectif: "", source: "prospection", full_prospect: false, note: "" }; }
+  function ficheVide() { return { societe: "", contact: "", telephone: "", email: "", ville: "", siret: "", code_insee: "", activite: "", effectif: "", source: "prospection", full_prospect: false, note: "", recommande_par: "" }; }
   function copieFiche(p) {
     var f = ficheVide();
     if (p) Object.keys(f).forEach(function (k) { f[k] = p[k] === null || p[k] === undefined ? f[k] : p[k]; });
@@ -3328,6 +3401,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       });
       return;
     }
+    if (opts.composer && p) composer(p.telephone);
     if (etat.appel && p && etat.appel.prospectId === p.id) { changerVue("appel"); return; }
     var sc = (p && scenarioPar(p.scenario)) ? p.scenario : (scenarioPar(etat.scenarioSession) ? etat.scenarioSession : ((scenarios()[0] || {}).id || ""));
     var axeUn = axes()[0];
@@ -3380,7 +3454,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
 
   // Les repères d'un script : {prenom}, {contact}, {societe}, {entreprise} et ceux de la reformulation.
-  var TROUS = { prenom: "votre prénom", contact: "le nom du contact", societe: "OOB", entreprise: "la société", priorite: "sa priorité", probleme: "le problème", impact: "ce que ça lui coûte", axe: "l'axe", dfe: "la fin d'engagement" };
+  var TROUS = { prenom: "votre prénom", contact: "le nom du contact", societe: "OOB", entreprise: "la société", priorite: "sa priorité", probleme: "le problème", impact: "ce que ça lui coûte", axe: "l'axe", dfe: "la fin d'engagement", recommandeur: "la personne qui recommande" };
   var CHAMP_DU_TROU = { priorite: "decouverte-priorite", probleme: "decouverte-probleme", impact: "decouverte-impact", axe: "decouverte-axe", dfe: "decouverte-dfe" };
   function valeursReformulation(a) {
     var d = a.decouverte || {}, ax = axePar(d.axe_prioritaire), axd = (d.axes || {})[d.axe_prioritaire] || {};
@@ -3392,6 +3466,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (k === "contact") return txt(f.contact);
     if (k === "societe") return txt(reglages().societe);
     if (k === "entreprise") return txt(f.societe);
+    if (k === "recommandeur") return txt(f.recommande_par);
     return a ? (valeursReformulation(a)[k] || "") : "";
   }
   // « Lucie de OOB » devient « Lucie d'OOB » : l'élision se fait au moment de remplir le repère.
@@ -3404,12 +3479,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   function texteScript(t, opts) {
     opts = opts || {};
     var p = el(opts.balise || "p", { class: "script-texte" + (opts.classe ? " " + opts.classe : "") });
-    String(t || "").split(/(\{[a-z_]+\}|\[[^\]]+\])/).forEach(function (m) {
+    String(t || "").replace(/ ([?!:;»])/g, "\u00a0$1").replace(/« /g, "«\u00a0").split(/(\{[a-z_]+\}|\[[^\]]+\])/).forEach(function (m) {
       if (!m) return;
       var k = /^\{([a-z_]+)\}$/.exec(m);
       if (k) {
         var v = valeurTrou(k[1]);
-        if (v) { elider(p, v); p.appendChild(el("mark", { class: "rempli", text: v })); return; }
+        if (v) { elider(p, v); var apres = p.lastChild && p.lastChild.nodeType === 3 && /'$/.test(p.lastChild.nodeValue); p.appendChild(el("mark", { class: "rempli" + (apres ? " apres-elision" : ""), text: v })); return; }
         if (opts.cliquable && CHAMP_DU_TROU[k[1]]) {
           p.appendChild(el("button", { type: "button", class: "trou", "data-cle": "trou-" + k[1], text: TROUS[k[1]] || k[1], onclick: function () { allerAuChamp(k[1]); } }));
           return;
@@ -3459,7 +3534,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       l.sort(function (x, y) { return (msDe(x.rappel_le) || 9e15) - (msDe(y.rappel_le) || 9e15); });
       liste.textContent = "";
       l.slice(0, 12).forEach(function (p) {
-        liste.appendChild(el("li", {}, [el("button", { type: "button", class: "choix-fiche", "data-cle": "lancer-" + p.id, onclick: function () { nouvelAppel(p); } }, [
+        liste.appendChild(el("li", {}, [el("button", { type: "button", class: "choix-fiche", "data-cle": "lancer-" + p.id, onclick: function () { nouvelAppel(p, { composer: true }); } }, [
           el("strong", { text: nomFiche(p) }),
           el("span", { text: [libelle(ETAPES, p.etape), isFinite(msDe(p.rappel_le)) ? quand(msDe(p.rappel_le)) : "", txt(p.ville)].filter(Boolean).join(" · ") }),
           trait(ICONES.fleche, 14)
@@ -3477,34 +3552,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ];
   }
 
-  function bandeauAppel(a) {
-    var f = a.fiche, sc = scenarioPar(a.scenario);
-    var details = [txt(f.contact), txt(f.ville), txt(f.activite)].filter(Boolean);
-    var tel = txt(f.telephone);
-    var abandon = false;
-    return el("div", { class: "appel-bandeau" }, [
-      el("div", { class: "ab-qui" }, [
-        el("p", { class: "ab-nature", text: a.nature === "r1" ? "R1" + (a.etapeInitiale === "r1p" && a.prospectId && (prospectPar(a.prospectId) || {}).source === "tmk" ? " issu de la TMK" : "") : (a.nature === "r2" ? "R2" : "Prospection") }),
-        el("h1", { class: "ab-nom", text: txt(f.societe) || (a.prospectId ? nomFiche(f) : "Nouveau prospect") }),
-        el("p", { class: "ab-details" }, [
-          details.join(" · "),
-          tel ? el("a", { class: "ab-tel", href: "tel:" + tel.replace(/[^\d+]/g, ""), "data-cle": "tel", text: tel }) : null
-        ]),
-        el("p", { class: "etiqs" }, [sc ? etiquette("Scénario : " + sc.nom, "scenario") : null, f.full_prospect ? etiquette("Full Prospect", "fp") : null, f.source !== "prospection" ? etiquette(libelle(SOURCES, f.source)) : null, estMacrozone(f) ? etiquette("Macrozone Rouge", "rouge") : null, txt(f.effectif) ? etiquette(f.effectif) : null])
-      ]),
-      el("div", { class: "ab-actions" }, [
-        el("p", { class: "chrono", "aria-label": "Durée de l'appel" }, [trait(ICONES.horloge, 14), el("span", { class: "chrono-temps", text: duree(a) })]),
-        el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-appel", onclick: ficheDeLAppel }, [trait(ICONES.crayon, 14), "Fiche"]),
-        el("button", { type: "button", class: "bouton-clair", "data-cle": "pas-decroche", onclick: pasDecroche, text: "Pas décroché" }),
-        el("button", { type: "button", class: "lien-action danger", "data-cle": "abandonner", text: "Abandonner", onclick: function (e) {
-          if (appelEntame(a) && !abandon) { abandon = true; e.currentTarget.textContent = "Confirmer l'abandon"; return; }
-          finirAppel();
-          annoncer("Appel abandonné, rien n'a été enregistré.");
-          changerVue("journee");
-        } })
-      ])
-    ]);
-  }
   function duree(a) { var s = Math.max(0, Math.floor((Date.now() - a.debut) / 1000)), m = Math.floor(s / 60); return (m < 10 ? "0" : "") + m + ":" + (s % 60 < 10 ? "0" : "") + (s % 60); }
 
   function conducteur(a) {
@@ -3537,29 +3584,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
 
   /* Étape 1 : accroche, barrage et cadrage */
-  function etapeAccroche(a) {
-    var sc = scenarioPar(a.scenario), cad = script("cadrage");
-    var choix = el("div", { class: "scenarios", role: "radiogroup", "aria-label": "Scénario d'appel" }, scenarios().map(function (x) {
-      var on = x.id === a.scenario;
-      return el("button", { type: "button", role: "radio", "aria-checked": on ? "true" : "false", class: "scenario-btn" + (on ? " actif" : ""), "data-cle": "scenario-" + x.id, text: x.nom, onclick: function () { a.scenario = x.id; sauverBrouillon(); rendre(); } });
-    }));
-    var corps = [enTeteEtape(a.nature === "prospection" ? "Accroche" : "Ouverture du " + (a.nature === "r1" ? "R1" : "R2"), sc && a.nature === "prospection" ? sc.angle : null), choix];
-    if (a.nature !== "prospection") {
-      corps.push(carteScript(a.nature === "r1" ? "Ouvrir le rendez-vous" : "Relancer la proposition", a.nature === "r1" ? cad.r1 : cad.r2, { grand: true, classe: "principal" }));
-      corps.push(carteScript("Pas le moment ?", cad.pas_le_moment));
-    } else if (sc) {
-      corps.push(carteScript("Si vous tombez sur l'accueil", sc.barrage));
-      corps.push(carteScript("L'accroche", sc.accroche, { grand: true, classe: "principal" }));
-      corps.push(carteScript("Si ça bloque", sc.alternative));
-      corps.push(carteScript("Cadrer l'appel", cad.texte, { conseil: cad.conseil }));
-      corps.push(carteScript("Pas le moment ?", cad.pas_le_moment));
-    } else {
-      corps.push(el("p", { class: "vide", text: "Aucun scénario n'est encore écrit. Un administrateur les ajoute dans l'onglet Scripts." }));
-    }
-    if (sc && txt(sc.leviers)) corps.push(el("div", { class: "carte-script discret" }, [el("p", { class: "cs-titre", text: "Ce qu'on vise avec ce scénario" }), el("p", { class: "cs-conseil", text: sc.leviers })]));
-    corps.push(piedEtape(a, "Il est d'accord : découverte"));
-    return corps;
-  }
 
   /* Étape 2 : découverte, axe par axe */
   function saisirDecouverte(chemin, valeur) {
@@ -3611,7 +3635,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       onglets,
       el("div", { class: "axe-panneau", id: "axe-panneau", role: "tabpanel" }, [
         el("div", { class: "spins" }, spin),
-        el("div", { class: "axe-champs" }, champsAxe),
+        estCreateur(a) ? replier("contrat-" + cle, "Son contrat actuel, s'il en a un", [el("div", { class: "axe-champs" }, champsAxe)]) : el("div", { class: "axe-champs" }, champsAxe),
         el("div", { class: "champ" }, [el("label", { class: "champ-lib", for: "dc-" + cle + "-note", text: "Ce qu'il dit sur " + minuscule(ax.nom) }), noteAxe]),
         prio
       ]),
@@ -3703,7 +3727,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     cherche.value = a.cherche || "";
     var liste = el("div", { class: "objections" });
     function remplir() {
-      var q = plat(cherche.value), l = objections();
+      var q = plat(cherche.value), l = objectionsPour(a);
       if (a.categorie) l = l.filter(function (o) { return o.categorie === a.categorie; });
       if (q) l = l.filter(function (o) { return plat(o.objection + " " + o.reponse).indexOf(q) >= 0; });
       liste.textContent = "";
@@ -3762,6 +3786,53 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ];
   }
 
+  /* La recommandation : un contact satisfait donne un nom, et sa fiche se crée sans quitter l'appel. */
+  var ISSUES_RECO = ["Vente signée", "R1P pris", "R2 prévu"];
+  var recoEnCours = false;
+  // Le script des fiches recommandées se reconnaît à son nom, comme ceux des créateurs.
+  function scenarioReco() { return scenarios().filter(function (s) { return /^recommand/.test(plat(s.nom)); })[0] || null; }
+  function recoVide() { return { contact: "", societe: "", telephone: "", precision: "" }; }
+  function recoEnAttente(a) { var r = (a && a.reco) || {}; return !!(txt(r.contact) || txt(r.societe) || txt(r.telephone)); }
+  function telCourt(t) { var n = String(t || "").replace(/\D/g, ""); return n.length > 9 ? n.slice(-9) : n; }
+  function creerReco(a, erreur, bouton, clavier) {
+    if (!a || recoEnCours) return;
+    // Le champ en cours de saisie rend sa valeur maintenant : plus tard, il l'écrirait dans la recommandation suivante.
+    var actif = document.activeElement;
+    if (actif && actif.tagName === "INPUT" && actif.blur) actif.blur();
+    var r = a.reco || recoVide(), f = a.fiche || {};
+    erreur.textContent = "";
+    if (!txt(r.contact) && !txt(r.societe)) { erreur.textContent = "Indiquez au moins son nom ou sa société."; return; }
+    var tel = txt(r.telephone), court = telCourt(tel);
+    var deja = court.length >= 9 ? etat.prospects.filter(function (p) { return telCourt(p.telephone) === court; })[0] : null;
+    if (deja) { erreur.textContent = "Ce numéro est déjà dans vos fiches : " + nomFiche(deja) + "."; return; }
+    var qui = txt(f.contact) || txt(f.societe), sc = scenarioReco();
+    var note = (qui ? "Recommandé par " + qui + (txt(f.contact) && txt(f.societe) ? " (" + txt(f.societe) + ")" : "") + "." : "Recommandation.") + (txt(r.precision) ? " " + txt(r.precision) : "");
+    var fiche = { societe: txt(r.societe).slice(0, 200), contact: txt(r.contact).slice(0, 200), telephone: tel.slice(0, 40), etape: "a_appeler", source: "recommandation", recommande_par: qui.slice(0, 200), note: note.slice(0, 4000), scenario: sc ? sc.id : "", full_prospect: false };
+    recoEnCours = true;
+    bouton.disabled = true;
+    inserer("vad_prospects", fiche).then(function (p) {
+      recoEnCours = false;
+      poserProspect(p);
+      a.recos = (a.recos || []).concat([{ id: p.id, nom: nomFiche(p) }]);
+      a.reco = recoVide();
+      sauverBrouillon();
+      rendre();
+      var suivant = clavier ? document.getElementById("reco-contact") : null;
+      if (suivant) { try { suivant.focus({ preventScroll: true }); } catch (e) { /* sans focus */ } }
+      annoncer("Fiche créée : " + nomFiche(p) + ", à appeler.", function () {
+        return supprimerLigne("vad_prospects", p.id).then(function () {
+          oterProspect(p.id);
+          if (etat.appel === a) { a.recos = (a.recos || []).filter(function (x) { return x.id !== p.id; }); sauverBrouillon(); }
+          rendre();
+        });
+      });
+    }, function (err) {
+      recoEnCours = false;
+      bouton.disabled = false;
+      erreur.textContent = messageErreur(err);
+    });
+  }
+
   /* Étape 7 : conclusion, puis enregistrement */
   var ISSUES = {
     prospection: [["Vente signée", "Vente signée"], ["R2 prévu", "Proposition faite, R2 prévu"], ["R1P pris", "R1P pris"], ["Rappel prévu", "Rappel prévu"], ["Pas intéressé", "Pas intéressé"], ["Barrage", "Barrage"]],
@@ -3787,6 +3858,32 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     function zone(id, lib, n, aide) { n.id = id; return el("div", { class: "champ" }, [el("label", { class: "champ-lib", for: id, text: lib }), n, aide ? el("p", { class: "champ-aide", text: aide }) : null]); }
     function saisie(type, valeur, cle, attrs) { var n = el("input", Object.assign({ class: "saisie", type: type, "data-cle": cle, autocomplete: "off" }, attrs || {})); n.value = valeur || ""; return n; }
+    // Proposée d'office quand l'appel va bien, à un clic sinon.
+    function blocRecommandation() {
+      var lignes = tableau(c.recommandation);
+      if (ISSUES_RECO.indexOf(a.issue) < 0 && !a.recoOuverte && !recoEnAttente(a) && !(a.recos || []).length) {
+        if (!a.issue || a.issue === "Barrage") return null;
+        return el("p", { class: "reco-lien" }, [el("button", { type: "button", class: "lien-action", "data-cle": "reco-ouvrir", text: "L'échange s'est bien passé ? Demander une recommandation", onclick: function () { a.recoOuverte = true; sauverBrouillon(); rendre(); } })]);
+      }
+      a.reco = a.reco || recoVide();
+      var qui = txt(a.fiche.contact) || txt(a.fiche.societe), sc = scenarioReco();
+      var erreur = el("p", { class: "erreur", role: "alert", id: "erreur-reco" });
+      var bouton = el("button", { type: "button", class: "bouton-clair", "data-cle": "reco-creer", disabled: recoEnCours ? true : null, onclick: function () { creerReco(a, erreur, bouton); } }, [trait(ICONES.plus, 13), "Créer sa fiche"]);
+      var aide = "La fiche part dans vos fiches à appeler." + (sc ? (qui ? " Le script " + sc.nom + " citera " + qui + "." : " Remplissez la fiche de l'appel, pour que le script cite votre contact.") : "");
+      return el("section", { class: "reco", "aria-label": "Recommandation", onkeydown: function (e) { if (e.key === "Enter" && e.target.tagName === "INPUT") { e.preventDefault(); creerReco(a, erreur, bouton, true); } } }, [
+        el("h3", { class: "sous-titre", text: "Recommandation" }),
+        lignes.length ? el("div", { class: "reco-script" }, lignes.map(function (x) { return texteScript(x); })) : null,
+        el("div", { class: "quatre" }, [
+          zone("reco-contact", "Nom", liaison(saisie("text", a.reco.contact, "reco-contact", { maxlength: 200 }), ["reco", "contact"])),
+          zone("reco-societe", "Société", liaison(saisie("text", a.reco.societe, "reco-societe", { maxlength: 200 }), ["reco", "societe"])),
+          zone("reco-telephone", "Téléphone", liaison(saisie("tel", a.reco.telephone, "reco-telephone", { maxlength: 40 }), ["reco", "telephone"])),
+          zone("reco-precision", "Lien ou activité", liaison(saisie("text", a.reco.precision, "reco-precision", { maxlength: 300, placeholder: "son beau-frère, plombier" }), ["reco", "precision"]))
+        ]),
+        el("div", { class: "reco-pied" }, [bouton, el("span", { class: "champ-aide", text: aide })]),
+        erreur,
+        (a.recos || []).length ? el("ul", { class: "reco-liste" }, a.recos.map(function (x) { return el("li", {}, [trait(ICONES.coche, 13), el("span", { text: x.nom + " : fiche créée, à appeler." })]); })) : null
+      ]);
+    }
     var details = [];
     if (a.issue === "Vente signée") {
       var v = a.vente;
@@ -3809,6 +3906,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           return el("label", { class: "puce", for: "offre-" + i }, [b, el("span", { text: o })]);
         }))]) : null
       ]));
+      details.push(el("div", { class: "ines-ligne" }, [boutonInes(a.fiche, a.vente), el("span", { class: "champ-aide", text: "Les champs de la vente, prêts à coller dans INES, Type FULL PROSPECT compris." })]));
     }
     if (avecDate(a.issue)) {
       details.push(el("div", { class: "deux" }, [
@@ -3830,6 +3928,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       el("h3", { class: "sous-titre", text: "Issue de l'appel" }),
       choix,
       details.length ? el("div", { class: "issue-details" }, details) : null,
+      blocRecommandation(),
       el("div", { class: "cases-appel" }, [
         el("label", { class: "case-lib" }, [el("input", { type: "checkbox", "data-cle": "argumente", checked: arg, onchange: function (e) { a.argForce = e.target.checked; sauverBrouillon(); } }), el("span", { text: "Contact argumenté" })]),
         a.nature !== "prospection" || a.vus.indexOf("proposition") >= 0 ? el("label", { class: "case-lib" }, [el("input", { type: "checkbox", "data-cle": "ap-propose-fin", checked: !!a.apPropose, onchange: function (e) { a.apPropose = e.target.checked; sauverBrouillon(); } }), el("span", { text: "Accompagnement Pro proposé" })]) : null
@@ -3861,6 +3960,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     o.siret = /^\d{9}(\d{5})?$/.test(String(f.siret || "").replace(/\s+/g, "")) ? String(f.siret).replace(/\s+/g, "") : null;
     o.code_insee = /^[0-9][0-9AB][0-9]{3}$/.test(txt(f.code_insee)) ? txt(f.code_insee) : null;
     if (SOURCES.map(function (s) { return s[0]; }).indexOf(o.source) < 0) o.source = "prospection";
+    if (txt(f.recommande_par) || (o.source === "recommandation" && f.recommande_par !== undefined)) o.recommande_par = txt(f.recommande_par).slice(0, 200);
     return o;
   }
   function enregistrerAppel(bouton, erreurs) {
@@ -3869,6 +3969,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     function stopper(texte) { erreurs.textContent = texte; }
     erreurs.textContent = "";
     if (!a.issue) return stopper("Choisissez l'issue de l'appel.");
+    if (recoEnAttente(a)) return stopper("Une recommandation est notée sans fiche : cliquez sur Créer sa fiche, ou videz ses champs.");
     var quandMs = NaN;
     if (avecDate(a.issue)) {
       if (!jourIso(a.rdv.date) || heureMin(a.rdv.heure) < 0) return stopper("Indiquez la date et l'heure du prochain contact.");
@@ -3922,6 +4023,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       var ids = a.ids, issue = a.issue, nom = txt(a.fiche.societe) || txt(a.fiche.contact);
       finirAppel();
       changerVue("journee");
+      lancerEnchainement();
       annoncer("Appel enregistré : " + minuscule(issue === "Rappel prévu" && a.nature !== "prospection" ? "rendez-vous reporté" : issue) + (nom ? ", " + nom : "") + ".", function () {
         var l = [];
         if (ids.vente) l.push(supprimerLigne("vad_ventes", ids.vente));
@@ -4022,7 +4124,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     cherche.addEventListener("input", function () { etat.recherche = cherche.value; rendre(); });
     var filtres = el("div", { class: "filtres-cat", role: "group", "aria-label": "Étapes" }, FILTRES.map(function (f) {
       var n = base.filter(function (p) { return filtrer(p, f[0]); }).length, on = etat.filtre === f[0];
-      if (!n && !on && ["sans_date", "r2", "fp"].indexOf(f[0]) >= 0) return null;
+      if (!n && !on && ["actifs", "toutes"].indexOf(f[0]) < 0) return null;
       return el("button", { type: "button", class: "seg-btn" + (on ? " actif" : ""), "aria-pressed": on ? "true" : "false", "data-cle": "filtre-" + f[0], onclick: function () { etat.filtre = f[0]; rendre(); } }, [f[1], el("span", { class: "seg-n", text: String(n) })]);
     }));
     var choixConseiller = null;
@@ -4048,9 +4150,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         el("strong", { text: nomFiche(p) }),
         el("span", { text: [txt(p.contact), txt(p.ville), mien ? "" : nomDe(p.conseiller)].filter(Boolean).join(" · ") })
       ]),
-      el("span", { class: "fl-etape" }, [etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape), p.full_prospect ? etiquette("Full Prospect", "fp") : null, p.source !== "prospection" ? etiquette(libelle(SOURCES, p.source)) : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null]),
+      el("span", { class: "fl-etape" }, [etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape), p.full_prospect ? etiquette("Full Prospect", "fp") : null, p.source !== "prospection" ? etiquette(origine(p)) : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null]),
       el("span", { class: "fl-quand" + (retard ? " retard" : ""), text: isFinite(t) && ACTIVES.indexOf(p.etape) >= 0 ? (retard ? "En retard : " : "") + minuscule(quand(t)) : "" }),
-      mien && ["signe", "perdu"].indexOf(p.etape) < 0 ? el("button", { type: "button", class: "bouton-clair", "data-cle": "appeler-" + p.id, onclick: function () { nouvelAppel(p); } }, [trait(ICONES.appel, 13), "Appeler"]) : el("span")
+      mien && ["signe", "perdu"].indexOf(p.etape) < 0 ? el("button", { type: "button", class: "bouton-clair", "data-cle": "appeler-" + p.id, onclick: function () { nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 13), "Appeler"]) : el("span")
     ]);
   }
 
@@ -4137,7 +4239,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       { groupe: [{ cle: "email", lib: "Mail", type: "email", valeur: f.email }, { cle: "ville", lib: "Ville", type: "texte", valeur: f.ville }] },
       { groupe: [{ cle: "siret", lib: "SIRET", type: "texte", valeur: f.siret, exemple: "14 chiffres" }, { cle: "effectif", lib: "Effectif", type: "texte", valeur: f.effectif }] },
       { cle: "activite", lib: "Activité", type: "texte", valeur: f.activite },
-      { cle: "source", lib: "Origine", type: "selection", options: SOURCES, valeur: f.source || "prospection" },
+      { groupe: [{ cle: "source", lib: "Origine", type: "selection", options: SOURCES, valeur: f.source || "prospection" }, { cle: "recommande_par", lib: "Recommandé par", type: "texte", valeur: f.recommande_par, exemple: "Si c'est une recommandation" }] },
       { cle: "full_prospect", lib: "Full Prospect : rien n'est facturé chez Orange sur ce SIREN", type: "case", valeur: !!f.full_prospect }
     ];
     if (opts.suivi) {
@@ -4185,7 +4287,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     var mien = p.conseiller === compte.id;
     var histo = el("div", { class: "historique" }, [el("p", { class: "champ-aide", text: "Chargement de l'historique" })]);
-    var boutons = mien ? [el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-appeler", onclick: function () { fermerFeuille(); nouvelAppel(p); } }, [trait(ICONES.appel, 14), "Appeler"])] : [];
+    var boutons = mien ? [el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-appeler", onclick: function () { fermerFeuille(); nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 14), "Appeler"])] : [];
     ouvrirFeuilleFiche(p, {
       titre: nomFiche(p), suivi: true, apres: histo, boutons: boutons,
       intro: mien ? null : "Fiche de " + nomDe(p.conseiller) + ".",
@@ -4198,7 +4300,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           annoncer("Fiche enregistrée.", function () {
             var r = {};
             Object.keys(c).forEach(function (k) { r[k] = avant[k] === undefined ? null : avant[k]; });
-            ["societe", "contact", "telephone", "email", "ville", "activite", "effectif", "note"].forEach(function (k) { if (r[k] === null) r[k] = ""; });
+            ["societe", "contact", "telephone", "email", "ville", "activite", "effectif", "note", "recommande_par"].forEach(function (k) { if (r[k] === null) r[k] = ""; });
             r.full_prospect = !!r.full_prospect;
             return majLigne("vad_prospects", p.id, r).then(function (x) { poserProspect(x); rendre(); });
           });
@@ -4562,6 +4664,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   }
   function lancerRecherche() {
     var R = etat.radar, f = R.filtres;
+    R.filtresOuverts = false;
     var r = R.r = {
       cle: cleRadar(f), filtres: JSON.parse(JSON.stringify(f)), where: clauseBodacc(f), total: null, decalage: 0, lues: 0, verifiees: 0, faitPage: 0, aVerifier: 0,
       leads: [], vus: {}, aReprendre: [], ecart: { sci: 0, deja: 0, non_diffusibles: 0, fermees: 0, anciennes: 0, activite: 0, introuvables: 0, erreurs: 0 },
@@ -4750,7 +4853,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         });
       };
       if (appeler) {
-        nouvelAppel(n);
+        nouvelAppel(n, { composer: true });
         annoncer("Fiche créée pour " + nomFiche(n) + ". Le script est prêt, bon appel.", defaire);
       } else {
         rendre();
@@ -4964,12 +5067,28 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     return [
       teteDePage("Radar créateurs", "Créateurs à appeler", "Les entreprises qui viennent de naître, partout en France. La recherche lit les annonces de création du BODACC, puis vérifie chaque entreprise dans Sirene, en direct. Toutes ont droit à la remise créateur de 30 % pendant 12 mois, Connect Pro compris.", null),
-      section("radar-filtres", [titreSection("radar-filtres", "Ma recherche"), filtresCreateurs()]),
+      section("radar-filtres", [titreSection("radar-filtres", "Ma recherche")].concat(r && !R.filtresOuverts ? [resumeRecherche(r)] : [filtresCreateurs()])),
       r ? chiffresCreateurs(r) : null,
       r ? section("radar-liste", [titreSection("radar-liste", r.leads.length ? entier(r.leads.length) + NB + (r.leads.length > 1 ? "créateurs" : "créateur") + " à appeler" : "À appeler")].concat(corps)) : null,
       estAdmin ? blocSuiviCreateurs() : null,
       el("p", { class: "note-discrete radar-regles", text: "Chaque appel dit qui appelle et pourquoi. Un créateur qui ne veut plus être appelé passe en «\u00a0Perdu\u00a0» dans sa fiche : il ne revient plus dans les recherches. Les entrepreneurs qui ont refusé la diffusion de leurs données ne sont jamais proposés. Outre-mer exclu : les offres Orange y relèvent d'Orange Caraïbe et d'Orange Réunion." })
     ];
+  }
+
+  // Une recherche faite : ses critères tiennent sur une ligne, et la liste remonte.
+  function resumeRecherche(r) {
+    var f = r.filtres;
+    var zone = f.regions.length ? f.regions.map(function (k) { var x = REGIONS_RADAR.filter(function (g) { return g[0] === k; })[0]; return x ? x[1] : k; }).join(", ") : "Toute la France";
+    var act = f.familles.indexOf("toutes") >= 0 ? "Toutes les activités" : f.familles.map(function (k) { var x = famille(k); return x ? x[1] : k; }).join(", ");
+    var per = (PERIODES_RADAR.filter(function (x) { return x[0] === f.periode; })[0] || [0, ""])[1];
+    var texte = [zone, act, per, txt(f.motcle) ? "«\u00a0" + txt(f.motcle) + "\u00a0»" : "", f.societes ? "Sociétés seulement" : ""].filter(Boolean).join(" · ");
+    return el("div", { class: "radar-resume" }, [
+      el("p", { class: "radar-resume-texte", text: texte }),
+      el("div", { class: "radar-resume-actions" }, [
+        el("button", { type: "button", class: "bouton-clair", "data-cle": "radar-modifier", onclick: function () { etat.radar.filtresOuverts = true; rendre(); } }, [trait(ICONES.crayon, 13), "Modifier la recherche"]),
+        el("button", { type: "button", class: "lien-action", "data-cle": "radar-relancer", text: "Relancer", onclick: lancerRecherche })
+      ])
+    ]);
   }
 
   /* Dans « Ma journée » : un raccourci vers la recherche, et la dernière liste s'il y en a une */
@@ -5016,9 +5135,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     if (!lignes) return [tete, el("p", { class: "chargement", role: "status" }, [el("span", { class: "rond", "aria-hidden": "true" }), "Chargement des chiffres"])];
     var objectif = portee === "equipe" ? objectifEquipe(activiteDu(m), m) : objectifDe(compte.email, m);
     var t = somme(lignes), L = lecture(t, objectif), R = rythme(m, t.marge_nette, objectif);
-    var blocs = [tete, tuilesObjectifs(L, R, m, portee), payplanVisible() ? blocPayplan(m, portee, objectif) : null, tuilesSecondaires(L), entonnoir(L), courbeMarge(m, lignes, objectif)];
+    var detail = [tuilesSecondaires(L, lignes), entonnoir(L), courbeMarge(m, lignes, objectif)];
+    var blocs = [tete, tuilesObjectifs(L, R, m, portee), payplanVisible() ? blocPayplan(m, portee, objectif) : null];
+    if (portee === "moi" && peutSaisir) blocs.push(mesVentes(m), replier("resultats-detail", "Le détail du mois : ventes, Full Prospect, efficacité, marge jour après jour", detail));
+    else blocs = blocs.concat(detail);
     if (portee === "equipe") blocs.push(tableEquipe(m));
-    if (portee === "moi" && peutSaisir) blocs.push(mesVentes(m));
     return blocs;
   }
 
@@ -5056,20 +5177,24 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ], "section-tuiles");
   }
 
-  function tuilesSecondaires(L) {
+  function tuilesSecondaires(L, lignes) {
     var t = L.t, r = reglages(), cible = num(r.cible_accompagnement) / 100;
+    // Les ventes signées sur une fiche venue d'une recommandation : ce que rapporte le fait de demander.
+    var tr = somme(lignes, function (x) { return x.source === "recommandation"; });
     function petite(cle, lib, valeur, sous) {
       return el("div", { class: "tuile petite", "data-cle": "tuile-" + cle }, [el("p", { class: "tuile-lib", text: lib }), el("p", { class: "tuile-valeur" }, [el("strong", { text: valeur })]), sous ? el("p", { class: "tuile-sous", text: sous }) : null]);
     }
     return section("detail", [
       titreSection("detail", "Le mois en détail"),
-      el("div", { class: "tuiles six" }, [
+      el("div", { class: "tuiles quatre" }, [
         petite("ventes", "Ventes", entier(t.ventes), t.ventes ? "Panier moyen " + euros(L.panier) : null),
         petite("fp", "Full Prospect", entier(t.full_prospect), t.full_prospect ? euros(t.marge_fp_nette) + " de marge nette" : "Aucune vente Full Prospect"),
         petite("ap", "Accompagnement Pro", t.ventes ? pourcent(L.apSigne) : "Pas de vente", (t.ventes ? pluriel(t.accompagnement, "vente", "ventes") + " sur " + t.ventes + (cible ? ", cible " + pourcent(cible) : "") : "") + (t.rdv_tenus ? " · proposé dans " + pourcent(L.apPropose) + " des R1 et R2 tenus" : "")),
         petite("r1p", "R1P pris", entier(t.r1p), t.r1p && t.appels ? "1 pour " + entier(t.appels / t.r1p) + " appels de prospection" : null),
         petite("rdv-fp", "RDV Full Prospect", entier(t.rdv_fp), "R1 tenus avec une entreprise sans facturation chez Orange"),
-        petite("mrl", "Mon Réseau Local", entier(t.actes_mrl), pluriel(t.actes_mrl, "acte", "actes") + " : pare-feu, wifi privé ou public")
+        petite("mrl", "Mon Réseau Local", entier(t.actes_mrl), pluriel(t.actes_mrl, "acte", "actes") + " : pare-feu, wifi privé ou public"),
+        petite("recos", "Recommandations obtenues", entier(t.recos), t.recos ? (t.ventes ? (FMT_DECIMAL ? FMT_DECIMAL.format(t.recos / t.ventes) : (t.recos / t.ventes).toFixed(1)) + " par vente signée" : null) : "À demander en fin d'appel réussi"),
+        petite("ventes-reco", "Ventes sur recommandation", entier(tr.ventes), tr.ventes ? euros(tr.marge_nette) + " de marge nette" : "Aucune vente sur une fiche recommandée")
       ])
     ]);
   }
@@ -5306,7 +5431,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     return section("equipe", [
       titreSection("equipe", "L'équipe"),
       el("div", { class: "table-defile" }, [el("table", { class: "table-equipe" }, [
-        el("thead", {}, [el("tr", {}, ["Conseiller", "Marge nette", "Objectif", "TASE", "Annulations", "Appels", "Décrochés", "Argumentés", "R1P", "R1 tenus", "Ventes", "Full Prospect"].map(function (x, i) { return el("th", { scope: "col", class: i ? "num" : "", text: x }); }))]),
+        el("thead", {}, [el("tr", {}, ["Conseiller", "Marge nette", "Objectif", "TASE", "Annulations", "Appels", "Décrochés", "Argumentés", "R1P", "R1 tenus", "Ventes", "Full Prospect", "Recos"].map(function (x, i) { return el("th", { scope: "col", class: i ? "num" : "", text: x }); }))]),
         el("tbody", {}, rangs.map(function (x) {
           var t = x.L.t;
           return el("tr", { class: x.c.uid === compte.id ? "moi" : "" }, [
@@ -5321,7 +5446,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             el("td", { class: "num", text: entier(t.r1p) }),
             el("td", { class: "num", text: entier(t.r1_tenus) }),
             el("td", { class: "num", text: entier(t.ventes) }),
-            el("td", { class: "num", text: entier(t.full_prospect) })
+            el("td", { class: "num", text: entier(t.full_prospect) }),
+            el("td", { class: "num", text: entier(t.recos) })
           ]);
         }))
       ])]),
@@ -5364,6 +5490,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     ouvrirFeuille({
       titre: neuve ? "Ajouter une vente" : "Vente du " + dateFr(v.signee_le), champs: champs, large: true,
+      boutons: neuve ? null : [boutonInes(Object.assign({ societe: v.societe }, v.prospect ? prospectPar(v.prospect) : null), { marge: v.marge, actes: v.actes, engageants: v.actes_engageants, mrl: v.actes_mrl, fp: v.full_prospect, ap: v.accompagnement_pro, offres: v.offres, note: v.note })],
       avant: neuve ? el("p", { class: "feuille-intro", text: "Pour une vente signée hors appel guidé. Celles de l'appel guidé s'enregistrent toutes seules." }) : null,
       enregistrer: function (x) {
         var marge = montantSaisi(x.marge), actes = Number(x.actes), eng = Number(x.actes_engageants || 0);
@@ -5397,16 +5524,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
   /* ---------- Scripts : la bibliothèque de l'équipe, modifiable par l'administrateur ---------- */
 
-  var AIDE_REPERES = "Repères remplis pendant l'appel : {prenom} (le conseiller), {contact}, {societe} (OOB), {entreprise} (la société appelée). Entre crochets, ce qui se dit sur le moment : [jour], [heure], [date].";
-  function vueScripts() {
-    var liens = [["bloc-scenarios", "Scénarios"], ["bloc-decouverte", "Découverte"], ["bloc-etapes", "Étapes de l'appel"], ["bloc-objections", "Objections"]];
-    return [
-      teteDePage(null, "Scripts", estAdmin ? "Vous pouvez tout modifier : les conseillers voient la nouvelle version aussitôt, même en plein appel." : "Les scénarios, les questions de découverte, chaque étape de l'appel et les réponses aux objections : à relire entre deux sessions.", [
-        el("nav", { class: "sommaire", "aria-label": "Dans cette page" }, liens.map(function (l) { return el("a", { class: "sommaire-lien", href: "#" + l[0], "data-cle": "aller-" + l[0], text: l[1], onclick: function (e) { e.preventDefault(); allerA(l[0], true); } }); }))
-      ]),
-      blocScenarios(), blocAxesScripts(), blocEtapesScripts(), blocObjectionsScripts()
-    ];
-  }
+  var AIDE_REPERES = "Repères remplis pendant l'appel : {prenom} (le conseiller), {contact}, {societe} (OOB), {entreprise} (la société appelée), {recommandeur} (qui a recommandé la société). Entre crochets, ce qui se dit sur le moment : [jour], [heure], [date].";
   function modifierDoc(c, id, champs, texte) {
     var avant = (etat.donnees[c] || {})[id], precedent = {};
     Object.keys(champs).forEach(function (k) { precedent[k] = avant && Object.prototype.hasOwnProperty.call(avant, k) ? avant[k] : null; });
@@ -5499,7 +5617,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     ["reformulation", "Reformuler", [["texte", "La phrase", 3], ["conseil", "Le conseil", 2]]],
     ["proposition", "Proposer", [["points", "Les points, un par ligne", 4, "lignes"], ["accompagnement", "L'Accompagnement Pro", 3], ["engageants", "Les services engageants", 2], ["prix", "Le prix", 2]]],
     ["negociation", "Négocier et conclure", [["froid", "Froid", 2], ["tiede", "Tiède", 2], ["chaud", "Chaud", 2], ["assumptif", "Le choix de la date", 2], ["alternatif", "Le choix entre deux options", 2], ["urgence", "La fin d'engagement", 2], ["concession", "Une concession", 2]]],
-    ["conclusion", "Conclure l'appel", [["signature", "La signature", 2], ["relance", "La prochaine étape", 2], ["sortie", "Avant de raccrocher, une ligne par point", 4, "lignes"]]]
+    ["conclusion", "Conclure l'appel", [["signature", "La signature", 2], ["relance", "La prochaine étape", 2], ["sortie", "Avant de raccrocher, une ligne par point", 4, "lignes"], ["recommandation", "La recommandation, une ligne par point", 5, "lignes"]]]
   ];
   function blocEtapesScripts() {
     return section("etapes", [
@@ -5585,7 +5703,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       { cle: "cible_accompagnement", lib: "Cible d'Accompagnement Pro (% des ventes)", type: "nombre", valeur: r.cible_accompagnement },
       { cle: "offres", lib: "Offres proposées à la signature, une par ligne", type: "lignes", lignes: 5, valeur: r.offres },
       { cle: "macrozones", lib: "Macrozones Rouge : codes INSEE des communes", type: "long", lignes: 3, valeur: r.macrozones.join(" "), aide: "Séparés par des espaces, des virgules ou des retours à la ligne. Une fiche dans l'une de ces communes porte la mention Macrozone Rouge." },
-      { cle: "levier_macrozone", lib: "Le levier à rappeler en macrozone Rouge", type: "long", lignes: 2, valeur: r.levier_macrozone }
+      { cle: "levier_macrozone", lib: "Le levier à rappeler en macrozone Rouge", type: "long", lignes: 2, valeur: r.levier_macrozone },
+      { cle: "webclient_3cx", lib: "3CX dans le navigateur : adresse du standard", type: "texte", valeur: r.webclient_3cx, exemple: "https://votre-standard.3cx.fr", aide: "Seulement si les conseillers appellent avec 3CX ouvert dans le navigateur. Laissez vide s'ils ont l'application 3CX installée : le bouton Appeler passe alors par elle." }
     ]);
     var pp = r.payplan, regle = payplanRegle();
     // Payplan pas encore réglé : des champs vides plutôt que des zéros
@@ -5597,7 +5716,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       { groupe: [{ cle: "pp_boosters", lib: "Boosters et Accompagnement Pro dès (€)", type: "nombre", valeur: vpp("boosters") }, { cle: "pp_constance", lib: "Constance : chaque mois au moins (€)", type: "nombre", valeur: vpp("constance") }] },
       { groupe: [{ cle: "pp_rdv_fp", lib: "Booster Full Prospect : RDV par mois", type: "nombre", valeur: vpp("rdv_fp") }, { cle: "pp_actes_mrl", lib: "Booster Mon Réseau Local : actes par mois", type: "nombre", valeur: vpp("actes_mrl") }] },
       { groupe: [{ cle: "pp_tase", lib: "Booster TASE à partir de (%)", type: "nombre", valeur: vpp("tase") }, { cle: "pp_reprise", lib: "Garde-fou reprise à (%)", type: "nombre", valeur: vpp("reprise") }] },
-      { cle: "pp_visible", lib: "Montrer le payplan 2027 aux conseillers et sur le mur", type: "case", valeur: pp.visible, aide: "Tant que la case est décochée, vous seul voyez le bloc « Payplan 2027 »." }
+      { cle: "pp_visible", lib: "Montrer le payplan 2027 aux conseillers et sur le mur", type: "case", valeur: pp.visible, aide: "Décochée, vous seul voyez le payplan. Cochée avant le mois de début, les conseillers le voient en essai, calculé sur leurs chiffres du mois." }
     ];
     champs = champs.concat(champsPayplan);
     // Recalculer les seuils à partir de l'objectif, dans les proportions de la grille gardées avec les réglages (pas dans la page, qui est publique).
@@ -5634,6 +5753,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         if (faux.length) return Promise.reject({ texte: "Ces codes INSEE ne sont pas valables : " + faux.slice(0, 5).join(", ") + (faux.length > 5 ? "..." : "") + "." });
         o.macrozones = codes.filter(function (c, i) { return codes.indexOf(c) === i; });
         o.levier_macrozone = txt(v.levier_macrozone);
+        var web = adresse3cx(v.webclient_3cx);
+        if (web === null) return Promise.reject({ texte: "L'adresse de 3CX commence par https://, par exemple https://votre-standard.3cx.fr." });
+        o.webclient_3cx = web;
         // Payplan laissé vide : on n'y touche pas
         if (!txt(v.pp_debut) && !txt(v.pp_objectif) && !regle) {
           if ((etat.donnees.reglages || {}).equipe) return modifierDoc("reglages", "equipe", o, "Réglages enregistrés.");
@@ -5662,62 +5784,729 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   /* ---------- Le mur : l'équipe sur un écran, sans aucun détail de prospect ---------- */
 
   function heureMur() { var m = minutesParis(Date.now()), h = Math.floor(m / 60), r = m % 60; return h + NB + "h" + NB + (r < 10 ? "0" : "") + r; }
+
+  /* ---------- 3CX : le bouton Appeler compose le numéro ---------- */
+  // Le numéro tel que 3CX l'attend : des chiffres seuls, au format national pour la France.
+  function numeroCompose(s) {
+    var m = /\+?\d[\d\s.\-()\/]{6,}\d/.exec(String(s || ""));
+    if (!m) return "";
+    var n = m[0].replace(/[^\d+]/g, "");
+    if (/^\+33\d{9}$/.test(n)) n = "0" + n.slice(3);
+    else if (/^0033\d{9}$/.test(n)) n = "0" + n.slice(4);
+    else if (/^[1-9]\d{8}$/.test(n)) n = "0" + n;
+    return n.replace(/\+/g, "").length >= 6 ? n : "";
+  }
+  function composerActif() { return lire("vad-3cx") !== "non"; }
+  // L'adresse du client web 3CX, réduite à son origine : https://standard.exemple.fr
+  function adresse3cx(x) {
+    x = txt(x);
+    if (!x) return "";
+    if (!/^[a-z]+:\/\//i.test(x)) x = "https://" + x;
+    try { var u = new URL(x); return u.protocol === "https:" && u.hostname.indexOf(".") > 0 ? u.origin : null; } catch (e) { return null; }
+  }
+  // Compose le numéro : par l'application 3CX (lien tel:), ou par le client web si son adresse est réglée.
+  function composer(numero) {
+    var n = numeroCompose(numero);
+    if (!n || !composerActif()) return false;
+    var web = adresse3cx(reglages().webclient_3cx);
+    if (web) {
+      window.open(web + "/webclient/#/call?phone=" + encodeURIComponent(n), "copilote-3cx");
+      return true;
+    }
+    var a = el("a", { href: "tel:" + n, "aria-hidden": "true", tabindex: "-1", css: { display: "none" } });
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    return true;
+  }
+
+  /* ---------- Pas décroché en un clic ---------- */
+  // Le prochain essai : un quart d'heure pour un rendez-vous, deux heures sinon ; après 18 h 30, le jour ouvré suivant à 10 h.
+  function prochainEssai(p) {
+    var t = Date.now() + ((p.etape === "r1p" || p.etape === "r2") ? 15 : 120) * 60000, j = jourParis(new Date(t));
+    if (j !== aujourdhui() || !estOuvre(j) || minutesParis(t) > 18 * 60 + 30) {
+      var d = decaler(aujourdhui(), 1);
+      while (!estOuvre(d)) d = decaler(d, 1);
+      t = instantParis(d, 10 * 60);
+    }
+    return t;
+  }
+  function noterNonDecroche(raison, bouton) {
+    var a = etat.appel;
+    if (!a || etat.envoi) return;
+    var p = a.prospectId ? prospectPar(a.prospectId) : null;
+    var nouveau = p && ACTIVES.indexOf(p.etape) >= 0 && raison !== "Faux numéro" ? new Date(prochainEssai(p)).toISOString() : null;
+    var ancien = p ? p.rappel_le : null;
+    etat.envoi = true;
+    if (bouton) bouton.disabled = true;
+    inserer("vad_appels", { prospect: a.prospectId || null, nature: a.nature, source: champsFiche(a.fiche).source, full_prospect: !!a.fiche.full_prospect, decroche: false, argumente: false, issue: raison, scenario: a.scenario || "" }).then(function (l) {
+      etat.appelsJour.unshift(l);
+      return (nouveau ? majLigne("vad_prospects", p.id, { rappel_le: nouveau }).then(poserProspect) : Promise.resolve()).then(function () {
+        etat.envoi = false;
+        if (p && !nouveau) { etat.passes = etat.passes || {}; etat.passes[p.id] = Date.now(); }
+        finirAppel();
+        changerVue("journee");
+        lancerEnchainement();
+        annoncer(raison + " noté" + (nouveau ? ". Nouvel essai " + minuscule(quand(msDe(nouveau))) : (raison === "Faux numéro" && p ? ". Corrigez le numéro dans la fiche" : "")) + ".", function () {
+          return supprimerLigne("vad_appels", l.id).then(function () {
+            etat.appelsJour = etat.appelsJour.filter(function (x) { return x.id !== l.id; });
+            return nouveau ? majLigne("vad_prospects", p.id, { rappel_le: ancien }).then(poserProspect) : null;
+          }).then(rafraichir);
+        });
+        rafraichir();
+      });
+    }).then(null, function (err) {
+      etat.envoi = false;
+      if (bouton) bouton.disabled = false;
+      alerter(messageErreur(err));
+    });
+  }
+
+  /* ---------- Ma journée : le prochain appel, puis la file ---------- */
+  // La file : d'abord ce qui est en retard ou dans le quart d'heure, puis les fiches à appeler, des plus anciennes aux plus récentes.
+  function fileAppels() {
+    var maintenant = Date.now(), auj = aujourdhui(), bientot = maintenant + 15 * 60000;
+    var r = { prets: [], aAppeler: [], plusTard: [], prochainsJours: [], sansDate: [], file: [], prochain: null };
+    if (!peutSaisir) return r;
+    mesProspects().forEach(function (p) {
+      if (ACTIVES.indexOf(p.etape) < 0) return;
+      var t = msDe(p.rappel_le);
+      if (!isFinite(t)) { (p.etape === "a_appeler" ? r.aAppeler : r.sansDate).push(p); return; }
+      if (t <= bientot) r.prets.push(p);
+      else if (jourParis(new Date(t)) === auj) r.plusTard.push(p);
+      else r.prochainsJours.push(p);
+    });
+    var parDate = function (a, b) { return msDe(a.rappel_le) - msDe(b.rappel_le); };
+    r.prets.sort(parDate);
+    r.plusTard.sort(parDate);
+    r.prochainsJours.sort(parDate);
+    r.aAppeler.sort(function (a, b) { return (msDe(a.cree_le) || 0) - (msDe(b.cree_le) || 0); });
+    var passes = etat.passes || {}, tous = r.prets.concat(r.aAppeler);
+    r.file = tous.filter(function (p) { return !passes[p.id]; }).concat(tous.filter(function (p) { return passes[p.id]; }));
+    r.prochain = r.file[0] || null;
+    return r;
+  }
+  function raisonAppel(p) {
+    var t = msDe(p.rappel_le);
+    if (!isFinite(t)) return p.source === "prospection" ? "À appeler" : origine(p) + ", à appeler";
+    var quoi = p.etape === "r1p" ? "Rendez-vous R1" : (p.etape === "r2" ? "Rendez-vous R2" : (p.etape === "rappel" ? "Rappel prévu" : "Nouvel essai"));
+    var retard = t < Date.now() - 5 * 60000;
+    if (jourParis(new Date(t)) === aujourdhui()) return quoi + " à " + heureFr(t) + (retard ? ", en retard" : "");
+    return quoi + " " + minuscule(quand(t)) + ", en retard";
+  }
+  function blocProchainAppel(f) {
+    var p = f.prochain;
+    if (!p) {
+      var suite = f.plusTard[0];
+      return section("prochain", [
+        titreSection("prochain", "Mon prochain appel"),
+        el("div", { class: "prochain vide" }, [
+          el("p", { class: "prochain-texte", text: suite ? "Rien d'urgent. Prochain contact à " + heureFr(msDe(suite.rappel_le)) + " : " + nomFiche(suite) + ". D'ici là, de nouveaux créateurs vous attendent." : "Personne en attente pour l'instant. C'est le bon moment pour trouver des créateurs à appeler." }),
+          el("div", { class: "prochain-actions" }, [
+            el("button", { type: "button", class: "bouton fort", "data-cle": "prochain-createurs", onclick: function () { changerVue("createurs"); } }, [trait(ICONES.createurs, 16), " Trouver des créateurs"]),
+            el("button", { type: "button", class: "lien-action", "data-cle": "prochain-nouveau", text: "Appeler un prospect sans fiche", onclick: function () { nouvelAppel(null); } })
+          ])
+        ])
+      ], "bloc-prochain");
+    }
+    var tel = txt(p.telephone), sc = scenarioPar(p.scenario), autres = f.file.length - 1;
+    var d = etat.decompte && etat.decompte.id === p.id ? etat.decompte : null;
+    var enchainer = el("label", { class: "case-lib enchainer" }, [
+      el("input", { type: "checkbox", "data-cle": "enchainer", checked: enchainementActif(), onchange: function (e) { ecrire("vad-enchainer", e.target.checked ? "oui" : null); if (!e.target.checked) annulerEnchainement(); rendre(); } }),
+      el("span", { text: "Enchaîner : l'appel suivant part tout seul, 3 secondes après l'issue de l'appel" })
+    ]);
+    return section("prochain", [
+      titreSection("prochain", "Mon prochain appel", autres > 0 ? el("span", { class: "prochain-compte", text: "puis " + pluriel(autres, "autre", "autres") + " dans la file" }) : null),
+      el("div", { class: "prochain" + (msDe(p.rappel_le) < Date.now() - 5 * 60000 ? " retard" : "") }, [
+        d ? el("p", { class: "decompte", role: "status" }, [
+          el("span", {}, ["Appel suivant dans ", el("strong", { class: "decompte-s", text: String(Math.max(1, Math.ceil((d.fin - Date.now()) / 1000))) }), " s"]),
+          el("button", { type: "button", class: "lien-action", "data-cle": "decompte-pause", text: "Pause", onclick: function () { annulerEnchainement(); rendre(); } })
+        ]) : null,
+        el("div", { class: "prochain-qui" }, [
+          el("p", { class: "prochain-raison", text: raisonAppel(p) }),
+          el("h3", { class: "prochain-nom" }, [el("button", { type: "button", class: "contact-nom", "data-cle": "prochain-fiche", text: nomFiche(p), onclick: function () { ouvrirFiche(p); } })]),
+          el("p", { class: "prochain-details", text: [txt(p.contact), txt(p.activite), txt(p.ville)].filter(Boolean).join(" · ") }),
+          el("p", { class: "etiqs" }, [sc ? etiquette("Script : " + sc.nom, "scenario") : null, p.full_prospect ? etiquette("Full Prospect", "fp") : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null])
+        ]),
+        el("div", { class: "prochain-actions" }, [
+          el("button", { type: "button", class: "bouton fort prochain-appeler", "data-cle": "prochain-appeler", onclick: function () { annulerEnchainement(); nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 17), tel && composerActif() ? " Appeler le " + tel : " Ouvrir l'appel"]),
+          autres > 0 ? el("button", { type: "button", class: "lien-action", "data-cle": "prochain-passer", text: "Passer, je l'appelle plus tard", onclick: function () { annulerEnchainement(); etat.passes = etat.passes || {}; etat.passes[p.id] = Date.now(); rendre(); } }) : null
+        ]),
+        enchainer
+      ])
+    ], "bloc-prochain");
+  }
+  function blocContacts(f) {
+    f = f || fileAppels();
+    var corps = [], suite = f.file.slice(1);
+    if (suite.length) {
+      corps.push(el("ol", { class: "contacts" }, suite.slice(0, 10).map(ligneContact)));
+      if (suite.length > 10) corps.push(el("button", { type: "button", class: "lien-action", "data-cle": "voir-file", text: "Voir les " + suite.length + " fiches de la file", onclick: function () { etat.filtre = "actifs"; changerVue("prospects"); } }));
+    }
+    if (f.plusTard.length) {
+      corps.push(el("h3", { class: "sous-titre", text: "Plus tard aujourd'hui" }));
+      corps.push(el("ol", { class: "contacts plus-tard" }, f.plusTard.map(ligneContact)));
+    }
+    if (f.prochainsJours.length) {
+      corps.push(el("h3", { class: "sous-titre", text: "Les prochains jours" }));
+      corps.push(el("ol", { class: "contacts plus-tard" }, f.prochainsJours.slice(0, 5).map(ligneContact)));
+      if (f.prochainsJours.length > 5) corps.push(el("button", { type: "button", class: "lien-action", "data-cle": "voir-fiches", text: "Voir les " + f.prochainsJours.length + " contacts prévus", onclick: function () { etat.filtre = "actifs"; changerVue("prospects"); } }));
+    }
+    if (f.sansDate.length) {
+      corps.push(el("p", { class: "note-discrete" }, [
+        pluriel(f.sansDate.length, "fiche en cours n'a", "fiches en cours n'ont") + " pas de date de contact. ",
+        el("button", { type: "button", class: "lien-action", "data-cle": "sans-date", text: "Les planifier", onclick: function () { etat.filtre = "sans_date"; changerVue("prospects"); } })
+      ]));
+    }
+    return section("contacts", [titreSection("contacts", suite.length ? "Ensuite dans la file" : "À venir", boutonAjout("Nouvelle fiche", "nouvelle-fiche", function () { ouvrirFiche(null); }))]
+      .concat(corps.length ? corps : [el("p", { class: "vide-contacts", text: "Rien d'autre de prévu. Les fiches que vous prenez dans Créateurs arrivent ici." })]));
+  }
+  function ligneContact(p) {
+    var t = msDe(p.rappel_le), date = isFinite(t), retard = date && t < Date.now(), auj = date && jourParis(new Date(t)) === aujourdhui();
+    var details = [txt(p.contact), txt(p.telephone), txt(p.ville)].filter(Boolean).join(" · ");
+    return el("li", { class: "contact" + (retard ? " retard" : "") }, [
+      el("div", { class: "contact-quand" }, [
+        el("strong", { text: !date ? "À appeler" : (auj ? heureFr(t) : jourCourt(jourParis(new Date(t)))) }),
+        el("span", { text: !date ? (p.source === "prospection" ? "Nouvelle fiche" : libelle(SOURCES, p.source)) : (retard ? (auj ? "En retard" : "En retard, " + minuscule(quand(t))) : (auj ? libelle(ETAPES, p.etape) : heureFr(t))) })
+      ]),
+      el("div", { class: "contact-qui" }, [
+        el("button", { type: "button", class: "contact-nom", "data-cle": "fiche-" + p.id, text: nomFiche(p), onclick: function () { ouvrirFiche(p); } }),
+        details ? el("span", { class: "contact-details", text: details }) : null,
+        el("span", { class: "etiqs" }, [date ? etiquette(libelle(ETAPES, p.etape), "etape-" + p.etape) : null, p.source !== "prospection" ? etiquette(origine(p)) : null, estMacrozone(p) ? etiquette("Macrozone Rouge", "rouge") : null])
+      ]),
+      el("button", { type: "button", class: "bouton petit", "data-cle": "appeler-" + p.id, title: txt(p.telephone) && composerActif() ? "Composer le " + txt(p.telephone) + " avec 3CX" : null, onclick: function () { nouvelAppel(p, { composer: true }); } }, [trait(ICONES.appel, 14), " Appeler"])
+    ]);
+  }
+  // Les contacts du jour pour le badge de l'onglet : rappels et rendez-vous, et les nouveaux essais de fiches à appeler.
+  function aRappeler() {
+    var maintenant = Date.now(), auj = aujourdhui(), r = { retard: 0, jour: 0, liste: [], plusTard: [], sansDate: [] };
+    if (!peutSaisir) return r;
+    mesProspects().forEach(function (p) {
+      if (ACTIVES.indexOf(p.etape) < 0) return;
+      var t = msDe(p.rappel_le);
+      if (!isFinite(t)) { if (p.etape !== "a_appeler") r.sansDate.push(p); return; }
+      var j = jourParis(new Date(t));
+      if (t < maintenant) { r.retard++; r.liste.push(p); }
+      else if (j === auj) { r.jour++; r.liste.push(p); }
+      else r.plusTard.push(p);
+    });
+    var tri = function (a, b) { return msDe(a.rappel_le) - msDe(b.rappel_le); };
+    r.liste.sort(tri); r.plusTard.sort(tri);
+    return r;
+  }
+  function blocBienDemarrer() {
+    if (lire("vad-bien-demarrer") === "vu") return null;
+    return section("demarrer", [
+      titreSection("demarrer", "Bien démarrer", el("button", { type: "button", class: "lien-action", "data-cle": "demarrer-fermer", text: "C'est compris", onclick: function () { ecrire("vad-bien-demarrer", "vu"); rendre(); } })),
+      el("ol", { class: "demarrer" }, [
+        el("li", {}, [el("strong", { text: "Votre prochain appel est en haut de cette page." }), " Pour remplir la file : l'onglet Créateurs, puis «\u00a0Prendre\u00a0»."]),
+        el("li", {}, [el("strong", { text: "Appeler compose le numéro dans 3CX" }), " et ouvre le script, étape par étape. Parlez avec vos mots : le texte est un repère."]),
+        el("li", {}, [el("strong", { text: "En fin d'appel, un clic sur l'issue." }), " La fiche, vos rappels et vos chiffres se mettent à jour tout seuls."])
+      ]),
+      el("p", { class: "note-discrete" }, ["Un mot inconnu, un doute ? Le bouton ", el("strong", { text: "?" }), " en haut de l'écran répond."])
+    ], "bloc-demarrer");
+  }
+  function vueJournee() {
+    if (!peutSaisir) return vueMur();
+    var auj = aujourdhui(), f = fileAppels();
+    return [
+      teteDePage(jourLong(auj), "Ma journée", null, null),
+      blocBienDemarrer(),
+      el("div", { class: "jour-grille" }, [
+        el("div", { class: "jour-colonne" }, [blocProchainAppel(f), blocAlertes(), blocContacts(f), blocCreateursJour()]),
+        el("div", { class: "jour-colonne cote" }, [chiffresDuJour(), blocSession(), blocAppelsDuJour()])
+      ]),
+      bandeauMois()
+    ];
+  }
+
+  /* ---------- L'aide : le copilote en bref, et les mots du métier ---------- */
+  function boutonAide() {
+    return el("button", { type: "button", class: "aide-btn", "data-cle": "aide", "aria-label": "Aide : le copilote en bref", title: "Aide", text: "?", onclick: function (e) { e.stopPropagation(); etat.menu = false; ouvrirAide(); } });
+  }
+  function ouvrirAide() {
+    var mots = [
+      ["Argumenté", "Vous avez pu présenter votre proposition. C'est ce qui sépare un simple décroché d'un vrai échange."],
+      ["R1P pris", "Vous avez fixé un premier rendez-vous (R1). La fiche passe en «\u00a0R1 prévu\u00a0» et revient dans votre journée à l'heure dite."],
+      ["R2", "Le rendez-vous où l'on revient sur la proposition faite."],
+      ["Full Prospect", "Une entreprise qui n'a rien de facturé chez Orange sur son SIREN."],
+      ["TASE", "La part de vos actes vendus avec un service engageant."],
+      ["Mon Réseau Local", "Les actes pare-feu, wifi privé ou wifi public."],
+      ["Accompagnement Pro", "La ligne directe vers nous après la signature, au lieu du centre d'appels d'Orange."],
+      ["Macrozone Rouge", "Les communes prioritaires définies par Orange : la fiche porte la mention."],
+      ["Remise créateur", "30 % pendant 12 mois sur les offres internet et mobile d'Orange Pro, pour les entreprises de moins de deux ans."]
+    ];
+    ouvrirFeuille({
+      titre: "Le copilote en bref",
+      avant: el("div", { class: "aide" }, [
+        el("h3", { text: "Une journée, trois gestes" }),
+        el("ol", { class: "demarrer" }, [
+          el("li", {}, [el("strong", { text: "Ma journée vous dit qui appeler." }), " En haut : le prochain appel, puis la file. Les rappels et rendez-vous arrivent à l'heure prévue."]),
+          el("li", {}, [el("strong", { text: "Appeler compose le numéro dans 3CX" }), " et ouvre le script. Avancez d'étape en étape avec le bouton du bas ; les objections sont à portée de clic."]),
+          el("li", {}, [el("strong", { text: "En fin d'appel, choisissez l'issue." }), " Pas décroché : un clic sur la raison, le nouvel essai se programme tout seul."])
+        ]),
+        el("h3", { text: "Si 3CX ne compose pas" }),
+        el("p", { text: "La première fois, le navigateur demande s'il peut ouvrir 3CX : cochez «\u00a0Toujours autoriser\u00a0», puis Ouvrir. Si rien ne se passe, 3CX n'est pas l'application choisie pour les numéros de téléphone : sous Windows, Paramètres, Applications par défaut, cherchez TEL et choisissez 3CX. Votre responsable peut aussi régler l'adresse du 3CX du navigateur." }),
+        el("p", { text: "Pour ouvrir l'appel sans composer, le temps d'un essai : menu de votre compte, «\u00a0Ne plus composer avec 3CX\u00a0»." }),
+        el("h3", { text: "Les mots du métier" }),
+        el("dl", { class: "lecture aide-mots" }, mots.map(function (m) { return el("div", { class: "lecture-ligne" }, [el("dt", { text: m[0] }), el("dd", { text: m[1] })]); }))
+      ])
+    });
+  }
+  function barre() {
+    demarrerAlertes();
+    var a = aRappeler(), signal = a.retard + a.jour;
+    var onglets = compte.role === "lecture" ? [
+      onglet("resultats", "Résultats", 0), onglet("scripts", "Scripts", 0), onglet("mur", "Mur", 0)
+    ] : [
+      onglet("journee", "Ma journée", signal, "Journée"),
+      onglet("appel", etat.appel ? "Appel en cours" : "Appel", 0, "Appel", !!etat.appel),
+      onglet("prospects", "Fiches", 0),
+      onglet("createurs", "Créateurs", 0),
+      onglet("resultats", "Résultats", 0),
+      onglet("scripts", "Scripts", 0)
+    ];
+    return el("header", { class: "barre" }, [
+      el("div", { class: "barre-int" }, [
+        el("a", { class: "marque", href: "#journee", "aria-label": "LUSKO, BU Orange : retour à ma journée", onclick: function (e) { e.preventDefault(); changerVue(compte.role === "lecture" ? "mur" : "journee"); } }, [
+          el("span", { class: "logo", role: "img", "aria-label": "LUSKO" }),
+          el("span", { class: "marque-sep", "aria-hidden": "true" }),
+          el("span", { class: "marque-bu", text: "Copilote VAD" })
+        ]),
+        el("nav", { class: "onglets", "aria-label": "Pages du copilote" }, onglets),
+        el("div", { class: "barre-droite" }, [boutonAide(), boutonCompte()])
+      ])
+    ]);
+  }
+  function menuCompte() {
+    var items = [
+      ["theme", theme() === "dark" ? "Passer en thème clair" : "Passer en thème sombre", basculerTheme],
+      peutSaisir ? ["3cx", composerActif() ? "Ne plus composer avec 3CX" : "Composer les numéros avec 3CX", function () {
+        var on = !composerActif();
+        ecrire("vad-3cx", on ? null : "non");
+        rendre();
+        annoncer(on ? "Le bouton Appeler compose de nouveau le numéro dans 3CX." : "Le bouton Appeler ouvre l'appel guidé sans composer le numéro.");
+      }] : null,
+      peutSaisir && lire("vad-bien-demarrer") === "vu" ? ["demarrer", "Revoir «\u00a0Bien démarrer\u00a0»", function () { ecrire("vad-bien-demarrer", null); changerVue("journee"); }] : null,
+      ["mur", "Afficher le mur de l'équipe", function () { changerVue("mur"); }],
+      estAdmin ? ["reglages", "Objectifs et réglages", ouvrirReglages] : null,
+      estAdmin ? ["acces", "Gérer les accès", ouvrirAcces] : null,
+      peutSaisir && telechargements ? ["sauvegarde", "Télécharger mes fiches", sauvegarder] : null,
+      ["deconnexion", "Se déconnecter", function () { if (P.deconnecter) P.deconnecter(); }]
+    ].filter(Boolean);
+    return el("div", { class: "compte-menu", role: "menu", onclick: stop }, [
+      el("div", { class: "compte-qui" }, [
+        el("strong", { text: compte.nom || compte.email || "" }),
+        el("span", { text: compte.email || "" }),
+        el("span", { text: libelle(DROITS, compte.role) })
+      ]),
+      items.map(function (i) {
+        return el("button", { type: "button", role: "menuitem", class: "compte-item", "data-cle": "menu-" + i[0], text: i[1], onclick: function () { etat.menu = false; rendre(); i[2](); } });
+      })
+    ]);
+  }
+
+  /* ---------- L'appel guidé : l'essentiel à l'écran, le reste à un clic ---------- */
+  // Un script secondaire, replié : ouvert ou fermé, il le reste d'un affichage à l'autre.
+  function siScript(titre, texte, opts) {
+    opts = opts || {};
+    if (!txt(texte)) return null;
+    var cle = "si-" + plat(titre).replace(/[^a-z0-9]+/g, "-");
+    etat.siOuverts = etat.siOuverts || {};
+    var d = el("details", { class: "si-script" + (opts.conseil ? " conseil" : ""), open: etat.siOuverts[cle] ? true : null }, [
+      el("summary", { "data-cle": cle }, [el("span", { text: titre })]),
+      opts.conseil ? el("p", { class: "cs-conseil", text: texte }) : texteScript(texte)
+    ]);
+    d.addEventListener("toggle", function () { etat.siOuverts[cle] = d.open; });
+    return d;
+  }
+  function etapeAccroche(a) {
+    var sc = scenarioPar(a.scenario), cad = script("cadrage"), liste = scenarios();
+    var corps = [enTeteEtape(a.nature === "prospection" ? "Accroche" : "Ouverture du " + (a.nature === "r1" ? "R1" : "R2"), sc && a.nature === "prospection" ? sc.angle : null)];
+    if (a.fiche.source === "recommandation" && txt(a.fiche.note)) corps.push(el("div", { class: "carte-script discret" }, [el("p", { class: "cs-titre", text: "Note de la fiche" }), el("p", { class: "script-texte", text: txt(a.fiche.note) })]));
+    if (a.nature === "prospection" && liste.length) {
+      var choix = el("select", { class: "saisie petite", id: "appel-scenario", "data-cle": "appel-scenario" }, (sc ? [] : [el("option", { value: "", text: "Choisir un script" })]).concat(liste.map(function (x) { return el("option", { value: x.id, text: x.nom }); })));
+      choix.value = sc ? sc.id : "";
+      choix.addEventListener("change", function () { a.scenario = choix.value; sauverBrouillon(); rendre(); });
+      corps.push(el("div", { class: "scenario-ligne" }, [el("label", { class: "champ-lib", for: "appel-scenario", text: "Script de l'appel" }), choix]));
+    }
+    if (a.nature !== "prospection") {
+      corps.push(carteScript(a.nature === "r1" ? "Ouvrir le rendez-vous" : "Relancer la proposition", a.nature === "r1" ? cad.r1 : cad.r2, { grand: true, classe: "principal" }));
+      corps.push(el("div", { class: "si-scripts" }, [siScript("Ce n'est pas le moment", cad.pas_le_moment)]));
+    } else if (sc) {
+      corps.push(carteScript("Vous dites", sc.accroche, { grand: true, classe: "principal" }));
+      corps.push(carteScript("Il répond oui : vous cadrez", cad.texte, { conseil: cad.conseil }));
+      corps.push(el("div", { class: "si-scripts" }, [
+        el("p", { class: "si-titre", text: "Et si..." }),
+        siScript("Vous tombez sur l'accueil", sc.barrage),
+        siScript("Il hésite, ça bloque", sc.alternative),
+        siScript("Ce n'est pas le moment", cad.pas_le_moment),
+        siScript("Ce qu'on vise avec ce script", sc.leviers, { conseil: true })
+      ]));
+    } else {
+      corps.push(el("p", { class: "vide", text: liste.length ? "Choisissez le script de l'appel ci-dessus." : "Aucun script n'est encore écrit. Un administrateur les ajoute dans l'onglet Scripts." }));
+    }
+    corps.push(piedEtape(a, "Il est d'accord : découverte"));
+    return corps;
+  }
+  function bandeauAppel(a) {
+    var f = a.fiche, sc = scenarioPar(a.scenario);
+    var details = [txt(f.contact), txt(f.ville), txt(f.activite)].filter(Boolean);
+    var tel = txt(f.telephone);
+    var abandon = false;
+    return el("div", { class: "appel-bandeau" }, [
+      el("div", { class: "ab-qui" }, [
+        el("p", { class: "ab-nature", text: a.nature === "r1" ? "R1" + (a.etapeInitiale === "r1p" && a.prospectId && (prospectPar(a.prospectId) || {}).source === "tmk" ? " issu de la TMK" : "") : (a.nature === "r2" ? "R2" : "Prospection") }),
+        el("h1", { class: "ab-nom", text: txt(f.societe) || (a.prospectId ? nomFiche(f) : "Nouveau prospect") }),
+        el("p", { class: "ab-details" }, [
+          details.join(" · "),
+          tel ? el("a", { class: "ab-tel", href: "tel:" + (numeroCompose(tel) || tel.replace(/[^\d+]/g, "")), "data-cle": "tel", title: "Composer ce numéro avec 3CX", onclick: function (e) { if (composer(tel)) e.preventDefault(); } }, [trait(ICONES.appel, 13), tel]) : null
+        ]),
+        ligneDernier(a),
+        el("p", { class: "etiqs" }, [sc ? etiquette("Script : " + sc.nom, "scenario") : null, f.full_prospect ? etiquette("Full Prospect", "fp") : null, f.source !== "prospection" ? etiquette(origine(f)) : null, estMacrozone(f) ? etiquette("Macrozone Rouge", "rouge") : null, txt(f.effectif) ? etiquette(f.effectif) : null])
+      ]),
+      el("div", { class: "ab-actions" }, [
+        el("p", { class: "chrono", "aria-label": "Durée de l'appel" }, [trait(ICONES.horloge, 14), el("span", { class: "chrono-temps", text: duree(a) })]),
+        el("button", { type: "button", class: "bouton-clair", "data-cle": "fiche-appel", onclick: ficheDeLAppel }, [trait(ICONES.crayon, 14), "Fiche"]),
+        el("button", { type: "button", class: "bouton-clair" + (a.nonDecroche ? " actif" : ""), "aria-expanded": a.nonDecroche ? "true" : "false", "data-cle": "pas-decroche", text: "Pas décroché", onclick: function () { a.nonDecroche = !a.nonDecroche; rendre(); } }),
+        el("button", { type: "button", class: "lien-action danger", "data-cle": "abandonner", text: "Abandonner", onclick: function (e) {
+          if (appelEntame(a) && !abandon) { abandon = true; e.currentTarget.textContent = "Confirmer l'abandon"; return; }
+          finirAppel();
+          annoncer((a.recos || []).length ? "Appel abandonné. Les fiches des recommandations, elles, sont gardées." : "Appel abandonné, rien n'a été enregistré.");
+          changerVue("journee");
+        } })
+      ]),
+      a.nonDecroche ? el("div", { class: "ab-nondecroche", role: "group", "aria-label": "Pas décroché : pourquoi ?" }, [
+        el("span", { class: "ab-nd-lib", text: "Pas décroché, un clic :" }),
+        NON_DECROCHE.map(function (r) {
+          return el("button", { type: "button", class: "choix-nd", "data-cle": "nd-" + plat(r).replace(/[^a-z0-9]+/g, "-"), text: r, onclick: function (e) { noterNonDecroche(r, e.currentTarget); } });
+        }),
+        el("button", { type: "button", class: "lien-action", "data-cle": "nd-creneau", text: "Choisir moi-même le prochain essai", onclick: pasDecroche })
+      ]) : null
+    ]);
+  }
+
+  /* ---------- Avant de composer : le dernier échange sous les yeux ---------- */
+  function chargerDernier(a) {
+    if (!a || !a.prospectId || a.dernier !== undefined || a.chargeDernier) return;
+    a.chargeDernier = true;
+    historique(a.prospectId).then(function (r) {
+      var l = (r[0] || []).filter(function (x) { return isFinite(msDe(x.le)); }).sort(function (x, y) { return msDe(y.le) - msDe(x.le); });
+      var sansReponse = 0;
+      for (var i = 0; i < l.length && !l[i].decroche; i++) sansReponse++;
+      var annote = l.filter(function (x) { return txt(x.note); })[0];
+      a.dernier = l.length ? { le: l[0].le, issue: txt(l[0].issue), decroche: !!l[0].decroche, sansReponse: sansReponse, note: annote ? txt(annote.note) : "" } : null;
+      a.chargeDernier = false;
+      if (etat.appel === a) rendreSiCalme();
+    }, function () { a.chargeDernier = false; a.dernier = null; });
+  }
+  function ligneDernier(a) {
+    if (!a.prospectId) return null;
+    var d = a.dernier;
+    if (d === undefined) { chargerDernier(a); return null; }
+    if (!d) return el("p", { class: "ab-dernier", text: "Premier appel à cette fiche." });
+    var t = "Dernier échange : " + minuscule(d.issue || (d.decroche ? "décroché" : "pas décroché")) + ", " + minuscule(quand(msDe(d.le))) +
+      (d.sansReponse >= 2 ? ", " + d.sansReponse + " essais sans réponse d'affilée" : "") + (d.note ? ". Noté : «\u00a0" + d.note + "\u00a0»" : ".");
+    return el("p", { class: "ab-dernier", title: t, text: t });
+  }
+
+  /* ---------- INES : une seule saisie ---------- */
+  // Les champs de la vente, un par ligne, prêts à coller dans INES.
+  function texteInes(fiche, v) {
+    var f = fiche || {};
+    return [["Société", txt(f.societe)], ["SIRET", txt(f.siret)], ["Contact", txt(f.contact)], ["Téléphone", txt(f.telephone)], ["Email", txt(f.email)], ["Ville", txt(f.ville)],
+      ["Type de l'affaire", v.fp ? "FULL PROSPECT" : ""], ["Marge attendue", txt(v.marge) ? txt(v.marge) + " €" : ""], ["Actes", txt(v.actes)], ["Dont service engageant", txt(v.engageants)],
+      ["Dont Mon Réseau Local", txt(v.mrl)], ["Accompagnement Pro", v.ap ? "oui" : ""], ["Offres", tableau(v.offres).join(", ")], ["Note", txt(v.note)]]
+      .filter(function (l) { return l[1]; }).map(function (l) { return l[0] + " : " + l[1]; }).join("\n");
+  }
+  function copier(texte) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texte);
+    return new Promise(function (ok, ko) {
+      var z = el("textarea", { "aria-hidden": "true", css: { position: "fixed", top: "-1000px", opacity: "0" } });
+      z.value = texte;
+      document.body.appendChild(z);
+      z.select();
+      var fait = false;
+      try { fait = document.execCommand("copy"); } catch (e) { fait = false; }
+      z.remove();
+      if (fait) ok(); else ko(new Error("copie impossible"));
+    });
+  }
+  function boutonInes(fiche, vente) {
+    return el("button", { type: "button", class: "bouton-clair", "data-cle": "copier-ines", onclick: function (e) {
+      var b = e.currentTarget;
+      copier(texteInes(fiche, vente)).then(function () {
+        b.lastChild.textContent = "Copié : collez dans INES";
+        annoncer("Vente copiée : collez-la dans INES.");
+      }, function () { alerter("La copie n'a pas marché : votre navigateur la refuse. Recopiez les champs à la main cette fois."); });
+    } }, [trait(ICONES.coche, 14), el("span", { text: "Copier pour INES" })]);
+  }
+
+  /* ---------- Alertes : cinq minutes avant chaque rendez-vous ---------- */
+  var ALERTE_AVANT = 5 * 60000;
+  function alertesPossibles() { return typeof window.Notification === "function"; }
+  function blocAlertes() {
+    if (!alertesPossibles() || Notification.permission !== "default" || lire("vad-alertes") === "non") return null;
+    return el("p", { class: "note-discrete alertes-offre" }, [
+      "Une alerte cinq minutes avant chaque rendez-vous, même dans un autre onglet ? ",
+      el("button", { type: "button", class: "lien-action", "data-cle": "alertes-activer", text: "Activer les alertes", onclick: function () {
+        Promise.resolve(Notification.requestPermission()).then(function (r) {
+          rendre();
+          if (r === "granted") annoncer("Alertes activées : vous serez prévenu cinq minutes avant chaque rendez-vous.");
+        });
+      } }),
+      " ",
+      el("button", { type: "button", class: "lien-action discret", "data-cle": "alertes-non", text: "Non merci", onclick: function () { ecrire("vad-alertes", "non"); rendre(); } })
+    ]);
+  }
+  function verifierAlertes() {
+    if (!peutSaisir || !etat.prospects) return;
+    var maintenant = Date.now();
+    etat.alertees = etat.alertees || {};
+    mesProspects().forEach(function (p) {
+      if (["r1p", "r2", "rappel"].indexOf(p.etape) < 0) return;
+      var t = msDe(p.rappel_le), cle = p.id + "@" + p.rappel_le;
+      if (!isFinite(t) || t - maintenant > ALERTE_AVANT || t - maintenant < -60000 || etat.alertees[cle]) return;
+      etat.alertees[cle] = true;
+      var quoi = (p.etape === "r1p" ? "R1" : (p.etape === "r2" ? "R2" : "Rappel")) + " à " + heureFr(t) + " : " + nomFiche(p);
+      if (alertesPossibles() && Notification.permission === "granted") {
+        try {
+          var n = new Notification("Dans cinq minutes", { body: quoi, tag: cle });
+          n.onclick = function () { try { window.focus(); } catch (e) { /* fenêtre déjà active */ } n.close(); changerVue("journee"); };
+        } catch (e) { /* le navigateur refuse la notification : l'annonce suffit */ }
+      }
+      annoncer("Dans cinq minutes : " + quoi + ".");
+      if (document.hidden) { etat.titreAvant = etat.titreAvant || document.title; document.title = "Dans 5 min : " + nomFiche(p); }
+    });
+  }
+  function demarrerAlertes() {
+    if (etat.minuteurAlertes || !peutSaisir) return;
+    etat.minuteurAlertes = setInterval(verifierAlertes, 20000);
+    setTimeout(verifierAlertes, 3000);
+    document.addEventListener("visibilitychange", function () { if (!document.hidden && etat.titreAvant) { document.title = etat.titreAvant; etat.titreAvant = null; } });
+  }
+
+  /* ---------- Enchaîner les appels ---------- */
+  // Le navigateur n'ouvre 3CX que dans les secondes qui suivent un clic : d'où trois secondes, et pas plus.
+  var DELAI_ENCHAINEMENT = 3000;
+  function enchainementActif() { return lire("vad-enchainer") === "oui"; }
+  function annulerEnchainement() {
+    var d = etat.decompte;
+    if (!d) return;
+    clearTimeout(d.minuteur);
+    clearInterval(d.tic);
+    etat.decompte = null;
+  }
+  function lancerEnchainement() {
+    annulerEnchainement();
+    if (!enchainementActif()) return;
+    var p = fileAppels().prochain;
+    if (!p || !numeroCompose(p.telephone) || !composerActif()) return;
+    var d = etat.decompte = { id: p.id, fin: Date.now() + DELAI_ENCHAINEMENT };
+    d.minuteur = setTimeout(function () {
+      if (etat.decompte !== d) return;
+      annulerEnchainement();
+      var q = prospectPar(d.id);
+      if (!q || etat.appel || etat.vue !== "journee" || feuille) { rendre(); return; }
+      nouvelAppel(q, { composer: true });
+    }, DELAI_ENCHAINEMENT);
+    d.tic = setInterval(function () {
+      var n = app.querySelector(".decompte-s");
+      if (n) n.textContent = String(Math.max(1, Math.ceil((d.fin - Date.now()) / 1000)));
+    }, 250);
+    rendre();
+  }
+
+  /* ---------- Plier ce qui sert moins ---------- */
+  // Un bloc replié : ouvert ou fermé, il le reste d'un affichage à l'autre.
+  function replier(cle, titre, enfants, ouvert) {
+    etat.siOuverts = etat.siOuverts || {};
+    var o = etat.siOuverts[cle] === undefined ? !!ouvert : etat.siOuverts[cle];
+    var d = el("details", { class: "replie", open: o ? true : null }, [el("summary", { "data-cle": cle }, [el("span", { text: titre })])].concat(enfants));
+    d.addEventListener("toggle", function () { etat.siOuverts[cle] = d.open; });
+    return d;
+  }
+  function estCreateur(a) { var sc = scenarioPar(a && a.scenario); return !!sc && /^createur/.test(plat(sc.nom)); }
+  // Pour un créateur, ses objections à lui d'abord.
+  function objectionsPour(a) {
+    var l = objections();
+    if (!estCreateur(a)) return l;
+    return l.filter(function (o) { return o.createur; }).concat(l.filter(function (o) { return !o.createur; }));
+  }
+
+  /* ---------- Scripts : une partie à la fois, et une recherche ---------- */
+  function vueScripts() {
+    var parties = [["scenarios", "Scénarios", blocScenarios], ["decouverte", "Découverte", blocAxesScripts], ["etapes", "Étapes de l'appel", blocEtapesScripts], ["objections", "Objections", blocObjectionsScripts]];
+    var actif = parties.filter(function (o) { return o[0] === etat.ongletScripts; })[0] || parties[0];
+    var q = plat(etat.chercheScripts || "");
+    var cherche = el("input", { class: "saisie", type: "search", id: "cherche-scripts", "data-cle": "cherche-scripts", placeholder: "Un mot : associé, chantier, wifi, TVA...", autocomplete: "off" });
+    cherche.value = etat.chercheScripts || "";
+    cherche.addEventListener("input", function () { etat.chercheScripts = cherche.value; rendre(); });
+    var onglets = el("div", { class: "filtres-cat scripts-onglets", role: "tablist", "aria-label": "Parties des scripts" }, parties.map(function (o) {
+      var on = !q && o === actif;
+      return el("button", { type: "button", role: "tab", "aria-selected": on ? "true" : "false", class: "seg-btn" + (on ? " actif" : ""), "data-cle": "scripts-" + o[0], text: o[1], onclick: function () { etat.ongletScripts = o[0]; etat.chercheScripts = ""; rendre(); } });
+    }));
+    var corps = el("div", { class: "scripts-corps" }, q ? parties.map(function (o) { return o[2](); }) : [actif[2]()]);
+    if (q) filtrerScripts(corps, q);
+    return [
+      teteDePage(null, "Scripts", estAdmin ? "Vous pouvez tout modifier : les conseillers voient la nouvelle version aussitôt, même en plein appel." : "Une partie à la fois, ou un mot à chercher partout : scénarios, découverte, étapes de l'appel et objections.", null),
+      el("div", { class: "scripts-outils" }, [onglets, el("div", { class: "champ scripts-cherche" }, [el("label", { class: "champ-lib", for: "cherche-scripts", text: "Chercher dans les scripts" }), cherche])]),
+      corps
+    ];
+  }
+  function filtrerScripts(racine, q) {
+    var n = 0;
+    [].slice.call(racine.querySelectorAll("article.script-carte, .obj-liste > li")).forEach(function (x) {
+      if (plat(x.textContent).indexOf(q) >= 0) n++; else x.hidden = true;
+    });
+    [].slice.call(racine.querySelectorAll(".obj-groupe")).forEach(function (g) { if (!g.querySelector(".obj-liste > li:not([hidden])")) g.hidden = true; });
+    [].slice.call(racine.querySelectorAll("section")).forEach(function (x) { if (!x.querySelector("article.script-carte:not([hidden]), .obj-liste > li:not([hidden])")) x.hidden = true; });
+    if (!n) racine.appendChild(el("p", { class: "vide", text: "Aucun script ne contient ce mot." }));
+  }
+
+  /* ---------- Le mur : la journée de l'équipe, en direct ---------- */
+  // Le résumé du jour de l'équipe, calculé côté base : appels par heure, rendez-vous et ventes, dernier appel de chacun.
+  // Quelques centaines d'octets toutes les trente secondes, aucun détail de prospect. Faute de fonction côté base, le mur se passe du fil.
+  function chargerFil() {
+    return sb.rpc("vad_mur_jour", { p_espace: ESPACE }).then(verifier).then(function (d) { etat.filMur = d && typeof d === "object" && !Array.isArray(d) ? d : {}; }, function () { if (!etat.filMur) etat.filMur = false; });
+  }
+  function surveillerMur() {
+    if (etat.filMur === undefined && !etat.chargeFil) {
+      etat.chargeFil = true;
+      chargerFil().then(function () { etat.chargeFil = false; etat.majMur = Date.now(); rendreSiCalme(); });
+    }
+    if (etat.minuteurMur) return;
+    etat.minuteurMur = setInterval(function () {
+      if (etat.vue !== "mur" || document.hidden) return;
+      Promise.all([chargerActivite(moisDe(aujourdhui())), chargerFil()]).then(function () { etat.majMur = Date.now(); rendreSiCalme(); }, function () { /* on réessaie dans trente secondes */ });
+    }, 30000);
+  }
+  var FIL_MUR = { "R1P pris": "décroche un rendez-vous", "R2 prévu": "cale un R2", "Vente signée": "signe une vente" };
   function vueMur() {
     var mc = moisDe(aujourdhui()), auj = aujourdhui(), lignes = activiteDu(mc);
     assurerMois(mc);
+    surveillerMur();
     var sortir = compte.role === "lecture" ? null : el("button", { type: "button", class: "mur-quitter", "data-cle": "quitter-mur", text: "Quitter le mur", onclick: function () { changerVue("journee"); } });
     var tete = el("header", { class: "mur-tete" }, [
       el("span", { class: "logo", role: "img", "aria-label": "LUSKO" }),
-      el("p", { class: "mur-titre" }, [el("strong", { text: "Équipe VAD" }), " · " + majuscule(libelleMois(mc))]),
+      el("p", { class: "mur-titre" }, [el("strong", { text: "Équipe VAD" }), " · " + jourLong(auj)]),
+      el("p", { class: "mur-direct" }, [el("span", { class: "mur-point", "aria-hidden": "true" }), "En direct"]),
       el("p", { class: "mur-heure", text: heureMur() }),
       sortir
     ]);
     if (!lignes) return [tete, el("p", { class: "chargement", role: "status" }, [el("span", { class: "rond", "aria-hidden": "true" }), "Chargement des chiffres de l'équipe"])];
-    var membres = equipe(lignes, mc), avecPayplan = payplanVisible() && payplanEnVigueur(mc);
+    var membres = equipe(lignes, mc), avecPayplan = payplanVisible();
+    var estAuj = function (r) { return String(r.jour).slice(0, 10) === auj; };
+    var jour = somme(lignes, estAuj);
+    var mj = etat.filMur && typeof etat.filMur === "object" ? etat.filMur : null;
+    // La moyenne d'une journée d'appels ce mois-ci, aujourd'hui exclu : de quoi voir si la journée est au-dessus.
+    var parJour = {};
+    lignes.forEach(function (r) {
+      var j = String(r.jour).slice(0, 10);
+      if (j === auj) return;
+      var x = parJour[j] = parJour[j] || { appels: 0, decroches: 0, argumentes: 0, r1p: 0, ventes: 0 };
+      Object.keys(x).forEach(function (k) { x[k] += Number(r[k]) || 0; });
+    });
+    var jours = Object.keys(parJour).filter(function (j) { return parJour[j].appels > 0; });
+    function moyenne(k) { return jours.length ? jours.reduce(function (s, j) { return s + parJour[j][k]; }, 0) / jours.length : null; }
+    var avant = etat.murAvant || {}, apres = {};
+    function compteur(k, lib) {
+      // Moyenne affichée telle qu'on la lit : une décimale sous 10 (0,8 vente par jour), un entier au-delà
+      var v = Number(jour[k]) || 0, moy = moyenne(k), m = moy === null ? null : (moy < 10 ? Math.round(moy * 10) / 10 : Math.round(moy));
+      var mTxt = m === null ? "" : (m < 10 ? String(m).replace(".", ",") : entier(m)), dessus = m !== null && m > 0 && v > m, egal = m !== null && m > 0 && v === m;
+      apres[k] = v;
+      return el("div", { class: "mur-compteur" + (avant[k] !== undefined && v > avant[k] ? " monte" : ""), "data-cle": "mur-" + k }, [
+        el("p", { class: "mur-c-val", text: entier(v) }),
+        el("p", { class: "mur-c-lib", text: lib }),
+        m === null ? null : el("p", { class: "mur-c-moy" + (dessus || egal ? " dessus" : "") }, dessus ? ["Au-dessus de la moyenne (", mTxt, ")"] : egal ? ["Moyenne atteinte (", mTxt, ")"] : ["Moyenne d'une journée : ", mTxt])
+      ]);
+    }
+    // Chaque conseiller : sa journée en barres, la plus longue pour celui qui mène
+    var parConseiller = membres.map(function (c) { return { c: c, j: somme(lignes, function (r) { return c.uid && r.conseiller === c.uid && estAuj(r); }), m: somme(lignes, function (r) { return c.uid && r.conseiller === c.uid; }) }; });
+    var maxi = {};
+    ["appels", "argumentes", "r1p"].forEach(function (k) { maxi[k] = Math.max.apply(null, [0].concat(parConseiller.map(function (x) { return Number(x.j[k]) || 0; }))); });
+    var dernierPar = {};
+    if (mj && mj.derniers) Object.keys(mj.derniers).forEach(function (uid) { var t = msDe(mj.derniers[uid]); if (isFinite(t)) dernierPar[uid] = t; });
+    function nomDuConseiller(uid) { var m = membres.filter(function (c) { return c.uid === uid; })[0]; return m ? (prenomDe(m.nom) || m.nom) : "L'équipe"; }
+    var cartes = parConseiller.map(function (x) {
+      var c = x.c, tj = x.j, Lc = lecture(x.m, c.objectif), dern = dernierPar[c.uid], actif = !!dern && Date.now() - dern < 10 * 60000;
+      function barre(k, lib) {
+        var v = Number(tj[k]) || 0, tete = v > 0 && v === maxi[k];
+        return el("div", { class: "mur-barre" + (tete ? " tete" : "") }, [
+          el("span", { class: "mur-b-lib", text: lib }),
+          el("span", { class: "mur-b-piste" }, [el("span", { class: "mur-b-rempli", css: { width: (maxi[k] ? Math.round(100 * v / maxi[k]) : 0) + "%" } })]),
+          el("strong", { class: "mur-b-val", text: entier(v) })
+        ]);
+      }
+      return el("article", { class: "mur-conseiller" + (actif ? " actif" : "") }, [
+        el("div", { class: "mur-c-tete" }, [
+          el("h2", { class: "mur-nom", text: prenomDe(c.nom) || c.nom }),
+          el("p", { class: "mur-etat" }, [actif ? el("span", { class: "mur-point", "aria-hidden": "true" }) : null, actif ? "En action" : (dern ? "Dernier appel à " + heureFr(dern) : (mj ? "Pas encore d'appel" : ""))])
+        ]),
+        barre("appels", "Appels"), barre("argumentes", "Argumentés"), barre("r1p", "RDV pris"),
+        el("p", { class: "mur-ligne" }, [Number(tj.ventes) ? el("strong", { class: "mur-vente", text: pluriel(tj.ventes, "vente", "ventes") + " aujourd'hui" }) : null, Number(tj.ventes) ? " · " : "", "Mois : ", el("strong", { text: euros(x.m.marge_nette) }), c.objectif > 0 ? " sur " + euros(c.objectif) : "", x.m.actes ? " · TASE " + pourcent(Lc.tase) : ""]),
+        avecPayplan ? el("p", { class: "mur-ligne discret" }, ["Full Prospect ", el("strong", { text: x.m.rdv_fp + "/" + reglages().payplan.rdv_fp }), " · Mon Réseau Local ", el("strong", { text: x.m.actes_mrl + "/" + reglages().payplan.actes_mrl })]) : null
+      ]);
+    });
+    // Le fil : rendez-vous, R2 et ventes, et les paliers d'appels de l'équipe
+    var evts = (mj && Array.isArray(mj.evenements) ? mj.evenements : []).filter(function (e) { return FIL_MUR[e.issue]; }).map(function (e) { return { t: msDe(e.le), texte: nomDuConseiller(e.conseiller) + " " + FIL_MUR[e.issue], fort: e.issue === "Vente signée", cle: e.le + "|" + e.conseiller + "|" + e.issue }; });
+    // Seul le dernier palier de 25 appels reste affiché : le fil garde la place pour les rendez-vous et les ventes
+    var pal = mj && mj.palier;
+    if (pal && Number(pal.n) >= 25 && isFinite(msDe(pal.le))) evts.push({ t: msDe(pal.le), texte: pal.n + "e appel de l'équipe aujourd'hui", palier: true, cle: "palier|" + pal.n });
+    evts.sort(function (a, b) { return b.t - a.t; });
+    var vus = etat.murVus, nouveaux = {};
+    evts.forEach(function (e) { nouveaux[e.cle] = true; });
+    var fileFil = etat.filMur === false ? null : el("section", { class: "mur-fil", "aria-label": "Le fil du jour" }, [
+      el("p", { class: "mur-lib", text: "Le fil du jour" }),
+      evts.length ? el("ol", { class: "mur-fil-liste" }, evts.slice(0, 5).map(function (e) {
+        return el("li", { class: "mur-evt" + (e.fort ? " fort" : "") + (e.palier ? " palier" : "") + (vus && !vus[e.cle] ? " mur-nouveau" : "") }, [el("span", { class: "mur-evt-h", text: heureFr(e.t) }), el("span", { class: "mur-evt-t", text: e.texte })]);
+      })) : el("p", { class: "mur-sous", text: "Le premier rendez-vous de la journée s'affichera ici." })
+    ]);
+    if (mj) etat.murVus = nouveaux;
+    etat.murAvant = apres;
+    // Les appels heure par heure, l'heure en cours en couleur
+    var heures = null;
+    if (mj) {
+      var app = {}, arg = {}, hMaint = Math.floor(minutesParis(Date.now()) / 60), hs = [];
+      (Array.isArray(mj.heures) ? mj.heures : []).forEach(function (x) { var h = Number(x[0]); if (isFinite(h)) { app[h] = Number(x[1]) || 0; arg[h] = Number(x[2]) || 0; } });
+      var cles = Object.keys(app).map(Number), h0 = Math.min.apply(null, [8].concat(cles)), h1 = Math.max.apply(null, [18].concat(cles));
+      for (var h = h0; h <= h1; h++) hs.push(h);
+      var haut = Math.max.apply(null, [1].concat(hs.map(function (x) { return app[x] || 0; })));
+      heures = el("section", { class: "mur-heures", "aria-label": "Les appels heure par heure" }, [
+        el("p", { class: "mur-lib", text: "Les appels, heure par heure" }),
+        el("div", { class: "mur-h-barres" }, hs.map(function (x) {
+          var a = app[x] || 0, g = arg[x] || 0;
+          return el("div", { class: "mur-h" + (x === hMaint ? " maintenant" : "") + (x > hMaint ? " avenir" : "") }, [
+            el("span", { class: "mur-h-val", text: a ? String(a) : "" }),
+            el("span", { class: "mur-h-zone" }, [el("span", { class: "mur-h-col", css: { height: Math.round(100 * a / haut) + "%" } }, [el("span", { class: "mur-h-arg", css: { height: a ? Math.round(100 * g / a) + "%" : "0%" } })])]),
+            el("span", { class: "mur-h-lib", text: x + NB + "h" })
+          ]);
+        })),
+        el("p", { class: "mur-legende" }, [el("span", { class: "mur-leg app" }), "appels", el("span", { class: "mur-leg arg" }), "dont argumentés"])
+      ]);
+    }
+    // Le mois, en une ligne
     var objectif = membres.reduce(function (s, c) { return s + c.objectif; }, 0);
     var L = lecture(somme(lignes), objectif), R = rythme(mc, L.t.marge_nette, objectif);
-    var jour = somme(lignes, function (r) { return String(r.jour).slice(0, 10) === auj; });
-    function grand(lib, valeur, sous, bon) {
-      return el("div", { class: "mur-tuile" }, [el("p", { class: "mur-lib", text: lib }), el("p", { class: "mur-val", text: valeur }), sous !== undefined && sous !== null ? (bon === undefined ? el("p", { class: "mur-sous", text: sous }) : statut(bon, sous)) : null]);
-    }
+    var mois = el("section", { class: "mur-mois", "aria-label": "Le mois de l'équipe" }, [
+      el("p", { class: "mur-lib", text: "Le mois de " + MOIS_LONGS[Number(mc.slice(5, 7)) - 1] }),
+      el("p", { class: "mur-montant" }, [el("strong", { text: euros(L.t.marge_nette) }), objectif > 0 ? el("span", { text: " sur " + euros(objectif) }) : null]),
+      objectif > 0 ? jauge(L.part) : null,
+      el("p", { class: "mur-ligne" }, [
+        objectif > 0 ? (R.reste > 0 ? "Reste " + euros(R.reste) + (R.restants ? ", soit " + euros(R.parJour) + " par jour" : "") : "Objectif atteint") : "",
+        " · ", el("strong", { text: entier(L.t.ventes) }), L.t.ventes > 1 ? " ventes" : " vente",
+        L.t.actes ? " · TASE " : "", L.t.actes ? el("strong", { text: pourcent(L.tase) }) : null,
+        L.annulation !== null ? " · Annulations " : "", L.annulation !== null ? el("strong", { text: pourcent(L.annulation) }) : null
+      ])
+    ]);
     return [
       tete,
-      el("section", { class: "mur-hero", "aria-label": "Marge nette de l'équipe" }, [
-        el("p", { class: "mur-lib", text: "Marge nette de l'équipe" }),
-        el("p", { class: "mur-montant" }, [el("strong", { text: euros(L.t.marge_nette) }), objectif > 0 ? el("span", { text: " sur " + euros(objectif) }) : null]),
-        objectif > 0 ? jauge(L.part) : null,
-        objectif > 0 ? el("p", { class: "mur-sous", text: R.reste > 0 ? "Reste " + euros(R.reste) + (R.restants ? " en " + pluriel(R.restants, "jour ouvré", "jours ouvrés") + ", soit " + euros(R.parJour) + " par jour" : "") : "Objectif de l'équipe atteint" }) : null
+      el("section", { class: "mur-compteurs", "aria-label": "Aujourd'hui, l'équipe" }, [
+        compteur("appels", "appels"), compteur("decroches", "décrochés"), compteur("argumentes", "argumentés"), compteur("r1p", "rendez-vous pris"), compteur("ventes", Number(jour.ventes) > 1 ? "ventes" : "vente")
       ]),
-      el("section", { class: "mur-tuiles", "aria-label": "Le mois" }, [
-        grand("TASE", L.t.actes ? pourcent(L.tase) : "Pas de vente", L.t.actes ? (L.taseOk ? "Au-dessus de " + pourcent(L.seuilTase) : "Sous les " + pourcent(L.seuilTase)) : null, L.t.actes ? L.taseOk : undefined),
-        grand("Annulations", L.annulation === null ? "Pas de vente" : pourcent(L.annulation), L.annulation === null ? null : (L.annulationOk ? "Sous le plafond de " + pourcent(L.plafond) : "Au-dessus de " + pourcent(L.plafond)), L.annulation === null ? undefined : L.annulationOk),
-        grand("R1P pris", entier(L.t.r1p), L.t.appels ? entier(L.t.appels) + " appels de prospection" : null),
-        grand("Ventes", entier(L.t.ventes), L.t.full_prospect ? pluriel(L.t.full_prospect, "Full Prospect", "Full Prospect") : null)
-      ]),
-      el("section", { class: "mur-equipe", "aria-label": "Chaque conseiller" }, membres.map(function (c) {
-        var t = somme(lignes, function (r) { return c.uid && r.conseiller === c.uid; }), Lc = lecture(t, c.objectif);
-        var tj = somme(lignes, function (r) { return c.uid && r.conseiller === c.uid && String(r.jour).slice(0, 10) === auj; });
-        return el("article", { class: "mur-conseiller" }, [
-          el("h2", { class: "mur-nom", text: prenomDe(c.nom) || c.nom }),
-          el("p", { class: "mur-marge" }, [el("strong", { text: euros(t.marge_nette) }), c.objectif > 0 ? el("span", { text: " / " + euros(c.objectif) }) : null]),
-          c.objectif > 0 ? jauge(Lc.part) : null,
-          el("p", { class: "mur-ligne" }, ["TASE ", el("strong", { text: t.actes ? pourcent(Lc.tase) : "pas de vente" }), Lc.annulation !== null ? " · Annulations " : "", Lc.annulation !== null ? el("strong", { text: pourcent(Lc.annulation) }) : null]),
-          avecPayplan ? el("p", { class: "mur-ligne" }, ["Full Prospect ", el("strong", { text: t.rdv_fp + "/" + reglages().payplan.rdv_fp }), " · Mon Réseau Local ", el("strong", { text: t.actes_mrl + "/" + reglages().payplan.actes_mrl })]) : null,
-          el("p", { class: "mur-ligne discret" }, ["Aujourd'hui : " + pluriel(tj.appels, "appel", "appels") + ", " + entier(tj.r1p) + " R1P, " + pluriel(tj.ventes, "vente", "ventes")])
-        ]);
-      })),
-      el("section", { class: "mur-jour", "aria-label": "Aujourd'hui" }, [
-        el("p", { class: "mur-lib", text: "Aujourd'hui, l'équipe" }),
-        el("p", { class: "mur-jour-chiffres" }, [
-          el("span", {}, [el("strong", { text: entier(jour.appels) }), " appels"]),
-          el("span", {}, [el("strong", { text: entier(jour.decroches) }), " décrochés"]),
-          el("span", {}, [el("strong", { text: entier(jour.argumentes) }), " argumentés"]),
-          el("span", {}, [el("strong", { text: entier(jour.r1p) }), " R1P"]),
-          el("span", {}, [el("strong", { text: entier(jour.r1_tenus) }), " R1 tenus"]),
-          el("span", {}, [el("strong", { text: entier(jour.ventes) }), jour.ventes > 1 ? " ventes" : " vente"])
-        ]),
-        el("p", { class: "mur-maj", text: etat.majMur ? "Mis à jour à " + heureFr(etat.majMur) + ", toutes les minutes" : "" })
-      ])
+      el("div", { class: "mur-milieu" + (fileFil ? "" : " sans-fil") }, [el("section", { class: "mur-equipe", "aria-label": "Chaque conseiller, aujourd'hui" }, cartes), fileFil]),
+      el("div", { class: "mur-bas" + (heures ? "" : " sans-heures") }, [heures, mois]),
+      el("p", { class: "mur-maj", text: etat.majMur ? "Mis à jour à " + heureFr(etat.majMur) + ", toutes les trente secondes" : "" })
     ];
   }
 
